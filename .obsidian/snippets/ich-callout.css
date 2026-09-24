@@ -1,0 +1,28 @@
+/* Eigener Stil für den > [!ich]-Block: die Stimme der Person.
+   Zurückhaltend, ein warmer Sepiaton, damit er sich von den eingebauten
+   Callouts abhebt, ohne zu leuchten. Icon aus dem Lucide-Satz.
+
+   Obsidian hat das Format von --callout-color gewechselt: bis 1.12 ein
+   r, g, b-Tripel, ab 1.13 eine volle Farbe. Damit der Block in beiden
+   gleich aussieht, setzt das Snippet Hintergrund, Rand und Titelfarbe
+   zusätzlich selbst. */
+
+.theme-light {
+  --ich-farbe: 138 98 58;
+}
+
+.theme-dark {
+  --ich-farbe: 201 164 120;
+}
+
+.callout[data-callout="ich"] {
+  --callout-color: rgb(var(--ich-farbe));
+  --callout-icon: lucide-pen-line;
+  background-color: rgb(var(--ich-farbe) / 0.08);
+  border-color: rgb(var(--ich-farbe) / 0.3);
+}
+
+.callout[data-callout="ich"] .callout-title,
+.callout[data-callout="ich"] .callout-icon .svg-icon {
+  color: rgb(var(--ich-farbe));
+}
