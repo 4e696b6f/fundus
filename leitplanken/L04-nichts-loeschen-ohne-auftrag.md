@@ -21,8 +21,8 @@ pruefen_bis: 2027-09-23
 ## Begründung
 
 Eine gelöschte Seite nimmt ihre eingehenden Links mit, und die Person sieht
-nicht mehr, was einmal da war. Eine als veraltet markierte Seite zeigt beides:
-dass es sie gab und was an ihre Stelle getreten ist.
+nicht mehr, was da war. Eine als veraltet markierte Seite zeigt beides: dass
+es sie gab und was an ihre Stelle getreten ist.
 
 ## Was die Regel nicht sagt
 

@@ -24,15 +24,13 @@ pruefen_bis: 2027-09-23
 ## Begründung
 
 Die Quellen sind der Boden, an dem sich jede Aussage im Wiki nachprüfen lässt.
-Wer sie verändert, macht die Prüfung wertlos, denn danach stimmt die
-Zusammenfassung mit einer Quelle überein, die es so nie gab. Module gehören
-ihren Autorinnen und Autoren und werden von dort aktualisiert. Eine lokale
-Änderung ginge beim nächsten Update verloren.
+Wer sie verändert, macht die Prüfung wertlos: Die Zusammenfassung stimmt dann
+mit einer Quelle überein, die es so nie gab. Module werden von ihren
+Autorinnen und Autoren aktualisiert; eine lokale Änderung ginge dabei
+verloren.
 
 ## Was die Regel nicht sagt
 
-Die Person selbst darf ihre Quellen jederzeit ändern oder löschen, auch
-Dateien eines Moduls. Bei einem Modul geht ihre Änderung beim nächsten Update
-verloren, deshalb ist die Meldung an die Autorinnen und Autoren der bessere
-Weg. Die Regel bindet nur den Agenten. Das Verschieben nach `archiv/` ist
-erlaubt, weil der Ort den Status trägt und der Inhalt dabei gleich bleibt.
+Die Regel bindet nur den Agenten. Die Person selbst darf ihre Quellen
+jederzeit ändern oder löschen, auch Dateien eines Moduls; dort ist die Meldung
+an die Autorinnen und Autoren der bessere Weg.

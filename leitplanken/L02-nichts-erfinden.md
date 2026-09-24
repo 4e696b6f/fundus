@@ -22,15 +22,14 @@ pruefen_bis: 2027-09-23
 
 ## Begründung
 
-Ein Sprachmodell schreibt Falsches so flüssig wie Richtiges. Im Chat verfliegt
-ein Fehler, im Wiki bleibt er stehen und wird bei der nächsten Frage als Beleg
-gelesen. Eine sichtbare Lücke kostet einen Satz. Eine erfundene Zahl kostet
+Ein Sprachmodell schreibt Falsches so flüssig wie Richtiges. Im Wiki bleibt ein
+Fehler stehen und wird bei der nächsten Frage als Beleg gelesen. Eine sichtbare Lücke kostet einen Satz. Eine erfundene Zahl kostet
 das Vertrauen in alle anderen Zahlen.
 
 ## Was die Regel nicht sagt
 
-Schlussfolgern ist erlaubt und erwünscht. Eine Brücke zwischen zwei Seiten ist
-eigene Denkarbeit und braucht keine Quelle, die genau diese Verbindung schon
-zieht. Sie muss sich aber auf belegte Aussagen stützen und als eigene Folgerung
-erkennbar sein. Auch eine Gegenposition (`regeln/LINSEN.md`) ist ein Einwand,
-keine Tatsache, und braucht keine Fundstelle; Zahlen darin schon.
+Schlussfolgern ist erwünscht. Eine Brücke zwischen zwei Seiten braucht keine
+Quelle, die genau diese Verbindung zieht, stützt sich aber auf belegte Aussagen
+und ist als eigene Folgerung erkennbar. Eine Gegenposition (`regeln/LINSEN.md`)
+ist ein Einwand, keine Tatsache, und braucht keine Fundstelle; Zahlen darin
+schon.

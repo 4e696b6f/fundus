@@ -24,21 +24,17 @@ pruefen_bis: 2027-09-23
 
 ## Begründung
 
-Ein Wiki wird kopiert, geteilt, in Werkzeuge geladen und auf Rechnern
-synchronisiert. Was über andere Menschen darin steht, reist mit, ohne dass
-diese Menschen davon wissen. Die meisten Seiten verlieren nichts, wenn statt
-eines Namens eine Rolle steht.
+Ein Wiki wird kopiert, geteilt, in Werkzeuge geladen und synchronisiert. Was
+darin über andere Menschen steht, reist mit, ohne dass sie davon wissen. Die
+meisten Seiten verlieren nichts, wenn statt eines Namens eine Rolle steht.
 
 ## Was die Regel nicht sagt
 
-Die Person entscheidet über ihr eigenes Wiki. Braucht sie Namen, etwa für ein
+Die Person entscheidet über ihr Wiki. Braucht sie Namen, etwa für ein
 Projekt mit festen Beteiligten, hält sie das in `AGENTS.md` fest, und die
-Regel gilt dort nicht. Verbietet eine harte Leitplanke eines Moduls
-den Namen, gilt das Verbot, auch gegen den Wunsch der Person und gegen die
-Ausnahmen oben (`FORMAT.md` → *Vorrang*). Über die Person selbst darf im Wiki stehen, was sie
-selbst hineinschreibt.
+Regel gilt dort nicht; eine harte Modulregel geht vor
+(`leitplanken/FORMAT.md` → *Vorrang* 1). Über die Person selbst darf im Wiki
+stehen, was sie selbst hineinschreibt.
 
-Wer sich in einer veröffentlichten Quelle mit Namen fachlich äußert, handelt
-in dieser Rolle öffentlich. Der Name gehört dann zur Fundstelle. Eine eigene
-`akteur`-Seite bekommt so eine Person erst, wenn sie auch sonst öffentlich
-auftritt, etwa als Autorin.
+Eine eigene `akteur`-Seite bekommt eine fachlich zitierte Person erst, wenn
+sie auch sonst öffentlich auftritt, etwa als Autorin.
