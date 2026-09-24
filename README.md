@@ -4,8 +4,7 @@ Fundus ist ein Ordner, in dem ein KI-Programm ein Wiki für dich führt: Du
 legst Quellen hinein, es schreibt daraus verlinkte Seiten.
 
 KI-Hinweis: Ich schreibe Fundus und die Anleitungen mit KI-Unterstützung.
-Aufbau und Regeln verantworte ich. Version 0.2.1 hat außer mir noch niemand
-durchgesehen, es wird also etwas haken. Fehler und Fragen bitte in die
+Version 0.2.1 hat außer mir noch niemand durchgesehen, es wird also etwas haken. Fehler und Fragen bitte in die
 [Issues](https://github.com/4e696b6f/fundus/issues).
 
 ## Was du davon hast
