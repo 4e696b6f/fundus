@@ -1,136 +1,97 @@
 # Fundus
 
-**Ein Wiki, das ein Sprachmodell für dich führt.** Du legst Quellen ab,
-Artikel, PDFs oder eigene Notizen, und stellst Fragen. Der Agent liest,
-fasst zusammen, verknüpft und hält das Wissen aktuell. Der Agent ist ein
-KI-Programm, das auf deinem Rechner Dateien lesen und schreiben darf, erprobt
-ist Claude Code. Alles liegt als einfache Textdateien in einem Ordner, und
-Obsidian, ein kostenloses Notizprogramm, zeigt dir diesen Ordner als Wiki an.
-Obsidian nennt so einen Ordner einen Vault.
+Fundus ist ein Ordner, in dem ein KI-Programm ein Wiki für dich führt: Du
+legst Quellen hinein, es schreibt daraus verlinkte Seiten.
 
-Fundus ist eine deutschsprachige Grundausstattung dafür: Ordner, Regeln,
-Abläufe und eine Vorlage für die Haltung des Agenten. Fachwissen bringt
-Fundus nicht mit. Das kommt aus deinen eigenen Quellen oder aus
-[Modulen](handbuch/MODULE.md), die du später dazuholen kannst.
+KI-Hinweis: Ich schreibe Fundus und die Anleitungen mit KI-Unterstützung.
+Aufbau und Regeln verantworte ich. Version 0.2.1 hat außer mir noch niemand
+durchgesehen, es wird also etwas haken. Fehler und Fragen bitte in die
+[Issues](https://github.com/4e696b6f/fundus/issues).
 
-> KI-Hinweis: Die Texte in diesem Repository sind mit Hilfe eines
-> Sprachmodells (KI) geschrieben, die Entscheidungen darin haben Menschen
-> getroffen. Die Fassung 0.2.0 ist ein Entwurf, den noch niemand von außen
-> durchgesehen hat.
+## Was du davon hast
 
-## Anfangen
+Du legst Artikel, PDFs oder Notizen ab. Der Agent, also das KI-Programm, fasst
+sie zusammen, verknüpft sie und meldet Veraltetes und Widersprüche. Deine
+eigenen Gedanken bleiben erkennbar: Eine eigene Notiz ist ganz deine Stimme,
+und in einem fremden Text markierst du deine Anmerkungen mit `Backticks`. Der
+Agent übernimmt beides wörtlich und setzt es farbig ab. Alles bleibt als
+Textdateien auf deinem Rechner. Obsidian, ein kostenloses Notizprogramm, zeigt
+sie als Wiki an.
 
-Du brauchst einen Mac oder einen Windows-Rechner, Obsidian und ein bezahltes
-Konto für Claude Code. Rechne mit einer halben Stunde, dazu kommt die Zeit
-für die beiden Installationen.
+Gedacht ist Fundus für alle, die viel lesen und sammeln, aber keine Zeit
+haben, daraus selbst Notizen zu pflegen.
 
-1. Auf der Projektseite
-   [github.com/4e696b6f/fundus](https://github.com/4e696b6f/fundus) den
-   grünen Knopf „Code“ drücken, dann „Download ZIP“. Die ZIP-Datei entpacken, den Ordner an einen festen Platz legen,
-   etwa in „Dokumente“, und ihm einen Namen ohne Leerzeichen geben, zum
-   Beispiel `mein-wiki`.
-2. [Obsidian](https://obsidian.md) installieren und den Ordner darin als Vault
-   öffnen.
-3. `SOUL.md` ausfüllen: wofür du das Wiki willst und wie der Agent klingen soll.
-4. Claude Code installieren, im Ordner starten, anmelden und als Erstes sagen:
-   „Ich fange gerade an. Lies SOUL.md und sag mir, was du hier tust.“
-5. Eine Quelle in `quellen/eingang/` legen und sagen: „Nimm die neue Quelle auf.“
+## Was du brauchst
 
-Nach ein paar Minuten siehst du in Obsidian neue Seiten im Ordner `wiki/`,
-die Quelle liegt jetzt in `quellen/archiv/`, und der Agent sagt dir in
-wenigen Sätzen, was neu ist.
+Einen Mac oder Windows-Rechner, [Obsidian](https://obsidian.md) und Claude
+Code. Das ist das KI-Programm, das hier den Agenten macht. Es braucht ein
+bezahltes Claude-Konto. Was der Agent liest, geht an Anthropic, den Anbieter
+von Claude. Leg nur ab, was dort hin darf.
 
-Den Überblick über das ganze Wiki, mit allem, was fällig ist, zeigt dir
-`ansicht/uebersicht.html` im Browser ([handbuch/ANSICHT.md](handbuch/ANSICHT.md)).
+## So fängst du an
 
-Was der Agent liest, schickt das Werkzeug an seinen Anbieter, bei Claude Code
-an Anthropic. Lege nur Quellen ab, die dort hin dürfen.
+Rechne mit einer halben Stunde. Jeder Klick steht in
+[handbuch/EINRICHTEN.md](handbuch/EINRICHTEN.md), hier die Kurzfassung:
 
-Jeder Schritt einzeln erklärt, auch das Terminal und was Claude Code beim
-ersten Start fragt: [handbuch/EINRICHTEN.md](handbuch/EINRICHTEN.md).
+1. Auf [github.com/4e696b6f/fundus](https://github.com/4e696b6f/fundus) „Code“
+   und „Download ZIP“ drücken, den Ordner entpacken und an einen festen Platz
+   legen, etwa in „Dokumente“.
+2. In Obsidian „Ordner als Vault öffnen“ (Open folder as vault) wählen und den
+   Ordner aussuchen. Vault nennt Obsidian so einen Ordner.
+3. In Obsidian `SOUL.md` öffnen und die Stellen in eckigen Klammern ausfüllen:
+   wofür das Wiki ist und wie der Agent klingen soll.
+4. Claude Code installieren und im Ordner starten. Das läuft im Terminal, dem
+   Fenster, in das man Befehle tippt. Wie das ohne Vorkenntnisse geht, steht im
+   Handbuch unter Schritt 4.
+5. Eine Datei in `quellen/eingang/` legen und dem Agenten im Terminal
+   schreiben: „Nimm die neue Quelle auf.“ Er fragt dabei, ob er Dateien anlegen
+   darf. Danach stehen die neuen Seiten in Obsidian unter `wiki/`.
 
-## Die Idee
+## Was du sagen kannst
 
-Andrej Karpathy hat im April 2026 beschrieben, wie ein Sprachmodell statt
-eines Chatverlaufs ein Wiki pflegen kann: Rohquellen bleiben unverändert, das
-Modell schreibt daraus verlinkte Seiten, und eine Steuerungsdatei sagt ihm,
-wie
-([llm-wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)).
-Was du einmal erarbeitet hast, steht danach in einer Seite und wächst mit
-jeder neuen Quelle weiter.
+| Du sagst | Was passiert |
+|---|---|
+| „Nimm die neue Quelle auf.“ | Aus der Quelle werden Wiki-Seiten. |
+| „Was wissen wir über …?“ | Antwort aus deinem Wiki, mit Fundstellen. |
+| „Prüf das Wiki.“ | Bericht: tote Links, Veraltetes, Widersprüche, Lücken. |
+| „Feierabend.“ | Der Agent schreibt auf, wo ihr steht. Beim nächsten Start weiß er es sonst nicht mehr. |
 
-Fundus setzt diese Idee um und ergänzt, was sich im täglichen Betrieb eines
-solchen Wikis bewährt hat:
+## Was im Ordner liegt
 
-- **Wer spricht.** Jede Seite sagt, ob sie deine Worte enthält, die
-  Zusammenfassung des Agenten oder beides. Deine eigenen Gedanken stehen
-  wörtlich in einem eigenen Block und werden nie umformuliert.
-- **Verfall.** Seiten und Regeln, die an einem Datum veralten, tragen dieses
-  Datum. Die Prüfung meldet sie, bevor sie still falsch werden.
-- **Leitplanken.** Regeln, die der Agent immer einhält, stehen als eigene
-  Dateien in einem festen Format: wann sie greifen, was gilt und was der
-  Agent stattdessen anbietet.
-- **Linsen.** Der Agent sucht zu jedem Begriff die stärkste Gegenposition und
-  nach Mustern, die in verschiedenen Themen dieselbe Form haben. So wird aus
-  einer Sammlung ein Netz.
-- **Gedächtnis zwischen Sitzungen.** Eine kurze Übergabe am Ende jeder
-  Sitzung und eine Lernschleife, in der aus wiederholten Korrekturen Regeln
-  werden.
+| Was | Wofür |
+|---|---|
+| `SOUL.md` | Füllst du aus: wofür das Wiki ist. |
+| `quellen/` | Deine Quellen: `eingang/` neu, `archiv/` verarbeitet. |
+| `wiki/` | Schreibt der Agent. Du liest. |
+| `ansicht/uebersicht.html` | Dein Wiki im Browser, ohne Internet ([Anleitung](handbuch/ANSICHT.md)). |
+| `handbuch/` | Anleitungen für dich. |
+| `module/` | Fertige Wissenspakete, siehe unten. |
 
-## Aufbau
-
-Zum Anfangen brauchst du nur `SOUL.md` und `quellen/eingang/`. Alles andere
-liest der Agent selbst, wenn er es braucht.
-
-```
-AGENTS.md        Steuerung: was der Agent wann liest und tut
-CLAUDE.md        verweist für Claude Code auf AGENTS.md
-SOUL.md          Haltung und Ton des Agenten, von dir ausgefüllt
-regeln/          Seitenformat (SCHEMA.md) und Linsen (LINSEN.md)
-leitplanken/     Regeln, die immer gelten, samt Format
-ablaeufe/        aufnehmen, fragen, prüfen, verknüpfen, Sitzung beenden
-quellen/         deine Rohquellen: eingang/ (neu), archiv/ (verarbeitet), anhaenge/
-wiki/            das Wiki, das der Agent schreibt
-gedaechtnis/     Übergabe zwischen Sitzungen, Lernschleife
-module/          eingehängte Fachmodule, daneben deine Einstellungen dazu
-vorlagen/        Vorlagen je Seitentyp für Obsidian
-ansicht/         uebersicht.html: dein Wiki im Browser, ohne Internet
-handbuch/        für Menschen: Einrichten, Module, Ansicht
-```
-
-`quellen/` gehört dir, `wiki/` dem Agenten und `module/` den Leuten, die das
-jeweilige Modul pflegen. Deine Einstellungen zu einem Modul in
-`module/<modulname>.lokal.md` gehören wieder dir. Der Agent ändert nur, was
-ihm gehört, und diese Einstellungen nur, wenn du ihn darum bittest. Deine
-eigenen Gedanken kommen trotzdem ins Wiki: Du sagst sie dem Agenten, und er
-übernimmt sie wörtlich in einen eigenen Block auf der passenden Seite.
+Alles andere (`AGENTS.md`, `regeln/`, `ablaeufe/`, `leitplanken/`, `vorlagen/`,
+`gedaechtnis/`) sind Regeln und Gedächtnis des Agenten, lesbar und änderbar.
+`CLAUDE.md` enthält nur den Verweis auf `AGENTS.md`, damit Claude Code die
+Regeln findet. `.obsidian/` hält die Einstellungen dieses Ordners, etwa die
+Farbe deiner Gedanken-Blöcke, nicht deine persönlichen. `CHANGELOG.md` listet,
+was sich je Version ändert. Das brauchst du erst, wenn du eine neue Version
+holst. Anfassen musst du nichts davon, löschen solltest du es nicht.
 
 ## Module
 
-Ein Modul bringt Fachwissen mit, das ein Agent allein nicht hat: Regeln,
-Abläufe, Vorlagen und belegtes Wissen zu einem Gebiet. Zum Anfangen brauchst
-du keins. Welche es gibt, wie man sie einhängt und wie man selbst eins baut:
+Fachwissen bringt Fundus nicht mit. Es kommt aus deinen Quellen oder aus
+Modulen, fertigen Wissenspaketen, die du zum Anfangen nicht brauchst:
 [handbuch/MODULE.md](handbuch/MODULE.md).
 
-## Was Fundus nicht ist
+## Herkunft, Fragen, Lizenz
 
-Fundus ist keine App und kein Dienst. Du installierst nur Obsidian und dein
-KI-Werkzeug, und außer dem Sprachmodell selbst läuft nichts auf einem fremden
-Server. Ein Programm, das du starten musst, gibt es nicht: Die Ansicht ist
-eine einzelne HTML-Datei, die dein Browser öffnet.
-Alles, was der Agent tut, steht als lesbare Anleitung in `ablaeufe/`, und du
-kannst jede davon ändern.
+Die Idee stammt von Andrej Karpathy, der sie als
+[llm-wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
+beschrieben hat. Andere KI-Programme, die `AGENTS.md` lesen, etwa Codex, gehen
+auch, sind aber weniger erprobt.
 
-## Fehler melden
+Fehler und Fragen gehören in die
+[Issues](https://github.com/4e696b6f/fundus/issues), die Fehlerliste dieses
+Projekts. Dafür brauchst du ein kostenloses GitHub-Konto. Was dort steht, ist
+öffentlich: Schreib nichts aus deinem Wiki hinein, was andere nicht lesen
+sollen.
 
-Fehler, Fragen und Vorschläge gehören in die
-[Issues](https://github.com/4e696b6f/fundus/issues) des Projekts. Schreib
-dort nichts aus deinem eigenen Wiki hinein, was andere nicht lesen sollen:
-Issues sind öffentlich.
-
-## Lizenz
-
-GNU General Public License 3.0 (GPL-3.0), siehe [LICENSE](LICENSE).
-Copyright © 2026 Nikolaj Podlesny. Module haben eigene Lizenzen.
-
-Stand: Version 0.2.0, Entwurf. Änderungen in [CHANGELOG.md](CHANGELOG.md).
+Lizenz [GPL-3.0](LICENSE), Copyright © 2026 Nikolaj Podlesny.
