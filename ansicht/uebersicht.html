@@ -292,20 +292,29 @@ var FundusKern = (function () {
   'use strict';
 
   var BILD = /\.(png|jpe?g|gif|webp|svg|bmp|avif)$/i;
-  var ZONEN = { wiki: 1, quellen: 1, leitplanken: 1, module: 1 };
-  var CALLOUT_FARBE = {
+  /* Nachschlagetabellen ohne Prototyp: Schlüssel kommen aus Dateien (Ordnernamen, Callout-Typen). */
+  function ohneProto(o) { var t = Object.create(null); for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) t[k] = o[k]; return t; }
+  function eigen(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
+  var ZONEN = ohneProto({ wiki: 1, quellen: 1, leitplanken: 1, module: 1 });
+  /* Ordner in wiki/, die kein Themenbereich sind (regeln/SCHEMA.md): meta/ für Meta-Seiten, bruecken/ und muster/
+     sammeln Seiten über Bereiche hinweg. Wert = Hinweis in der Kachel Bereiche. */
+  var KEIN_THEMA = ohneProto({ meta: 'Meta-Seiten, kein Themenbereich', bruecken: 'Brücken, kein Themenbereich', muster: 'Musterseiten, kein Themenbereich' });
+  var CALLOUT_FARBE = ohneProto({
     note: 'note', info: 'note', todo: 'note', abstract: 'note', summary: 'note', tldr: 'note',
     tip: 'tip', hint: 'tip', important: 'tip', success: 'tip', check: 'tip', done: 'tip',
     question: 'warning', help: 'warning', faq: 'warning', warning: 'warning', caution: 'warning', attention: 'warning',
     danger: 'danger', error: 'danger', failure: 'danger', fail: 'danger', missing: 'danger', bug: 'danger',
     example: 'example', quote: 'quote', cite: 'quote', ich: 'ich'
-  };
+  });
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
       return c === '&' ? '&amp;' : c === '<' ? '&lt;' : c === '>' ? '&gt;' : c === '"' ? '&quot;' : '&#39;';
     });
   }
+  /* Unicode-Form angleichen: macOS liefert Dateinamen oft als NFD, Links stehen meist als NFC. */
+  function nfc(s) { s = String(s == null ? '' : s); return s.normalize ? s.normalize('NFC') : s; }
+  function schluessel(p) { return nfc(p).toLowerCase(); }
   function basisname(p) { var k = p.lastIndexOf('/'); return k < 0 ? p : p.slice(k + 1); }
   function verzeichnis(p) { var k = p.lastIndexOf('/'); return k < 0 ? '' : p.slice(0, k); }
   function endung(p) { var b = basisname(p), k = b.lastIndexOf('.'); return k <= 0 ? '' : b.slice(k + 1).toLowerCase(); }
@@ -415,10 +424,11 @@ var FundusKern = (function () {
         return o;
       }
       if (/^[@`]/.test(r)) fehler('Wert beginnt mit „' + c + '“, das YAML reserviert; Wert in Anführungszeichen setzen', zi);
-      if (/^[*&!%|>]/.test(r)) fehler('Wert beginnt mit „' + c + '“, das hier nicht unterstützt wird; Wert in Anführungszeichen setzen', zi);
+      if (c === '&' || c === '*') fehler('YAML-' + (c === '&' ? 'Anker („&name“)' : 'Verweis („*name“)') + ' wird nicht gelesen; SCHEMA sieht Anker und Verweise nicht vor. Wert ausschreiben oder in Anführungszeichen setzen', zi);
+      if (/^[!%|>]/.test(r)) fehler('Wert beginnt mit „' + c + '“, das hier nicht unterstützt wird; Wert in Anführungszeichen setzen', zi);
       if (!imFlow && /^-( |$)/.test(r)) fehler('Listeneintrag direkt hinter einem Feldnamen', zi);
       if (!imFlow && /:( |$)/.test(r)) fehler('Doppelpunkt im Wert ohne Anführungszeichen', zi);
-      if (r === '~' || r === 'null') return null;
+      if (r === '~' || r === 'null' || r === 'Null' || r === 'NULL') return null;
       return r;
     }
     function wert(roh, zi, ind) {
@@ -466,18 +476,29 @@ var FundusKern = (function () {
       return tiefe <= 0;
     }
     function blockSkalar(ind0, ind) {
-      var roh = [];
+      /* | behält Zeilenumbrüche, > faltet sie. Schluss wie YAML: ohne Zeichen ein Umbruch, - keiner, + alle. */
+      var roh = [], start = i;
       while (i < n && (/^\s*$/.test(zeilen[i]) || ez(zeilen[i]) > ind)) { roh.push(zeilen[i]); i++; }
-      while (roh.length && /^\s*$/.test(roh[roh.length - 1])) roh.pop();
+      var leerAmEnde = 0;
+      while (roh.length && /^\s*$/.test(roh[roh.length - 1])) { roh.pop(); leerAmEnde++; }
+      if (!roh.length) return '';
+      // Umbruch nach der letzten Inhaltszeile gibt es nur, wenn danach noch eine Zeile im Frontmatter steht
+      var umbruch = start + roh.length < n;
       var min = Infinity; roh.forEach(function (z) { if (/\S/.test(z)) min = Math.min(min, ez(z)); });
       var z = roh.map(function (x) { return /\S/.test(x) ? x.slice(min) : ''; });
-      if (ind0.charAt(0) === '|') return z.join('\n');
-      var aus = '', vorher = null;
-      z.forEach(function (x) {
-        if (x === '') { aus += '\n'; vorher = ''; return; }
-        aus += (vorher && vorher !== '' ? ' ' : '') + x; vorher = x;
-      });
-      return aus.trim();
+      var aus;
+      if (ind0.charAt(0) === '|') aus = z.join('\n');
+      else {
+        aus = ''; var vorher = null;
+        z.forEach(function (x) {
+          if (x === '') { aus += '\n'; vorher = ''; return; }
+          aus += (vorher ? ' ' : '') + x; vorher = x;
+        });
+      }
+      var chomp = /-/.test(ind0) ? '-' : /\+/.test(ind0) ? '+' : '';
+      if (chomp === '-' || !umbruch) return aus;
+      if (chomp === '+') return aus + new Array((i < n ? 1 : 0) + leerAmEnde + 1).join('\n');
+      return aus + '\n';
     }
     function map(ind, obj) {
       while (true) {
@@ -527,9 +548,10 @@ var FundusKern = (function () {
     var erg = { daten: {}, koerper: t, fehler: null, roh: null, hat: false };
     if (!/^---[ \t]*(\n|$)/.test(t)) return erg;
     var z = t.split('\n'), ende = -1;
-    for (var i = 1; i < z.length; i++) if (/^(---|\.\.\.)[ \t]*$/.test(z[i])) { ende = i; break; }
+    for (var i = 1; i < z.length; i++) if (/^---[ \t]*$/.test(z[i])) { ende = i; break; }
+    // Ohne schließendes --- ist die erste Zeile eine Linie, kein Frontmatter (wie Obsidian)
+    if (ende < 0) return erg;
     erg.hat = true;
-    if (ende < 0) { erg.fehler = 'Das Frontmatter wird nicht mit --- geschlossen.'; erg.roh = z.slice(1, 40).join('\n'); erg.koerper = z.slice(1).join('\n'); return erg; }
     var fm = z.slice(1, ende);
     erg.roh = fm.join('\n');
     erg.koerper = z.slice(ende + 1).join('\n');
@@ -576,6 +598,28 @@ var FundusKern = (function () {
     var h = ziel.indexOf('#'), anker = h >= 0 ? ziel.slice(h + 1).trim() : '';
     return { ziel: (h >= 0 ? ziel.slice(0, h) : ziel).trim(), anker: anker, alias: alias };
   }
+  /* Code-Spans wie CommonMark: eine Folge von n Backticks schließt nur mit genau n Backticks.
+     Ohne Gegenstück bleibt die Folge Text. fn(inhalt, ganz) liefert den Ersatz. */
+  function codeSpans(a, fn) {
+    if (a.indexOf('`') < 0) return a;
+    var r = '', k = 0, len = a.length;
+    while (k < len) {
+      var p = a.indexOf('`', k);
+      if (p < 0) { r += a.slice(k); break; }
+      r += a.slice(k, p);
+      var n = 0; while (a.charAt(p + n) === '`') n++;
+      var s = p + n, gef = -1;
+      while (s < len) {
+        var q = a.indexOf('`', s); if (q < 0) break;
+        var m = 0; while (a.charAt(q + m) === '`') m++;
+        if (m === n) { gef = q; break; }
+        s = q + m;
+      }
+      if (gef < 0) { r += a.slice(p, p + n); k = p + n; continue; }
+      r += fn(a.slice(p + n, gef), a.slice(p, gef + n)); k = gef + n;
+    }
+    return r;
+  }
   function ohneCode(t) {
     var aus = [], zaun = null;
     t.split('\n').forEach(function (z) {
@@ -584,28 +628,31 @@ var FundusKern = (function () {
       if (m) { zaun = m[1]; aus.push(''); return; }
       aus.push(z);
     });
-    return aus.join('\n').replace(/<!--[\s\S]*?-->/g, '').replace(/%%[\s\S]*?%%/g, '').replace(/(`+)(?!`)[\s\S]*?[^`]\1(?!`)/g, '');
+    // Inline-Code nur innerhalb eines Absatzes paaren, wie die Darstellung
+    return aus.join('\n').replace(/<!--[\s\S]*?-->/g, '').replace(/%%[\s\S]*?%%/g, '').split(/(\n[ \t]*\n)/)
+      .map(function (a, i) { return i % 2 ? a : codeSpans(a, function () { return ' '; }); }).join('');
   }
   function kandidatenSortieren(liste, vonPfad) {
-    var dir = verzeichnis(vonPfad || '');
+    var dir = nfc(verzeichnis(vonPfad || ''));
     return liste.slice().sort(function (a, b) {
-      var sa = verzeichnis(a) === dir ? 0 : 1, sb = verzeichnis(b) === dir ? 0 : 1;
+      var sa = nfc(verzeichnis(a)) === dir ? 0 : 1, sb = nfc(verzeichnis(b)) === dir ? 0 : 1;
       if (sa !== sb) return sa - sb;
       if (a.length !== b.length) return a.length - b.length;
       return a < b ? -1 : 1;
     });
   }
   function loeseWiki(idx, ziel, vonPfad) {
-    var z = String(ziel || '').trim().replace(/\\/g, '/').replace(/^\/+/, '');
+    var z = nfc(ziel || '').trim().replace(/\\/g, '/').replace(/^\/+/, '');
     if (!z) return vonPfad ? { pfad: vonPfad, n: 1 } : null;
     var zl = z.toLowerCase(), p = idx.pfadKlein[zl] || idx.pfadKlein[zl + '.md'];
     if (p) return { pfad: p, n: 1 };
     var kand;
     if (z.indexOf('/') >= 0) {
-      var rel = normalisiere(verzeichnis(vonPfad || '') + '/' + z).toLowerCase();
+      var rel = schluessel(normalisiere(verzeichnis(vonPfad || '') + '/' + z));
       p = idx.pfadKlein[rel] || idx.pfadKlein[rel + '.md'];
       if (p) return { pfad: p, n: 1 };
-      kand = idx.pfade.filter(function (x) { var xl = x.toLowerCase(); return xl.slice(-zl.length - 1) === '/' + zl || xl.slice(-zl.length - 4) === '/' + zl + '.md'; });
+      kand = [];
+      idx.schluessel.forEach(function (xl, k) { if (xl.slice(-zl.length - 1) === '/' + zl || xl.slice(-zl.length - 4) === '/' + zl + '.md') kand.push(idx.pfade[k]); });
     } else {
       kand = idx.nachName[zl] || idx.nachName[ohneMd(zl)] || [];
     }
@@ -617,10 +664,11 @@ var FundusKern = (function () {
     if (k >= 0) { anker = href.slice(k + 1); href = href.slice(0, k); }
     try { href = decodeURIComponent(href); } catch (e) { /* bleibt roh */ }
     try { anker = decodeURIComponent(anker); } catch (e) { /* bleibt roh */ }
+    href = nfc(href);
     if (!href) return vonPfad ? { pfad: vonPfad, n: 1, anker: anker } : null;
     var kand = [normalisiere(verzeichnis(vonPfad || '') + '/' + href), normalisiere(href)];
     for (var i = 0; i < kand.length; i++) {
-      var kl = kand[i].toLowerCase(), p = idx.pfadKlein[kl] || idx.pfadKlein[kl + '.md'];
+      var kl = schluessel(kand[i]), p = idx.pfadKlein[kl] || idx.pfadKlein[kl + '.md'];
       if (p) return { pfad: p, n: 1, anker: anker };
     }
     if (href.indexOf('/') < 0 || !/^\.\.?\//.test(href)) {
@@ -646,11 +694,15 @@ var FundusKern = (function () {
       else { var ml = /^(.+)\.lokal\.md$/i.exec(t[1]); if (ml) { d.modul = ml[1]; d.istLokal = true; } }
     }
     d.istModulKopf = d.zone === 'module' && t.length === 3 && /^modul\.md$/i.test(t[2]);
-    d.istLeitplanke = d.istMd && ((d.zone === 'leitplanken' && t.length === 2) || (d.zone === 'module' && t.length >= 4 && t[2] === 'leitplanken'));
+    // Ort einer Leitplanke; Leitplanke ist sie erst mit id: im Frontmatter (FORMAT.md, SCHEMA.md eines Moduls sind keine)
+    var leitplankenOrt = d.istMd && ((d.zone === 'leitplanken' && t.length === 2) || (d.zone === 'module' && t.length >= 4 && t[2] === 'leitplanken'));
+    d.istLeitplanke = false;
     if (!d.istMd) { d.titel = d.name; d.suchtext = p.toLowerCase(); return d; }
     var f = parseFrontmatter(e.text || '');
     d.fm = f.daten; d.fmFehler = f.fehler; d.fmRoh = f.roh; d.koerper = f.koerper; d.hatFm = f.hat;
-    var fm = d.fm, h1 = /^#[ \t]+(.+?)[ \t#]*$/m.exec(ohneCode(d.koerper));
+    d.istLeitplanke = leitplankenOrt && !!text(d.fm.id);
+    var t2 = ohneCode(d.koerper);
+    var fm = d.fm, h1 = /^#[ \t]+(.+?)[ \t#]*$/m.exec(t2);
     var titel = text(fm.title) || text(fm.titel);
     d.titel = titel || (h1 ? h1[1].trim() : ohneMd(d.name));
     if (d.istLeitplanke && fm.id) d.titel = text(fm.id) + ' · ' + (titel || (h1 ? h1[1].trim() : ohneMd(d.name)));
@@ -659,7 +711,6 @@ var FundusKern = (function () {
     d.tags = liste(fm.tags); d.aliases = liste(fm.aliases);
     d.suchtext = (d.titel + '\n' + d.aliases.join('\n') + '\n' + p + '\n' + d.koerper).toLowerCase();
 
-    var t2 = ohneCode(d.koerper);
     t2.replace(RE_WIKI, function (_, b, inh) {
       var w = teileWiki(inh); if (!w.ziel) return '';
       d.links.push({ art: b ? 'einbettung' : 'wiki', roh: inh, ziel: w.ziel }); return '';
@@ -685,11 +736,12 @@ var FundusKern = (function () {
 
   function baueIndex(vault, eintraege) {
     var b = bereinige(eintraege);
-    var idx = { vault: b.unterordner || vault, unterordner: b.unterordner, docs: [], nachPfad: Object.create(null), pfadKlein: Object.create(null), nachName: Object.create(null), pfade: [] };
+    // nachPfad: Pfad wie geliefert; pfadKlein, nachName, schluessel: NFC und klein, für den Vergleich mit Link-Zielen
+    var idx = { vault: b.unterordner || vault, unterordner: b.unterordner, docs: [], nachPfad: Object.create(null), pfadKlein: Object.create(null), nachName: Object.create(null), pfade: [], schluessel: [] };
     b.eintraege.forEach(function (e) {
-      var d = neuesDoc(e);
-      idx.docs.push(d); idx.nachPfad[d.pfad] = d; idx.pfadKlein[d.pfad.toLowerCase()] = d.pfad; idx.pfade.push(d.pfad);
-      var schl = (d.istMd ? ohneMd(d.name) : d.name).toLowerCase();
+      var d = neuesDoc(e), sp = schluessel(d.pfad);
+      idx.docs.push(d); idx.nachPfad[d.pfad] = d; idx.pfadKlein[sp] = d.pfad; idx.pfade.push(d.pfad); idx.schluessel.push(sp);
+      var schl = schluessel(d.istMd ? ohneMd(d.name) : d.name);
       (idx.nachName[schl] = idx.nachName[schl] || []).push(d.pfad);
     });
     idx.docs.forEach(function (d) {
@@ -752,13 +804,14 @@ var FundusKern = (function () {
   function offeneZeilen(doc) {
     if (!doc) return null;
     var t = abschnitt(doc.koerper, 'Offen'); if (t == null) return [];
-    var aus = [], zaun = false;
+    // Nur Punkte der obersten Ebene zählen; eingerückte Unterpunkte und Folgezeilen hängen am Punkt davor
+    var aus = [], zaun = false, basis = -1;
     t.split('\n').forEach(function (z) {
       if (/^ {0,3}(`{3,}|~{3,})/.test(z)) { zaun = !zaun; return; }
       if (zaun) return;
-      var m = /^\s{0,3}(?:[-*+]|\d+[.)])\s+(.*)$/.exec(z);
-      if (m) aus.push(m[1].trim());
-      else if (aus.length && /^\s+\S/.test(z)) aus[aus.length - 1] += ' ' + z.trim();
+      var m = /^( {0,3})(?:[-*+]|\d+[.)])\s+(.*)$/.exec(z);
+      if (m && (basis < 0 || m[1].length <= basis)) { if (basis < 0) basis = m[1].length; aus.push(m[2].trim()); }
+      else if (aus.length && /^\s+\S/.test(z)) aus[aus.length - 1] += ' ' + z.trim().replace(/^(?:[-*+]|\d+[.)])\s+/, '· ');
     });
     return aus.filter(Boolean);
   }
@@ -775,17 +828,18 @@ var FundusKern = (function () {
     var naechster = abschn.filter(function (a) { return /^n(ä|ae)chster schritt/i.test(a.titel); })[0] || null;
     return { titel: h1 ? h1[1].trim() : 'Übergabe', datum: h1 ? datum((/(\d{4}-\d{2}-\d{2})/.exec(h1[1]) || [])[1] || '') : '', naechster: naechster, abschnitte: abschn };
   }
+  /* Ordner in wiki/ mit Seitenzahl und Typen. keinThema: Hinweistext bei Ordnern, die kein Themenbereich sind (KEIN_THEMA). */
   function bereiche(idx) {
-    var m = {};
+    var m = Object.create(null);
     idx.docs.forEach(function (d) {
       if (d.zone !== 'wiki' || !d.istMd || !d.bereich) return;
-      var b = m[d.bereich] = m[d.bereich] || { name: d.bereich, gesamt: 0, typen: {} };
+      var b = m[d.bereich] = m[d.bereich] || { name: d.bereich, gesamt: 0, typen: Object.create(null), keinThema: KEIN_THEMA[d.bereich.toLowerCase()] || '' };
       b.gesamt++; var t = d.typ || 'ohne Typ'; b.typen[t] = (b.typen[t] || 0) + 1;
     });
-    return Object.keys(m).map(function (k) { return m[k]; }).sort(function (a, b) { return b.gesamt - a.gesamt || a.name.localeCompare(b.name, 'de'); });
+    return Object.keys(m).map(function (k) { return m[k]; }).sort(function (a, b) { return (!!a.keinThema - !!b.keinThema) || b.gesamt - a.gesamt || a.name.localeCompare(b.name, 'de'); });
   }
   function module(idx) {
-    var m = {};
+    var m = Object.create(null);
     idx.docs.forEach(function (d) {
       if (d.zone !== 'module' || !d.modul) return;
       var e = m[d.modul] = m[d.modul] || { name: d.modul, pfad: '', titel: '', version: '', stand: '', pruefen_bis: '', dateien: 0, lokal: '' };
@@ -817,15 +871,17 @@ var FundusKern = (function () {
     { id: 'weitere', name: 'Weitere', facetten: [['ordner', 'Ordner']] }
   ];
   function imReiter(d, r) {
-    if (r === 'wiki') return d.zone === 'wiki' && d.istMd;
-    if (r === 'leitplanken') return d.istMd && (d.zone === 'leitplanken' || /^module\/[^\/]+\/leitplanken\//.test(d.pfad));
+    if (r === 'wiki') return d.zone === 'wiki';
+    if (r === 'leitplanken') return d.istLeitplanke;
+    // leitplanken/ ohne Regel (FORMAT.md, Anhänge) steht unter Weitere
+    if (r === 'weitere') return d.zone === 'weitere' || (d.zone === 'leitplanken' && !d.istLeitplanke);
     return d.zone === r;
   }
   function facette(d, k) {
     var t = d.pfad.split('/');
     switch (k) {
       case 'bereich': return d.bereich || '(wiki/)';
-      case 'typ': return d.typ || '(ohne)';
+      case 'typ': return d.istMd ? d.typ || '(ohne)' : '(Datei)';
       case 'status': return d.status || '(ohne)';
       case 'stimme': return d.stimme || '(ohne)';
       case 'sicherheit': return d.sicherheit || '(ohne)';
@@ -859,7 +915,7 @@ var FundusKern = (function () {
     return aus;
   }
   function facettenWerte(idx, reiter, k) {
-    var z = {};
+    var z = Object.create(null);
     idx.docs.forEach(function (d) { if (imReiter(d, reiter)) { var v = facette(d, k); z[v] = (z[v] || 0) + 1; } });
     return Object.keys(z).sort(function (a, b) { return a.localeCompare(b, 'de'); }).map(function (v) { return { wert: v, anzahl: z[v] }; });
   }
@@ -901,28 +957,31 @@ var FundusKern = (function () {
     return aus;
   }
 
+  /* Hilfsmarken \u0000n\u0000 halten fertiges HTML fest. Jede Marke kennt ihren Quelltext (roh): Was in ein
+     Attribut geht (Link-Ziel, Alt-Text, Wikilink-Inhalt), bekommt den Quelltext, nie das HTML der Marke. */
   function inline(s, ctx) {
-    var halter = [];
-    function halte(h) { halter.push(h); return '\u0000' + (halter.length - 1) + '\u0000'; }
-    s = String(s).replace(/<!--[\s\S]*?-->/g, '').replace(/%%[\s\S]*?%%/g, '');
-    s = s.replace(/(`+)(?!`)([\s\S]*?[^`])\1(?!`)/g, function (_, b, c) {
+    var halter = [], quelle = [];
+    function halte(h, r) { halter.push(h); quelle.push(r == null ? '' : r); return '\u0000' + (halter.length - 1) + '\u0000'; }
+    function roh(x) { var alt; do { alt = x; x = x.replace(/\u0000(\d+)\u0000/g, function (_, k) { return quelle[+k]; }); } while (x !== alt); return x; }
+    s = String(s).replace(/\u0000/g, '').replace(/<!--[\s\S]*?-->/g, '').replace(/%%[\s\S]*?%%/g, '');
+    s = codeSpans(s, function (c, ganz) {
       if (/^ [\s\S]* $/.test(c) && /\S/.test(c)) c = c.slice(1, -1);
-      return halte('<code>' + esc(c) + '</code>');
+      return halte('<code>' + esc(c) + '</code>', ganz);
     });
-    s = inlineRest(s, ctx, halte);
+    s = inlineRest(s, ctx, halte, roh);
     var alt; do { alt = s; s = s.replace(/\u0000(\d+)\u0000/g, function (_, k) { return halter[+k]; }); } while (s !== alt);
     return s;
   }
-  function inlineRest(s, ctx, halte) {
-    s = s.replace(RE_WIKI, function (_, b, inh) { return halte(b ? ctx.einbettung(inh) : ctx.wikilink(inh)); });
-    s = s.replace(/\\([\\`*_{}\[\]()#+\-.!|~=<>"'])/g, function (_, c) { return halte(esc(c)); });
-    s = s.replace(RE_MDLINK, function (_, b, txt, href) {
-      href = href.replace(/^<([\s\S]*)>$/, '$1');
-      return halte(b ? ctx.bild(href, txt) : ctx.mdlink(href, inlineRest(txt, ctx, halte)));
+  function inlineRest(s, ctx, halte, roh) {
+    s = s.replace(RE_WIKI, function (ganz, b, inh) { inh = roh(inh); return halte(b ? ctx.einbettung(inh) : ctx.wikilink(inh), roh(ganz)); });
+    s = s.replace(/\\([\\`*_{}\[\]()#+\-.!|~=<>"'])/g, function (_, c) { return halte(esc(c), c); });
+    s = s.replace(RE_MDLINK, function (ganz, b, txt, href) {
+      href = roh(href).replace(/^<([\s\S]*)>$/, '$1');
+      return halte(b ? ctx.bild(href, roh(txt)) : ctx.mdlink(href, inlineRest(txt, ctx, halte, roh)), roh(ganz));
     });
-    s = s.replace(/<((?:https?:\/\/|mailto:)[^\s<>]+)>/gi, function (_, u) { return halte(ctx.extern(u, esc(u))); });
-    s = s.replace(/(^|[\s(])(https?:\/\/[^\s<>]*[^\s<>.,;:!?'")\]])/gi, function (_, v, u) { return v + halte(ctx.extern(u, esc(u))); });
-    s = s.replace(/(^|\s)#([\p{L}\p{N}_\/-]*[\p{L}_\/-][\p{L}\p{N}_\/-]*)/gu, function (_, v, t) { return v + halte('<span class="tag">#' + esc(t) + '</span>'); });
+    s = s.replace(/<((?:https?:\/\/|mailto:)[^\s<>]+)>/gi, function (ganz, u) { u = roh(u); return halte(ctx.extern(u, esc(u)), u); });
+    s = s.replace(/(^|[\s(])(https?:\/\/[^\s<>]*[^\s<>.,;:!?'")\]])/gi, function (_, v, u) { u = roh(u); return v + halte(ctx.extern(u, esc(u)), u); });
+    s = s.replace(/(^|\s)#([\p{L}\p{N}_\/-]*[\p{L}_\/-][\p{L}\p{N}_\/-]*)/gu, function (_, v, t) { return v + halte('<span class="tag">#' + esc(t) + '</span>', '#' + t); });
     s = esc(s);
     return s
       .replace(/\*\*\*(?=\S)([\s\S]*?\S)\*\*\*/g, '<strong><em>$1</em></strong>')
@@ -992,6 +1051,11 @@ var FundusKern = (function () {
     var tag = geordnet ? 'ol' : 'ul';
     return { html: '<' + tag + (geordnet && start !== 1 ? ' start="' + start + '"' : '') + '>\n' + html + '\n</' + tag + '>', i: i };
   }
+  function ueberschrift(ebene, t, ctx) {
+    var id = ctx.idEindeutig(t);
+    if (ctx.ueberschriften) ctx.ueberschriften.push({ ebene: ebene, text: t.replace(/[*_`=~\[\]]/g, ''), id: id });
+    return '<h' + ebene + ' id="' + esc(id) + '">' + inline(t, ctx) + '</h' + ebene + '>';
+  }
   function bloecke(z, ctx) {
     var html = [], i = 0, n = z.length, m;
     while (i < n) {
@@ -1009,9 +1073,7 @@ var FundusKern = (function () {
       if (/^\s*<!--.*-->\s*$/.test(l)) { i++; continue; }
       if (/^\s*%%/.test(l) && !/^\s*%%.*%%\s*$/.test(l)) { i++; while (i < n && z[i].indexOf('%%') < 0) i++; i++; continue; }
       if ((m = /^ {0,3}(#{1,6})(?:[ \t]+(.*?))?(?:[ \t]+#+)?[ \t]*$/.exec(l))) {
-        var ebene = m[1].length, t = m[2] || '', id = ctx.idEindeutig(t);
-        if (ctx.ueberschriften) ctx.ueberschriften.push({ ebene: ebene, text: t.replace(/[*_`=~\[\]]/g, ''), id: id });
-        html.push('<h' + ebene + ' id="' + esc(id) + '">' + inline(t, ctx) + '</h' + ebene + '>');
+        html.push(ueberschrift(m[1].length, m[2] || '', ctx));
         i++; continue;
       }
       if (istHr(l)) { html.push('<hr>'); i++; continue; }
@@ -1030,9 +1092,15 @@ var FundusKern = (function () {
         continue;
       }
       if (RE_LISTE.test(l) && (RE_LISTE.exec(l)[4] !== '' || /^\s*[-*+]\s*$/.test(l))) { var r = listeHtml(z, i, ctx); html.push(r.html); i = r.i; continue; }
-      var p = [l]; i++;
-      while (i < n && /\S/.test(z[i]) && !unterbricht(z[i], z[i + 1])) { p.push(z[i]); i++; }
-      html.push('<p>' + absatz(p, ctx) + '</p>');
+      var p = [l], setext = 0; i++;
+      while (i < n && /\S/.test(z[i])) {
+        // Setext-Überschrift: Absatz, darunter nur = (Ebene 1) oder nur - (Ebene 2)
+        if ((m = /^ {0,3}(=+|-+)[ \t]*$/.exec(z[i]))) { setext = m[1].charAt(0) === '=' ? 1 : 2; i++; break; }
+        if (unterbricht(z[i], z[i + 1])) break;
+        p.push(z[i]); i++;
+      }
+      if (setext) html.push(ueberschrift(setext, p.map(function (x) { return x.trim(); }).join('\n'), ctx));
+      else html.push('<p>' + absatz(p, ctx) + '</p>');
     }
     return html.join('\n');
   }
@@ -1101,7 +1169,7 @@ var FundusKern = (function () {
     return { html: renderMarkdown(k, ctx), ueberschriften: ctx.ueberschriften, ctx: ctx };
   }
   function obsidianUri(vault, pfad) {
-    return 'obsidian://open?vault=' + encodeURIComponent(vault) + '&file=' + encodeURIComponent(pfad.replace(/\.md$/i, ''));
+    return 'obsidian://open?vault=' + encodeURIComponent(nfc(vault)) + '&file=' + encodeURIComponent(nfc(pfad).replace(/\.md$/i, ''));
   }
 
   return {
@@ -1112,7 +1180,7 @@ var FundusKern = (function () {
     faelligkeiten: faelligkeiten, offeneZeilen: offeneZeilen, uebergabe: uebergabe, bereiche: bereiche, module: module,
     zuletzt: zuletzt, stand: stand, eingang: eingang, REITER: REITER, imReiter: imReiter, facette: facette, filtere: filtere,
     facettenWerte: facettenWerte, ausschnitt: ausschnitt, renderMarkdown: renderMarkdown, kontext: kontext, inline: inline,
-    rendereDoc: rendereDoc, obsidianUri: obsidianUri, BILD: BILD
+    rendereDoc: rendereDoc, obsidianUri: obsidianUri, BILD: BILD, nfc: nfc, schluessel: schluessel, ohneProto: ohneProto
   };
 })();
 </script>
@@ -1241,7 +1309,7 @@ var FundusKern = (function () {
   document.getElementById('knopf-neu').addEventListener('click', function () { if (S.griff) ausGriff(S.griff, true).catch(zeigeFehler); });
 
   /* ---------- Dateien öffnen ---------- */
-  var MIME = { pdf: 'application/pdf', png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', gif: 'image/gif', webp: 'image/webp', avif: 'image/avif', bmp: 'image/bmp', svg: 'image/svg+xml', txt: 'text/plain;charset=utf-8', md: 'text/plain;charset=utf-8', csv: 'text/plain;charset=utf-8', json: 'text/plain;charset=utf-8', html: 'text/plain;charset=utf-8', htm: 'text/plain;charset=utf-8', xml: 'text/plain;charset=utf-8', js: 'text/plain;charset=utf-8', css: 'text/plain;charset=utf-8', yml: 'text/plain;charset=utf-8', yaml: 'text/plain;charset=utf-8', log: 'text/plain;charset=utf-8' };
+  var MIME = K.ohneProto({ pdf: 'application/pdf', png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', gif: 'image/gif', webp: 'image/webp', avif: 'image/avif', bmp: 'image/bmp', svg: 'image/svg+xml', txt: 'text/plain;charset=utf-8', md: 'text/plain;charset=utf-8', csv: 'text/plain;charset=utf-8', json: 'text/plain;charset=utf-8', html: 'text/plain;charset=utf-8', htm: 'text/plain;charset=utf-8', xml: 'text/plain;charset=utf-8', js: 'text/plain;charset=utf-8', css: 'text/plain;charset=utf-8', yml: 'text/plain;charset=utf-8', yaml: 'text/plain;charset=utf-8', log: 'text/plain;charset=utf-8' });
   function blobUrl(pfad, zumOeffnen) {
     var schl = (zumOeffnen ? 'o:' : 'b:') + pfad;
     if (S.urls[schl]) return S.urls[schl];
@@ -1368,13 +1436,18 @@ var FundusKern = (function () {
     var k4 = offenKachel('wiki/meta/luecken.md', 'Offene Lücken', 'Welche Fragen kann das Wiki noch nicht belegen?', 'Keine offenen Lücken. Fehlt dem Agenten ein Beleg, trägt er die Frage hier ein.');
     var k5 = offenKachel('wiki/meta/widersprueche.md', 'Offene Widersprüche', 'Wo widersprechen sich Quellen, und was musst du entscheiden?', 'Keine offenen Widersprüche. Findet der Agent einen, steht er hier, und du entscheidest.');
 
-    var ber = K.bereiche(idx), max = ber.reduce(function (m, b) { return Math.max(m, b.gesamt); }, 1);
+    // Nur Themenbereiche zählen; meta/, bruecken/, muster/ stehen darunter, ohne Balken und ohne Zählung
+    var alleBer = K.bereiche(idx), ber = alleBer.filter(function (b) { return !b.keinThema; }), metaBer = alleBer.filter(function (b) { return b.keinThema; });
+    var max = ber.reduce(function (m, b) { return Math.max(m, b.gesamt); }, 1);
+    var bereichZeile = function (b) {
+      var typen = Object.keys(b.typen).sort(function (x, y) { return b.typen[y] - b.typen[x]; }).map(function (t) { return b.typen[t] + ' ' + esc(t); }).join(' · ');
+      return '<li><span class="haupt" style="flex:1"><a href="#liste/wiki?bereich=' + encodeURIComponent(b.name) + '">' + esc(b.name) + '</a><span class="unter typen">' + typen + '</span>' +
+        (b.keinThema ? '<span class="unter">' + esc(b.keinThema) + '</span>' : '<div class="balken"><span style="width:' + Math.max(4, Math.round(b.gesamt / max * 100)) + '%"></span></div>') +
+        '</span><span class="neben">' + b.gesamt + (b.gesamt === 1 ? ' Seite' : ' Seiten') + '</span></li>';
+    };
+    var berLeer = '<p class="leer">Noch keine Bereiche. Sie entstehen mit der ersten aufgenommenen Quelle als Ordner in <code>wiki/</code>.</p>';
     var k6 = kachel({ label: 'Bereiche', zahl: ber.length, frage: 'Welche Themen hat das Wiki, und wie viel steht darin?',
-      inhalt: ber.length ? '<ul class="eintraege">' + ber.map(function (b) {
-        var typen = Object.keys(b.typen).sort(function (x, y) { return b.typen[y] - b.typen[x]; }).map(function (t) { return b.typen[t] + ' ' + esc(t); }).join(' · ');
-        return '<li><span class="haupt" style="flex:1"><a href="#liste/wiki?bereich=' + encodeURIComponent(b.name) + '">' + esc(b.name) + '</a><span class="unter typen">' + typen + '</span>' +
-          '<div class="balken"><span style="width:' + Math.max(4, Math.round(b.gesamt / max * 100)) + '%"></span></div></span><span class="neben">' + b.gesamt + (b.gesamt === 1 ? ' Seite' : ' Seiten') + '</span></li>';
-      }).join('') + '</ul>' : '', leer: 'Noch keine Bereiche. Sie entstehen mit der ersten aufgenommenen Quelle als Ordner in <code>wiki/</code>.' });
+      inhalt: (ber.length ? '' : berLeer) + (alleBer.length ? '<ul class="eintraege">' + ber.concat(metaBer).map(bereichZeile).join('') + '</ul>' : '') });
     var k7 = kachel({ label: 'Module', zahl: mods.length, frage: 'Welche Fachmodule sind eingehängt, und wann sind sie zu prüfen?',
       inhalt: mods.length ? '<ul class="eintraege">' + mods.map(function (m) {
         var kopfDoc = idx.nachPfad[m.pfad];
@@ -1473,7 +1546,7 @@ var FundusKern = (function () {
     var kopf, rows;
     if (reiter === 'wiki') {
       kopf = ['Titel', 'Typ', 'Bereich', 'Status', 'Sicherheit', 'Stimme', 'Aktualisiert'];
-      rows = docs.map(function (d) { return zeile(d, [titelZelle(d, p), td(esc(d.typ)), td(esc(d.bereich || '—')), td(esc(d.status)), td(esc(d.sicherheit)), td(esc(d.stimme)), td(K.datumDe(d.updated), 'zahlspalte')]); });
+      rows = docs.map(function (d) { return zeile(d, [titelZelle(d, p), td(d.istMd ? esc(d.typ) : 'Datei · ' + esc(d.ext || '?')), td(esc(d.bereich || '—')), td(esc(d.status)), td(esc(d.sicherheit)), td(esc(d.stimme)), td(K.datumDe(d.updated), 'zahlspalte')]); });
     } else if (reiter === 'quellen') {
       kopf = ['Datei', 'Ort', 'Art', 'Größe', 'Zitiert von'];
       rows = docs.map(function (d) { var t = d.pfad.split('/'); return zeile(d, [titelZelle(d, p), td(esc(t.length > 2 ? t[1] : '—')), td(esc(d.ext || '—')), td(K.groesse(d.groesse), 'zahlspalte'), td(String(d.eingehend.length), 'zahlspalte')]); });
@@ -1495,9 +1568,9 @@ var FundusKern = (function () {
   }
   /* ---------- Dokument ---------- */
   var CHIP_FOLGE = ['type', 'status', 'sicherheit', 'stimme', 'id', 'art', 'schwere', 'modul', 'version', 'created', 'updated', 'stand', 'geprueft', 'pruefen_bis', 'verfaellt', 'einrichtung', 'land', 'gilt_fuer', 'sprache', 'lizenz', 'fundus', 'ergebnisse', 'confidence'];
-  var DATUMSFELD = { created: 'angelegt', updated: 'aktualisiert', stand: 'Stand', geprueft: 'geprüft', pruefen_bis: 'prüfen bis', verfaellt: 'verfällt' };
+  var DATUMSFELD = K.ohneProto({ created: 'angelegt', updated: 'aktualisiert', stand: 'Stand', geprueft: 'geprüft', pruefen_bis: 'prüfen bis', verfaellt: 'verfällt' });
   function chips(d) {
-    var fm = d.fm, aus = [], lang = [], gesehen = { title: 1, titel: 1, tags: 1, aliases: 1, quellen: 1 };
+    var fm = d.fm, aus = [], lang = [], gesehen = K.ohneProto({ title: 1, titel: 1, tags: 1, aliases: 1, quellen: 1 });
     var schluessel = CHIP_FOLGE.filter(function (k) { return k in fm; }).concat(Object.keys(fm).filter(function (k) { return CHIP_FOLGE.indexOf(k) < 0; }));
     schluessel.forEach(function (k) {
       if (gesehen[k]) return; gesehen[k] = 1;
@@ -1539,6 +1612,7 @@ var FundusKern = (function () {
   function zeigeDoc(pfad, anker) {
     setzeNavi('');
     var idx = S.idx, d = idx.nachPfad[pfad];
+    if (!d && idx.pfadKlein[K.schluessel(pfad)]) d = idx.nachPfad[idx.pfadKlein[K.schluessel(pfad)]];
     if (!d) {
       haupt.innerHTML = '<div class="anhang-karte"><h1>Nicht gefunden</h1><p><code>' + esc(pfad) + '</code> gibt es in diesem Ordner nicht, oder die Ansicht liest diesen Ort nicht (Punkt-Ordner, <code>vorlagen/</code>).</p><p><a href="#liste">Zur Liste</a></p></div>';
       return;
@@ -1569,7 +1643,7 @@ var FundusKern = (function () {
       h += '<div class="anhang-karte"><p>Diese Datei zeigt die Ansicht nicht selbst an. „Datei öffnen“ öffnet sie in einem neuen Tab' + (/pdf|png|jpe?g|gif|webp/i.test(d.ext) ? '' : ' oder lädt sie herunter') + '.</p></div>';
     }
     // Links
-    var aus = {}, ausListe = [];
+    var aus = Object.create(null), ausListe = [];
     d.links.forEach(function (l) { var k = l.pfad || ('?' + l.roh); if (aus[k]) return; aus[k] = 1; ausListe.push(l); });
     var ARTEN = { wiki: '', einbettung: 'eingebettet', md: 'Markdown-Link', bild: 'Bild', quelle: 'quellen:', eigenschaft: 'Feld' };
     var linkZeile = function (l) {
