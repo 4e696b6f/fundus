@@ -1,19 +1,14 @@
 # Reibung
 
-Hier landet jede Korrektur der Person und jeder eigene Fehlgriff, eine Zeile
-je Vorfall, sofort. Eine einzelne Korrektur ist ein Vorfall. Kommt derselbe
-Schlüssel ein zweites Mal vor, ist es ein Muster, und die Lehre gehört als
-Regel dorthin, wo sie künftig gelesen wird: `AGENTS.md`, ein Ablauf oder eine
-Leitplanke. Die Person entscheidet darüber (`ablaeufe/sitzung-beenden.md`).
-
-Format:
+Eine Zeile je Korrektur oder eigenem Fehlgriff, sofort. Regel:
+`ablaeufe/sitzung-beenden.md` § 3.
 
 ```
 - [Datum] schluessel-in-kurzform · was passiert ist · was richtig gewesen wäre
 ```
 
-Der Schlüssel beschreibt die Art des Fehlers, nicht den Einzelfall:
-`frage-statt-stichwort`, nicht `suche-nach-schlaf-am-dienstag`.
+Der Schlüssel benennt die Fehlerart: `frage-statt-stichwort`, nicht
+`suche-nach-schlaf-am-dienstag`.
 
 ## Vorfälle
 
