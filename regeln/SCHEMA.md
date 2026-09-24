@@ -1,55 +1,52 @@
 # SCHEMA — Seitenformat
 
-Hier steht verbindlich, wie eine Wiki-Seite aussieht und welche Felder Pflicht
-sind. Andere Dateien verweisen hierher und wiederholen es nicht.
-
 ## Seitentypen
 
-| `type:` | Was | Beispiel |
-|---|---|---|
-| `quelle` | Zusammenfassung einer einzelnen Rohquelle | ein Artikel, ein Buchkapitel, ein Vortrag |
-| `begriff` | ein Konzept, eine Theorie, ein Muster | „Spaced Repetition“ |
-| `bruecke` | Verbindung zwischen zwei oder mehr Bereichen | „Lernkurven in Sport und Sprache“ |
-| `akteur` | Person, Organisation, Institution | ein Verband, eine Autorin |
-| `projekt` | etwas, woran die Person arbeitet, mit Stand | „Umzug der Praxis“ |
-| `notiz` | ein eigener Gedanke der Person, kurz und für sich lesbar | |
-| `meta` | Prüfberichte, Lücken, Widersprüche, Befunde | |
+- `quelle`: Zusammenfassung einer einzelnen Rohquelle (Artikel, Buchkapitel, Vortrag)
+- `begriff`: ein Konzept, eine Theorie, ein Muster
+- `bruecke`: Verbindung zwischen zwei oder mehr Bereichen
+- `akteur`: Person, Organisation, Institution
+- `projekt`: etwas, woran die Person arbeitet, mit Stand
+- `notiz`: ein eigener Gedanke der Person, kurz und für sich lesbar
+- `meta`: Prüfberichte, Lücken, Widersprüche, Befunde
 
 Der Typ steht im Frontmatter, nicht im Pfad. Ordner in `wiki/` sind
-Themenbereiche (`wiki/lernen/`, `wiki/gesundheit/`), eine Seite hat genau einen
-Ordner. Ordnernamen folgen denselben Regeln wie Dateinamen. Welche Bereiche du
-ohne Nachfrage anlegst, steht in `AGENTS.md` → *Was du ohne Nachfrage tust*.
+Themenbereiche (`wiki/lernen/`), eine Seite hat genau einen Ordner;
+Ordnernamen folgen den Regeln für Dateinamen. Neben `wiki/meta/` sind
+`wiki/bruecken/` (jede `bruecke`-Seite) und `wiki/muster/` (Musterseiten,
+`regeln/LINSEN.md` → *Gleiche Form*) keine Themenbereiche und stehen nicht in
+`SOUL.md`.
 
 ## Dateinamen und Links
 
 - Kleinbuchstaben, Bindestriche, keine Umlaute im Dateinamen:
-  `spaced-repetition.md`, `lernkurven-sport-zu-sprache.md`.
+  `spaced-repetition.md`.
 - `quelle`-Seiten tragen `quelle-` vorn: `quelle-artikel-wiederholen.md`.
-- Notizen tragen das Datum vorn: `2026-09-23-kurztitel.md`. Es ist das Datum,
-  das in der Notiz steht; steht keins darin, das Datum der Aufnahme.
-- Kein Dateiname in `wiki/` gleicht einem Dateinamen in `quellen/` oder
-  `module/`, auch nicht in den Unterordnern eines Moduls. Obsidian sieht alle
-  drei Ordner, `[[name]]` wäre sonst mehrdeutig.
+- Notizen tragen das Datum vorn: `2026-09-23-kurztitel.md`, das Datum aus der
+  Notiz, sonst das der Aufnahme.
+- Musterseiten heißen `muster-<wert>.md` nach ihrem `gleiche_form:`-Wert
+  (`muster-rueckkopplung-verzoegert.md`). Eine Brücke heißt nie wie ein
+  `gleiche_form:`-Wert.
+- Jeder Dateiname kommt im Vault nur einmal vor (Ordner mit Punkt vorn wie
+  `.obsidian/` ausgenommen). Vor dem Anlegen suchst du ihn; ist er belegt,
+  änderst du den Kurztitel.
 - Links als `[[dateiname]]`. **In beide Richtungen:** Verlinkt A auf B, bekommt
-  B einen Link zurück auf A, mit einem Halbsatz, warum.
-- Meta-Seiten (`wiki/index.md`, `wiki/log.md`, alles in `wiki/meta/`) sind
-  davon in beide Richtungen ausgenommen: Sie brauchen keinen Gegenlink, und
-  ein Link auf sie braucht keinen. `wiki/muster/` gehört nicht dazu, denn
-  Musterseiten sind `begriff`-Seiten.
+  B einen Link zurück auf A, mit einem Halbsatz, warum. Ausgenommen sind, in
+  beide Richtungen, Meta-Seiten (`wiki/index.md`, `wiki/log.md`, alles in
+  `wiki/meta/`), nicht aber `wiki/bruecken/` und `wiki/muster/`.
 - Auf eine Moduldatei verlinkst du mit Pfad:
-  `[[module/<modulname>/<datei>|Kurzname]]`. Der Link zählt als ausgehender
-  Link. Einen Gegenlink bekommt er nicht, weil du `module/` nicht änderst
-  (`L01`).
+  `[[module/<modulname>/<datei>|Kurzname]]`; der Link zählt als ausgehender,
+  ohne Gegenlink (`L01`).
 
 ## Frontmatter
 
-Jede Seite beginnt so (Beispiel für den Typ `begriff`):
+Beispiel (`begriff` in `wiki/lernen/`):
 
 ```yaml
 ---
 title: 'Spaced Repetition'
 type: begriff
-tags: [lernen, gedaechtnis]
+tags: [lernen]                       # erster Tag: der Bereich
 aliases: ['verteiltes Wiederholen']
 created: 2026-09-23
 updated: 2026-09-23
@@ -58,7 +55,6 @@ sicherheit: mittel                   # hoch | mittel | niedrig | strittig
 status: aktiv                        # aktiv | veraltet | ersetzt | skizze
 stimme: agent                        # ich | agent | gemischt
 gegenposition: 'Wer nur verteilt wiederholt, übt Abrufen, nicht Verstehen.'
-pruefen_bis: 2027-09-23
 ---
 ```
 
@@ -77,44 +73,61 @@ Wahlweise: `aliases` (Synonyme für die Suche), `pruefen_bis`, die übrigen
 Linsen-Felder aus `regeln/LINSEN.md`, `quellen` bei allen anderen Typen. Ein
 leerer Wert (`''`, `[]`) zählt nicht als gesetzt.
 
+**`created:`** ist der Tag des Anlegens, auch wenn Notiz oder Quelle älter
+sind. Deren Datum steht im Dateinamen der Notiz bzw. im ersten Absatz der
+`quelle`-Seite.
+
 **`sicherheit:`** ist dein Urteil über die Belege der Kernaussagen, nicht über
-das Thema. Eine einzelne Werbequelle ist `niedrig`, auch wenn sie überzeugend
-klingt. Widerspricht eine Quelle einer Kernaussage, wird die Seite `strittig`,
-deren Kernaussage betroffen ist, gleich wie gut die Quellen sind. In der Regel
-ist das die Seite, auf der beide Aussagen stehen; die beiden `quelle`-Seiten
-werden es nicht von selbst, denn sie geben wieder, was ihre Quelle sagt.
-`strittig` geht jedem anderen Wert
-vor, und der Widerspruch steht in `wiki/meta/widersprueche.md`. Seiten, deren
-Kernaussagen niemand bestreitet, behalten ihren Wert, auch wenn dieselbe
-Quelle anderswo umstritten ist. Eine `notiz` hat das Feld nicht: Sie gibt
-wieder, was die Person denkt, nicht was belegt ist.
+das Thema oder deine Zustimmung; eine einzelne Werbequelle ist `niedrig`. Widerspricht eine Quelle
+einer Kernaussage, wird die Seite `strittig`, auf der beide Aussagen
+nebeneinander stehen, gleich wie gut die Quellen sind; `strittig` geht jedem
+Wert vor. Die beiden `quelle`-Seiten behalten ihren Wert (jede gibt ihre
+Quelle richtig wieder), ebenso unbestrittene Seiten. Die Zeile in
+`wiki/meta/widersprueche.md` nennt vorn die beiden Seiten oder Quellen, hinter
+„beide Aussagen auf“ die `strittig`-Seite, auch wenn sie vorn schon steht. Für
+einen Widerspruch zu einer Moduldatei gilt die zweite Formzeile; die Person
+kann ihn über `kontakt:` in der `MODUL.md` melden.
 
-**`stimme:`** trennt, wer spricht. `ich` = der Hauptteil ist wörtlich die
-Person (`notiz`). `agent` = deine Zusammenfassung. `gemischt` = beides, die
-Person steht im `> [!ich]`-Block. Stellst du einen `[!ich]`-Block in eine Seite
-mit `stimme: agent`, setzt du `stimme: gemischt`. Eine `notiz` bleibt `ich`,
-auch wenn du Abschnitte ergänzt (`## Verbindungen`, `## Offene Fragen`,
-`## Verlauf`): Sie stehen unter der Zeile `*Ergänzt vom Agenten:*` direkt nach
-dem Wortlaut der Person.
+**`stimme:`** `ich` = der Hauptteil ist wörtlich die Person (`notiz`),
+`agent` = deine Zusammenfassung, `gemischt` = beides, die Person im
+`> [!ich]`-Block. Stellst du einen `[!ich]`-Block in eine Seite mit
+`stimme: agent`, setzt du im selben Arbeitsgang `gemischt`, auch bei `bruecke`
+und `quelle`. Eine `notiz` bleibt `ich`; was du ergänzt (`## Verbindungen`,
+`## Offene Fragen`, `## Verlauf`), steht unter der Zeile `*Ergänzt vom
+Agenten:*` direkt nach dem Wortlaut der Person.
 
-**`pruefen_bis:`** setzt du bei Seiten, die an einem Datum veralten: Preise,
-Rechtsstände, Zuständigkeiten, Telefonnummern, Softwareversionen. Nach dem
-Datum meldet `ablaeufe/pruefen.md` die Seite. Seiten ohne solchen Stoff
-bekommen kein Datum.
+**`pruefen_bis:`** nur, wenn eine Kernaussage an einem Datum hängt (Preis,
+Rechtsstand, Zuständigkeit, Telefonnummer, Softwareversion). Der Wert ist das
+früheste Datum, an dem eine Kernaussage ungültig wird oder neu zu prüfen ist;
+danach meldet `ablaeufe/pruefen.md` die Seite.
 
-**Moduldateien als Beleg:** Stützt sich eine Seite auf eine Datei in einem
-Modul, steht deren Pfad in `quellen:` (`'module/<modulname>/<datei>'`). Die
-Seite übernimmt das `pruefen_bis:` dieser Datei, sonst das aus der `MODUL.md`
-des Moduls. So veraltet sie nicht still, wenn das Modul sich ändert.
+- Kein Gültigkeitsende genannt: Stand der Quelle plus zwölf Monate, und ein
+  Halbsatz bei der Aussage sagt das. Liegt dieses Datum beim Aufnehmen zurück:
+  Aufnahmetag plus drei Monate, und der Halbsatz sagt, dass der Stand der
+  Quelle nicht nachgeprüft ist.
+- Genanntes Gültigkeitsende beim Aufnehmen schon vorbei: Die Aussage steht als
+  veraltet im Text („galt bis 31.03.2026“), die Lücke kommt nach
+  `wiki/meta/luecken.md`, `pruefen_bis:` ist das Datum, an dem ein neuer Stand
+  zu erwarten ist, sonst Aufnahmetag plus drei Monate.
+- Eine datierte Nebenangabe (Anmeldeschluss, Preis in einer Nebenzeile) gibt
+  kein `pruefen_bis:`, sondern eine Frist in der Übergabe unter *Nicht
+  vergessen* (`ablaeufe/sitzung-beenden.md`).
+- Ohne datierten Kernstoff kein Datum, außer von einer Moduldatei übernommen.
 
-**`tags:`** Der erste Tag ist der Bereich der Seite, also ihr Ordnername
-(`meta` bei `meta`-Seiten). Weitere Tags nur für ein Thema, das absehbar
-mindestens drei Seiten teilen. Kleinbuchstaben, keine Umlaute, ohne `#`, ohne
-Punkte, nicht rein aus Ziffern (`jahr-2026` statt `2026`).
+**Moduldateien als Beleg:** Stützt sich eine Seite auf eine Moduldatei, steht
+deren Pfad in `quellen:` (`'module/<modulname>/<datei>'`), und die Seite
+übernimmt deren `pruefen_bis:`, sonst das der `MODUL.md`; ein früheres eigenes
+Datum bleibt.
+
+**`tags:`** Der erste Tag ist der Bereich, also der Ordnername (`meta` bei
+`meta`-Seiten); eine Brücke trägt zuerst `bruecke`, dann die verbundenen
+Bereiche: `[bruecke, sport, sprache]`. Einen Thementag setzt du erst, wenn
+eine zweite Seite ihn braucht, dann auf beiden. Kleinbuchstaben, keine Umlaute, ohne `#`, ohne Punkte, nicht rein aus Ziffern
+(`jahr-2026` statt `2026`).
 
 **Anführungszeichen:** `title`, `aliases` und jedes freie Textfeld stehen in
 einfachen Anführungszeichen, sobald ein Doppelpunkt, ein `#` oder ein
-`[[Link]]` darin vorkommt. Sonst zeigt Obsidian das Frontmatter rot.
+`[[Link]]` darin vorkommt.
 
 ## Die Stimme der Person
 
@@ -123,22 +136,44 @@ einfachen Anführungszeichen, sobald ein Doppelpunkt, ein `#` oder ein
 > Wörtlich, was die Person gesagt oder notiert hat. Nicht geglättet.
 ```
 
-Alles in diesem Block ist die Person. Alles außerhalb ist Quelle oder deine
+Alles im Block ist die Person, alles außerhalb Quelle oder deine
 Zusammenfassung.
 
-Text in `Backticks` in einer Rohdatei ist ein Hinweis auf die Stimme der
-Person. Was daraus wird, hängt von der Art der Quelle ab
-(`ablaeufe/aufnehmen.md` § 1):
+**Kopieren:** Jeden `[!ich]`-Block kopierst du aus der Rohdatei in `quellen/`,
+nie aus dem Gedächtnis oder von einer anderen Wiki-Seite, auch die zweite
+Stelle desselben Zitats, auch im selben Arbeitsgang. Steht der Block nicht auf
+der Seite der Notiz oder Quelle selbst, verlinkst du bei ihm diese Seite. Vor
+jede Zeile kommt `> `, vor eine leere `>`; sonst änderst du nichts außer den
+Backticks bei Art C.
 
-- **Art B, eigene Notiz:** Die ganze Notiz ist schon die Person. Ihr Wortlaut
-  kommt vollständig in *einen* `[!ich]`-Block. Backticks darin sind Betonungen
-  und bleiben stehen.
+**Ohne Rohdatei:** Was die Person im Gespräch für eine Seite sagt, übernimmst
+du genau so, darunter `*im Gespräch am JJJJ-MM-TT*`. Die erste Wiki-Seite
+damit gilt als Rohfassung, weitere Kopien kommen von dort, samt Zeile. Diese
+Blöcke und solche, die die Person selbst ins Wiki schreibt (etwa per Vorlage
+`projekt`), gleicht die Prüfung nicht ab (`ablaeufe/pruefen.md` § 4).
+
+Backticks in einer Rohdatei markieren die Stimme der Person, je nach Art der
+Quelle (`ablaeufe/aufnehmen.md` § 1):
+
+- **Art B, eigene Notiz:** Der ganze Wortlaut kommt in *einen* `[!ich]`-Block,
+  alle Zeilen samt Datumszeile, Leerzeilen und Listenpunkte wie in der
+  Rohdatei. Backticks sind hier Betonungen und bleiben.
 - **Art C, fremde Quelle mit Anmerkungen:** Jede Stelle in Backticks ist eine
-  Anmerkung der Person und wird ein eigener `[!ich]`-Block, wörtlich samt
-  Backticks, neben der Aussage, auf die sie sich bezieht.
+  Anmerkung und wird ein eigener `[!ich]`-Block neben ihrer Aussage, ohne die
+  umschließenden Backticks; der Text dazwischen bleibt wörtlich. Ein Wort mit `#` vorn bleibt auch im Block in Backticks
+  (`` `#später` ``), sonst wird es ein Tag.
 
-Backticks entfernst oder ersetzt du nie, auch nicht durch Tags oder Fettdruck:
-Ohne sie würde aus `` `#später` `` in Obsidian ein Tag.
+Umbrechen darfst du eine lange Zeile innerhalb eines Absatzes; Wortlaut,
+Reihenfolge und Backticks änderst du nicht. Sonst entfernst oder ersetzt du
+Backticks nie, auch nicht durch Tags oder Fettdruck. Unter einem `[!ich]`-Block
+deutest du die Person nicht um: Sagt sie etwas anderes als die Quelle, steht
+die Abweichung so da, wie sie sie sagt.
+
+**Aufgaben der Person:** Was sich die Person in einer Rohdatei vormerkt (etwa
+`` `#später` `` und Aufgabe), bleibt wörtlich im `[!ich]`-Block. Du
+erledigst es nicht ungefragt; es gehört weder unter `## Offene Fragen` noch
+nach `wiki/meta/luecken.md`, die Übergabe führt es als „Von dir vorgemerkt“
+(`ablaeufe/sitzung-beenden.md`).
 
 ## Aufbau einer Seite
 
@@ -161,30 +196,31 @@ Ein bis drei Sätze: worum es geht und warum es hier steht.
 - 2026-09-23: angelegt aus [[quelle-x]]
 ```
 
-`## Offene Fragen` und `## Verlauf` dürfen fehlen, wenn es nichts zu sagen gibt.
-Neue Zeilen unter `## Verlauf` kommen ans Ende, wie im Log.
+`## Offene Fragen` und `## Verlauf` dürfen fehlen, wenn sie leer wären. Neue
+Zeilen unter `## Verlauf` kommen ans Ende.
 
 ## Wann eine Seite fertig ist
 
-Alle zutreffenden Punkte müssen halten. Sie sind so gewählt, dass auch ein
-kleines Modell sie nachprüfen kann:
+Alle zutreffenden Punkte halten:
 
-- [ ] alle Pflichtfelder gesetzt (Tabelle oben), Frontmatter parst in Obsidian ohne roten Block
-- [ ] `quellen:` zeigt auf eine existierende Datei in `quellen/archiv/` oder in einem Modul
-- [ ] mindestens zwei ausgehende Links, je mit Begründung (hat der Bereich erst zwei Seiten, genügt einer; kein Link nur zum Auffüllen), und die Gegenlinks sind gesetzt
-- [ ] jede Kernaussage lässt sich an der Fundstelle nachprüfen
-- [ ] wörtliche Übernahmen stehen in Anführungszeichen oder als `>`-Zitat mit Fundstelle
-- [ ] `sicherheit:` ehrlich, eine schwache Quelle im Text benannt
-- [ ] `stimme:` passt zu dem, was auf der Seite steht (siehe oben)
-- [ ] `updated:` gesetzt, Zeile unter `## Verlauf`, Eintrag in `wiki/log.md`
+- Pflichtfelder gesetzt, `created:`, `tags:`, `stimme:` und `pruefen_bis:` nach ihren Absätzen oben, Frontmatter parst in Obsidian ohne roten Block
+- Dateiname nach *Dateinamen und Links*, im Vault nur einmal; eine Brücke liegt in `wiki/bruecken/`
+- `quellen:` zeigt auf eine existierende Datei in `quellen/archiv/` oder in einem Modul
+- mindestens zwei ausgehende Links, je mit Begründung (hat der Bereich erst zwei Seiten, genügt einer; kein Link nur zum Auffüllen), Gegenlinks gesetzt
+- jede Kernaussage an der Fundstelle nachprüfbar
+- wörtliche Übernahmen in Anführungszeichen oder als `>`-Zitat mit Fundstelle
+- `sicherheit:` ehrlich, eine schwache Quelle im Text benannt
+- jeder `[!ich]`-Block mit Rohdatei stimmt mit ihr überein (*Die Stimme der Person*)
+- verdichtet ohne Verschiebung: Zahlen mit Einheit und Bezugsgröße wie in der Quelle („je Person“), ein Vorbehalt der Quelle nur bei der Aussage, an der er steht, eine eigene Folgerung („zwei unabhängige Quellen“) als solche gekennzeichnet
+- `updated:` gesetzt, Zeile unter `## Verlauf`, Eintrag in `wiki/log.md`
 
 ## Befunde mit Verfallsdatum
 
-Eine Analyse zu einem bestimmten Stand (ein Vergleich, eine Marktlage, ein
-Prüfbericht, auch aus einem Ablauf eines Moduls) ist eine `meta`-Seite mit
-dem Feld `verfaellt:` (Datum). Sie wird nicht fortgeschrieben. Was daran
-dauerhaft gilt, wandert in eine `begriff`-Seite. Nach dem Verfallsdatum ist sie Geschichte und wird beim
-Prüfen gemeldet, nicht gelöscht.
+Eine Analyse zu einem bestimmten Stand (Vergleich, Marktlage, Prüfbericht,
+auch aus einem Modul-Ablauf) ist eine `meta`-Seite mit `verfaellt:`.
+Sie wird nicht fortgeschrieben; was daran dauerhaft gilt, wandert in eine
+`begriff`-Seite. Nach dem Verfallsdatum wird sie beim Prüfen gemeldet, nicht
+gelöscht.
 
 ## Protokoll: `wiki/log.md`
 
@@ -195,14 +231,19 @@ derselben Sitzung darfst du berichtigen. Ein Eintrag je Vorgang:
 ## [2026-09-23] aufnehmen | Artikel über verteiltes Wiederholen
 Neu: quelle-artikel-wiederholen.md, spaced-repetition.md
 Geändert: lernkurven.md, gedaechtnis.md
-Offen: Studie zur Wirkung bei Erwachsenen fehlt → luecken.md
+Offen: Frist 2026-10-15: Anmeldeschluss Lernkurs (Randspalte) · [[quelle-artikel-wiederholen]]
 ```
 
-Vorgänge: `aufnehmen`, `frage`, `pruefen`, `verknuepfen`, `sitzung`.
+Vorgänge: `aufnehmen`, `frage`, `pruefen`, `verknuepfen`, `sitzung`,
+`entscheidung` (`ablaeufe/aufnehmen.md` § 7).
+
+`Offen:` steht nur für eine Frist, eine von der Person vorgemerkte Aufgabe
+oder eine Brückenidee, auch mehrfach; `ablaeufe/sitzung-beenden.md` übernimmt
+sie in die Übergabe. Lücken nicht als `Offen:`.
 
 ## Index: `wiki/index.md`
 
-Der Index führt die Themenbereiche mit je einem Satz und dem Einstieg, nicht
-jede einzelne Seite. Einzelne Seiten findet die Suche. Der Einstieg ist die
-`begriff`-Seite des Bereichs mit den meisten eingehenden Links; eine eigene
-Bereichsseite braucht es nicht.
+Unter *Bereiche* die Themenbereiche mit je einem Satz und dem Einstieg, nicht
+jede Seite. Einstieg ist die `begriff`-Seite mit den meisten eingehenden Links.
+Danach folgen, sobald es sie gibt, `wiki/bruecken/` (Einstieg: die Brücke mit
+den meisten eingehenden Links) und `wiki/muster/`.
