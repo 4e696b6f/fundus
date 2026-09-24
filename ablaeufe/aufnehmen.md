@@ -1,62 +1,51 @@
 # Ablauf: eine Quelle aufnehmen
 
 Auslöser: Eine Datei liegt in `quellen/eingang/`, und die Person sagt
-„aufnehmen“, „verarbeiten“ oder „ingest“. Liegen mehrere Dateien dort, nimmst
-du eine nach der anderen auf, jede vollständig. Dateien mit Punkt am Anfang
-(`.gitkeep`) sind keine Quellen.
+„aufnehmen“, „verarbeiten“ oder „ingest“.
 
-Eine Quelle darf zehn bis fünfzehn Seiten berühren. Das ist normal, denn
-Wissen wirkt dort, wo es sich mit Bestehendem verbindet.
+**Quelle für Quelle.** Jede Datei geht ganz durch § 1 bis § 6, bevor du die
+nächste öffnest; nicht erst alle lesen und dann gebündelt schreiben. Braucht
+eine Quelle eine Rückfrage, gilt § 7. Eine Quelle darf zehn bis fünfzehn
+Seiten berühren.
 
 ## 1 · Lesen und einordnen
 
-Lies die Quelle ganz. Dann entscheide, welche Art sie ist:
+Lies die Quelle ganz. Dann entscheide, welche Art sie ist (Text in `Backticks`
+ist die Stimme der Person, `regeln/SCHEMA.md` → *Die Stimme der Person*):
 
 | Art | Woran erkennbar | Was daraus wird |
 |---|---|---|
 | **A · fremde Quelle** | Artikel, Studie, Buchauszug, Transkript, Webseite | eine `quelle`-Seite, dazu Änderungen an bestehenden Seiten |
 | **B · eigene Notiz** | von der Person geschrieben, oft kurz, oft ungeordnet | eine `notiz` mit `stimme: ich`, der ganze Wortlaut in einem `> [!ich]`-Block |
-| **C · gemischt** | eine fremde Quelle mit Anmerkungen der Person | eine `quelle`-Seite, jede Anmerkung als eigener `> [!ich]`-Block, `stimme: gemischt` |
-
-Text in `Backticks` zeigt die Stimme der Person. Bei Art B bleibt er im
-Wortlaut stehen, wie er ist. Bei Art C wird jede Stelle in Backticks ein
-eigener `[!ich]`-Block. Backticks entfernst du nie (Regel und Grund:
-`regeln/SCHEMA.md` → *Die Stimme der Person*).
+| **C · gemischt** | eine fremde Quelle mit Anmerkungen der Person | eine `quelle`-Seite, jede Anmerkung als eigener `> [!ich]`-Block ohne die umschließenden Backticks, `stimme: gemischt` |
 
 ## 2 · Im Bestand suchen, Bereich wählen
 
-Bevor du schreibst: Gibt es schon eine Seite zu diesem Thema? Suche mit zwei
-oder drei Stichwörtern in der Grundform, nicht mit einer ganzen Frage (siehe
-`ablaeufe/fragen.md`). Gibt es eine, ergänzt du sie, statt eine zweite
-anzulegen.
+Gibt es schon eine Seite zum Thema (Suche wie `ablaeufe/fragen.md` § 1)?
+Dann ergänzt du sie.
 
-Neue Seiten kommen in einen Bereich (Ordner in `wiki/`). Passt die Quelle in
-einen bestehenden Bereich oder in einen, der in `SOUL.md` unter
-*Themenbereiche* steht, legst du dort an, den Ordner bei Bedarf neu. Passt sie
-in keinen davon, fragst du die Person, bevor du einen neuen Bereich anlegst.
-Einen so genehmigten Bereich trägst du nicht selbst in `SOUL.md` ein; ab dann
-ist er ein bestehender Bereich.
+Neue Seiten kommen in einen bestehenden Bereich oder einen aus `SOUL.md` →
+*Themenbereiche*. Passt keiner, fragst du im Bericht am Ende des Auftrags
+(§ 6), ob du einen neuen Bereich anlegen darfst; bis zur Antwort gilt § 7.
+Einen genehmigten Bereich trägst du nicht selbst in `SOUL.md` ein.
 
-Berührt die Quelle oder der Bereich das Fachgebiet eines Moduls (die Titel
-kennst du vom Sitzungsbeginn), lädst du das Modul vor dem ersten Schreiben
-(`AGENTS.md` → *Wenn … dann*). Seine Leitplanken gelten dann für jede Seite
-dieses Auftrags, auch für die Zusammenfassung der Quelle.
+Berührt die Quelle das Fachgebiet eines Moduls, gelten seine Leitplanken für
+jede Seite dieses Auftrags, auch für die Zusammenfassung der Quelle.
 
 ## 3 · Die Hauptseite schreiben
 
-Nach `regeln/SCHEMA.md` (Pflichtfelder, Dateiname). Pflicht:
+Nach `regeln/SCHEMA.md`. Pflicht:
 
-- Dateiname: `quelle-<kurztitel>.md` bei Art A und C, Datum vorn bei Art B
+- Dateiname: `quelle-<kurztitel>.md` bei Art A und C, Datum vorn bei Art B;
+  eindeutig im Vault (`regeln/SCHEMA.md` → *Dateinamen und Links*)
 - `quellen:` auf den späteren Archivpfad (`quellen/archiv/<dateiname>`), bei
   jeder Art
-- `## Kernaussagen`: nur, was die Quelle wirklich sagt, jede Aussage mit
-  Fundstelle (Seite, Abschnitt, Minute)
-- `sicherheit:` nach der Güte der Quelle, nicht nach deiner Zustimmung (eine
-  `notiz` hat das Feld nicht)
-- bei Art B: was du ergänzt, steht unter der Zeile `*Ergänzt vom Agenten:*`
-  nach dem Wortlaut; die Seite bleibt `stimme: ich`
-- keine Absätze aus der Quelle abschreiben, sondern in eigenen Worten.
-  Wörtliches steht als Zitat.
+- `## Kernaussagen`: nur, was die Quelle sagt, in eigenen Worten, jede Aussage
+  mit Fundstelle (Seite, Abschnitt, Minute); Wörtliches steht als Zitat
+- `pruefen_bis:` nach `regeln/SCHEMA.md` → `pruefen_bis:`. In den Log-Eintrag
+  dieser Quelle kommt jede datierte Nebenangabe als Zeile
+  `Offen: Frist JJJJ-MM-TT: was · [[seite]]` und jede Aufgabe, die die Person
+  sich vorgemerkt hat, als `Offen: Von dir vorgemerkt: Aufgabe · [[seite]]`.
 
 ## 4 · Den Bestand nachziehen
 
@@ -64,40 +53,62 @@ Für jede Seite, die von der neuen Quelle berührt wird:
 
 - Aussage ergänzen oder präzisieren, mit Verweis auf die neue Seite
 - Gegenlinks setzen
-- Übernimmst du einen `[!ich]`-Block in eine Seite mit `stimme: agent`, setzt
-  du dort `stimme: gemischt`.
+- ein übernommener `[!ich]`-Block kommt aus der Rohdatei und macht die Seite
+  `stimme: gemischt`, im selben Arbeitsgang
 - Weicht eigene Erfahrung der Person von einer Quelle ab, steht sie als
-  `[!ich]`-Block neben der Aussage. Das ist kein Eintrag für
-  `widersprueche.md`.
+  `[!ich]`-Block neben der Aussage, nicht in `widersprueche.md`.
 
-Widerspricht die neue Quelle einer bestehenden Aussage, sind drei Schritte
-Pflicht:
+Widerspricht die Quelle einer bestehenden Aussage oder einer Moduldatei:
 
-1. Nicht entscheiden: beide Aussagen nebeneinander stehen lassen, je mit
-   Fundstelle.
+1. Nicht entscheiden: beide Aussagen nebeneinander, je mit Fundstelle.
 2. `sicherheit: strittig` auf der Seite, deren Kernaussage betroffen ist.
-3. Eine Zeile in `wiki/meta/widersprueche.md` (Format dort), mit den beiden
-   Seiten oder Quellen, die sich widersprechen, und hinter „beide Aussagen
-   auf“ der Seite, auf der beide Aussagen jetzt stehen.
-
-Widerspricht die Quelle einer Datei in einem Modul, gilt dasselbe. In
-`widersprueche.md` steht dann statt der zweiten Seite der Pfad der Moduldatei.
+3. Eine Zeile in `wiki/meta/widersprueche.md` (Format dort).
 
 ## 5 · Linsen
 
-Ist eine neue `begriff`- oder `bruecke`-Seite entstanden, gehört eine
-`gegenposition:` hinein (`regeln/LINSEN.md`). Die übrigen Linsen nur, wo sie
-etwas zeigen.
+Eine neue `begriff`- oder `bruecke`-Seite bekommt `gegenposition:`, die
+übrigen Linsen nur, wo sie etwas zeigen (`regeln/LINSEN.md`).
 
 ## 6 · Abschließen
 
-1. Die Datei von `quellen/eingang/` nach `quellen/archiv/` verschieben, ohne
-   Umbenennung, ohne Unterordner.
-2. `wiki/index.md` ergänzen, wenn du einen Bereich neu angelegt hast: ein Satz
-   und der Einstieg (`regeln/SCHEMA.md` → *Index*).
-3. Eintrag in `wiki/log.md` (Format in `regeln/SCHEMA.md`).
-4. Der Person in drei bis fünf Sätzen sagen: was neu ist, was sich geändert
-   hat, welcher Widerspruch oder welche Lücke aufgetaucht ist.
+1. Jeden `[!ich]`-Block dieser Quelle nach dem Schreiben Zeile für Zeile
+   gegen die Rohdatei halten: Art B gegen die ganze Notiz, Art C gegen den
+   Text zwischen den Backticks.
+2. Die Datei von `quellen/eingang/` nach `quellen/archiv/` verschieben, ohne
+   Umbenennung, ohne Unterordner. Liegt dort schon eine Datei gleichen
+   Namens, fragst du die Person (§ 7).
+3. `wiki/index.md` ergänzen, wenn du einen Bereich neu angelegt hast
+   (`regeln/SCHEMA.md` → *Index*).
+4. Eintrag in `wiki/log.md` vom Typ `aufnehmen`, einer je Quelle, mit den
+   Zeilen `Offen:` aus § 3.
+5. Der Person in drei bis fünf Sätzen sagen, was neu ist, was sich geändert
+   hat, welcher Widerspruch oder welche Lücke auftauchte; am Ende des
+   Auftrags auch die offenen Rückfragen.
 
-Ist die letzte Quelle des Auftrags aufgenommen, folgt einmal
-`ablaeufe/verknuepfen.md`, ohne Nachfrage, für die Seiten dieses Auftrags.
+Sind alle Quellen des Auftrags aufgenommen, außer denen, die auf eine Antwort
+warten, folgt einmal `ablaeufe/verknuepfen.md`, ohne Nachfrage.
+
+## 7 · Rückfrage mitten im Auftrag
+
+Eine Rückfrage zu einer Quelle hält die übrigen nicht auf; bleibt sie bis zum
+Sitzungsende offen, steht sie in der Übergabe:
+
+1. Die offene Quelle bleibt unverändert in `quellen/eingang/`.
+2. Die übrigen nimmst du vollständig auf, archivierst und verknüpfst sie,
+   ohne auf die Antwort zu warten.
+3. Nach der Antwort nimmst du die offene Quelle auf; für ihre Seiten läuft
+   `ablaeufe/verknuepfen.md` noch einmal.
+
+**Entscheidungen ohne Seitenänderung** (eine Datei bleibt im Eingang, kein
+neuer Bereich, keine Brücke) hältst du sofort fest, damit keine spätere
+Sitzung erneut fragt:
+
+1. als Log-Eintrag vom Typ `entscheidung`:
+
+   ```markdown
+   ## [2026-09-23] entscheidung | flyer-roller.pdf bleibt im Eingang
+   Die Person räumt die Datei selbst weg. Nicht aufnehmen, nicht erneut fragen.
+   ```
+
+2. in `gedaechtnis/UEBERGABE.md` unter *Offen* als Zeile `Entschieden: …`
+   (Form: `ablaeufe/sitzung-beenden.md` § 1); der Rest bleibt stehen.

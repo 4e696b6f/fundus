@@ -1,57 +1,65 @@
 # Ablauf: verknüpfen
 
-Auslöser: Ein Auftrag zum Aufnehmen ist fertig, also die letzte seiner Quellen
-aufgenommen. Dann verknüpfst du einmal, ohne Nachfrage. Oder die Person sagt
-„verknüpfen“ oder fragt, was zusammenhängt.
+Auslöser: ein fertiger Auftrag zum Aufnehmen und jeder Nachzügler
+(`ablaeufe/aufnehmen.md` § 6 und § 7), ohne Nachfrage; oder die Person sagt
+„verknüpfen“.
 
-Aufnehmen legt Wissen ab. Verknüpfen macht daraus ein Netz. Hier entsteht der
-Wert, den eine Sammlung von Zusammenfassungen nicht hat.
+Jeder Lauf geht durch § 1 bis § 5, mit eigenem Log-Eintrag; ein Satz im
+Eintrag `aufnehmen` ersetzt ihn nicht.
 
 ## 1 · Umfang festlegen
 
-Nach einem Auftrag zum Aufnehmen: die Seiten, die er neu angelegt oder
-geändert hat. Auf Zuruf: die heute neuen oder geänderten Seiten, wenn die
-Person nichts anderes nennt. Nie das ganze Wiki.
+Nach einem Auftrag: die Seiten, die er neu angelegt oder geändert hat. Nach
+einem Nachzügler: nur dessen Seiten. Auf Zuruf: die heute neuen oder
+geänderten, wenn die Person nichts anderes nennt. Nie das ganze Wiki.
 
 ## 2 · Je Seite
 
-- **Was verlinkt schon hierher?** Fehlen Gegenlinks, setzen.
-- **Was liegt thematisch daneben, ohne verlinkt zu sein?** Suche mit den zwei
-  oder drei tragenden Begriffen der Seite. Passende Seiten verlinken, mit
-  Begründung.
-- **Welches Projekt der Person ist betroffen?** Berührt die Seite ein
-  laufendes `projekt`, sag es der Person sofort, in einem Satz.
-- **Linsen:** fehlende `gegenposition:` nachtragen, `gleiche_form:` prüfen.
-  Kommt ein Muster zum dritten Mal vor, legst du seine Seite in
-  `wiki/muster/` an (`regeln/LINSEN.md`).
+- **Gegenlinks:** fehlende setzen.
+- **Nachbarn:** mit den zwei oder drei tragenden Begriffen der Seite suchen,
+  passende Seiten mit Begründung verlinken.
+- **Projekte:** Berührt die Seite ein laufendes `projekt`, sagst du es der
+  Person sofort, in einem Satz.
+- **Linsen:** fehlende `gegenposition:` nachtragen, `gleiche_form:` prüfen;
+  ab dem dritten Vorkommen die Musterseite anlegen (`regeln/LINSEN.md` →
+  *Gleiche Form*).
 
 ## 3 · Muster über Bereiche hinweg
 
-Das ist der wichtigste Schritt. Gibt es unter den heutigen Seiten und dem
-Bestand zwei aus verschiedenen Themenbereichen, die dieselbe Struktur haben,
-nicht nur dasselbe Stichwort? Beispiel: Eine Seite über Muskelaufbau und eine
-über Sprachenlernen beschreiben beide eine Verzögerung zwischen Aufwand und
-sichtbarem Ergebnis, die Menschen zum Aufgeben bringt.
+Der wichtigste Schritt: zwei Seiten aus verschiedenen Themenbereichen mit
+derselben Struktur, nicht nur demselben Stichwort. Bei nur einem Bereich
+entfällt die Suche nach Paaren.
 
-Findest du so ein Paar, schlägst du eine `bruecke`-Seite vor. Anlegen nur
-nach Zustimmung der Person, denn eine Brücke ist eine These.
-
-Gibt es erst einen Bereich, entfällt dieser Schritt. Eine Idee, die später zur
-Brücke werden könnte, notierst du in der Übergabe unter *Offen*.
+1. **Anlegen nur nach Zustimmung der Person.** Du schlägst vor.
+2. **Struktur:** Für jede Seite im Umfang fragst du, ob eine Seite aus einem
+   anderen Bereich dieselbe Form hat (erst `gleiche_form:`, dann die Suche).
+3. **Die Person selbst:** Verbindet ein `[!ich]`-Block im Umfang zwei
+   Bereiche, etwa mit einer Methode aus dem einen für den anderen, ist das ein
+   Kandidat, auch ohne gleiche Struktur.
+4. **Jeder Vorschlag** und jede Idee, die später Brücke werden könnte, wird
+   eine Zeile `Offen: Brückenidee …` im Log-Eintrag (§ 5).
+5. **Zustimmung:** Die Seite entsteht nach `regeln/SCHEMA.md`, `[!ich]` aus
+   der Rohdatei. Einen neuen Ordner `wiki/bruecken/` oder `wiki/muster/`
+   trägst du in `wiki/index.md` ein.
+6. **Ablehnung:** festhalten nach `ablaeufe/aufnehmen.md` § 7.
 
 ## 4 · Widersprüche
 
-Sagt eine neue Seite etwas anderes als eine alte? Eine Zeile in
-`wiki/meta/widersprueche.md`:
-
-```markdown
-- [[seite-a]] ↔ [[seite-b]]: worin sie sich widersprechen · beide Aussagen auf [[seite-c]] · seit [Datum] · offen
-```
-
-Widerspricht eine Seite einer Moduldatei, steht deren Pfad an zweiter Stelle
-(Format in `wiki/meta/widersprueche.md`).
+Sagt eine neue Seite etwas anderes als eine alte oder eine Moduldatei:
+vorgehen wie `ablaeufe/aufnehmen.md` § 4.
 
 ## 5 · Bericht
 
-Kurz: gesetzte Links, vorgeschlagene Brücken, neue Widersprüche, betroffene
-Projekte. Eintrag in `wiki/log.md`.
+An die Person, kurz: gesetzte Links, vorgeschlagene Brücken, neue
+Widersprüche, betroffene Projekte. Dazu ein Log-Eintrag vom Typ
+`verknuepfen`: was du gesucht und was du gefunden hast, auch wenn es nichts
+war. „Geprüft“ allein genügt nicht.
+
+```markdown
+## [2026-09-23] verknuepfen | Auftrag Artikel Wiederholen, Notiz Lernplan
+Gesucht: `wiederholen abstand`, `lernplan woche`; Gegenlinks aller vier Seiten
+Geändert: spaced-repetition.md ↔ lernkurven.md (gleicher Mechanismus)
+Brücken: [!ich] in 2026-09-23-lernplan verbindet keine zwei Bereiche
+Widersprüche: keine neuen · Projekte: keins betroffen
+Offen: Brückenidee lernkurven × sport (verzögerte Rückmeldung), vorgeschlagen
+```

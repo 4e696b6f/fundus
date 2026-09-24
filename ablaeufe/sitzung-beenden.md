@@ -1,15 +1,25 @@
 # Ablauf: Sitzung beenden
 
-Auslöser: Die Person beendet die Arbeit („Feierabend“, „das war’s für heute“).
-
-Ein Sprachmodell vergisst zwischen zwei Sitzungen alles. Was die nächste
-Sitzung wissen muss, steht deshalb in einer Datei. Diese Datei ist kurz, und
-sie wird überschrieben, nicht verlängert.
+Auslöser: Die Person beendet die Arbeit („Feierabend“, „das war’s“).
 
 ## 1 · Übergabe schreiben
 
 `gedaechtnis/UEBERGABE.md` **ganz neu schreiben**, nicht anhängen, höchstens
-eine Seite. Was erledigt ist, steht im Log, nicht hier.
+eine Seite; Erledigtes steht im Log.
+
+Vorher liest du, was sonst verloren geht:
+
+- die bisherige Übergabe, auch wenn `ablaeufe/pruefen.md` § 6 sie in dieser
+  Sitzung neu geschrieben hat: Zeilen unter *Offen* und *Nicht vergessen*, die
+  weiter gelten, übernimmst du (Regeln unten);
+- in `wiki/log.md` alles nach dem letzten Eintrag `sitzung`: jeden Eintrag
+  `entscheidung` und jede Zeile `Offen:` (Frist, vorgemerkte Aufgabe,
+  unbeantwortete Brückenidee);
+- die offenen Einträge in `wiki/meta/widersprueche.md` und deine
+  Rückfragen ohne Antwort (auch aus dem Aufnehmen und Verknüpfen), auch wenn
+  eine zugleich Lücke ist:
+  je eine Zeile unter *Offen*, ein Widerspruch mit Link auf die Seite hinter
+  „beide Aussagen auf“.
 
 ```markdown
 # Übergabe · [Datum]
@@ -18,7 +28,10 @@ eine Seite. Was erledigt ist, steht im Log, nicht hier.
 Ein Satz: womit die nächste Sitzung anfängt.
 
 ## Offen
-- Entscheidungen, die bei der Person liegen
+- Entscheidungen, die bei der Person liegen (Rückfrage, auch eine, auf die
+  eine Quelle im Eingang wartet; Brückenidee)
+- Widerspruch: worin · [[seite]] · seit JJJJ-MM-TT
+- Entschieden: was, zu welcher Datei · seit JJJJ-MM-TT · nicht erneut fragen
 - angefangene Arbeit, mit Datei (bei einem Modul mit `ergebnisse: nur-bericht`
   nur Ablauf und Schritt, ohne Inhalt)
 
@@ -26,40 +39,52 @@ Ein Satz: womit die nächste Sitzung anfängt.
 - Quellen seit letzter Prüfung: n
 - Fällig: [[seite]] · pruefen_bis JJJJ-MM-TT (oder: nichts fällig)
 - Bald fällig: [[seite]] · pruefen_bis JJJJ-MM-TT (oder: nichts bald fällig)
-- Termine oder Fristen, die das Wiki betreffen, und Fristen aus Quellen, die
-  die Person selbst betreffen (etwa ein Anmeldeschluss)
+- Frist JJJJ-MM-TT: was · [[seite]]
+- Von dir vorgemerkt: Aufgabe · [[seite]]
 ```
 
-Die ersten drei Zeilen unter *Nicht vergessen* stehen immer da, auch mit 0
-oder „nichts fällig“. Der nächste Sitzungsbeginn liest sie und schlägt ab zehn
-Quellen oder bei einem Prüfdatum in der Vergangenheit die Prüfung vor
-(`AGENTS.md`). Ein Datum unter *Bald fällig* löst die Prüfung erst aus, wenn
-es inzwischen vorbei ist.
+*Nicht vergessen* steht immer da, seine ersten drei Zeilen auch mit 0 oder
+„nichts fällig“.
 
-- **n:** die Zahl aus der bisherigen Übergabe plus die heute aufgenommenen
-  Quellen. Hast du heute geprüft, zählen nur die Quellen danach. Fehlt die
-  Zahl, zählst du im Log die Einträge `aufnehmen` nach dem letzten `pruefen`.
-- **Fällig:** jede Seite, jede Leitplanke und jede `MODUL.md`, deren
-  `pruefen_bis:` oder `verfaellt:` in der Vergangenheit liegt.
-- **Bald fällig:** dasselbe mit einem Datum in den nächsten zwei Wochen.
-- Beide findest du über die Suche nach `pruefen_bis:` und `verfaellt:` in
-  `wiki/`, `leitplanken/`, den Leitplanken der Module und deren `MODUL.md`.
-  Treffer in Codeblöcken sind Beispiele und zählen nicht (etwa in
-  `leitplanken/FORMAT.md`).
+- **n:** die bisherige Zahl plus die seitdem aufgenommenen Quellen, nach
+  einer Prüfung nur die danach; fehlt sie, zählst du im Log die Einträge
+  `aufnehmen` nach dem letzten `pruefen`.
+- **Fällig:** jede Seite in `wiki/`, jede Leitplanke, auch der Module, und
+  jede `MODUL.md`, deren `pruefen_bis:` oder `verfaellt:` vor heute liegt;
+  Treffer in Codeblöcken zählen nicht. **Bald fällig:** dasselbe in den
+  nächsten zwei Wochen.
+- **Frist:** eine Zeile je Termin für das Wiki oder die Person, auch jede
+  datierte Nebenangabe (`ablaeufe/aufnehmen.md` § 3). Eine vorbeigegangene
+  nennst du der Person einmal, dann entfällt sie.
+- **Von dir vorgemerkt:** je Aufgabe, die die Person in einem `[!ich]`-Block
+  notiert hat (etwa `` `#später` ``), eine Zeile mit Link auf die Seite. Die
+  Aufgabe steht wörtlich, ein Wort mit `#` am Anfang in Backticks. Sie
+  bleibt, bis die Person sie erledigt oder streicht.
+- **Entschieden** (unter *Offen*): je Log-Eintrag `entscheidung`
+  (`ablaeufe/aufnehmen.md` § 7) eine Zeile; sie bleibt, solange die
+  Entscheidung gilt, etwa die Datei im Eingang liegt.
+- Ist eine Zeile *Von dir vorgemerkt* oder `Entschieden:` älter als vier
+  Wochen, fragst du einmal, ob sie noch gilt.
+- Lücken bleiben in `wiki/meta/luecken.md`, nicht in der Übergabe, außer als
+  offene Rückfrage.
+- Zeilen ohne Frist, Aufgabe oder Entscheidung entfallen.
 
 ## 2 · Protokoll
 
-Ein Eintrag in `wiki/log.md` vom Typ `sitzung`: was heute entstanden ist, in
-drei bis fünf Zeilen.
+Ein Eintrag in `wiki/log.md` vom Typ `sitzung`: was entstanden ist, in drei
+bis fünf Zeilen.
 
 ## 3 · Lernschleife
 
-Hat die Person dich heute korrigiert, oder hast du selbst einen Fehlgriff
-bemerkt? Dann steht es schon in `gedaechtnis/REIBUNG.md`, sonst trägst du es
-jetzt nach. Prüfe dort, ob ein Schlüssel jetzt zum zweiten Mal
-vorkommt. Wenn ja, schlägst du vor, die Lehre als Regel dort einzutragen, wo
-sie hingehört: in `AGENTS.md`, einen Ablauf oder eine Leitplanke. Die Person
-entscheidet.
+Jede Korrektur der Person und jeder eigene Fehlgriff kommt sofort als Zeile
+in `gedaechtnis/REIBUNG.md`; was fehlt, trägst du jetzt nach. Kommt derselbe
+Schlüssel zum zweiten Mal vor, schlägst du vor, die Lehre als Regel dort
+einzutragen, wo sie künftig gelesen wird: `AGENTS.md`, ein Ablauf oder eine
+Leitplanke. Die Person entscheidet.
+
+Einen Fehler einer früheren Sitzung trägst du nur mit Beleg (Datei, Zeile)
+ein. Erlaubten die Regeln das damalige Vorgehen, war es keiner, auch nicht in
+dem, was du der Person sagst.
 
 ## 4 · Letzte Zeile an die Person
 
