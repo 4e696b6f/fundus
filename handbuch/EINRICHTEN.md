@@ -3,129 +3,88 @@
 > Auch diese Anleitung ist mit Hilfe einer KI geschrieben, mehr dazu im
 > KI-Hinweis der [README](../README.md).
 
-Diese Anleitung bringt dich von null bis zur ersten aufgenommenen Quelle.
-Rechne mit einer halben Stunde, dazu kommt die Zeit für die Installation von
-Obsidian und Claude Code. Programmieren musst du nicht. Du tippst im Terminal
-ein paar Zeilen, die hier stehen, und sprichst sonst mit dem Agenten wie in
-einem Chat.
+In einer halben Stunde, plus Installationszeit, kommst du bis zur ersten
+aufgenommenen Quelle. Programmieren musst du nicht: Du tippst ein paar Zeilen
+ab und sprichst sonst mit dem Agenten wie in einem Chat.
 
 ## Was du brauchst
 
-- **Einen Mac oder einen Windows-Rechner** mit Internetzugang. Welche
-  Systemversion Claude Code mindestens braucht, steht auf der offiziellen
-  [Installationsseite](https://code.claude.com/docs/de/setup).
-- **Obsidian**, kostenlos und ohne Anmeldung: <https://obsidian.md>. Obsidian
-  zeigt dir das Wiki an, also Seiten, Links, den Graphen und die Suche.
-- **Claude Code mit einem bezahlten Claude-Konto.** Claude Code ist das
-  KI-Werkzeug, das in deinem Ordner Dateien liest und schreibt. Der kostenlose
-  Claude-Plan reicht dafür nicht. Welche Abos und Konten gehen und was sie
-  kosten, steht bei Anthropic unter [Preise](https://claude.com/pricing).
-  Codex und andere Werkzeuge, die eine `AGENTS.md` lesen, funktionieren nach
-  demselben Muster, diese Anleitung beschreibt aber Claude Code. Ein reines
-  Chatfenster im Browser reicht nicht, weil der Agent die Dateien selbst
-  anlegen muss.
-- **Optional:** den [Obsidian Web Clipper](https://obsidian.md/clipper) als
-  Browser-Erweiterung, um Webseiten mit einem Klick als Quelle abzulegen.
+- Einen Mac oder Windows-Rechner mit Internet. Die nötige Systemversion
+  steht auf der [Installationsseite](https://code.claude.com/docs/de/setup).
+- [Obsidian](https://obsidian.md), kostenlos und ohne Anmeldung. Es zeigt dir
+  das Wiki an.
+- Claude Code, das KI-Werkzeug, das in deinem Ordner Dateien liest und
+  schreibt. Es braucht ein bezahltes Claude-Konto, siehe
+  [Preise](https://claude.com/pricing). Ein Chatfenster im Browser reicht
+  nicht, andere Werkzeuge, die `AGENTS.md` lesen, etwa Codex, gehen auch.
+- Wenn du magst, den [Obsidian Web Clipper](https://obsidian.md/clipper), der
+  Webseiten mit einem Klick als Quelle ablegt.
 
 ## Bevor du anfängst: Was wohin geht
 
-Alles, was der Agent liest, schickt das Werkzeug an seinen Anbieter, bei
-Claude Code an Anthropic, bei Codex an OpenAI. Lege nur Quellen ab, die du
-dort haben darfst. Für Dienstliches klärst du das vorher mit deiner
-Organisation. Lokale Modelle auf dem eigenen Rechner vermeiden das, halten
-sich aber nach unserer Erfahrung deutlich schlechter an die Abläufe.
+Alles, was der Agent liest, geht an den Anbieter des Werkzeugs, bei Claude
+Code an Anthropic. Lege nur Quellen ab, die dort hin dürfen, und kläre
+Dienstliches vorher mit deiner Organisation. Lokale Modelle vermeiden das,
+halten sich aber nach unserer Erfahrung deutlich schlechter an die Abläufe.
 
 ## Schritt 1 · Den Ordner holen
 
-Auf der Projektseite
-[github.com/4e696b6f/fundus](https://github.com/4e696b6f/fundus) über der
-Dateiliste den grünen Knopf „Code“ drücken, dann „Download ZIP“. Die Datei landet in deinem Ordner „Downloads“.
+Auf [github.com/4e696b6f/fundus](https://github.com/4e696b6f/fundus) über der
+Dateiliste den grünen Knopf „Code“ drücken, dann „Download ZIP“. Die Datei
+landet in „Downloads“.
 
-- **Mac:** Doppelklick auf die ZIP-Datei entpackt sie.
-- **Windows:** Rechtsklick auf die ZIP-Datei → „Alle extrahieren“.
+- Mac: Doppelklick auf die ZIP-Datei.
+- Windows: Rechtsklick auf die ZIP-Datei → „Alle extrahieren“.
 
-Heraus kommt ein Ordner, der etwa `fundus-main` heißt. Verschieb ihn an einen
-festen Platz, zum Beispiel in „Dokumente“, und benenne ihn um, etwa in
-`mein-wiki`. Nimm einen Namen ohne Leerzeichen, das erspart dir später im
-Terminal Ärger. Dieser Ordner ist ab jetzt dein Wiki.
-
-Wenn du `git` schon kennst, kannst du den Ordner auch klonen:
-
-```
-git clone https://github.com/4e696b6f/fundus.git mein-wiki
-```
+Heraus kommt ein Ordner wie `fundus-main`. Verschieb ihn an einen festen
+Platz, etwa nach „Dokumente“, und benenne ihn um, zum Beispiel in `mein-wiki`.
+Nimm einen Namen ohne Leerzeichen. Dieser Ordner ist ab jetzt dein Wiki.
 
 ## Schritt 2 · In Obsidian öffnen
 
 Obsidian installieren und starten. Im Startfenster „Ordner als Vault öffnen“
-(Open folder as vault) wählen und deinen Wiki-Ordner aussuchen. Links siehst
-du jetzt die Ordner und Dateien, rechts die geöffnete Seite.
+(Open folder as vault) wählen und deinen Wiki-Ordner aussuchen. Links siehst du
+die Dateien, rechts die geöffnete Seite.
 
-Eingestellt ist schon alles, was du brauchst:
+Eingestellt ist schon alles. Bilder und PDFs, die du in eine Seite ziehst,
+landen in `quellen/anhaenge/`. Schreibst du selbst eine Seite, holst du mit
+„Vorlage einfügen“ (Insert template) eine Vorlage aus `vorlagen/`. Am Anfang
+brauchst du das nicht.
 
-- Bilder und PDFs, die du in eine Seite ziehst, landen in `quellen/anhaenge/`.
-- In `vorlagen/` liegt für jede Art von Seite eine Vorlage. Am Anfang brauchst
-  du sie nicht, weil der Agent die Seiten anlegt. Wenn du selbst eine Seite
-  schreibst, holst du die Vorlage mit dem Befehl „Vorlage einfügen“ (Insert
-  template).
-- Deine eigenen Worte stehen in einem `[!ich]`-Block und bekommen eine eigene
-  Farbe, damit du sie auf einen Blick von dem unterscheidest, was der Agent
-  zusammengefasst hat. So sieht er in der Datei aus:
-
-```
-> [!ich]
-> Das deckt sich nicht mit dem, was ich selbst beobachtet habe.
-```
-
-Falls du den Web Clipper nutzt: Trag in seinen Einstellungen als Ablageort
-(Note location) `quellen/eingang` ein. Dann landet jede Webseite, die du
-damit sicherst, genau dort, wo der Agent nach Neuem sucht.
+Für den Web Clipper trägst du in seinen Einstellungen als Ablageort (Note
+location) `quellen/eingang` ein. Dort sucht der Agent nach Neuem.
 
 ## Schritt 3 · `SOUL.md` ausfüllen
 
-Klick in Obsidian links auf `SOUL.md`. Die Datei ist an den Agenten
-gerichtet: Wo außerhalb der eckigen Klammern „du“ steht, ist er gemeint, in
-den Klammern bist du gemeint. Fülle die Stellen in eckigen Klammern aus und
-lösch die Klammern dabei: wofür du das Wiki willst, mit welchen Themen du
-anfängst, wie der Agent dich ansprechen soll. Für jedes Thema unter
-*Themenbereiche* legt der Agent ohne Nachfrage einen Bereich im Wiki an, für
-jedes andere fragt er dich vorher. Zehn Minuten reichen, und du kannst die
-Datei jederzeit ändern.
+Klick in Obsidian links auf `SOUL.md`. Die Datei spricht den Agenten mit „du“
+an, in den eckigen Klammern bist du gemeint. Füll die Klammern aus und lösch
+sie dabei: wofür du das Wiki willst, mit welchen Themen du anfängst, wie der
+Agent dich ansprechen soll. Zehn Minuten reichen, ändern kannst du die Datei
+jederzeit.
 
 ## Schritt 4 · Claude Code installieren und anmelden
 
-Claude Code läuft im Terminal. Das ist ein Fenster, in das du Befehle tippst,
-statt zu klicken. Jeder Mac und jeder Windows-Rechner hat eins.
+Claude Code läuft im Terminal, einem Fenster, in das du Befehle tippst.
 
-- **Mac:** Finder → Programme → Dienstprogramme → Terminal. Schneller geht es
-  mit Cmd + Leertaste, „Terminal“ tippen, Enter.
-- **Windows:** Auf die Suche in der Taskleiste klicken, „PowerShell“ oder
-  „Terminal“ tippen, Enter.
+- Mac: Cmd + Leertaste, „Terminal“ tippen, Enter.
+- Windows: Auf die Suche in der Taskleiste klicken, „PowerShell“ tippen,
+  Enter.
 
-**Installieren.** Öffne die offizielle
+Öffne die
 [Terminal-Anleitung für neue Benutzer](https://code.claude.com/docs/de/terminal-guide)
-und kopiere dort den Installationsbefehl für dein System. Füge ihn ins
-Terminal ein (Mac: Cmd + V, Windows: Strg + V) und drück Enter. Es läuft eine
-Weile Text durch, am Ende meldet der Installer, dass er fertig ist. Schließ
-das Terminalfenster danach und öffne ein neues.
+und kopier dort den Installationsbefehl für dein System. Füg ihn ins Terminal
+ein (Mac: Cmd + V, Windows: Strg + V) und drück Enter. Wenn der Installer
+meldet, dass er fertig ist, schließ das Terminal und öffne ein neues.
 
-**In den Ordner wechseln.** Claude Code arbeitet in dem Ordner, in dem du es
-startest. Tippe `cd` und ein Leerzeichen. Dann zieh deinen Wiki-Ordner aus
-dem Finder oder Explorer ins Terminalfenster. Der Pfad erscheint von selbst
-hinter dem `cd`. Drück Enter. Am Anfang der Zeile steht jetzt der Name deines
-Ordners.
+Jetzt in den Wiki-Ordner wechseln: `cd` und ein Leerzeichen tippen, den
+Ordner aus dem Finder oder Explorer ins Terminal ziehen, Enter. Am Anfang der
+Zeile steht nun der Name deines Ordners.
 
-**Starten.** Tippe `claude` und drück Enter. Beim ersten Start passiert
-Folgendes:
-
-- Claude Code stellt ein paar Fragen zur Einrichtung. Mit den Pfeiltasten
-  wählst du, Enter bestätigt. Wenn du unsicher bist, nimm den Vorschlag.
-- Ein Browserfenster öffnet sich, und du meldest dich mit deinem
-  Claude-Konto an. Danach bleibt die Anmeldung gespeichert.
-- Claude Code fragt, ob du den Dateien in diesem Ordner vertraust. Wähle Ja.
-  Der Ordner enthält nur Textdateien und keine Programme.
-
-Jetzt wartet Claude Code auf deine erste Nachricht.
+Dann `claude` tippen und Enter. Beim ersten Start fragt Claude Code ein paar
+Einstellungen ab. Du wählst mit den Pfeiltasten und bestätigst mit Enter, im
+Zweifel den Vorschlag. Im Browser meldest du dich mit deinem Claude-Konto an,
+das bleibt gespeichert. Auf die Frage, ob du den Dateien im Ordner vertraust,
+wählst du Ja. Es sind nur Textdateien.
 
 ## Schritt 5 · Die erste Sitzung
 
@@ -133,68 +92,61 @@ Tippe als Erstes:
 
 > Ich fange gerade an. Lies SOUL.md und sag mir, was du hier tust.
 
-Der Agent liest `AGENTS.md`, bei Claude Code über `CLAUDE.md`, und weiß
-damit, wie das Wiki funktioniert. Er antwortet dir in ein paar Sätzen.
+Der Agent liest seine Regeln und antwortet in ein paar Sätzen. Bevor er eine
+Datei anlegt, fragt Claude Code oft um Erlaubnis. Du kannst einmal zustimmen
+oder es ab dann immer erlauben. Das ist bequemer, denn eine Quelle berührt oft
+zehn und mehr Seiten.
 
-Je nach Abo und Einstellung fragt Claude Code um Erlaubnis, bevor es eine
-Datei anlegt oder ändert. Du kannst einmal zustimmen oder die Aktion ab dann
-immer erlauben. Das zweite ist bequemer, weil der Agent bei einer
-einzigen Quelle zehn und mehr Seiten anfassen kann.
-
-Bewährt hat sich, beide Fenster nebeneinander zu haben: links das Terminal
-mit dem Agenten, rechts Obsidian. Du siehst dann, was der Agent schreibt,
-während er es schreibt.
+Stell die Fenster nebeneinander, links das Terminal, rechts Obsidian. Dann
+siehst du, was der Agent schreibt, während er es schreibt.
 
 ## Schritt 6 · Die erste Quelle
 
-Leg eine Datei in den Ordner `quellen/eingang/`, im Finder oder Explorer wie
-jede andere Datei auch. Gut geeignet für den Anfang sind ein PDF, ein
-Artikel, den du mit dem Web Clipper gesichert hast, oder eine eigene Notiz.
-Die Notiz legst du in Obsidian an: Rechtsklick links auf `eingang` → „Neue
-Notiz“ (New note), ein paar Sätze schreiben. Dann sag dem Agenten:
+Leg im Finder oder Explorer eine Datei nach `quellen/eingang/`, etwa ein PDF,
+einen Artikel aus dem Web Clipper oder eine eigene Notiz. Die Notiz legst du
+in Obsidian an: Rechtsklick links auf `eingang` → „Neue Notiz“ (New note), ein
+paar Sätze schreiben.
+
+Was du in `Backticks` setzt, auch in einer fremden Quelle, übernimmt der Agent
+wörtlich als deine Stimme in einen farbig abgesetzten `[!ich]`-Block. Eine
+Aufgabe mit `` `#später` `` steht am Ende der Sitzung in der Übergabe. Dann schreib:
 
 > Nimm die neue Quelle auf.
 
-Der Agent folgt `ablaeufe/aufnehmen.md`. Er liest die Quelle, legt Seiten in
-`wiki/` an, verknüpft sie mit dem, was schon da ist, und verschiebt die Quelle
-nach `quellen/archiv/`. Passt die Quelle zu keinem deiner Themenbereiche,
-fragt er, ob er einen neuen Bereich in `wiki/` anlegen darf. Sag Ja. Nach ein
-paar Minuten sagt er dir in wenigen Sätzen, was neu ist, und in Obsidian
-siehst du die neuen Seiten links unter `wiki/`.
+Der Agent legt Seiten in `wiki/` an, verknüpft sie mit dem Bestand und
+verschiebt die Quelle nach `quellen/archiv/`. Fragt er, ob er einen neuen
+Bereich anlegen darf, sag Ja. Nach ein paar Minuten sagt er dir, was neu ist,
+und in Obsidian stehen die Seiten links unter `wiki/`.
 
 ## So geht es weiter
 
-Zum Weiterarbeiten öffnest du das Terminal, tippst `cd` mit Leerzeichen,
-ziehst den Ordner hinein, drückst Enter und startest `claude`. Zum Einstieg
-passt dann: „Lies die Übergabe und sag mir, wo wir stehen.“
+Zum Weiterarbeiten Terminal öffnen, `cd` mit Leerzeichen, Ordner
+hineinziehen, Enter, `claude`. Dann: „Lies die Übergabe und sag mir, wo wir
+stehen.“
 
 | Du sagst | Es passiert |
 |---|---|
 | „Nimm die neue Quelle auf.“ | Die Quelle wird Wissen im Wiki. |
-| „Was wissen wir über …?“ | Der Agent sucht, antwortet mit Fundstellen und bietet an, die Antwort als Seite zu sichern. |
-| „Was hängt zusammen?“ | Der Agent sucht Verbindungen und Muster über Themen hinweg. |
-| „Prüf das Wiki.“ | Tote Links, veraltete Seiten, Widersprüche, Lücken, als Bericht. |
+| „Was wissen wir über …?“ | Antwort mit Fundstellen, auf Wunsch als Seite gesichert. |
+| „Was hängt zusammen?“ | Verbindungen und Muster über Themen hinweg. |
+| „Prüf das Wiki.“ | Bericht: tote Links, Veraltetes, Widersprüche, Lücken, Abgleich von Wortlaut und Belegen mit den Quellen. |
 | „Feierabend.“ | Der Agent schreibt die Übergabe für das nächste Mal. |
 
-Wenn der Agent etwas falsch macht, sag es ihm. Er notiert es in
-`gedaechtnis/REIBUNG.md`. Was zweimal passiert, schlägt er dir als Regel vor,
-und du entscheidest.
+Macht der Agent etwas falsch, sag es ihm. Was zweimal passiert, schlägt er
+dir als Regel vor, und du entscheidest.
 
 ## Sicherheitsnetz
 
-Kopier den ganzen Wiki-Ordner ab und zu an einen anderen Ort, etwa einmal
-die Woche auf einen USB-Stick oder in einen zweiten Ordner mit dem Datum im
-Namen. Geht etwas schief, holst du dir die Kopie zurück. Wer `git` kennt,
-verwaltet den Ordner damit und kann jede Änderung des Agenten nachsehen und
-zurücknehmen.
+Kopier den Wiki-Ordner jede Woche auf einen USB-Stick oder an einen anderen
+Ort. Mit `git` kannst du jede Änderung des Agenten nachsehen und zurücknehmen.
 
 ## Wenn es hakt
 
 | Was du siehst | Was du tust |
 |---|---|
-| Das Terminal kennt `claude` nicht („command not found“, „nicht erkannt“). | Terminal schließen, neu öffnen, noch einmal `claude`. Hilft das nicht, steht die Lösung unter „Troubleshooting“ in der [Terminal-Anleitung](https://code.claude.com/docs/de/terminal-guide). |
-| `cd` meldet, den Ordner gebe es nicht. | Den Ordner ins Fenster ziehen, statt den Namen zu tippen. |
-| Die Anmeldung klappt nicht oder dein Konto wird abgelehnt. | Prüfen, ob dein Claude-Konto ein bezahltes Abo hat. Der kostenlose Plan reicht nicht. |
-| Der Agent weiß nichts von deinem Wiki und fragt, was er tun soll. | Er läuft im falschen Ordner. `/exit` tippen, mit `cd` in den Wiki-Ordner wechseln, `claude` neu starten. |
-| In Obsidian tauchen die neuen Seiten nicht auf. | Obsidian hat einen anderen Ordner offen. Unten links auf den Namen des Vaults klicken, „Vaults verwalten“ (Manage vaults) wählen und deinen Wiki-Ordner öffnen. |
-| Der Agent tut gerade etwas, das du nicht willst. | Esc drücken, das unterbricht ihn. Dann sag ihm, was du stattdessen willst. |
+| „command not found“ oder „nicht erkannt“ bei `claude`. | Terminal schließen, neu öffnen, noch einmal. Sonst hilft „Troubleshooting“ in der [Terminal-Anleitung](https://code.claude.com/docs/de/terminal-guide). |
+| `cd` findet den Ordner nicht. | Den Ordner ins Fenster ziehen, statt den Namen zu tippen. |
+| Die Anmeldung klappt nicht. | Prüfen, ob dein Claude-Konto bezahlt ist. |
+| Der Agent weiß nichts von deinem Wiki. | Falscher Ordner: `/exit`, mit `cd` in den Wiki-Ordner, `claude`. |
+| Obsidian zeigt die neuen Seiten nicht. | Unten links auf den Vault-Namen, „Vaults verwalten“ (Manage vaults), deinen Wiki-Ordner öffnen. |
+| Der Agent tut etwas, das du nicht willst. | Esc drücken, dann sagen, was du stattdessen willst. |
