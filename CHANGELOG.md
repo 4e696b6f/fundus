@@ -5,6 +5,77 @@ müssen. Übernehmen heißt: die genannten Dateien aus der neuen Version in das
 eigene Wiki kopieren. `SOUL.md`, `wiki/`, `quellen/` und `gedaechtnis/` bleiben
 dabei immer unberührt.
 
+## 0.2.1 · 2026-09-24 · Entwurf
+
+Nach dem ersten echten Testdurchgang und drei Testsitzungen mit dem
+veröffentlichten Stand. Die meisten Befunde betrafen dieselben Stellen: den
+Wortlaut der Person, das Prüfdatum und Rückfragen mitten im Aufnehmen.
+
+**Wortlaut der Person.** Jeder `[!ich]`-Block wird aus der Rohdatei kopiert,
+auch die zweite Kopie desselben Zitats. Eine eigene Notiz (Art B) kommt
+vollständig in den Block, samt Datumszeile, Listenpunkten und Backticks.
+Anmerkungen in einer fremden Quelle (Art C) stehen im Block ohne die
+umschließenden Backticks; ein Wort mit `#` am Anfang bleibt in Backticks.
+Wortlaut aus dem Gespräch trägt die Zeile `*im Gespräch am …*`. Die Prüfung
+gleicht Blöcke mit Rohdatei ab.
+
+**Prüfdatum.** `pruefen_bis:` nur für datierten Kernstoff; ohne Ablaufdatum
+in der Quelle ein Jahr; ein schon vergangenes Gültigkeitsende wird im Text als
+veraltet gekennzeichnet. Datierte Nebenangaben wie ein Anmeldeschluss kommen
+als Frist in die Übergabe.
+
+**Aufnehmen und Übergabe.** Quelle für Quelle; eine Rückfrage hält die übrigen
+Quellen nicht auf (`ablaeufe/aufnehmen.md` § 7). Entscheidungen, nach denen
+sonst erneut gefragt würde, kommen als `entscheidung` ins Log und in die
+Übergabe. Aufgaben der Person wie `` `#später` `` erscheinen in der Übergabe
+unter *Von dir vorgemerkt*.
+
+**Brücken und Muster.** Brücken liegen in `wiki/bruecken/`, Musterseiten
+heißen `muster-<wert>.md`; Dateinamen sind im ganzen Vault eindeutig.
+
+**Prüfen.** Neuer `§ 0 · Grundlagen` (Umfang, Werkzeug, Heute, Meta-Seiten).
+`§ 4` heißt jetzt *Wortlaut und Belege*: `[!ich]`-Abgleich, Fundstelle je
+Kernaussage und eine Stichprobe von bis zu drei Kernaussagen gegen die Quelle.
+Die bisherigen Lücken stehen in § 3. Nach der Prüfung schreibt der Agent
+*Fällig*, *Bald fällig* und den Zähler in der Übergabe neu.
+
+**Sitzungsbeginn und Module.** Der Sitzungsbeginn ist eine Prüfliste, die jede
+Sitzung ganz abarbeitet. Die vier Leitplanken stehen in Kurzform in
+`AGENTS.md`, die der Agent in jeder Sitzung ohnehin kennt; die Datei liest er
+im Zweifel oder vor einer Ausnahme. Bei Modularbeit liest er alle Leitplanken
+des Moduls; was er bei `lokal:` und `ergebnisse:` tut, steht jetzt in
+`leitplanken/FORMAT.md` → *Module*. Eine harte Regel lockert
+niemand, auch keine Einrichtungsdatei, und der Agent zeigt keinen Weg um sie
+herum (`leitplanken/FORMAT.md` → *Vorrang*).
+
+**Ansicht.** Umlaute in Dateinamen (NFC/NFD), Links in Markdown-Links, einzelne
+Backticks, Zählung von Lücken und Bereichen, Setext-Überschriften, weitere
+YAML-Formen; Dateien ohne Markdown erscheinen in der Wiki-Liste.
+
+**Schlanker.** Jede Regel steht an einer Stelle, die anderen verweisen. Das
+Regelwerk ist trotz der neuen Regeln kürzer als in 0.2.0 (rund 7.000 statt
+7.200 Wörter), die Vorlagen sind auf das Nötige gekürzt, das Handbuch um gut
+ein Viertel, die README auf eine Seite. Die Regel für `gedaechtnis/REIBUNG.md`
+steht jetzt in `ablaeufe/sitzung-beenden.md` § 3.
+
+Übernehmen, wenn du mit 0.2.0 angefangen hast:
+
+- Ersetzen: `AGENTS.md`, `regeln/`, `ablaeufe/`, `leitplanken/` (alle
+  Dateien; eigene Leitplanken bleiben liegen), `vorlagen/`, `handbuch/`,
+  `ansicht/uebersicht.html`, `module/README.md`, `README.md`, `CHANGELOG.md`.
+- Hast du `AGENTS.md` angepasst (eine Abweichung, eine Verschärfung, eine
+  eigene Leitplanke), trag das danach wieder ein, jede eigene Leitplanke als
+  Zeile unter *Leitplanken*. Sonst kennt der Agent sie nicht mehr.
+- `SOUL.md`, `gedaechtnis/REIBUNG.md` und die Seiten in `wiki/meta/` bleiben
+  deine. Ihr alter Kopftext und in `SOUL.md` der alte Abschnitt *Was du nie
+  tust* dürfen stehen bleiben.
+- `module/LIESMICH.md` aus 0.2.0 kannst du löschen, sie heißt jetzt
+  `module/README.md`.
+- `gedaechtnis/UEBERGABE.md` bleibt deine. Die nächste Sitzung schreibt sie in
+  der neuen Form, mit dem Abschnitt *Nicht vergessen*.
+- Eine Brücke, die schon in einem Themenbereich liegt, darf dort bleiben oder
+  nach `wiki/bruecken/` umziehen; der Agent fragt vorher.
+
 ## 0.2.0 · 2026-09-23 · Entwurf
 
 Nach einem Lektorat und zwei Probeläufen, einer davon mit eingehängtem Modul.
@@ -82,7 +153,7 @@ für Anhänge und ein eigenes Aussehen für den `[!ich]`-Block.
 
 - Ersetzen: `AGENTS.md`, `regeln/SCHEMA.md`, `regeln/LINSEN.md`, alle fünf
   Dateien in `ablaeufe/`, in `leitplanken/` die Dateien `FORMAT.md` und
-  `L01` bis `L03`, dazu `handbuch/`, `module/LIESMICH.md`, `README.md` und
+  `L01` bis `L03`, dazu `handbuch/`, `module/README.md`, `README.md` und
   `CHANGELOG.md`. Hast du eine dieser Dateien selbst geändert, etwa eine
   Abweichung in `AGENTS.md` festgehalten, trag deine Änderung danach wieder
   ein. Eigene Leitplanken in `leitplanken/` bleiben liegen.
