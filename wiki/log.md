@@ -11,5 +11,4 @@ stimme: agent
 
 # Protokoll
 
-Nur anhängen, ältere Einträge nie umschreiben. Format und Ausnahme in
-`regeln/SCHEMA.md`.
+Format: `regeln/SCHEMA.md` → *Protokoll*.

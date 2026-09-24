@@ -11,14 +11,12 @@ stimme: agent
 
 # Index
 
-Die Themenbereiche dieses Wikis, je mit einem Satz und dem Einstieg. Einzelne
-Seiten stehen hier nicht, die findet die Suche.
+Die Themenbereiche dieses Wikis, je mit einem Satz und dem Einstieg. Aufbau:
+`regeln/SCHEMA.md` → *Index*.
 
 ## Bereiche
 
-*Noch keine. Bereiche aus `SOUL.md` → Themenbereiche legt der Agent mit der
-ersten passenden Quelle an, jeden anderen nach Rückfrage. Einstieg ist die
-`begriff`-Seite des Bereichs mit den meisten eingehenden Links.*
+*Noch keine.*
 
 ## Meta
 
