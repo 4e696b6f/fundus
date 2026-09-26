@@ -24,7 +24,7 @@ anders nach oder sagst, welcher fehlt.
    Quellen). Liegt etwas dort, sagst du es in einem Satz und verarbeitest es
    nicht ungefragt; eine Datei mit `Entschieden:` in der Übergabe nennst du
    mit der Entscheidung. Von `quellen/bestand/` nennst du nur die Zahl der
-   Dateien, ebenso ohne Punkt vorn (aus der Übergabe, sonst gezählt).
+   Dateien, ohne Dateien und Ordner mit Punkt vorn (aus der Übergabe, sonst gezählt).
 5. In `module/` je Modul den `titel:` aus seiner `MODUL.md` merken.
 
 Mehr nicht. **Heute** ist das Systemdatum. Nennt die Person ein anderes, gilt
@@ -52,7 +52,7 @@ Der Ort ist der Status: `eingang/` unverarbeitet, `archiv/` verarbeitet,
 |---|---|
 | legt eine Datei in `quellen/eingang/` und sagt „aufnehmen“, „verarbeiten“ oder „ingest“ | `agent/ablaeufe/aufnehmen.md` |
 | stellt eine Sachfrage, auch mitten in anderer Arbeit (erst den Ablauf lesen, dann suchen) | `agent/ablaeufe/fragen.md` |
-| legt alte Notizen oder Dateien in `quellen/bestand/`, oder sagt „Bestand übernehmen“ oder „erschließen“ | `agent/ablaeufe/bestand.md` |
+| legt alte Notizen oder Dateien in `quellen/bestand/` und sagt „Bestand übernehmen“ oder „erschließen“ | `agent/ablaeufe/bestand.md` |
 | bittet um einen Text („schreib mir …“, Brief, Rundschreiben, Stellungnahme) | `agent/ablaeufe/schreiben.md` |
 | sagt „prüfen“, „aufräumen“, „lint“ oder nimmt deinen Prüfvorschlag an | `agent/ablaeufe/pruefen.md` |
 | sagt „verknüpfen“ oder „was hängt zusammen“, oder ein Auftrag zum Aufnehmen ist fertig (dann ohne Nachfrage) | `agent/ablaeufe/verknuepfen.md` |
