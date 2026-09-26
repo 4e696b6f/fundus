@@ -23,7 +23,8 @@ anders nach oder sagst, welcher fehlt.
 4. In `quellen/eingang/` nachsehen (Dateien mit Punkt am Anfang sind keine
    Quellen). Liegt etwas dort, sagst du es in einem Satz und verarbeitest es
    nicht ungefragt; eine Datei mit `Entschieden:` in der Übergabe nennst du
-   mit der Entscheidung.
+   mit der Entscheidung. Von `quellen/bestand/` nennst du nur die Zahl der
+   Dateien (aus der Übergabe, sonst gezählt).
 5. In `module/` je Modul den `titel:` aus seiner `MODUL.md` merken.
 
 Mehr nicht. **Heute** ist das Systemdatum. Nennt die Person ein anderes, gilt
@@ -35,12 +36,14 @@ in einem Satz, mit beiden Daten.
 | Ordner | gehört | du darfst |
 |---|---|---|
 | `quellen/` | der Person | lesen; verarbeitete Dateien von `eingang/` nach `archiv/` verschieben |
+| `quellen/bestand/` | der Person | lesen und verlinken, nie verschieben |
 | `wiki/` | dir | schreiben, verknüpfen, pflegen |
 | `module/` | den Autorinnen und Autoren | lesen |
 | `module/<modulname>.lokal.md` | der Person | lesen, ändern nur auf Auftrag |
 | `ausgaben/` | der Person | schreiben nur auf Auftrag; keine Quelle, nichts daraus fließt ins Wiki |
 
-Der Ort ist der Status: `eingang/` unverarbeitet, `archiv/` verarbeitet.
+Der Ort ist der Status: `eingang/` unverarbeitet, `archiv/` verarbeitet;
+`bestand/` ist alter Bestand, sein Stand steht in `wiki/meta/bestand.md`.
 `quellen/anhaenge/` hält Bilder und PDFs, auf die Seiten verweisen.
 
 ## Wenn … dann
@@ -49,12 +52,13 @@ Der Ort ist der Status: `eingang/` unverarbeitet, `archiv/` verarbeitet.
 |---|---|
 | legt eine Datei in `quellen/eingang/` und sagt „aufnehmen“, „verarbeiten“ oder „ingest“ | `agent/ablaeufe/aufnehmen.md` |
 | stellt eine Sachfrage, auch mitten in anderer Arbeit (erst den Ablauf lesen, dann suchen) | `agent/ablaeufe/fragen.md` |
+| legt alte Notizen oder Dateien in `quellen/bestand/` und sagt „übernehmen“ oder „erschließen“ | `agent/ablaeufe/bestand.md` |
 | bittet um einen Text („schreib mir …“, Brief, Rundschreiben, Stellungnahme) | `agent/ablaeufe/schreiben.md` |
 | sagt „prüfen“, „aufräumen“, „lint“ oder nimmt deinen Prüfvorschlag an | `agent/ablaeufe/pruefen.md` |
 | sagt „verknüpfen“ oder „was hängt zusammen“, oder ein Auftrag zum Aufnehmen ist fertig (dann ohne Nachfrage) | `agent/ablaeufe/verknuepfen.md` |
 | beendet die Sitzung („Feierabend“, „das war’s“) | `agent/ablaeufe/sitzung-beenden.md` |
 | korrigiert dich, oder du bemerkst selbst einen Fehlgriff | sofort eine Zeile in `agent/gedaechtnis/REIBUNG.md` (`agent/ablaeufe/sitzung-beenden.md` § 3) |
-| fragt, lässt aufnehmen oder schreiben, und das berührt das Fachgebiet eines Moduls | vorher: seine `MODUL.md`, den Einstieg, **alle** seine Leitplanken (nicht nur die, die der Einstieg nennt), `module/<modulname>.lokal.md` falls vorhanden, und `agent/leitplanken/FORMAT.md` → *Vorrang* und *Module* |
+| fragt, lässt aufnehmen, erschließen oder schreiben, und das berührt das Fachgebiet eines Moduls | vorher: seine `MODUL.md`, den Einstieg, **alle** seine Leitplanken (nicht nur die, die der Einstieg nennt), `module/<modulname>.lokal.md` falls vorhanden, und `agent/leitplanken/FORMAT.md` → *Vorrang* und *Module* |
 
 Die Abläufe sind die Anleitung. Baue sie nicht aus dem Gedächtnis nach.
 
@@ -82,8 +86,8 @@ Handlung, entscheidet `agent/leitplanken/FORMAT.md` → *Vorrang*. Leitplanken g
 
 ## Beim Schreiben
 
-- Links als `[[dateiname]]`, in beide Richtungen, Meta-Seiten, Moduldateien
-  und Ausgaben ausgenommen.
+- Links als `[[dateiname]]`, in beide Richtungen, Meta-Seiten, Moduldateien,
+  Bestand und Ausgaben ausgenommen.
   Format und Pflichtfelder: `agent/regeln/SCHEMA.md`.
 - Hat ein `[!ich]`-Block eine Rohdatei in `quellen/`, kopierst du ihn aus ihr,
   nie aus dem Gedächtnis oder von einer anderen Seite; ohne Rohdatei (etwa aus

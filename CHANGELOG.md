@@ -61,6 +61,28 @@ es beim Chat. Die Ansicht zeigt deine Ausgaben als eigene Liste.
   `ansicht/uebersicht.html`. Kommst du von 0.2, erledigt das schon der Umzug
   oben.
 
+**Neu: Bestand.** Alte Notizen und Dateien, auch ein alter Obsidian-Vault,
+kommen nach `quellen/bestand/` (kopieren, nicht verschieben). Sagst du
+„Übernimm meine alten Notizen“, macht der Agent eine Liste in
+`wiki/meta/bestand.md`, nennt dir zuerst Dateien mit Angaben über andere
+Menschen und fasst sie nicht an, bis du entschieden hast, schlägt
+Themenbereiche vor und verlinkt den Bestand dann in Runden von zehn Dateien
+aus Wiki-Seiten. Die Dateien selbst ändert, verschiebt und löscht er nie.
+Word-Dateien liest er nicht; speichere sie als PDF. Der Bestand zählt nicht
+als neue Quellen seit der letzten Prüfung, die Übergabe nennt nur den Zähler.
+Die Ansicht zeigt ihn unter Quellen; Links, Frontmatter und Tags alter
+Notizen zählen dort nicht zu deinem Wiki. Anleitung:
+`handbuch/EINRICHTEN.md` → *Du hast schon Notizen?*
+
+Übernehmen:
+
+- Leg in `quellen/` einen Ordner `bestand` an, klein geschrieben.
+- Neu: `agent/ablaeufe/bestand.md`.
+- Ersetzen: `AGENTS.md` (eigene Anpassungen danach wieder eintragen),
+  `agent/regeln/SCHEMA.md`, `agent/ablaeufe/sitzung-beenden.md`,
+  `ansicht/uebersicht.html`, `handbuch/EINRICHTEN.md`. Kommst du von 0.2,
+  erledigt das schon der Umzug oben.
+
 **Woran ich gerade arbeite.** Die Vorlage `SOUL.md` hat nach *Wofür das Wiki
 da ist* einen neuen Abschnitt für bis zu drei Vorhaben, die du selbst
 pflegst. Steht dort etwas, sagt dir der Agent beim Verknüpfen, welche neuen

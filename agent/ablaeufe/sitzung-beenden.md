@@ -41,6 +41,7 @@ Ein Satz: womit die nächste Sitzung anfängt.
 - Bald fällig: [[seite]] · pruefen_bis JJJJ-MM-TT (oder: nichts bald fällig)
 - Frist JJJJ-MM-TT: was · [[seite]]
 - Von dir vorgemerkt: Aufgabe · [[seite]]
+- Bestand: x von y erschlossen · … (die Zählerzeile aus `wiki/meta/bestand.md`, falls es sie gibt)
 ```
 
 *Nicht vergessen* steht immer da, seine ersten drei Zeilen auch mit 0 oder

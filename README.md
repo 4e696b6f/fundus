@@ -53,6 +53,7 @@ Rechne mit einer halben Stunde. Jeder Klick steht in
 | „Nimm die neue Quelle auf.“ | Aus der Quelle werden Wiki-Seiten. |
 | „Was wissen wir über …?“ | Antwort aus deinem Wiki, mit Fundstellen. |
 | „Prüf das Wiki.“ | Bericht: tote Links, Veraltetes, Widersprüche, Lücken. |
+| „Übernimm meine alten Notizen.“ | Alte Dateien aus `quellen/bestand/` werden ins Wiki verlinkt, ohne dass sich an ihnen etwas ändert ([Anleitung](handbuch/EINRICHTEN.md#du-hast-schon-notizen)). |
 | „Schreib mir ein Rundschreiben zu …“ | Ein Entwurf aus deinem Wiki in `ausgaben/`, die Belege darunter. |
 | „Feierabend.“ | Der Agent schreibt auf, wo ihr steht. Beim nächsten Start weiß er es sonst nicht mehr. |
 
@@ -61,7 +62,7 @@ Rechne mit einer halben Stunde. Jeder Klick steht in
 | Was | Wofür |
 |---|---|
 | `SOUL.md` | Füllst du aus: wofür das Wiki ist. |
-| `quellen/` | Deine Quellen: `eingang/` neu, `archiv/` verarbeitet. |
+| `quellen/` | Deine Quellen: `eingang/` neu, `archiv/` verarbeitet, `bestand/` deine alten Notizen und Dateien. |
 | `wiki/` | Schreibt der Agent. Du liest. |
 | `ausgaben/` | Texte, die der Agent auf deinen Auftrag für dich schreibt. Sie gehören dir. |
 | `ansicht/uebersicht.html` | Dein Wiki im Browser, ohne Internet ([Anleitung](handbuch/ANSICHT.md)). |

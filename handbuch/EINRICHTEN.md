@@ -118,6 +118,40 @@ verschiebt die Quelle nach `quellen/archiv/`. Fragt er, ob er einen neuen
 Bereich anlegen darf, sag Ja. Nach ein paar Minuten sagt er dir, was neu ist,
 und in Obsidian stehen die Seiten links unter `wiki/`.
 
+## Du hast schon Notizen?
+
+Viele fangen nicht bei null an: Es gibt einen Ordner mit Word-Dateien und
+PDFs, vielleicht einen alten Obsidian-Vault. Abtippen musst du nichts.
+
+1. Kopier die Dateien nach `quellen/bestand/`, gern mit ihren Unterordnern.
+   Kopieren, nicht verschieben: So bleibt dein Original, wo es war.
+2. Schreib dem Agenten:
+
+> Ich habe meine alten Notizen nach quellen/bestand gelegt. Übernimm sie bitte.
+
+**Was der Agent tut.** Er sieht jede Datei durch und führt eine Liste in
+`wiki/meta/bestand.md`: was darin steht und wie weit er ist. Er schlägt dir
+Themenbereiche vor und wartet auf deine Antwort. Dann nimmt er sich zur Probe
+höchstens zehn Dateien vor und macht erst weiter, wenn du einverstanden bist.
+Im Wiki entstehen Seiten zu deinen Themen, die auf die alten Dateien
+verweisen, mit einem Satz, was jeweils darin steht. Fragen beantwortet er aus
+dem Wiki: Was er noch nicht erschlossen hat, findet er dabei nicht.
+
+**Was er nicht tut.** Er ändert, verschiebt und löscht keine Datei in
+`quellen/bestand/`, auch nicht, wenn er fertig ist. Deine eigenen Anmerkungen
+kopiert er nicht ins Wiki, er verweist auf sie. Links in einem alten Vault,
+die ins Leere zeigen, zählt er, repariert sie aber nicht.
+
+**Word-Dateien** (`.docx`) kann er nicht lesen. Öffne sie in Word, speichere
+sie über „Datei“ → „Speichern unter“ als PDF und leg das PDF daneben.
+
+**Angaben über andere Menschen.** Stehen in einer Datei Namen oder andere
+Angaben über Kinder, Eltern oder Kolleginnen, auch nur Initialen mit Gruppe
+und Vorfall, nennt er dir die Datei zuerst, ohne die Angaben zu wiederholen,
+und rührt sie nicht an, bis du entschieden hast. Besser legst du solche
+Dateien gar nicht erst hinein: Was der Agent liest, geht an den Anbieter
+(siehe *Bevor du anfängst*).
+
 ## So geht es weiter
 
 Zum Weiterarbeiten Terminal öffnen, `cd` mit Leerzeichen, Ordner
@@ -130,6 +164,7 @@ stehen.“
 | „Was wissen wir über …?“ | Antwort mit Fundstellen, auf Wunsch als Seite gesichert. |
 | „Was hängt zusammen?“ | Verbindungen und Muster über Themen hinweg. |
 | „Prüf das Wiki.“ | Bericht: tote Links, Veraltetes, Widersprüche, Lücken, Abgleich von Wortlaut und Belegen mit den Quellen. |
+| „Übernimm meine alten Notizen.“ | Dein Bestand in `quellen/bestand/` wird ins Wiki verlinkt, in kleinen Runden (siehe oben). |
 | „Schreib mir einen Brief an …“ | Ein Entwurf aus deinem Wiki als Datei in `ausgaben/`. Die Belege stehen darunter, damit du sie prüfen kannst; vor dem Versand löschst du sie. |
 | „Feierabend.“ | Der Agent schreibt die Übergabe für das nächste Mal. |
 

@@ -700,6 +700,9 @@ var FundusKern = (function () {
       else { var ml = /^(.+)\.lokal\.md$/i.exec(t[1]); if (ml) { d.modul = ml[1]; d.istLokal = true; } }
     }
     d.istModulKopf = d.zone === 'module' && t.length === 3 && /^modul\.md$/i.test(t[2]);
+    // quellen/bestand/: alter Bestand der Person (agent/ablaeufe/bestand.md). Steht unter Quellen; Frontmatter, Links und
+    // Tags seiner Notizen gehören nicht zum Wiki: keine Rückverweise, nicht in Links ohne Ziel, Frontmatter-Fehlern, Stand
+    d.istBestand = d.zone === 'quellen' && t.length > 2 && t[1] === 'bestand';
     // Ort einer Leitplanke; Leitplanke ist sie erst mit id: im Frontmatter (FORMAT.md, SCHEMA.md eines Moduls sind keine)
     var leitplankenOrt = d.istMd && ((d.zone === 'leitplanken' && t.length === 3) || (d.zone === 'module' && t.length >= 4 && t[2] === 'leitplanken'));
     d.istLeitplanke = false;
@@ -755,7 +758,7 @@ var FundusKern = (function () {
       d.links.forEach(function (l) {
         var r = (l.art === 'wiki' || l.art === 'einbettung' || l.art === 'eigenschaft') ? loeseWiki(idx, l.ziel, d.pfad) : loeseRelativ(idx, l.ziel, l.art === 'quelle' ? '' : d.pfad);
         l.pfad = r ? r.pfad : null; l.n = r ? r.n : 0;
-        if (r && r.pfad !== d.pfad && d.zone !== 'ausgaben') {
+        if (r && r.pfad !== d.pfad && d.zone !== 'ausgaben' && !d.istBestand) {
           var ziel = idx.nachPfad[r.pfad];
           var vorh = ziel.eingehend.filter(function (x) { return x.pfad === d.pfad; })[0];
           if (vorh) { if (vorh.arten.indexOf(l.art) < 0) vorh.arten.push(l.art); }
@@ -767,10 +770,11 @@ var FundusKern = (function () {
   }
 
   function statistik(idx) {
-    var s = { dateien: idx.docs.length, md: 0, wiki: 0, links: 0, aufgeloest: 0, offen: 0, mehrdeutig: 0, fmFehler: 0, offenListe: [], fehlerListe: [], mehrdeutigListe: [] };
+    var s = { dateien: idx.docs.length, md: 0, wiki: 0, bestand: 0, links: 0, aufgeloest: 0, offen: 0, mehrdeutig: 0, fmFehler: 0, offenListe: [], fehlerListe: [], mehrdeutigListe: [] };
     idx.docs.forEach(function (d) {
       if (d.istMd) s.md++;
       if (d.zone === 'wiki' && d.istMd) s.wiki++;
+      if (d.istBestand) { s.bestand++; return; }
       if (d.fmFehler) { s.fmFehler++; s.fehlerListe.push({ pfad: d.pfad, fehler: d.fmFehler }); }
       d.links.forEach(function (l) {
         s.links++;
@@ -862,7 +866,7 @@ var FundusKern = (function () {
       .slice(0, anzahl || 10);
   }
   function stand(idx) {
-    var s = ''; idx.docs.forEach(function (d) { var u = datum(d.fm && d.fm.updated); if (u > s) s = u; }); return s;
+    var s = ''; idx.docs.forEach(function (d) { if (d.istBestand) return; var u = datum(d.fm && d.fm.updated); if (u > s) s = u; }); return s;
   }
   function eingang(idx) {
     return idx.docs.filter(function (d) { return /^quellen\/eingang\//.test(d.pfad); }).sort(function (a, b) { return a.pfad.localeCompare(b.pfad, 'de'); });

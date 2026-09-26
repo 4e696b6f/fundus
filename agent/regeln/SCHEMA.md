@@ -36,7 +36,8 @@ Ordnernamen folgen den Regeln für Dateinamen. Neben `wiki/meta/` sind
   `wiki/meta/`), nicht aber `wiki/bruecken/` und `wiki/muster/`.
 - Auf eine Moduldatei verlinkst du mit Pfad:
   `[[module/<modulname>/<datei>|Kurzname]]`; der Link zählt als ausgehender,
-  ohne Gegenlink (`L01`).
+  ohne Gegenlink (`L01`). Ebenso auf eine Datei im Bestand:
+  `[[quellen/bestand/<pfad>|Titel]]`, `.md` ohne Endung, andere mit.
 
 ## Frontmatter
 
@@ -203,7 +204,7 @@ Alle zutreffenden Punkte halten:
 
 - Pflichtfelder gesetzt, `created:`, `tags:`, `stimme:` und `pruefen_bis:` nach ihren Absätzen oben, Frontmatter parst in Obsidian ohne roten Block
 - Dateiname nach *Dateinamen und Links*, im Vault nur einmal; eine Brücke liegt in `wiki/bruecken/`
-- `quellen:` zeigt auf eine existierende Datei in `quellen/archiv/` oder in einem Modul
+- `quellen:` zeigt auf eine existierende Datei in `quellen/archiv/`, `quellen/bestand/` oder in einem Modul
 - mindestens zwei ausgehende Links, je mit Begründung (hat der Bereich erst zwei Seiten, genügt einer; kein Link nur zum Auffüllen), Gegenlinks gesetzt
 - jede Kernaussage an der Fundstelle nachprüfbar
 - wörtliche Übernahmen in Anführungszeichen oder als `>`-Zitat mit Fundstelle
@@ -227,6 +228,25 @@ Prüfung. Der Name folgt *Dateinamen und Links*. Frontmatter: `title`,
 `created`, `zielperson` (wer liest), `zweck` (was danach geschehen soll),
 `stimme: agent`.
 
+## Bestand: `wiki/meta/bestand.md`
+
+Eine `meta`-Seite ohne `verfaellt:`, die du fortschreibst
+(`agent/ablaeufe/bestand.md`). Oben der Zähler, dann je Datei eine Zeile, der
+Pfad ab `quellen/bestand/` in Backticks, nicht als Link:
+
+```markdown
+Bestand: 12 von 38 erschlossen · 3 ausgelassen · 2 zurückgestellt · 4 nicht lesbar · 17 offen
+Tote Links im Bestand: 2 (`[[Elternabend]]`, `[[Liste Sprachen]]`)
+
+| Datei | Art | Thema | Status | Seite |
+|---|---|---|---|---|
+| `Notizen/wortschatzkiste.md` | Notiz | Spiel mit Alltagsgegenständen | erschlossen | [[wortschatz-spiel]] |
+| `Team/Protokolle/` · Protokoll, enthält Namen | Notiz | Teamsitzung | zurückgestellt: Personendaten · bleibt liegen, 2026-09-26 | |
+```
+
+Status: `offen`, `erschlossen`, `ausgelassen`, `zurückgestellt: Personendaten`,
+`nicht lesbar: docx`; eine Entscheidung der Person steht mit Datum dahinter.
+
 ## Protokoll: `wiki/log.md`
 
 Nur anhängen. Ältere Einträge schreibst du nie um; den eigenen Eintrag
@@ -241,7 +261,7 @@ Offen: Frist 2026-10-15: Anmeldeschluss Lernkurs (Randspalte) · [[quelle-artike
 
 Vorgänge: `aufnehmen`, `frage`, `pruefen`, `verknuepfen`, `sitzung`,
 `entscheidung` (`agent/ablaeufe/aufnehmen.md` § 7), `ausgabe`
-(`agent/ablaeufe/schreiben.md`).
+(`agent/ablaeufe/schreiben.md`), `bestand` (`agent/ablaeufe/bestand.md`).
 
 `Offen:` steht nur für eine Frist, eine von der Person vorgemerkte Aufgabe
 oder eine Brückenidee, auch mehrfach; `agent/ablaeufe/sitzung-beenden.md` übernimmt
