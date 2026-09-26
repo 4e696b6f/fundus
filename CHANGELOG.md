@@ -14,19 +14,58 @@ Seiten statt seiner Regeln: Obsidian blendet `agent/` in Suche und Graph aus.
 `SOUL.md`, `AGENTS.md` und `CLAUDE.md` bleiben oben, weil Claude Code sie dort
 sucht.
 
+**Neu: Schreiben.** Sagst du „Schreib mir ein Rundschreiben zu …“ (auch Brief
+oder Stellungnahme), sucht der Agent in deinem Wiki und legt einen Entwurf
+als Datei in `ausgaben/` ab. Der Text selbst bleibt frei von Belegzeichen;
+woher jede Tatsache stammt, steht in einem Abschnitt darunter, den du vor
+dem Versand als Ganzes löschst. Was dein Wiki nicht belegt, lässt er offen
+und sagt es dir. `ausgaben/` gehört dir: Der Agent schreibt dort nur auf
+Auftrag, ändert eine Ausgabe nur, wenn du darum bittest, und nimmt nichts
+daraus ins Wiki auf. Ein Modul kann seine Ergebnisse mit
+`ergebnisse: ausgaben` dorthin legen; bei `nur-bericht` bleibt es beim Chat.
+Die Ansicht zeigt deine Ausgaben als eigene Liste.
+
+**Neu: Bestand.** Alte Notizen und Dateien, auch ein alter Obsidian-Vault,
+kommen nach `quellen/bestand/` (kopieren, nicht verschieben; Dateien mit
+Angaben über andere Menschen vorher herausnehmen). Sagst du „Übernimm meinen
+Bestand“, macht der Agent eine Liste in `wiki/meta/bestand.md`. Um Angaben
+über andere Menschen zu erkennen, muss er eine Datei lesen; findet er
+welche, liest er nicht weiter, nennt dir die Datei zuerst und verarbeitet
+sie nicht, bis du entschieden hast. Er schlägt Themenbereiche vor, verlinkt
+zur Probe höchstens zehn Dateien aus Wiki-Seiten und macht dann Runde für
+Runde weiter oder, wenn du es sagst, in einem Zug. Die Dateien selbst
+ändert, verschiebt und löscht er nie. Was er nicht lesen kann, etwa
+Word-Dateien, zählt er nur; speichere sie als PDF. Der Bestand zählt nicht
+als neue Quellen seit der letzten Prüfung, die Übergabe nennt nur den
+Zähler. Die Ansicht zeigt ihn unter Quellen; Links, Frontmatter und Tags
+alter Notizen zählen dort nicht zu deinem Wiki. Anleitung:
+`handbuch/EINRICHTEN.md` → *Du hast schon Notizen?*
+
+**Woran ich gerade arbeite.** Die Vorlage `SOUL.md` hat nach *Wofür das Wiki
+da ist* einen neuen Abschnitt für bis zu drei Vorhaben, die du selbst
+pflegst. Steht dort etwas, sagt dir der Agent beim Verknüpfen, welche neuen
+Seiten ein Vorhaben berühren; ist er leer, fragt er nicht nach.
+
+**Dubletten.** Sagt eine kaum verlinkte Seite dasselbe wie eine andere,
+meldet die Prüfung beide unter *Sollte behoben werden*. Zusammengelegt wird
+nur auf deinen Auftrag.
+
 Übernehmen, wenn du mit 0.2 angefangen hast:
 
 - Leg im Hauptordner einen Ordner `agent` an, klein geschrieben, und schieb
   die fünf Ordner `regeln`, `ablaeufe`, `leitplanken`, `vorlagen` und
   `gedaechtnis` hinein. Was du in `gedaechtnis/` geändert hast, wandert so
   einfach mit.
+- Leg zwei leere Ordner an, ebenfalls klein geschrieben: `ausgaben` im
+  Hauptordner und `bestand` in `quellen/`.
 - `wiki/`, `quellen/` und deine `SOUL.md` bleiben, wo sie sind. In deiner
   `SOUL.md` steht einmal `regeln/LINSEN.md`: Mach daraus
-  `agent/regeln/LINSEN.md`.
-- Ersetzen: `AGENTS.md`, die Dateien in `agent/regeln/`, `agent/ablaeufe/`,
-  `agent/leitplanken/` (eigene Leitplanken bleiben liegen) und
-  `agent/vorlagen/`, dazu `handbuch/`, `ansicht/uebersicht.html`,
-  `README.md` und `CHANGELOG.md`.
+  `agent/regeln/LINSEN.md`. Willst du den Abschnitt *Woran ich gerade
+  arbeite*, kopier ihn aus der neuen Vorlage hinein.
+- Ersetzen: `AGENTS.md`, die Dateien in `agent/regeln/`, `agent/ablaeufe/`
+  (dazu neu `schreiben.md` und `bestand.md`), `agent/leitplanken/` (eigene
+  Leitplanken bleiben liegen) und `agent/vorlagen/`, dazu `handbuch/`,
+  `ansicht/uebersicht.html`, `README.md` und `CHANGELOG.md`.
 - Die Dateien in `.obsidian/` kopierst du nicht, sie würden deine
   Obsidian-Einstellungen überschreiben. Stell stattdessen in Obsidian ein:
   unter *Vorlagen* (Templates) → *Speicherort für Vorlagen* den Ordner
@@ -40,62 +79,6 @@ sucht.
 - Im Kopftext von `wiki/index.md`, `wiki/log.md` und den Seiten in
   `wiki/meta/` stehen noch die alten Pfade. Das darf so bleiben, oder du
   sagst deinem Agenten: „Zieh die Pfade im Kopftext nach.“
-
-**Neu: Schreiben.** Sagst du „Schreib mir ein Rundschreiben zu …“ (auch Brief
-oder Stellungnahme), sucht der Agent in deinem Wiki und legt einen Entwurf
-als Datei in `ausgaben/` ab. Der Text selbst bleibt frei von Belegzeichen;
-woher jede Tatsache stammt, steht in einem Abschnitt darunter, den du vor
-dem Versand als Ganzes löschst. Was dein Wiki nicht
-belegt, lässt er offen und sagt es dir. `ausgaben/` gehört dir: Der Agent
-schreibt dort nur auf Auftrag, ändert eine Ausgabe nur, wenn du darum
-bittest, und nimmt nichts daraus ins Wiki auf. Ein Modul kann seine
-Ergebnisse mit `ergebnisse: ausgaben` dorthin legen; bei `nur-bericht` bleibt
-es beim Chat. Die Ansicht zeigt deine Ausgaben als eigene Liste.
-
-Übernehmen:
-
-- Leg im Hauptordner einen Ordner `ausgaben` an, klein geschrieben.
-- Neu: `agent/ablaeufe/schreiben.md`.
-- Ersetzen: `AGENTS.md` (eigene Anpassungen danach wieder eintragen),
-  `agent/regeln/SCHEMA.md`, `agent/leitplanken/FORMAT.md`,
-  `agent/ablaeufe/verknuepfen.md`, `agent/ablaeufe/pruefen.md`,
-  `ansicht/uebersicht.html`. Kommst du von 0.2, erledigt das schon der Umzug
-  oben.
-
-**Neu: Bestand.** Alte Notizen und Dateien, auch ein alter Obsidian-Vault,
-kommen nach `quellen/bestand/` (kopieren, nicht verschieben; Dateien mit
-Angaben über andere Menschen vorher herausnehmen). Sagst du „Übernimm meinen
-Bestand“, macht der Agent eine Liste in `wiki/meta/bestand.md`. Findet er
-Angaben über andere Menschen, liest er nicht weiter, nennt dir die Datei
-zuerst und verarbeitet sie nicht, bis du entschieden hast. Er schlägt
-Themenbereiche vor, verlinkt zur Probe höchstens zehn Dateien aus
-Wiki-Seiten und macht dann Runde für Runde weiter oder, wenn du es sagst, in
-einem Zug. Die Dateien selbst ändert, verschiebt und löscht er nie. Was er
-nicht lesen kann, etwa Word-Dateien, zählt er nur; speichere sie als PDF. Der
-Bestand zählt nicht als neue Quellen seit der letzten Prüfung, die Übergabe
-nennt nur den Zähler. Die Ansicht zeigt ihn unter Quellen; Links,
-Frontmatter und Tags alter Notizen zählen dort nicht zu deinem Wiki.
-Anleitung: `handbuch/EINRICHTEN.md` → *Du hast schon Notizen?*
-
-Übernehmen:
-
-- Leg in `quellen/` einen Ordner `bestand` an, klein geschrieben.
-- Neu: `agent/ablaeufe/bestand.md`.
-- Ersetzen: `AGENTS.md` (eigene Anpassungen danach wieder eintragen),
-  `agent/regeln/SCHEMA.md`, `agent/ablaeufe/sitzung-beenden.md`,
-  `ansicht/uebersicht.html`, `handbuch/EINRICHTEN.md`. Kommst du von 0.2,
-  erledigt das schon der Umzug oben.
-
-**Woran ich gerade arbeite.** Die Vorlage `SOUL.md` hat nach *Wofür das Wiki
-da ist* einen neuen Abschnitt für bis zu drei Vorhaben, die du selbst
-pflegst. Steht dort etwas, sagt dir der Agent beim Verknüpfen, welche neuen
-Seiten ein Vorhaben berühren; ist er leer, fragt er nicht nach. Deine eigene
-`SOUL.md` bleibt beim Update, wie sie ist: Willst du den Abschnitt, kopier
-ihn aus der neuen Vorlage hinein.
-
-**Dubletten.** Sagt eine kaum verlinkte Seite dasselbe wie eine andere,
-meldet die Prüfung beide unter *Sollte behoben werden*. Zusammengelegt wird
-nur auf deinen Auftrag.
 
 ## 0.2.1 · 2026-09-24 · Entwurf
 
