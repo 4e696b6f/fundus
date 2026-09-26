@@ -41,6 +41,37 @@ sucht.
   `wiki/meta/` stehen noch die alten Pfade. Das darf so bleiben, oder du
   sagst deinem Agenten: „Zieh die Pfade im Kopftext nach.“
 
+**Neu: Schreiben.** Sagst du „Schreib mir ein Rundschreiben zu …“ (auch Brief
+oder Stellungnahme), sucht der Agent in deinem Wiki und legt einen Entwurf
+als Datei in `ausgaben/` ab. Jede Tatsache trägt eine Fußnote, die Belege
+stehen darunter, und vor dem Versand löschst du sie. Was dein Wiki nicht
+belegt, lässt er offen und sagt es dir. `ausgaben/` gehört dir: Der Agent
+schreibt dort nur auf Auftrag, ändert eine Ausgabe nur, wenn du darum
+bittest, und nimmt nichts daraus ins Wiki auf. Ein Modul kann seine
+Ergebnisse mit `ergebnisse: ausgaben` dorthin legen; bei `nur-bericht` bleibt
+es beim Chat. Die Ansicht zeigt deine Ausgaben als eigene Liste.
+
+Übernehmen:
+
+- Leg im Hauptordner einen Ordner `ausgaben` an, klein geschrieben.
+- Neu: `agent/ablaeufe/schreiben.md`.
+- Ersetzen: `AGENTS.md` (eigene Anpassungen danach wieder eintragen),
+  `agent/regeln/SCHEMA.md`, `agent/leitplanken/FORMAT.md`,
+  `agent/ablaeufe/verknuepfen.md`, `agent/ablaeufe/pruefen.md`,
+  `ansicht/uebersicht.html`. Kommst du von 0.2, erledigt das schon der Umzug
+  oben.
+
+**Woran ich gerade arbeite.** Die Vorlage `SOUL.md` hat nach *Wofür das Wiki
+da ist* einen neuen Abschnitt für bis zu drei Vorhaben, die du selbst
+pflegst. Steht dort etwas, sagt dir der Agent beim Verknüpfen, welche neuen
+Seiten ein Vorhaben berühren; ist er leer, fragt er nicht nach. Deine eigene
+`SOUL.md` bleibt beim Update, wie sie ist: Willst du den Abschnitt, kopier
+ihn aus der neuen Vorlage hinein.
+
+**Dubletten.** Sagt eine kaum verlinkte Seite dasselbe wie eine andere,
+meldet die Prüfung beide unter *Sollte behoben werden*. Zusammengelegt wird
+nur auf deinen Auftrag.
+
 ## 0.2.1 · 2026-09-24 · Entwurf
 
 Nach dem ersten echten Testdurchgang und drei Testsitzungen mit dem

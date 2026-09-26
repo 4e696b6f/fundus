@@ -53,6 +53,7 @@ Rechne mit einer halben Stunde. Jeder Klick steht in
 | „Nimm die neue Quelle auf.“ | Aus der Quelle werden Wiki-Seiten. |
 | „Was wissen wir über …?“ | Antwort aus deinem Wiki, mit Fundstellen. |
 | „Prüf das Wiki.“ | Bericht: tote Links, Veraltetes, Widersprüche, Lücken. |
+| „Schreib mir ein Rundschreiben zu …“ | Ein Entwurf aus deinem Wiki in `ausgaben/`, die Belege darunter. |
 | „Feierabend.“ | Der Agent schreibt auf, wo ihr steht. Beim nächsten Start weiß er es sonst nicht mehr. |
 
 ## Was im Ordner liegt
@@ -62,6 +63,7 @@ Rechne mit einer halben Stunde. Jeder Klick steht in
 | `SOUL.md` | Füllst du aus: wofür das Wiki ist. |
 | `quellen/` | Deine Quellen: `eingang/` neu, `archiv/` verarbeitet. |
 | `wiki/` | Schreibt der Agent. Du liest. |
+| `ausgaben/` | Texte, die der Agent auf deinen Auftrag für dich schreibt. Sie gehören dir. |
 | `ansicht/uebersicht.html` | Dein Wiki im Browser, ohne Internet ([Anleitung](handbuch/ANSICHT.md)). |
 | `handbuch/` | Anleitungen für dich. |
 | `module/` | Fertige Wissenspakete, siehe unten. |

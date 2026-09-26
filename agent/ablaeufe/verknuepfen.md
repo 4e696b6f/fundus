@@ -18,8 +18,9 @@ geänderten, wenn die Person nichts anderes nennt. Nie das ganze Wiki.
 - **Gegenlinks:** fehlende setzen.
 - **Nachbarn:** mit den zwei oder drei tragenden Begriffen der Seite suchen,
   passende Seiten mit Begründung verlinken.
-- **Projekte:** Berührt die Seite ein laufendes `projekt`, sagst du es der
-  Person sofort, in einem Satz.
+- **Projekte und Vorhaben:** Berührt die Seite ein laufendes `projekt` oder
+  ein Vorhaben aus `SOUL.md` → *Woran ich gerade arbeite*, sagst du es der
+  Person sofort, in einem Satz. Ist der Abschnitt leer, fragst du nicht nach.
 - **Linsen:** fehlende `gegenposition:` nachtragen, `gleiche_form:` prüfen;
   ab dem dritten Vorkommen die Musterseite anlegen (`agent/regeln/LINSEN.md` →
   *Gleiche Form*).
@@ -51,7 +52,7 @@ vorgehen wie `agent/ablaeufe/aufnehmen.md` § 4.
 ## 5 · Bericht
 
 An die Person, kurz: gesetzte Links, vorgeschlagene Brücken, neue
-Widersprüche, betroffene Projekte. Dazu ein Log-Eintrag vom Typ
+Widersprüche, betroffene Projekte und Vorhaben. Dazu ein Log-Eintrag vom Typ
 `verknuepfen`: was du gesucht und was du gefunden hast, auch wenn es nichts
 war. „Geprüft“ allein genügt nicht.
 
@@ -60,6 +61,6 @@ war. „Geprüft“ allein genügt nicht.
 Gesucht: `wiederholen abstand`, `lernplan woche`; Gegenlinks aller vier Seiten
 Geändert: spaced-repetition.md ↔ lernkurven.md (gleicher Mechanismus)
 Brücken: [!ich] in 2026-09-23-lernplan verbindet keine zwei Bereiche
-Widersprüche: keine neuen · Projekte: keins betroffen
+Widersprüche: keine neuen · Projekte, Vorhaben: keins betroffen
 Offen: Brückenidee lernkurven × sport (verzögerte Rückmeldung), vorgeschlagen
 ```

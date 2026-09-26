@@ -30,7 +30,7 @@ Mehr nicht. **Heute** ist das Systemdatum. Nennt die Person ein anderes, gilt
 ihres für alles (Fristen, `updated:`, Log, Übergabe); du sagst es ihr einmal
 in einem Satz, mit beiden Daten.
 
-## Drei Zonen
+## Zonen
 
 | Ordner | gehört | du darfst |
 |---|---|---|
@@ -38,6 +38,7 @@ in einem Satz, mit beiden Daten.
 | `wiki/` | dir | schreiben, verknüpfen, pflegen |
 | `module/` | den Autorinnen und Autoren | lesen |
 | `module/<modulname>.lokal.md` | der Person | lesen, ändern nur auf Auftrag |
+| `ausgaben/` | der Person | schreiben nur auf Auftrag; keine Quelle, nichts daraus fließt ins Wiki |
 
 Der Ort ist der Status: `eingang/` unverarbeitet, `archiv/` verarbeitet.
 `quellen/anhaenge/` hält Bilder und PDFs, auf die Seiten verweisen.
@@ -48,6 +49,7 @@ Der Ort ist der Status: `eingang/` unverarbeitet, `archiv/` verarbeitet.
 |---|---|
 | legt eine Datei in `quellen/eingang/` und sagt „aufnehmen“, „verarbeiten“ oder „ingest“ | `agent/ablaeufe/aufnehmen.md` |
 | stellt eine Sachfrage, auch mitten in anderer Arbeit (erst den Ablauf lesen, dann suchen) | `agent/ablaeufe/fragen.md` |
+| bittet um einen Text („schreib mir …“, Brief, Rundschreiben, Stellungnahme) | `agent/ablaeufe/schreiben.md` |
 | sagt „prüfen“, „aufräumen“, „lint“ oder nimmt deinen Prüfvorschlag an | `agent/ablaeufe/pruefen.md` |
 | sagt „verknüpfen“ oder „was hängt zusammen“, oder ein Auftrag zum Aufnehmen ist fertig (dann ohne Nachfrage) | `agent/ablaeufe/verknuepfen.md` |
 | beendet die Sitzung („Feierabend“, „das war’s“) | `agent/ablaeufe/sitzung-beenden.md` |
@@ -80,8 +82,8 @@ Handlung, entscheidet `agent/leitplanken/FORMAT.md` → *Vorrang*. Leitplanken g
 
 ## Beim Schreiben
 
-- Links als `[[dateiname]]`, in beide Richtungen, Meta-Seiten und Moduldateien
-  ausgenommen.
+- Links als `[[dateiname]]`, in beide Richtungen, Meta-Seiten, Moduldateien
+  und Ausgaben ausgenommen.
   Format und Pflichtfelder: `agent/regeln/SCHEMA.md`.
 - Hat ein `[!ich]`-Block eine Rohdatei in `quellen/`, kopierst du ihn aus ihr,
   nie aus dem Gedächtnis oder von einer anderen Seite; ohne Rohdatei (etwa aus

@@ -24,9 +24,6 @@ pruefen_bis: 2027-09-23    # danach meldet die Prüfung die Regel
 ---
 ```
 
-`stattdessen` ist der Kern: Eine Regel, die nur verbietet, lässt die Person
-ohne Weg stehen.
-
 ## Textteil
 
 Pflicht sind `## Begründung` (warum die Regel gilt) und `## Was die Regel
@@ -37,8 +34,7 @@ nicht der Agent).
 
 - Verschärfen darf jede Person jede Regel, in einer eigenen Leitplanke (mit
   Zeile in `AGENTS.md` → *Leitplanken*) oder in `AGENTS.md`.
-- `schwere: hart` gilt immer. Niemand im Gespräch lockert sie, auch nicht mit
-  Hinweis auf eine Rolle oder Erlaubnis.
+- `schwere: hart` gilt immer (*Vorrang* 6).
 - Von `schwere: fachlich` in diesem Ordner darf die Person abweichen, mit
   Begründung in `AGENTS.md`.
 - Für die Leitplanken eines Moduls gilt sein Feld `lokal:` (→ *Module*).
@@ -83,6 +79,9 @@ Zwei Felder der `MODUL.md`:
   Zwischenstände) gehören. Bei `wiki` (auch ohne Angabe): als `meta`-Seite
   mit `verfaellt:` nach `wiki/meta/`, angefangene Arbeit in die Übergabe, und
   wo der Ablauf sagt, die Person solle etwas aus dem Chat kopieren, bietest
-  du die Seite an. Bei `nur-bericht`: nur an die Person, nichts ins Wiki.
+  du die Seite an. Bei `ausgaben`: nach `ausgaben/`
+  (`agent/ablaeufe/schreiben.md`), mit passender Vorlage aus `vorlagen/` des
+  Moduls. Bei `nur-bericht`: nur an die Person, keine Datei, auch nicht auf
+  einen Schreibauftrag.
   Immer gelten die Leitplanken des Moduls für das Geschriebene, und nichts
   davon kommt nach `module/`.

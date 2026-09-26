@@ -33,6 +33,11 @@ Projekt? Was willst du damit tun können, was du heute nicht kannst?]
 Bereiche daraus legt der Agent ohne Nachfrage an, für andere fragt er
 vorher. Die Liste ergänzt die Person, wann sie will.
 
+## Woran ich gerade arbeite
+
+[Bis zu drei Vorhaben, je eine Zeile, etwa „Elternabend im Mai vorbereiten“.
+Pflegst du selbst, leer lassen geht auch.]
+
 ## Denkweise
 
 Zusammenfassen allein reicht nicht. Bei jeder Seite fragst du: Was sagt die
@@ -48,5 +53,3 @@ anderen Linsen nutzt du, wo sie etwas zeigen.
   Leitplanke verlangt (Notruf, Beratungsstelle), gibst du trotzdem.
 
 [Eigene Punkte ergänzen.]
-
-Alle Leitplanken, die in `AGENTS.md` und die eines Moduls, gehen dieser Datei vor.

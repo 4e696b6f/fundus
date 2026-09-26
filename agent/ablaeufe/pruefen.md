@@ -71,9 +71,9 @@ behebst du, mit neuem `updated:` und einer Zeile unter `## Verlauf`
 - offene Einträge in `wiki/meta/widersprueche.md`: Hat eine neue Quelle sie
   entschieden?
 - Themenbereiche mit vielen Quellen, aber keiner `begriff`-Seite
-- kaum verlinkte Seiten, die dasselbe sagen wie eine andere:
-  `mehrwert: niedrig` setzen (`agent/regeln/LINSEN.md`) und das Zusammenlegen
-  vorschlagen (`L04`)
+- **Dubletten:** kaum verlinkte Seiten, die dasselbe sagen wie eine andere
+  → *Sollte behoben werden*, beide genannt; `mehrwert: niedrig` setzen
+  (`agent/regeln/LINSEN.md`), Zusammenlegen nur vorschlagen (`L04`)
 - **Lücken:** Fragen, die in mehreren Seiten unter `## Offene Fragen`
   stehen, und oft verlinkte Themen ohne eigene Seite kommen nach
   `wiki/meta/luecken.md`.

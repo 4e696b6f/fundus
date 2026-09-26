@@ -295,7 +295,8 @@ var FundusKern = (function () {
   /* Nachschlagetabellen ohne Prototyp: Schlüssel kommen aus Dateien (Ordnernamen, Callout-Typen). */
   function ohneProto(o) { var t = Object.create(null); for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) t[k] = o[k]; return t; }
   function eigen(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
-  var ZONEN = ohneProto({ wiki: 1, quellen: 1, module: 1 });
+  /* ausgaben/: Texte der Person (agent/ablaeufe/schreiben.md), keine Wiki-Seiten; ihre Links geben keine Rückverweise. */
+  var ZONEN = ohneProto({ wiki: 1, quellen: 1, module: 1, ausgaben: 1 });
   /* Systemordner des Agenten: agent/leitplanken/ ist eine eigene Zone, alles andere in agent/ steht unter Weitere. */
   function zoneVon(t) {
     if (t[0] === 'agent' && t[1] === 'leitplanken' && t.length > 2) return 'leitplanken';
@@ -702,7 +703,7 @@ var FundusKern = (function () {
     // Ort einer Leitplanke; Leitplanke ist sie erst mit id: im Frontmatter (FORMAT.md, SCHEMA.md eines Moduls sind keine)
     var leitplankenOrt = d.istMd && ((d.zone === 'leitplanken' && t.length === 3) || (d.zone === 'module' && t.length >= 4 && t[2] === 'leitplanken'));
     d.istLeitplanke = false;
-    if (!d.istMd) { d.titel = d.name; d.suchtext = p.toLowerCase(); return d; }
+    if (!d.istMd) { d.titel = d.name; d.suchtext = p.toLowerCase(); if (d.zone === 'ausgaben') d.updated = datum(d.name.slice(0, 10)); return d; }
     var f = parseFrontmatter(e.text || '');
     d.fm = f.daten; d.fmFehler = f.fehler; d.fmRoh = f.roh; d.koerper = f.koerper; d.hatFm = f.hat;
     d.istLeitplanke = leitplankenOrt && !!text(d.fm.id);
@@ -713,6 +714,7 @@ var FundusKern = (function () {
     if (d.istLeitplanke && fm.id) d.titel = text(fm.id) + ' · ' + (titel || (h1 ? h1[1].trim() : ohneMd(d.name)));
     d.typ = text(fm.type); d.status = text(fm.status); d.stimme = text(fm.stimme); d.sicherheit = text(fm.sicherheit);
     d.updated = datum(fm.updated) || datum(fm.stand) || datum(fm.geprueft);
+    if (d.zone === 'ausgaben') d.updated = datum(fm.updated) || datum(fm.created) || datum(d.name.slice(0, 10));
     d.tags = liste(fm.tags); d.aliases = liste(fm.aliases);
     d.suchtext = (d.titel + '\n' + d.aliases.join('\n') + '\n' + p + '\n' + d.koerper).toLowerCase();
 
@@ -753,7 +755,7 @@ var FundusKern = (function () {
       d.links.forEach(function (l) {
         var r = (l.art === 'wiki' || l.art === 'einbettung' || l.art === 'eigenschaft') ? loeseWiki(idx, l.ziel, d.pfad) : loeseRelativ(idx, l.ziel, l.art === 'quelle' ? '' : d.pfad);
         l.pfad = r ? r.pfad : null; l.n = r ? r.n : 0;
-        if (r && r.pfad !== d.pfad) {
+        if (r && r.pfad !== d.pfad && d.zone !== 'ausgaben') {
           var ziel = idx.nachPfad[r.pfad];
           var vorh = ziel.eingehend.filter(function (x) { return x.pfad === d.pfad; })[0];
           if (vorh) { if (vorh.arten.indexOf(l.art) < 0) vorh.arten.push(l.art); }
@@ -865,12 +867,18 @@ var FundusKern = (function () {
   function eingang(idx) {
     return idx.docs.filter(function (d) { return /^quellen\/eingang\//.test(d.pfad); }).sort(function (a, b) { return a.pfad.localeCompare(b.pfad, 'de'); });
   }
+  /* Dateien in ausgaben/, neueste zuerst; Datum aus created:, sonst aus dem Dateinamen (JJJJ-MM-TT-…) */
+  function ausgaben(idx) {
+    return idx.docs.filter(function (d) { return d.zone === 'ausgaben'; })
+      .sort(function (a, b) { return a.updated < b.updated ? 1 : a.updated > b.updated ? -1 : a.pfad.localeCompare(b.pfad, 'de'); });
+  }
 
   /* ---------- Liste ---------- */
 
   var REITER = [
     { id: 'wiki', name: 'Wiki', facetten: [['bereich', 'Bereich'], ['typ', 'Typ'], ['status', 'Status'], ['stimme', 'Stimme'], ['sicherheit', 'Sicherheit']] },
     { id: 'quellen', name: 'Quellen', facetten: [['ort', 'Ort'], ['ext', 'Dateiart']] },
+    { id: 'ausgaben', name: 'Ausgaben', facetten: [] },
     { id: 'leitplanken', name: 'Leitplanken', facetten: [['herkunft', 'Herkunft'], ['art', 'Art'], ['schwere', 'Schwere']] },
     { id: 'module', name: 'Module', facetten: [['modul', 'Modul']] },
     { id: 'weitere', name: 'Weitere', facetten: [['ordner', 'Ordner']] }
@@ -911,7 +919,7 @@ var FundusKern = (function () {
       for (var j = 0; j < worte.length; j++) if (d.suchtext.indexOf(worte[j]) < 0) return false;
       return true;
     });
-    var sort = p.sort || (r.id === 'wiki' ? 'updated' : 'titel');
+    var sort = p.sort || (r.id === 'wiki' || r.id === 'ausgaben' ? 'updated' : 'titel');
     aus.sort(function (a, b) {
       if (sort === 'updated') { var ua = a.updated || '', ub = b.updated || ''; if (ua !== ub) return ua < ub ? 1 : -1; }
       if (sort === 'pfad') return a.pfad.localeCompare(b.pfad, 'de');
@@ -1183,7 +1191,7 @@ var FundusKern = (function () {
     datum: datum, plusTage: plusTage, tage: tage, heuteIso: heuteIso, datumDe: datumDe, relativ: relativ, groesse: groesse,
     teileWiki: teileWiki, loeseWiki: loeseWiki, loeseRelativ: loeseRelativ, baueIndex: baueIndex, statistik: statistik,
     faelligkeiten: faelligkeiten, offeneZeilen: offeneZeilen, uebergabe: uebergabe, bereiche: bereiche, module: module,
-    zuletzt: zuletzt, stand: stand, eingang: eingang, REITER: REITER, imReiter: imReiter, facette: facette, filtere: filtere,
+    zuletzt: zuletzt, stand: stand, eingang: eingang, ausgaben: ausgaben, REITER: REITER, imReiter: imReiter, facette: facette, filtere: filtere,
     facettenWerte: facettenWerte, ausschnitt: ausschnitt, renderMarkdown: renderMarkdown, kontext: kontext, inline: inline,
     rendereDoc: rendereDoc, obsidianUri: obsidianUri, BILD: BILD, nfc: nfc, schluessel: schluessel, ohneProto: ohneProto
   };
@@ -1467,6 +1475,13 @@ var FundusKern = (function () {
       inhalt: zl.length ? '<ul class="eintraege">' + zl.map(function (d) {
         return '<li><span class="haupt">' + docLink(d) + '<span class="unter">' + esc(d.bereich || 'wiki') + (d.typ ? ' · ' + esc(d.typ) : '') + '</span></span><span class="neben">' + K.datumDe(d.updated) + '</span></li>';
       }).join('') + '</ul><a class="alle" href="#liste/wiki">Alle Wiki-Seiten</a>' : '', leer: 'Noch keine Wiki-Seite mit Datum. Die erste entsteht, wenn der Agent eine Quelle aufnimmt.' });
+    // Ausgaben: Texte der Person, keine Wiki-Seiten (zählen nicht bei Wiki-Seiten, geben keine Rückverweise)
+    var aus = K.ausgaben(idx);
+    var k10 = kachel({ klasse: aus.length ? '' : 'ruhig', label: 'Ausgaben', zahl: aus.length, frage: 'Welche Texte hat der Agent für dich geschrieben?',
+      inhalt: aus.length ? '<ul class="eintraege">' + aus.slice(0, 10).map(function (d) {
+        return '<li><span class="haupt">' + docLink(d) + '<span class="unter">' + esc(d.name) + '</span></span><span class="neben">' + (d.updated ? K.datumDe(d.updated) : '') + '</span></li>';
+      }).join('') + '</ul><a class="alle" href="#liste/ausgaben">Alle Ausgaben</a>' : '',
+      leer: 'Noch keine Ausgaben. Bittest du deinen Agenten um einen Text („Schreib mir …“), legt er ihn in <code>ausgaben/</code> ab.' });
 
     var zust = [];
     if (st.fmFehler) zust.push('<li><span class="haupt"><a href="#liste/' + reiterVon(st.fehlerListe[0].pfad) + '?fm=fehler">' + st.fmFehler + (st.fmFehler === 1 ? ' Datei' : ' Dateien') + ' mit fehlerhaftem Frontmatter</a><span class="unter">' +
@@ -1478,7 +1493,7 @@ var FundusKern = (function () {
     var k9 = kachel({ klasse: zust.length ? '' : 'ruhig', label: 'Dateien', zahl: zust.length || null, frage: 'Hakt etwas an den Dateien selbst?',
       inhalt: zust.length ? '<ul class="eintraege">' + zust.join('') + '</ul>' : '', leer: 'Alle Frontmatter lesbar, jeder Link findet sein Ziel.' });
 
-    h += '<div class="raster">' + k1 + k2 + k3 + k4 + k5 + k9 + k6 + k7 + k8 + '</div>';
+    h += '<div class="raster">' + k1 + k2 + k3 + k4 + k5 + k9 + k6 + k7 + k8 + k10 + '</div>';
     haupt.innerHTML = h;
   }
   function reiterVon(pfad) {
@@ -1502,7 +1517,7 @@ var FundusKern = (function () {
         return '<option value="' + esc(w.wert) + '"' + (p[f[0]] === w.wert ? ' selected' : '') + '>' + esc(w.wert) + ' (' + w.anzahl + ')</option>';
       }).join('') + '</select>';
     });
-    var sort = p.sort || (r.id === 'wiki' ? 'updated' : 'titel');
+    var sort = p.sort || (r.id === 'wiki' || r.id === 'ausgaben' ? 'updated' : 'titel');
     h += '<select data-facette="sort" aria-label="Sortierung"><option value="updated"' + (sort === 'updated' ? ' selected' : '') + '>Neueste zuerst</option><option value="titel"' + (sort === 'titel' ? ' selected' : '') + '>Titel A–Z</option><option value="pfad"' + (sort === 'pfad' ? ' selected' : '') + '>Pfad</option></select>';
     if (p.fm) h += '<select data-facette="fm" aria-label="Frontmatter"><option value="">Frontmatter: alle</option><option value="fehler" selected>Frontmatter fehlerhaft</option></select>';
     var aktiv = Object.keys(p).some(function (k) { return p[k] && k !== 'sort'; });
@@ -1545,7 +1560,7 @@ var FundusKern = (function () {
   function tabelle(reiter, docs, p) {
     if (!docs.length) {
       var gesamt = S.idx.docs.some(function (d) { return K.imReiter(d, reiter); });
-      var leer = { wiki: 'Noch keine Wiki-Seiten. Leg eine Quelle in <code>quellen/eingang/</code> und sag deinem Agenten „aufnehmen“.', quellen: 'Noch keine Quellen. Neue Quellen legst du in <code>quellen/eingang/</code>.', leitplanken: 'Keine Leitplanken gefunden. Sie liegen in <code>agent/leitplanken/</code>.', module: 'Kein Modul eingehängt. Wie das geht, steht in <code>handbuch/MODULE.md</code>.', weitere: 'Keine weiteren Dateien.' };
+      var leer = { wiki: 'Noch keine Wiki-Seiten. Leg eine Quelle in <code>quellen/eingang/</code> und sag deinem Agenten „aufnehmen“.', quellen: 'Noch keine Quellen. Neue Quellen legst du in <code>quellen/eingang/</code>.', ausgaben: 'Noch keine Ausgaben. Bittest du deinen Agenten um einen Text („Schreib mir …“), legt er ihn in <code>ausgaben/</code> ab.', leitplanken: 'Keine Leitplanken gefunden. Sie liegen in <code>agent/leitplanken/</code>.', module: 'Kein Modul eingehängt. Wie das geht, steht in <code>handbuch/MODULE.md</code>.', weitere: 'Keine weiteren Dateien.' };
       return '<p class="leer">' + (gesamt ? 'Nichts passt zu Suche und Filter. Nimm einen Filter heraus oder such nach einem anderen Wort.' : leer[reiter]) + '</p>';
     }
     var kopf, rows;
@@ -1555,6 +1570,9 @@ var FundusKern = (function () {
     } else if (reiter === 'quellen') {
       kopf = ['Datei', 'Ort', 'Art', 'Größe', 'Zitiert von'];
       rows = docs.map(function (d) { var t = d.pfad.split('/'); return zeile(d, [titelZelle(d, p), td(esc(t.length > 2 ? t[1] : '—')), td(esc(d.ext || '—')), td(K.groesse(d.groesse), 'zahlspalte'), td(String(d.eingehend.length), 'zahlspalte')]); });
+    } else if (reiter === 'ausgaben') {
+      kopf = ['Titel', 'Zielperson', 'Datum'];
+      rows = docs.map(function (d) { return zeile(d, [titelZelle(d, p), td(esc(K.text(d.fm.zielperson)) || '—'), td(K.datumDe(d.updated), 'zahlspalte')]); });
     } else if (reiter === 'leitplanken') {
       kopf = ['Leitplanke', 'Herkunft', 'Art', 'Schwere', 'Prüfen bis'];
       rows = docs.map(function (d) { return zeile(d, [titelZelle(d, p), td(esc(K.facette(d, 'herkunft'))), td(esc(K.text(d.fm.art))), td(esc(K.text(d.fm.schwere))), td(frist(K.datum(d.fm.pruefen_bis)), 'zahlspalte')]); });

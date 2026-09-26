@@ -107,7 +107,7 @@ stand: 2026-09-22
 pruefen_bis: 2027-03-22             # frühestes Prüfdatum im Modul
 kontakt: 'Issues im Repository des Moduls'
 lokal: 'Abweichungen von KS-L03 und KS-L09 mit Begründung, entscheiden Träger oder Leitung'
-ergebnisse: wiki                    # wiki | nur-bericht, ohne Angabe: wiki
+ergebnisse: wiki                    # wiki | ausgaben | nur-bericht, ohne Angabe: wiki
 ---
 
 # Kinderschutz in Einrichtungen
@@ -119,9 +119,12 @@ liegt.
 Unter dem Frontmatter steht, was das Modul kann und was nicht. `lokal:` sagt
 in einem Satz, was in der `.lokal.md` stehen darf und wer entscheidet; fehlt
 es, darf die Datei nur verschärfen. `ergebnisse:` sagt, ob der Agent
-die Ergebnisse der Modulabläufe im Wiki ablegt (`wiki`) oder nur der Person
-berichtet (`nur-bericht`). Wie er beide Felder anwendet, steht in
-`agent/leitplanken/FORMAT.md` → *Module*.
+die Ergebnisse der Modulabläufe im Wiki ablegt (`wiki`), als Datei in
+`ausgaben/` der Person (`ausgaben`) oder nur der Person berichtet
+(`nur-bericht`, dann auch kein Text in `ausgaben/`). Vorlagen für solche
+Dateien, etwa einen Bericht oder Brief, legt das Modul in `vorlagen/`. Wie
+der Agent beide Felder anwendet, steht in `agent/leitplanken/FORMAT.md` →
+*Module*.
 
 ## Ein Modul bauen
 

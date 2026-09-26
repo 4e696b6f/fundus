@@ -148,9 +148,7 @@ Backticks bei Art C.
 
 **Ohne Rohdatei:** Was die Person im Gespräch für eine Seite sagt, übernimmst
 du genau so, darunter `*im Gespräch am JJJJ-MM-TT*`. Die erste Wiki-Seite
-damit gilt als Rohfassung, weitere Kopien kommen von dort, samt Zeile. Diese
-Blöcke und solche, die die Person selbst ins Wiki schreibt (etwa per Vorlage
-`projekt`), gleicht die Prüfung nicht ab (`agent/ablaeufe/pruefen.md` § 4).
+damit gilt als Rohfassung, weitere Kopien kommen von dort, samt Zeile.
 
 Backticks in einer Rohdatei markieren die Stimme der Person, je nach Art der
 Quelle (`agent/ablaeufe/aufnehmen.md` § 1):
@@ -219,8 +217,15 @@ Alle zutreffenden Punkte halten:
 Eine Analyse zu einem bestimmten Stand (Vergleich, Marktlage, Prüfbericht,
 auch aus einem Modul-Ablauf) ist eine `meta`-Seite mit `verfaellt:`.
 Sie wird nicht fortgeschrieben; was daran dauerhaft gilt, wandert in eine
-`begriff`-Seite. Nach dem Verfallsdatum wird sie beim Prüfen gemeldet, nicht
-gelöscht.
+`begriff`-Seite.
+
+## Ausgaben
+
+Ein Text in `ausgaben/` (`agent/ablaeufe/schreiben.md`) ist keine Wiki-Seite:
+kein Typ, kein Gegenlink, nie in `quellen:`, seine Links zählen bei keiner
+Prüfung. Der Name folgt *Dateinamen und Links*. Frontmatter: `title`,
+`created`, `zielperson` (wer liest), `zweck` (was danach geschehen soll),
+`stimme: agent`.
 
 ## Protokoll: `wiki/log.md`
 
@@ -235,7 +240,8 @@ Offen: Frist 2026-10-15: Anmeldeschluss Lernkurs (Randspalte) · [[quelle-artike
 ```
 
 Vorgänge: `aufnehmen`, `frage`, `pruefen`, `verknuepfen`, `sitzung`,
-`entscheidung` (`agent/ablaeufe/aufnehmen.md` § 7).
+`entscheidung` (`agent/ablaeufe/aufnehmen.md` § 7), `ausgabe`
+(`agent/ablaeufe/schreiben.md`).
 
 `Offen:` steht nur für eine Frist, eine von der Person vorgemerkte Aufgabe
 oder eine Brückenidee, auch mehrfach; `agent/ablaeufe/sitzung-beenden.md` übernimmt
