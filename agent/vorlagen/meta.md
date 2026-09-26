@@ -12,7 +12,7 @@ stimme: agent                        # gemischt mit [!ich]-Block
 
 # {{title}}
 
-<!-- Worum es geht und zu welchem Stand. Regeln: regeln/SCHEMA.md -->
+<!-- Worum es geht und zu welchem Stand. Regeln: agent/regeln/SCHEMA.md -->
 
 ## Kernaussagen
 

@@ -1,20 +1,23 @@
 ---
 title: '{{title}}'
-type: quelle                         # Dateiname: quelle-<kurztitel>.md
+type: projekt
 tags: []                             # erster Tag: der Bereich
 aliases: []
 created: {{date:YYYY-MM-DD}}
 updated: {{date:YYYY-MM-DD}}
-quellen: []                          # Pflicht: quellen/archiv/<datei>
+quellen: []
 sicherheit:                          # hoch | mittel | niedrig | strittig
 status: skizze                       # aktiv | veraltet | ersetzt | skizze
-stimme: agent                        # gemischt mit [!ich]-Block
+stimme: gemischt                     # ohne [!ich]-Block agent
 # pruefen_bis: JJJJ-MM-TT
 ---
 
 # {{title}}
 
-<!-- Wer spricht, wann, in welcher Form. Regeln: regeln/SCHEMA.md -->
+<!-- Worum es geht und der Stand: was erreicht ist, was als Nächstes kommt. Regeln: agent/regeln/SCHEMA.md -->
+
+> [!ich]
+> 
 
 ## Kernaussagen
 

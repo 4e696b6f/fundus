@@ -33,7 +33,7 @@ meisten Seiten verlieren nichts, wenn statt eines Namens eine Rolle steht.
 Die Person entscheidet über ihr Wiki. Braucht sie Namen, etwa für ein
 Projekt mit festen Beteiligten, hält sie das in `AGENTS.md` fest, und die
 Regel gilt dort nicht; eine harte Modulregel geht vor
-(`leitplanken/FORMAT.md` → *Vorrang* 1). Über die Person selbst darf im Wiki
+(`agent/leitplanken/FORMAT.md` → *Vorrang* 1). Über die Person selbst darf im Wiki
 stehen, was sie selbst hineinschreibt.
 
 Eine eigene `akteur`-Seite bekommt eine fachlich zitierte Person erst, wenn

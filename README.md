@@ -66,8 +66,10 @@ Rechne mit einer halben Stunde. Jeder Klick steht in
 | `handbuch/` | Anleitungen für dich. |
 | `module/` | Fertige Wissenspakete, siehe unten. |
 
-Alles andere (`AGENTS.md`, `regeln/`, `ablaeufe/`, `leitplanken/`, `vorlagen/`,
-`gedaechtnis/`) sind Regeln und Gedächtnis des Agenten, lesbar und änderbar.
+Alles andere (`AGENTS.md` und `agent/`) sind Regeln und Gedächtnis des Agenten,
+lesbar und änderbar. In `agent/` liegen seine Regeln, Abläufe, Leitplanken,
+Vorlagen und sein Gedächtnis; Obsidian blendet den Ordner in Suche und Graph
+aus, damit du dort nur dein Wiki findest.
 `CLAUDE.md` enthält nur den Verweis auf `AGENTS.md`, damit Claude Code die
 Regeln findet. `.obsidian/` hält die Einstellungen dieses Ordners, etwa die
 Farbe deiner Gedanken-Blöcke, nicht deine persönlichen. `CHANGELOG.md` listet,

@@ -4,12 +4,12 @@ Auslöser: Die Person beendet die Arbeit („Feierabend“, „das war’s“).
 
 ## 1 · Übergabe schreiben
 
-`gedaechtnis/UEBERGABE.md` **ganz neu schreiben**, nicht anhängen, höchstens
+`agent/gedaechtnis/UEBERGABE.md` **ganz neu schreiben**, nicht anhängen, höchstens
 eine Seite; Erledigtes steht im Log.
 
 Vorher liest du, was sonst verloren geht:
 
-- die bisherige Übergabe, auch wenn `ablaeufe/pruefen.md` § 6 sie in dieser
+- die bisherige Übergabe, auch wenn `agent/ablaeufe/pruefen.md` § 6 sie in dieser
   Sitzung neu geschrieben hat: Zeilen unter *Offen* und *Nicht vergessen*, die
   weiter gelten, übernimmst du (Regeln unten);
 - in `wiki/log.md` alles nach dem letzten Eintrag `sitzung`: jeden Eintrag
@@ -54,14 +54,14 @@ Ein Satz: womit die nächste Sitzung anfängt.
   Treffer in Codeblöcken zählen nicht. **Bald fällig:** dasselbe in den
   nächsten zwei Wochen.
 - **Frist:** eine Zeile je Termin für das Wiki oder die Person, auch jede
-  datierte Nebenangabe (`ablaeufe/aufnehmen.md` § 3). Eine vorbeigegangene
+  datierte Nebenangabe (`agent/ablaeufe/aufnehmen.md` § 3). Eine vorbeigegangene
   nennst du der Person einmal, dann entfällt sie.
 - **Von dir vorgemerkt:** je Aufgabe, die die Person in einem `[!ich]`-Block
   notiert hat (etwa `` `#später` ``), eine Zeile mit Link auf die Seite. Die
   Aufgabe steht wörtlich, ein Wort mit `#` am Anfang in Backticks. Sie
   bleibt, bis die Person sie erledigt oder streicht.
 - **Entschieden** (unter *Offen*): je Log-Eintrag `entscheidung`
-  (`ablaeufe/aufnehmen.md` § 7) eine Zeile; sie bleibt, solange die
+  (`agent/ablaeufe/aufnehmen.md` § 7) eine Zeile; sie bleibt, solange die
   Entscheidung gilt, etwa die Datei im Eingang liegt.
 - Ist eine Zeile *Von dir vorgemerkt* oder `Entschieden:` älter als vier
   Wochen, fragst du einmal, ob sie noch gilt.
@@ -77,7 +77,7 @@ bis fünf Zeilen.
 ## 3 · Lernschleife
 
 Jede Korrektur der Person und jeder eigene Fehlgriff kommt sofort als Zeile
-in `gedaechtnis/REIBUNG.md`; was fehlt, trägst du jetzt nach. Kommt derselbe
+in `agent/gedaechtnis/REIBUNG.md`; was fehlt, trägst du jetzt nach. Kommt derselbe
 Schlüssel zum zweiten Mal vor, schlägst du vor, die Lehre als Regel dort
 einzutragen, wo sie künftig gelesen wird: `AGENTS.md`, ein Ablauf oder eine
 Leitplanke. Die Person entscheidet.

@@ -1,7 +1,7 @@
 # Ablauf: verknüpfen
 
 Auslöser: ein fertiger Auftrag zum Aufnehmen und jeder Nachzügler
-(`ablaeufe/aufnehmen.md` § 6 und § 7), ohne Nachfrage; oder die Person sagt
+(`agent/ablaeufe/aufnehmen.md` § 6 und § 7), ohne Nachfrage; oder die Person sagt
 „verknüpfen“.
 
 Jeder Lauf geht durch § 1 bis § 5, mit eigenem Log-Eintrag; ein Satz im
@@ -21,7 +21,7 @@ geänderten, wenn die Person nichts anderes nennt. Nie das ganze Wiki.
 - **Projekte:** Berührt die Seite ein laufendes `projekt`, sagst du es der
   Person sofort, in einem Satz.
 - **Linsen:** fehlende `gegenposition:` nachtragen, `gleiche_form:` prüfen;
-  ab dem dritten Vorkommen die Musterseite anlegen (`regeln/LINSEN.md` →
+  ab dem dritten Vorkommen die Musterseite anlegen (`agent/regeln/LINSEN.md` →
   *Gleiche Form*).
 
 ## 3 · Muster über Bereiche hinweg
@@ -38,15 +38,15 @@ entfällt die Suche nach Paaren.
    Kandidat, auch ohne gleiche Struktur.
 4. **Jeder Vorschlag** und jede Idee, die später Brücke werden könnte, wird
    eine Zeile `Offen: Brückenidee …` im Log-Eintrag (§ 5).
-5. **Zustimmung:** Die Seite entsteht nach `regeln/SCHEMA.md`, `[!ich]` aus
+5. **Zustimmung:** Die Seite entsteht nach `agent/regeln/SCHEMA.md`, `[!ich]` aus
    der Rohdatei. Einen neuen Ordner `wiki/bruecken/` oder `wiki/muster/`
    trägst du in `wiki/index.md` ein.
-6. **Ablehnung:** festhalten nach `ablaeufe/aufnehmen.md` § 7.
+6. **Ablehnung:** festhalten nach `agent/ablaeufe/aufnehmen.md` § 7.
 
 ## 4 · Widersprüche
 
 Sagt eine neue Seite etwas anderes als eine alte oder eine Moduldatei:
-vorgehen wie `ablaeufe/aufnehmen.md` § 4.
+vorgehen wie `agent/ablaeufe/aufnehmen.md` § 4.
 
 ## 5 · Bericht
 

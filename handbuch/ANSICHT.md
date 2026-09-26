@@ -40,6 +40,6 @@ danach etwas geändert, wählst du den Ordner neu. Das tust du auch bei jedem
 Öffnen. Nur Chrome und Edge merken ihn sich und fragen einmal, ob die Seite ihn
 wieder lesen darf. „In Obsidian öffnen“ klappt nur, solange dein Vault in
 Obsidian so heißt wie der Ordner. Das ist so, bis du ihn dort umbenennst. Ordner mit einem
-Punkt vorn (`.obsidian/`, `.git/`) und `vorlagen/` liest die Ansicht nicht.
+Punkt vorn (`.obsidian/`, `.git/`) und `agent/vorlagen/` liest die Ansicht nicht.
 Zeigt sie etwas Falsches, schreib es in die
 [Issues](https://github.com/4e696b6f/fundus/issues).

@@ -1,6 +1,6 @@
 ---
 title: '{{title}}'
-type: begriff
+type: akteur
 tags: []                             # erster Tag: der Bereich
 aliases: []
 created: {{date:YYYY-MM-DD}}
@@ -9,18 +9,12 @@ quellen: []
 sicherheit:                          # hoch | mittel | niedrig | strittig
 status: skizze                       # aktiv | veraltet | ersetzt | skizze
 stimme: agent                        # gemischt mit [!ich]-Block
-gegenposition: ''                    # Pflicht
-# gleiche_form: []
-# ursache_stoff: ''                  # regeln/LINSEN.md
-# ursache_form: ''
-# ursache_wirkung: ''
-# ursache_zweck: ''
 # pruefen_bis: JJJJ-MM-TT
 ---
 
 # {{title}}
 
-<!-- Ein bis drei Sätze: worum es geht und warum es hier steht. Regeln: regeln/SCHEMA.md -->
+<!-- Person, Organisation oder Institution und ihre Rolle im Wiki. Regeln: agent/regeln/SCHEMA.md -->
 
 ## Kernaussagen
 

@@ -33,10 +33,10 @@ gleiche_form: ['rueckkopplung-verzoegert']
 
 Kommt das Muster dreimal vor, bekommt es eine eigene `begriff`-Seite in
 `wiki/muster/` (den Bereich legst du mit ihr an); der Wert folgt deshalb den
-Regeln für Dateinamen. Name, Ort: `regeln/SCHEMA.md` → *Seitentypen* und
+Regeln für Dateinamen. Name, Ort: `agent/regeln/SCHEMA.md` → *Seitentypen* und
 *Dateinamen und Links*.
 
-**Mehrwert im Verbund**, beim Prüfen (`ablaeufe/pruefen.md` § 3):
+**Mehrwert im Verbund**, beim Prüfen (`agent/ablaeufe/pruefen.md` § 3):
 
 ```yaml
 mehrwert: niedrig    # hoch | mittel | niedrig

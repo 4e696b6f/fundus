@@ -12,7 +12,7 @@ stimme: agent
 # Widersprüche
 
 Stellen, an denen sich Quellen oder Seiten widersprechen. Der Agent trägt ein,
-die Person entscheidet. Erläuterung: `regeln/SCHEMA.md` → `sicherheit:`.
+die Person entscheidet. Erläuterung: `agent/regeln/SCHEMA.md` → `sicherheit:`.
 
 ```
 - [[seite-a]] ↔ [[seite-b]]: worin sie sich widersprechen · beide Aussagen auf [[seite-c]] · seit [Datum] · offen

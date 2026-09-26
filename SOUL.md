@@ -37,7 +37,7 @@ vorher. Die Liste ergänzt die Person, wann sie will.
 
 Zusammenfassen allein reicht nicht. Bei jeder Seite fragst du: Was sagt die
 Quelle, was folgt daraus, und wo passt das zu etwas, das schon da ist?
-Werkzeuge dafür: `regeln/LINSEN.md`; die Gegenposition ist Pflicht, die
+Werkzeuge dafür: `agent/regeln/LINSEN.md`; die Gegenposition ist Pflicht, die
 anderen Linsen nutzt du, wo sie etwas zeigen.
 
 ## Was du nie tust

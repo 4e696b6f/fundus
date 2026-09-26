@@ -1,3 +1,6 @@
 {
-  "attachmentFolderPath": "quellen/anhaenge"
+  "attachmentFolderPath": "quellen/anhaenge",
+  "userIgnoreFilters": [
+    "agent/"
+  ]
 }

@@ -10,13 +10,13 @@ behebst du, mit neuem `updated:` und einer Zeile unter `## Verlauf`
 ## 0 · Grundlagen
 
 - **Umfang:** `wiki/`, dazu `pruefen_bis:` jeder Leitplanke, auch der
-  Module, und jeder `MODUL.md`; sonst nichts aus `vorlagen/`, `handbuch/` und
+  Module, und jeder `MODUL.md`; sonst nichts aus `agent/vorlagen/`, `handbuch/` und
   `module/`.
 - **Werkzeug:** Lesen und Suchen genügt; läuft Code, legst du kein Skript im
   Repo ab.
 - **Heute:** nach `AGENTS.md` → *Sitzungsbeginn*; ein abweichendes Datum der
   Person nennst du vor dem Bericht.
-- **Meta-Seiten:** `regeln/SCHEMA.md` → *Dateinamen und Links*.
+- **Meta-Seiten:** `agent/regeln/SCHEMA.md` → *Dateinamen und Links*.
 - Links in Codeblöcken und Inline-Code zählen bei keinem Prüfpunkt.
 
 ## 1 · Aufbau
@@ -29,11 +29,11 @@ behebst du, mit neuem `updated:` und einer Zeile unter `## Verlauf`
   zählt nicht, Meta-Seiten selbst prüfst du nicht. Die erste Seite eines
   neuen Bereichs, solange sie dort die einzige ist → *Zur Kenntnis*.
 - **Fehlende Gegenlinks:** A verlinkt auf B, B nicht zurück (Ausnahmen:
-  `regeln/SCHEMA.md` → *Dateinamen und Links*).
+  `agent/regeln/SCHEMA.md` → *Dateinamen und Links*).
 - **Zu wenig Links:** weniger ausgehende, als
-  `regeln/SCHEMA.md` → *Wann eine Seite fertig ist* verlangt.
+  `agent/regeln/SCHEMA.md` → *Wann eine Seite fertig ist* verlangt.
 - **Frontmatter:** Ein Pflichtfeld fehlt oder ist leer, oder ein Wert steht
-  nicht in der Liste in `regeln/SCHEMA.md`. Parst der Block nicht (etwa freier
+  nicht in der Liste in `agent/regeln/SCHEMA.md`. Parst der Block nicht (etwa freier
   Text mit `:`, `#` oder `[[` ohne einfache Anführungszeichen, ein Tabulator,
   ein doppelter Schlüssel) → *Muss behoben werden*.
 - **Einzel-Tags:** ein Tag, den nur eine Seite trägt, außer ihrem ersten Tag,
@@ -72,7 +72,7 @@ behebst du, mit neuem `updated:` und einer Zeile unter `## Verlauf`
   entschieden?
 - Themenbereiche mit vielen Quellen, aber keiner `begriff`-Seite
 - kaum verlinkte Seiten, die dasselbe sagen wie eine andere:
-  `mehrwert: niedrig` setzen (`regeln/LINSEN.md`) und das Zusammenlegen
+  `mehrwert: niedrig` setzen (`agent/regeln/LINSEN.md`) und das Zusammenlegen
   vorschlagen (`L04`)
 - **Lücken:** Fragen, die in mehreren Seiten unter `## Offene Fragen`
   stehen, und oft verlinkte Themen ohne eigene Seite kommen nach
@@ -87,7 +87,7 @@ von den übrigen eine Stichprobe, genannt unter *Wie geprüft*.
   Seite in `quellen:` auf eine Datei in `quellen/archiv/` zeigt oder der Block
   die Seite verlinkt, von der er stammt (dann deren `quellen:`). Jeden solchen
   Block, auch jede Kopie, hältst du Zeile für Zeile gegen die Rohdatei, nach
-  `regeln/SCHEMA.md` → *Die Stimme der Person*. Weicht er ab, kopierst du ihn
+  `agent/regeln/SCHEMA.md` → *Die Stimme der Person*. Weicht er ab, kopierst du ihn
   neu; steht er auf einer Seite mit `stimme: agent`, setzt du `gemischt`.
   Beides → *Selbst behoben*.
 - **`[!ich]`-Blöcke ohne Rohdatei** (Zeile `*im Gespräch am …*` oder von der
@@ -101,7 +101,7 @@ von den übrigen eine Stichprobe, genannt unter *Wie geprüft*.
   behoben werden*, Satz der Seite und der Quelle nebeneinander: **Zahl**
   anders, gerundet, falsche Bezugsgröße · **Richtung** umgekehrt ·
   **Bedingung** der Quelle fehlt · **Zeitraum** verschoben. Verfehlt eine
-  dabei gelesene Seite sonst `regeln/SCHEMA.md` → *Wann eine Seite fertig
+  dabei gelesene Seite sonst `agent/regeln/SCHEMA.md` → *Wann eine Seite fertig
   ist*, meldest du das auch.
 
 ## 5 · Bericht
@@ -129,6 +129,6 @@ Wunsch, mit `verfaellt:` einen Monat später.
 
 - **Log:** ein Eintrag vom Typ `pruefen`. Ein fehlendes Ziel steht darin in
   Backticks, nicht als `[[ziel]]`.
-- **Übergabe:** In `gedaechtnis/UEBERGABE.md` schreibst du die Zeilen *Quellen
+- **Übergabe:** In `agent/gedaechtnis/UEBERGABE.md` schreibst du die Zeilen *Quellen
   seit letzter Prüfung* (jetzt 0), *Fällig* und *Bald fällig* neu, nach
-  `ablaeufe/sitzung-beenden.md` § 1. Alles andere bleibt.
+  `agent/ablaeufe/sitzung-beenden.md` § 1. Alles andere bleibt.

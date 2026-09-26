@@ -11,4 +11,4 @@ stimme: agent
 
 # Protokoll
 
-Format: `regeln/SCHEMA.md` → *Protokoll*.
+Format: `agent/regeln/SCHEMA.md` → *Protokoll*.

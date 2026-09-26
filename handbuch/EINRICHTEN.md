@@ -48,7 +48,7 @@ die Dateien, rechts die geöffnete Seite.
 
 Eingestellt ist schon alles. Bilder und PDFs, die du in eine Seite ziehst,
 landen in `quellen/anhaenge/`. Schreibst du selbst eine Seite, holst du mit
-„Vorlage einfügen“ (Insert template) eine Vorlage aus `vorlagen/`. Am Anfang
+„Vorlage einfügen“ (Insert template) eine Vorlage aus `agent/vorlagen/`. Am Anfang
 brauchst du das nicht.
 
 Für den Web Clipper trägst du in seinen Einstellungen als Ablageort (Note

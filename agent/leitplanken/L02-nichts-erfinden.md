@@ -30,6 +30,6 @@ das Vertrauen in alle anderen Zahlen.
 
 Schlussfolgern ist erwünscht. Eine Brücke zwischen zwei Seiten braucht keine
 Quelle, die genau diese Verbindung zieht, stützt sich aber auf belegte Aussagen
-und ist als eigene Folgerung erkennbar. Eine Gegenposition (`regeln/LINSEN.md`)
+und ist als eigene Folgerung erkennbar. Eine Gegenposition (`agent/regeln/LINSEN.md`)
 ist ein Einwand, keine Tatsache, und braucht keine Fundstelle; Zahlen darin
 schon.

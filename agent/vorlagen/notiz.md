@@ -11,7 +11,7 @@ stimme: ich                          # bleibt ich, auch mit Ergänzungen
 # kein Feld sicherheit
 # gegenposition: ''                  # wenn die Notiz eine These vertritt
 # gleiche_form: []
-# ursache_stoff: ''                  # regeln/LINSEN.md
+# ursache_stoff: ''                  # agent/regeln/LINSEN.md
 # ursache_form: ''
 # ursache_wirkung: ''
 # ursache_zweck: ''
@@ -20,7 +20,7 @@ stimme: ich                          # bleibt ich, auch mit Ergänzungen
 
 # {{title}}
 
-<!-- Dateiname: JJJJ-MM-TT-kurztitel.md, Datum aus der Notiz, sonst Tag der Aufnahme. Regeln: regeln/SCHEMA.md -->
+<!-- Dateiname: JJJJ-MM-TT-kurztitel.md, Datum aus der Notiz, sonst Tag der Aufnahme. Regeln: agent/regeln/SCHEMA.md -->
 
 > [!ich]
 > 

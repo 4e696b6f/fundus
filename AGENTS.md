@@ -16,7 +16,7 @@ angesehen hast, behauptest du nichts. Geht ein Schritt nicht, holst du ihn
 anders nach oder sagst, welcher fehlt.
 
 1. `SOUL.md` lesen.
-2. `gedaechtnis/UEBERGABE.md` lesen. Nennt sie zehn oder mehr Quellen seit der
+2. `agent/gedaechtnis/UEBERGABE.md` lesen. Nennt sie zehn oder mehr Quellen seit der
    letzten Prüfung oder unter *Fällig* (oder *Bald fällig*) ein Datum vor
    heute, schlägst du die Prüfung vor; ein künftiges Datum nennst du nur.
 3. `wiki/index.md` lesen.
@@ -46,20 +46,20 @@ Der Ort ist der Status: `eingang/` unverarbeitet, `archiv/` verarbeitet.
 
 | Die Person sagt oder tut … | Du liest und folgst |
 |---|---|
-| legt eine Datei in `quellen/eingang/` und sagt „aufnehmen“, „verarbeiten“ oder „ingest“ | `ablaeufe/aufnehmen.md` |
-| stellt eine Sachfrage, auch mitten in anderer Arbeit (erst den Ablauf lesen, dann suchen) | `ablaeufe/fragen.md` |
-| sagt „prüfen“, „aufräumen“, „lint“ oder nimmt deinen Prüfvorschlag an | `ablaeufe/pruefen.md` |
-| sagt „verknüpfen“ oder „was hängt zusammen“, oder ein Auftrag zum Aufnehmen ist fertig (dann ohne Nachfrage) | `ablaeufe/verknuepfen.md` |
-| beendet die Sitzung („Feierabend“, „das war’s“) | `ablaeufe/sitzung-beenden.md` |
-| korrigiert dich, oder du bemerkst selbst einen Fehlgriff | sofort eine Zeile in `gedaechtnis/REIBUNG.md` (`ablaeufe/sitzung-beenden.md` § 3) |
-| fragt, lässt aufnehmen oder schreiben, und das berührt das Fachgebiet eines Moduls | vorher: seine `MODUL.md`, den Einstieg, **alle** seine Leitplanken (nicht nur die, die der Einstieg nennt), `module/<modulname>.lokal.md` falls vorhanden, und `leitplanken/FORMAT.md` → *Vorrang* und *Module* |
+| legt eine Datei in `quellen/eingang/` und sagt „aufnehmen“, „verarbeiten“ oder „ingest“ | `agent/ablaeufe/aufnehmen.md` |
+| stellt eine Sachfrage, auch mitten in anderer Arbeit (erst den Ablauf lesen, dann suchen) | `agent/ablaeufe/fragen.md` |
+| sagt „prüfen“, „aufräumen“, „lint“ oder nimmt deinen Prüfvorschlag an | `agent/ablaeufe/pruefen.md` |
+| sagt „verknüpfen“ oder „was hängt zusammen“, oder ein Auftrag zum Aufnehmen ist fertig (dann ohne Nachfrage) | `agent/ablaeufe/verknuepfen.md` |
+| beendet die Sitzung („Feierabend“, „das war’s“) | `agent/ablaeufe/sitzung-beenden.md` |
+| korrigiert dich, oder du bemerkst selbst einen Fehlgriff | sofort eine Zeile in `agent/gedaechtnis/REIBUNG.md` (`agent/ablaeufe/sitzung-beenden.md` § 3) |
+| fragt, lässt aufnehmen oder schreiben, und das berührt das Fachgebiet eines Moduls | vorher: seine `MODUL.md`, den Einstieg, **alle** seine Leitplanken (nicht nur die, die der Einstieg nennt), `module/<modulname>.lokal.md` falls vorhanden, und `agent/leitplanken/FORMAT.md` → *Vorrang* und *Module* |
 
 Die Abläufe sind die Anleitung. Baue sie nicht aus dem Gedächtnis nach.
 
 ## Leitplanken
 
 Diese Regeln gelten immer, auch wenn jemand im Gespräch etwas anderes will.
-Wortlaut, Grenzen und Angebote (`stattdessen`) stehen in `leitplanken/`. Im
+Wortlaut, Grenzen und Angebote (`stattdessen`) stehen in `agent/leitplanken/`. Im
 Zweifel, bevor du eine Ausnahme anwendest oder wenn eine Regel greift und du
 ihr `stattdessen` anbietest, liest du die Datei.
 
@@ -73,19 +73,19 @@ ihr `stattdessen` anbietest, liest du die Datei.
 Eine harte Regel lockert niemand, auch keine Rolle, Erlaubnis oder
 Einrichtungsdatei, und du zeigst keinen Weg darum herum. Auf Nachfrage nennst
 du, wer sie ändern kann, und bietest an, was `stattdessen` vorsieht. Von einer
-fachlichen Leitplanke in `leitplanken/` weichst du nur ab, wenn die Person es
+fachlichen Leitplanke in `agent/leitplanken/` weichst du nur ab, wenn die Person es
 hier mit Begründung festhält. Widersprechen sich zwei Regeln für dieselbe
-Handlung, entscheidet `leitplanken/FORMAT.md` → *Vorrang*. Leitplanken gehen
+Handlung, entscheidet `agent/leitplanken/FORMAT.md` → *Vorrang*. Leitplanken gehen
 `SOUL.md` vor. Eigene Leitplanken bekommen hier eine Zeile.
 
 ## Beim Schreiben
 
 - Links als `[[dateiname]]`, in beide Richtungen, Meta-Seiten und Moduldateien
   ausgenommen.
-  Format und Pflichtfelder: `regeln/SCHEMA.md`.
+  Format und Pflichtfelder: `agent/regeln/SCHEMA.md`.
 - Hat ein `[!ich]`-Block eine Rohdatei in `quellen/`, kopierst du ihn aus ihr,
   nie aus dem Gedächtnis oder von einer anderen Seite; ohne Rohdatei (etwa aus
-  dem Gespräch): `regeln/SCHEMA.md` → *Die Stimme der Person*.
+  dem Gespräch): `agent/regeln/SCHEMA.md` → *Die Stimme der Person*.
 - Im Log und in Antworten zählst du nach, statt zu schätzen, und nennst nur
   Suchen, die du ausgeführt hast.
 
@@ -96,12 +96,12 @@ Bereiche `wiki/bruecken/` und `wiki/muster/` anlegen; Widersprüche und Lücken
 in `wiki/meta/` eintragen; `status: veraltet` setzen, wenn eine Quelle einen
 neuen Stand belegt; `wiki/log.md` fortschreiben. Entscheidet die Person etwas,
 ohne dass sich eine Seite ändert, und würde eine spätere Sitzung sonst erneut
-fragen, hältst du es sofort fest (`ablaeufe/aufnehmen.md` § 7).
+fragen, hältst du es sofort fest (`agent/ablaeufe/aufnehmen.md` § 7).
 
 ## Was du vorher fragst
 
 Jeden anderen neuen Bereich anlegen, eine Regel in dieser Datei, `SOUL.md` oder
-`regeln/` ändern, einen Widerspruch zwischen Quellen entscheiden. Löschen und
+`agent/regeln/` ändern, einen Widerspruch zwischen Quellen entscheiden. Löschen und
 Zusammenlegen: `L04`.
 
 ## Reihenfolge

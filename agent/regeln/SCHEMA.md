@@ -14,7 +14,7 @@ Der Typ steht im Frontmatter, nicht im Pfad. Ordner in `wiki/` sind
 Themenbereiche (`wiki/lernen/`), eine Seite hat genau einen Ordner;
 Ordnernamen folgen den Regeln für Dateinamen. Neben `wiki/meta/` sind
 `wiki/bruecken/` (jede `bruecke`-Seite) und `wiki/muster/` (Musterseiten,
-`regeln/LINSEN.md` → *Gleiche Form*) keine Themenbereiche und stehen nicht in
+`agent/regeln/LINSEN.md` → *Gleiche Form*) keine Themenbereiche und stehen nicht in
 `SOUL.md`.
 
 ## Dateinamen und Links
@@ -70,7 +70,7 @@ gegenposition: 'Wer nur verteilt wiederholt, übt Abrufen, nicht Verstehen.'
 | `verfaellt` | `meta`-Seite, die einen Stand festhält (siehe *Befunde mit Verfallsdatum*) |
 
 Wahlweise: `aliases` (Synonyme für die Suche), `pruefen_bis`, die übrigen
-Linsen-Felder aus `regeln/LINSEN.md`, `quellen` bei allen anderen Typen. Ein
+Linsen-Felder aus `agent/regeln/LINSEN.md`, `quellen` bei allen anderen Typen. Ein
 leerer Wert (`''`, `[]`) zählt nicht als gesetzt.
 
 **`created:`** ist der Tag des Anlegens, auch wenn Notiz oder Quelle älter
@@ -99,7 +99,7 @@ Agenten:*` direkt nach dem Wortlaut der Person.
 **`pruefen_bis:`** nur, wenn eine Kernaussage an einem Datum hängt (Preis,
 Rechtsstand, Zuständigkeit, Telefonnummer, Softwareversion). Der Wert ist das
 früheste Datum, an dem eine Kernaussage ungültig wird oder neu zu prüfen ist;
-danach meldet `ablaeufe/pruefen.md` die Seite.
+danach meldet `agent/ablaeufe/pruefen.md` die Seite.
 
 - Kein Gültigkeitsende genannt: Stand der Quelle plus zwölf Monate, und ein
   Halbsatz bei der Aussage sagt das. Liegt dieses Datum beim Aufnehmen zurück:
@@ -111,7 +111,7 @@ danach meldet `ablaeufe/pruefen.md` die Seite.
   zu erwarten ist, sonst Aufnahmetag plus drei Monate.
 - Eine datierte Nebenangabe (Anmeldeschluss, Preis in einer Nebenzeile) gibt
   kein `pruefen_bis:`, sondern eine Frist in der Übergabe unter *Nicht
-  vergessen* (`ablaeufe/sitzung-beenden.md`).
+  vergessen* (`agent/ablaeufe/sitzung-beenden.md`).
 - Ohne datierten Kernstoff kein Datum, außer von einer Moduldatei übernommen.
 
 **Moduldateien als Beleg:** Stützt sich eine Seite auf eine Moduldatei, steht
@@ -150,10 +150,10 @@ Backticks bei Art C.
 du genau so, darunter `*im Gespräch am JJJJ-MM-TT*`. Die erste Wiki-Seite
 damit gilt als Rohfassung, weitere Kopien kommen von dort, samt Zeile. Diese
 Blöcke und solche, die die Person selbst ins Wiki schreibt (etwa per Vorlage
-`projekt`), gleicht die Prüfung nicht ab (`ablaeufe/pruefen.md` § 4).
+`projekt`), gleicht die Prüfung nicht ab (`agent/ablaeufe/pruefen.md` § 4).
 
 Backticks in einer Rohdatei markieren die Stimme der Person, je nach Art der
-Quelle (`ablaeufe/aufnehmen.md` § 1):
+Quelle (`agent/ablaeufe/aufnehmen.md` § 1):
 
 - **Art B, eigene Notiz:** Der ganze Wortlaut kommt in *einen* `[!ich]`-Block,
   alle Zeilen samt Datumszeile, Leerzeilen und Listenpunkte wie in der
@@ -173,7 +173,7 @@ die Abweichung so da, wie sie sie sagt.
 `` `#später` `` und Aufgabe), bleibt wörtlich im `[!ich]`-Block. Du
 erledigst es nicht ungefragt; es gehört weder unter `## Offene Fragen` noch
 nach `wiki/meta/luecken.md`, die Übergabe führt es als „Von dir vorgemerkt“
-(`ablaeufe/sitzung-beenden.md`).
+(`agent/ablaeufe/sitzung-beenden.md`).
 
 ## Aufbau einer Seite
 
@@ -235,10 +235,10 @@ Offen: Frist 2026-10-15: Anmeldeschluss Lernkurs (Randspalte) · [[quelle-artike
 ```
 
 Vorgänge: `aufnehmen`, `frage`, `pruefen`, `verknuepfen`, `sitzung`,
-`entscheidung` (`ablaeufe/aufnehmen.md` § 7).
+`entscheidung` (`agent/ablaeufe/aufnehmen.md` § 7).
 
 `Offen:` steht nur für eine Frist, eine von der Person vorgemerkte Aufgabe
-oder eine Brückenidee, auch mehrfach; `ablaeufe/sitzung-beenden.md` übernimmt
+oder eine Brückenidee, auch mehrfach; `agent/ablaeufe/sitzung-beenden.md` übernimmt
 sie in die Übergabe. Lücken nicht als `Offen:`.
 
 ## Index: `wiki/index.md`

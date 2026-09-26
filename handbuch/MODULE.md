@@ -66,7 +66,7 @@ und auch ohne Fundus nutzbar sind.
    kein Fundus-Wiki haben.
 2. **`MODUL.md` im Wurzelordner** mit dem Frontmatter unten (dem Kopf
    zwischen den `---`-Zeilen). Daraus liest der Agent, was er wann lädt.
-3. **Leitplanken im Fundus-Format** (`leitplanken/FORMAT.md`) mit eigenem
+3. **Leitplanken im Fundus-Format** (`agent/leitplanken/FORMAT.md`) mit eigenem
    Präfix wie `KS-L01`, damit keine Nummern kollidieren.
 4. **Verfall sichtbar.** Was an einem Datum veraltet, trägt `pruefen_bis:`,
    in `MODUL.md` das früheste im Modul. Ein Datum nur im Fließtext findet die
@@ -77,7 +77,7 @@ und auch ohne Fundus nutzbar sind.
    Sie darf von Fundus abweichen, etwa [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.de).
 7. **Einstieg für den Agenten** hinter `einstieg:`. Richtet er sich auch an
    Menschen, markiert er den Teil, der als Anweisung gilt. Regeln darin zählen
-   wie Leitplanken des Moduls (`leitplanken/FORMAT.md` → *Vorrang*).
+   wie Leitplanken des Moduls (`agent/leitplanken/FORMAT.md` → *Vorrang*).
 8. **Einstellungen vor Ort geregelt** über `lokal:`. Ohne Fundus nennt das
    Modul das Gegenstück, etwa ein Feld in einer Projektanweisung.
 9. **Nur Modulinhalt ausliefern**, ohne Arbeitsstände und eigenes
@@ -121,7 +121,7 @@ in einem Satz, was in der `.lokal.md` stehen darf und wer entscheidet; fehlt
 es, darf die Datei nur verschärfen. `ergebnisse:` sagt, ob der Agent
 die Ergebnisse der Modulabläufe im Wiki ablegt (`wiki`) oder nur der Person
 berichtet (`nur-bericht`). Wie er beide Felder anwendet, steht in
-`leitplanken/FORMAT.md` → *Module*.
+`agent/leitplanken/FORMAT.md` → *Module*.
 
 ## Ein Modul bauen
 

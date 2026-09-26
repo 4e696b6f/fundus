@@ -1,7 +1,7 @@
 # Reibung
 
 Eine Zeile je Korrektur oder eigenem Fehlgriff, sofort. Regel:
-`ablaeufe/sitzung-beenden.md` § 3.
+`agent/ablaeufe/sitzung-beenden.md` § 3.
 
 ```
 - [Datum] schluessel-in-kurzform · was passiert ist · was richtig gewesen wäre

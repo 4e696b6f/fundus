@@ -12,7 +12,7 @@ stimme: agent
 # Index
 
 Die Themenbereiche dieses Wikis, je mit einem Satz und dem Einstieg. Aufbau:
-`regeln/SCHEMA.md` → *Index*.
+`agent/regeln/SCHEMA.md` → *Index*.
 
 ## Bereiche
 

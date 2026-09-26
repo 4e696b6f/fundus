@@ -1,7 +1,7 @@
 # Übergabe
 
 Startzustand, noch keine Sitzung. Der Agent schreibt diese Datei am Ende jeder
-Sitzung neu (`ablaeufe/sitzung-beenden.md`).
+Sitzung neu (`agent/ablaeufe/sitzung-beenden.md`).
 
 ## Nächster Schritt
 

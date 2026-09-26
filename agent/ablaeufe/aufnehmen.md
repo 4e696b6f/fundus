@@ -11,7 +11,7 @@ Seiten berühren.
 ## 1 · Lesen und einordnen
 
 Lies die Quelle ganz. Dann entscheide, welche Art sie ist (Text in `Backticks`
-ist die Stimme der Person, `regeln/SCHEMA.md` → *Die Stimme der Person*):
+ist die Stimme der Person, `agent/regeln/SCHEMA.md` → *Die Stimme der Person*):
 
 | Art | Woran erkennbar | Was daraus wird |
 |---|---|---|
@@ -21,7 +21,7 @@ ist die Stimme der Person, `regeln/SCHEMA.md` → *Die Stimme der Person*):
 
 ## 2 · Im Bestand suchen, Bereich wählen
 
-Gibt es schon eine Seite zum Thema (Suche wie `ablaeufe/fragen.md` § 1)?
+Gibt es schon eine Seite zum Thema (Suche wie `agent/ablaeufe/fragen.md` § 1)?
 Dann ergänzt du sie.
 
 Neue Seiten kommen in einen bestehenden Bereich oder einen aus `SOUL.md` →
@@ -34,15 +34,15 @@ jede Seite dieses Auftrags, auch für die Zusammenfassung der Quelle.
 
 ## 3 · Die Hauptseite schreiben
 
-Nach `regeln/SCHEMA.md`. Pflicht:
+Nach `agent/regeln/SCHEMA.md`. Pflicht:
 
 - Dateiname: `quelle-<kurztitel>.md` bei Art A und C, Datum vorn bei Art B;
-  eindeutig im Vault (`regeln/SCHEMA.md` → *Dateinamen und Links*)
+  eindeutig im Vault (`agent/regeln/SCHEMA.md` → *Dateinamen und Links*)
 - `quellen:` auf den späteren Archivpfad (`quellen/archiv/<dateiname>`), bei
   jeder Art
 - `## Kernaussagen`: nur, was die Quelle sagt, in eigenen Worten, jede Aussage
   mit Fundstelle (Seite, Abschnitt, Minute); Wörtliches steht als Zitat
-- `pruefen_bis:` nach `regeln/SCHEMA.md` → `pruefen_bis:`. In den Log-Eintrag
+- `pruefen_bis:` nach `agent/regeln/SCHEMA.md` → `pruefen_bis:`. In den Log-Eintrag
   dieser Quelle kommt jede datierte Nebenangabe als Zeile
   `Offen: Frist JJJJ-MM-TT: was · [[seite]]` und jede Aufgabe, die die Person
   sich vorgemerkt hat, als `Offen: Von dir vorgemerkt: Aufgabe · [[seite]]`.
@@ -67,7 +67,7 @@ Widerspricht die Quelle einer bestehenden Aussage oder einer Moduldatei:
 ## 5 · Linsen
 
 Eine neue `begriff`- oder `bruecke`-Seite bekommt `gegenposition:`, die
-übrigen Linsen nur, wo sie etwas zeigen (`regeln/LINSEN.md`).
+übrigen Linsen nur, wo sie etwas zeigen (`agent/regeln/LINSEN.md`).
 
 ## 6 · Abschließen
 
@@ -78,7 +78,7 @@ Eine neue `begriff`- oder `bruecke`-Seite bekommt `gegenposition:`, die
    Umbenennung, ohne Unterordner. Liegt dort schon eine Datei gleichen
    Namens, fragst du die Person (§ 7).
 3. `wiki/index.md` ergänzen, wenn du einen Bereich neu angelegt hast
-   (`regeln/SCHEMA.md` → *Index*).
+   (`agent/regeln/SCHEMA.md` → *Index*).
 4. Eintrag in `wiki/log.md` vom Typ `aufnehmen`, einer je Quelle, mit den
    Zeilen `Offen:` aus § 3.
 5. Der Person in drei bis fünf Sätzen sagen, was neu ist, was sich geändert
@@ -86,7 +86,7 @@ Eine neue `begriff`- oder `bruecke`-Seite bekommt `gegenposition:`, die
    Auftrags auch die offenen Rückfragen.
 
 Sind alle Quellen des Auftrags aufgenommen, außer denen, die auf eine Antwort
-warten, folgt einmal `ablaeufe/verknuepfen.md`, ohne Nachfrage.
+warten, folgt einmal `agent/ablaeufe/verknuepfen.md`, ohne Nachfrage.
 
 ## 7 · Rückfrage mitten im Auftrag
 
@@ -97,7 +97,7 @@ Sitzungsende offen, steht sie in der Übergabe:
 2. Die übrigen nimmst du vollständig auf, archivierst und verknüpfst sie,
    ohne auf die Antwort zu warten.
 3. Nach der Antwort nimmst du die offene Quelle auf; für ihre Seiten läuft
-   `ablaeufe/verknuepfen.md` noch einmal.
+   `agent/ablaeufe/verknuepfen.md` noch einmal.
 
 **Entscheidungen ohne Seitenänderung** (eine Datei bleibt im Eingang, kein
 neuer Bereich, keine Brücke) hältst du sofort fest, damit keine spätere
@@ -110,5 +110,5 @@ Sitzung erneut fragt:
    Die Person räumt die Datei selbst weg. Nicht aufnehmen, nicht erneut fragen.
    ```
 
-2. in `gedaechtnis/UEBERGABE.md` unter *Offen* als Zeile `Entschieden: …`
-   (Form: `ablaeufe/sitzung-beenden.md` § 1); der Rest bleibt stehen.
+2. in `agent/gedaechtnis/UEBERGABE.md` unter *Offen* als Zeile `Entschieden: …`
+   (Form: `agent/ablaeufe/sitzung-beenden.md` § 1); der Rest bleibt stehen.

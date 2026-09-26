@@ -2,8 +2,35 @@
 
 Je Version: was sich geändert hat und ob bestehende Wikis etwas übernehmen
 müssen. Übernehmen heißt: die genannten Dateien aus der neuen Version in das
-eigene Wiki kopieren. `SOUL.md`, `wiki/`, `quellen/` und `gedaechtnis/` bleiben
-dabei immer unberührt.
+eigene Wiki kopieren. `SOUL.md`, `wiki/`, `quellen/` und `agent/gedaechtnis/`
+bleiben dabei immer unberührt.
+
+## 0.3 · in Arbeit
+
+**Umzug.** Die Ordner des Agenten `regeln/`, `ablaeufe/`, `leitplanken/`,
+`vorlagen/` und `gedaechtnis/` liegen jetzt zusammen in `agent/`. So stehen
+im Hauptordner vor allem deine Sachen, und die Suche in Obsidian findet deine
+Seiten statt seiner Regeln: Obsidian blendet `agent/` in Suche und Graph aus.
+`SOUL.md`, `AGENTS.md` und `CLAUDE.md` bleiben oben, weil Claude Code sie dort
+sucht.
+
+Übernehmen, wenn du mit 0.2 angefangen hast:
+
+- Leg im Hauptordner einen Ordner `agent` an und schieb die fünf Ordner
+  `regeln`, `ablaeufe`, `leitplanken`, `vorlagen` und `gedaechtnis` hinein.
+  Was du in `gedaechtnis/` geändert hast, wandert so einfach mit.
+- `wiki/`, `quellen/` und deine `SOUL.md` bleiben, wo sie sind.
+- Ersetzen: `AGENTS.md`, die Dateien in `agent/regeln/`, `agent/ablaeufe/`,
+  `agent/leitplanken/` (eigene Leitplanken bleiben liegen) und
+  `agent/vorlagen/`, dazu `handbuch/`, `ansicht/uebersicht.html`,
+  `README.md`, `CHANGELOG.md`, `.obsidian/templates.json` und
+  `.obsidian/app.json`. Hast du in Obsidian eigene Einstellungen, trag statt
+  der beiden `.obsidian`-Dateien selbst ein: unter *Vorlagen* den Ordner
+  `agent/vorlagen`, unter *Dateien und Links* → *Ausgeschlossene Dateien* den
+  Ordner `agent/`.
+- Hast du `AGENTS.md` angepasst, trag das danach wieder ein.
+- Im Kopftext von `wiki/index.md`, `wiki/log.md` und den Seiten in
+  `wiki/meta/` stehen noch die alten Pfade. Das darf so bleiben.
 
 ## 0.2.1 · 2026-09-24 · Entwurf
 

@@ -1,7 +1,7 @@
 ---
 title: '{{title}}'
-type: bruecke
-tags: [bruecke]                      # danach die verbundenen Bereiche
+type: begriff
+tags: []                             # erster Tag: der Bereich
 aliases: []
 created: {{date:YYYY-MM-DD}}
 updated: {{date:YYYY-MM-DD}}
@@ -9,9 +9,9 @@ quellen: []
 sicherheit:                          # hoch | mittel | niedrig | strittig
 status: skizze                       # aktiv | veraltet | ersetzt | skizze
 stimme: agent                        # gemischt mit [!ich]-Block
-gleiche_form: []                     # Pflicht: das geteilte Muster; die Brücke heißt nie so
 gegenposition: ''                    # Pflicht
-# ursache_stoff: ''                  # regeln/LINSEN.md
+# gleiche_form: []
+# ursache_stoff: ''                  # agent/regeln/LINSEN.md
 # ursache_form: ''
 # ursache_wirkung: ''
 # ursache_zweck: ''
@@ -20,7 +20,7 @@ gegenposition: ''                    # Pflicht
 
 # {{title}}
 
-<!-- Liegt in wiki/bruecken/. Welche Bereiche die Brücke verbindet und welche Struktur sie teilen. Regeln: regeln/SCHEMA.md -->
+<!-- Ein bis drei Sätze: worum es geht und warum es hier steht. Regeln: agent/regeln/SCHEMA.md -->
 
 ## Kernaussagen
 

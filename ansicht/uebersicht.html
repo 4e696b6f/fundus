@@ -295,8 +295,13 @@ var FundusKern = (function () {
   /* Nachschlagetabellen ohne Prototyp: Schlüssel kommen aus Dateien (Ordnernamen, Callout-Typen). */
   function ohneProto(o) { var t = Object.create(null); for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) t[k] = o[k]; return t; }
   function eigen(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
-  var ZONEN = ohneProto({ wiki: 1, quellen: 1, leitplanken: 1, module: 1 });
-  /* Ordner in wiki/, die kein Themenbereich sind (regeln/SCHEMA.md): meta/ für Meta-Seiten, bruecken/ und muster/
+  var ZONEN = ohneProto({ wiki: 1, quellen: 1, module: 1 });
+  /* Systemordner des Agenten: agent/leitplanken/ ist eine eigene Zone, alles andere in agent/ steht unter Weitere. */
+  function zoneVon(t) {
+    if (t[0] === 'agent' && t[1] === 'leitplanken' && t.length > 2) return 'leitplanken';
+    return ZONEN[t[0]] && t.length > 1 ? t[0] : 'weitere';
+  }
+  /* Ordner in wiki/, die kein Themenbereich sind (agent/regeln/SCHEMA.md): meta/ für Meta-Seiten, bruecken/ und muster/
      sammeln Seiten über Bereiche hinweg. Wert = Hinweis in der Kachel Bereiche. */
   var KEIN_THEMA = ohneProto({ meta: 'Meta-Seiten, kein Themenbereich', bruecken: 'Brücken, kein Themenbereich', muster: 'Musterseiten, kein Themenbereich' });
   var CALLOUT_FARBE = ohneProto({
@@ -345,7 +350,7 @@ var FundusKern = (function () {
   function istIgnoriert(pfad) {
     var t = pfad.split('/');
     for (var i = 0; i < t.length; i++) if (t[i].charAt(0) === '.') return true;
-    return t[0] === 'vorlagen' && t.length > 1;
+    return t[0] === 'agent' && t[1] === 'vorlagen' && t.length > 2;
   }
   /* Nimmt [{pfad, ...}] mit Pfaden relativ zum gewählten Ordner. Liegt wiki/ nicht
      oben, aber in genau einem Unterordner, wird der zur Wurzel. */
@@ -684,7 +689,7 @@ var FundusKern = (function () {
     var p = e.pfad, t = p.split('/');
     var d = {
       pfad: p, name: basisname(p), ext: endung(p), istMd: /\.md$/i.test(p), groesse: e.groesse || 0, geaendert: e.geaendert || 0,
-      zone: ZONEN[t[0]] && t.length > 1 ? t[0] : 'weitere', bereich: '', modul: '', fm: {}, fmFehler: null, fmRoh: null, hatFm: false,
+      zone: zoneVon(t), bereich: '', modul: '', fm: {}, fmFehler: null, fmRoh: null, hatFm: false,
       koerper: '', titel: '', typ: '', status: '', stimme: '', sicherheit: '', updated: '', tags: [], aliases: [],
       links: [], eingehend: [], extern: 0, suchtext: ''
     };
@@ -695,7 +700,7 @@ var FundusKern = (function () {
     }
     d.istModulKopf = d.zone === 'module' && t.length === 3 && /^modul\.md$/i.test(t[2]);
     // Ort einer Leitplanke; Leitplanke ist sie erst mit id: im Frontmatter (FORMAT.md, SCHEMA.md eines Moduls sind keine)
-    var leitplankenOrt = d.istMd && ((d.zone === 'leitplanken' && t.length === 2) || (d.zone === 'module' && t.length >= 4 && t[2] === 'leitplanken'));
+    var leitplankenOrt = d.istMd && ((d.zone === 'leitplanken' && t.length === 3) || (d.zone === 'module' && t.length >= 4 && t[2] === 'leitplanken'));
     d.istLeitplanke = false;
     if (!d.istMd) { d.titel = d.name; d.suchtext = p.toLowerCase(); return d; }
     var f = parseFrontmatter(e.text || '');
@@ -873,7 +878,7 @@ var FundusKern = (function () {
   function imReiter(d, r) {
     if (r === 'wiki') return d.zone === 'wiki';
     if (r === 'leitplanken') return d.istLeitplanke;
-    // leitplanken/ ohne Regel (FORMAT.md, Anhänge) steht unter Weitere
+    // agent/leitplanken/ ohne Regel (FORMAT.md, Anhänge) steht unter Weitere
     if (r === 'weitere') return d.zone === 'weitere' || (d.zone === 'leitplanken' && !d.istLeitplanke);
     return d.zone === r;
   }
@@ -891,7 +896,7 @@ var FundusKern = (function () {
       case 'art': return text(d.fm.art) || '(ohne)';
       case 'schwere': return text(d.fm.schwere) || '(ohne)';
       case 'modul': return d.modul || '(module/)';
-      case 'ordner': return t.length > 1 ? t[0] : '(Wurzel)';
+      case 'ordner': return t[0] === 'agent' && t.length > 2 ? 'agent/' + t[1] : t.length > 1 ? t[0] : '(Wurzel)';
     }
     return '';
   }
@@ -1235,7 +1240,7 @@ var FundusKern = (function () {
         return it.next().then(function (r) {
           if (r.done) return Promise.all(auftraege);
           var e = r.value, p = pre ? pre + '/' + e.name : e.name;
-          if (e.name.charAt(0) !== '.' && !(pre === '' && e.name === 'vorlagen' && e.kind === 'directory')) {
+          if (e.name.charAt(0) !== '.' && !(pre === 'agent' && e.name === 'vorlagen' && e.kind === 'directory')) {
             if (e.kind === 'directory') auftraege.push(lauf(e, p));
             else auftraege.push(e.getFile().then(function (f) { aus.push({ pfad: p, datei: f }); }));
           }
@@ -1398,9 +1403,9 @@ var FundusKern = (function () {
       '<div><dt>Links ohne Ziel</dt><dd>' + st.offen + '</dd></div></dl></div>';
 
     // Nächster Schritt
-    var ueb = K.uebergabe(idx.nachPfad['gedaechtnis/UEBERGABE.md']);
+    var ueb = K.uebergabe(idx.nachPfad['agent/gedaechtnis/UEBERGABE.md']);
     if (ueb) {
-      var doc = idx.nachPfad['gedaechtnis/UEBERGABE.md'];
+      var doc = idx.nachPfad['agent/gedaechtnis/UEBERGABE.md'];
       var rest = ueb.abschnitte.filter(function (a) { return a !== ueb.naechster && a.md; });
       h += '<section class="naechster"><div><div class="kachel-label">Übergabe' + (ueb.datum ? ' vom ' + K.datumDe(ueb.datum) : '') + ' · Nächster Schritt</div>' +
         '<div class="schritt">' + (ueb.naechster && ueb.naechster.md ? mdVon(doc, ueb.naechster.md) : 'Die Übergabe nennt keinen nächsten Schritt.') + '</div></div>' +
@@ -1540,7 +1545,7 @@ var FundusKern = (function () {
   function tabelle(reiter, docs, p) {
     if (!docs.length) {
       var gesamt = S.idx.docs.some(function (d) { return K.imReiter(d, reiter); });
-      var leer = { wiki: 'Noch keine Wiki-Seiten. Leg eine Quelle in <code>quellen/eingang/</code> und sag deinem Agenten „aufnehmen“.', quellen: 'Noch keine Quellen. Neue Quellen legst du in <code>quellen/eingang/</code>.', leitplanken: 'Keine Leitplanken gefunden. Sie liegen in <code>leitplanken/</code>.', module: 'Kein Modul eingehängt. Wie das geht, steht in <code>handbuch/MODULE.md</code>.', weitere: 'Keine weiteren Dateien.' };
+      var leer = { wiki: 'Noch keine Wiki-Seiten. Leg eine Quelle in <code>quellen/eingang/</code> und sag deinem Agenten „aufnehmen“.', quellen: 'Noch keine Quellen. Neue Quellen legst du in <code>quellen/eingang/</code>.', leitplanken: 'Keine Leitplanken gefunden. Sie liegen in <code>agent/leitplanken/</code>.', module: 'Kein Modul eingehängt. Wie das geht, steht in <code>handbuch/MODULE.md</code>.', weitere: 'Keine weiteren Dateien.' };
       return '<p class="leer">' + (gesamt ? 'Nichts passt zu Suche und Filter. Nimm einen Filter heraus oder such nach einem anderen Wort.' : leer[reiter]) + '</p>';
     }
     var kopf, rows;
@@ -1614,7 +1619,7 @@ var FundusKern = (function () {
     var idx = S.idx, d = idx.nachPfad[pfad];
     if (!d && idx.pfadKlein[K.schluessel(pfad)]) d = idx.nachPfad[idx.pfadKlein[K.schluessel(pfad)]];
     if (!d) {
-      haupt.innerHTML = '<div class="anhang-karte"><h1>Nicht gefunden</h1><p><code>' + esc(pfad) + '</code> gibt es in diesem Ordner nicht, oder die Ansicht liest diesen Ort nicht (Punkt-Ordner, <code>vorlagen/</code>).</p><p><a href="#liste">Zur Liste</a></p></div>';
+      haupt.innerHTML = '<div class="anhang-karte"><h1>Nicht gefunden</h1><p><code>' + esc(pfad) + '</code> gibt es in diesem Ordner nicht, oder die Ansicht liest diesen Ort nicht (Punkt-Ordner, <code>agent/vorlagen/</code>).</p><p><a href="#liste">Zur Liste</a></p></div>';
       return;
     }
     var teile = d.pfad.split('/'), kette = teile.map(function (t, k) { return k < teile.length - 1 ? esc(t) + ' /' : '<b>' + esc(t) + '</b>'; }).join(' ');
