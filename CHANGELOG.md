@@ -16,21 +16,30 @@ sucht.
 
 Übernehmen, wenn du mit 0.2 angefangen hast:
 
-- Leg im Hauptordner einen Ordner `agent` an und schieb die fünf Ordner
-  `regeln`, `ablaeufe`, `leitplanken`, `vorlagen` und `gedaechtnis` hinein.
-  Was du in `gedaechtnis/` geändert hast, wandert so einfach mit.
-- `wiki/`, `quellen/` und deine `SOUL.md` bleiben, wo sie sind.
+- Leg im Hauptordner einen Ordner `agent` an, klein geschrieben, und schieb
+  die fünf Ordner `regeln`, `ablaeufe`, `leitplanken`, `vorlagen` und
+  `gedaechtnis` hinein. Was du in `gedaechtnis/` geändert hast, wandert so
+  einfach mit.
+- `wiki/`, `quellen/` und deine `SOUL.md` bleiben, wo sie sind. In deiner
+  `SOUL.md` steht einmal `regeln/LINSEN.md`: Mach daraus
+  `agent/regeln/LINSEN.md`.
 - Ersetzen: `AGENTS.md`, die Dateien in `agent/regeln/`, `agent/ablaeufe/`,
   `agent/leitplanken/` (eigene Leitplanken bleiben liegen) und
   `agent/vorlagen/`, dazu `handbuch/`, `ansicht/uebersicht.html`,
-  `README.md`, `CHANGELOG.md`, `.obsidian/templates.json` und
-  `.obsidian/app.json`. Hast du in Obsidian eigene Einstellungen, trag statt
-  der beiden `.obsidian`-Dateien selbst ein: unter *Vorlagen* den Ordner
-  `agent/vorlagen`, unter *Dateien und Links* → *Ausgeschlossene Dateien* den
-  Ordner `agent/`.
-- Hast du `AGENTS.md` angepasst, trag das danach wieder ein.
+  `README.md` und `CHANGELOG.md`.
+- Die Dateien in `.obsidian/` kopierst du nicht, sie würden deine
+  Obsidian-Einstellungen überschreiben. Stell stattdessen in Obsidian ein:
+  unter *Vorlagen* (Templates) → *Speicherort für Vorlagen* den Ordner
+  `agent/vorlagen`, unter *Dateien & Links* (Files and links) → *Ignorierte
+  Dateien* (Excluded files) den Ordner `agent/`.
+- Hast du `AGENTS.md` angepasst (eine Abweichung, eine Verschärfung, eine
+  eigene Leitplanke), trag das danach wieder ein, jede eigene Leitplanke als
+  Zeile unter *Leitplanken*. Sonst kennt der Agent sie nicht mehr. Pfade
+  darin, auch in deinen eigenen Leitplanken, bekommen `agent/` davor, etwa
+  `agent/leitplanken/FORMAT.md`.
 - Im Kopftext von `wiki/index.md`, `wiki/log.md` und den Seiten in
-  `wiki/meta/` stehen noch die alten Pfade. Das darf so bleiben.
+  `wiki/meta/` stehen noch die alten Pfade. Das darf so bleiben, oder du
+  sagst deinem Agenten: „Zieh die Pfade im Kopftext nach.“
 
 ## 0.2.1 · 2026-09-24 · Entwurf
 
