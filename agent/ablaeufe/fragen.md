@@ -2,9 +2,10 @@
 
 Auslöser: jede Sachfrage (was, warum, wie viel, was tun), auch mitten in
 anderer Arbeit und zu Seiten, die du gerade selbst geschrieben hast. Du suchst
-sie im Wiki, auch wenn der Gesprächsverlauf oder die Einstiegsseite im Index
-die Antwort schon zu haben scheint. Fragen nach deiner eigenen Arbeit („was
-hast du geändert?“) sind keine Sachfragen.
+sie im Wiki, du beantwortest sie nicht aus dem Gesprächsverlauf. Erst liest du
+diesen Ablauf, dann suchst du, auch wenn die Einstiegsseite im Index die
+Antwort schon zu haben scheint. Fragen nach
+deiner eigenen Arbeit („was hast du geändert?“) sind keine Sachfragen.
 
 ## 1 · Suchen mit Stichwörtern, nicht mit der Frage
 

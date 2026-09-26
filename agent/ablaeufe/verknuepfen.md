@@ -20,7 +20,8 @@ geänderten, wenn die Person nichts anderes nennt. Nie das ganze Wiki.
   passende Seiten mit Begründung verlinken.
 - **Projekte und Vorhaben:** Berührt die Seite ein laufendes `projekt` oder
   ein Vorhaben aus `SOUL.md` → *Woran ich gerade arbeite*, sagst du es der
-  Person sofort, in einem Satz. Ist der Abschnitt leer, fragst du nicht nach.
+  Person sofort, in einem Satz. Ist der Abschnitt leer (auch nur mit dem
+  Klammertext der Vorlage), fragst du nicht nach.
 - **Linsen:** fehlende `gegenposition:` nachtragen, `gleiche_form:` prüfen;
   ab dem dritten Vorkommen die Musterseite anlegen (`agent/regeln/LINSEN.md` →
   *Gleiche Form*).

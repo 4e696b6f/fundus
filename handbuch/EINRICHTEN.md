@@ -59,8 +59,8 @@ location) `quellen/eingang` ein. Dort sucht der Agent nach Neuem.
 Klick in Obsidian links auf `SOUL.md`. Die Datei spricht den Agenten mit „du“
 an, in den eckigen Klammern bist du gemeint. Füll die Klammern aus und lösch
 sie dabei: wofür du das Wiki willst, mit welchen Themen du anfängst, wie der
-Agent dich ansprechen soll, und, wenn du magst, woran du gerade arbeitest. Zehn Minuten reichen, ändern kannst du die Datei
-jederzeit.
+Agent dich ansprechen soll, und, wenn du magst, woran du gerade arbeitest.
+Zehn Minuten reichen, ändern kannst du die Datei jederzeit.
 
 ## Schritt 4 · Claude Code installieren und anmelden
 
@@ -130,7 +130,7 @@ stehen.“
 | „Was wissen wir über …?“ | Antwort mit Fundstellen, auf Wunsch als Seite gesichert. |
 | „Was hängt zusammen?“ | Verbindungen und Muster über Themen hinweg. |
 | „Prüf das Wiki.“ | Bericht: tote Links, Veraltetes, Widersprüche, Lücken, Abgleich von Wortlaut und Belegen mit den Quellen. |
-| „Schreib mir einen Brief an …“ | Ein Entwurf aus deinem Wiki als Datei in `ausgaben/`. Die Belege stehen darunter, damit du sie prüfen kannst; vor dem Versand löschst du sie. |
+| „Schreib mir einen Brief an …“ | Ein Entwurf aus deinem Wiki als Datei in `ausgaben/`. Die Belege stehen in einem Abschnitt darunter, damit du sie prüfen kannst; vor dem Versand löschst du den Abschnitt. |
 | „Feierabend.“ | Der Agent schreibt die Übergabe für das nächste Mal. |
 
 Macht der Agent etwas falsch, sag es ihm. Was zweimal passiert, schlägt er

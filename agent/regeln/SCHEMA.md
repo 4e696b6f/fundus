@@ -225,7 +225,9 @@ Ein Text in `ausgaben/` (`agent/ablaeufe/schreiben.md`) ist keine Wiki-Seite:
 kein Typ, kein Gegenlink, nie in `quellen:`, seine Links zählen bei keiner
 Prüfung. Der Name folgt *Dateinamen und Links*. Frontmatter: `title`,
 `created`, `zielperson` (wer liest), `zweck` (was danach geschehen soll),
-`stimme: agent`.
+`stimme: agent`. Soll eine Ausgabe Quelle werden, sagst du, dass sie
+Wiki-Inhalt wiederholt; nur eigene Ergänzungen der Person darin nimmst du
+wie eine Notiz auf.
 
 ## Protokoll: `wiki/log.md`
 

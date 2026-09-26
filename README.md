@@ -53,7 +53,7 @@ Rechne mit einer halben Stunde. Jeder Klick steht in
 | „Nimm die neue Quelle auf.“ | Aus der Quelle werden Wiki-Seiten. |
 | „Was wissen wir über …?“ | Antwort aus deinem Wiki, mit Fundstellen. |
 | „Prüf das Wiki.“ | Bericht: tote Links, Veraltetes, Widersprüche, Lücken. |
-| „Schreib mir ein Rundschreiben zu …“ | Ein Entwurf aus deinem Wiki in `ausgaben/`, die Belege darunter. |
+| „Schreib mir ein Rundschreiben zu …“ | Ein Entwurf aus deinem Wiki in `ausgaben/`, die Belege in einem Abschnitt darunter. |
 | „Feierabend.“ | Der Agent schreibt auf, wo ihr steht. Beim nächsten Start weiß er es sonst nicht mehr. |
 
 ## Was im Ordner liegt

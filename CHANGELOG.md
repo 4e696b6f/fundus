@@ -43,8 +43,9 @@ sucht.
 
 **Neu: Schreiben.** Sagst du „Schreib mir ein Rundschreiben zu …“ (auch Brief
 oder Stellungnahme), sucht der Agent in deinem Wiki und legt einen Entwurf
-als Datei in `ausgaben/` ab. Jede Tatsache trägt eine Fußnote, die Belege
-stehen darunter, und vor dem Versand löschst du sie. Was dein Wiki nicht
+als Datei in `ausgaben/` ab. Der Text selbst bleibt frei von Belegzeichen;
+woher jede Tatsache stammt, steht in einem Abschnitt darunter, den du vor
+dem Versand als Ganzes löschst. Was dein Wiki nicht
 belegt, lässt er offen und sagt es dir. `ausgaben/` gehört dir: Der Agent
 schreibt dort nur auf Auftrag, ändert eine Ausgabe nur, wenn du darum
 bittest, und nimmt nichts daraus ins Wiki auf. Ein Modul kann seine

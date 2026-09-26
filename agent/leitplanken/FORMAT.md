@@ -81,7 +81,7 @@ Zwei Felder der `MODUL.md`:
   wo der Ablauf sagt, die Person solle etwas aus dem Chat kopieren, bietest
   du die Seite an. Bei `ausgaben`: nach `ausgaben/`
   (`agent/ablaeufe/schreiben.md`), mit passender Vorlage aus `vorlagen/` des
-  Moduls. Bei `nur-bericht`: nur an die Person, keine Datei, auch nicht auf
-  einen Schreibauftrag.
+  Moduls. Bei `nur-bericht`: nur an die Person, nichts ins Wiki, keine Datei
+  in `ausgaben/`, auch nicht auf einen Schreibauftrag.
   Immer gelten die Leitplanken des Moduls für das Geschriebene, und nichts
   davon kommt nach `module/`.
