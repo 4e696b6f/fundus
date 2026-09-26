@@ -57,7 +57,7 @@ Ein Satz: womit die nächste Sitzung anfängt.
 - **Frist:** eine Zeile je Termin für das Wiki oder die Person, auch jede
   datierte Nebenangabe (`agent/ablaeufe/aufnehmen.md` § 3). Eine vorbeigegangene
   nennst du der Person einmal, dann entfällt sie.
-- **Von dir vorgemerkt:** je Aufgabe, die die Person in einem `[!ich]`-Block
+- **Von dir vorgemerkt:** nur je Aufgabe, die die Person in einem `[!ich]`-Block
   notiert hat (etwa `` `#später` ``), eine Zeile mit Link auf die Seite. Die
   Aufgabe steht wörtlich, ein Wort mit `#` am Anfang in Backticks. Sie
   bleibt, bis die Person sie erledigt oder streicht.
@@ -68,7 +68,7 @@ Ein Satz: womit die nächste Sitzung anfängt.
   Wochen, fragst du einmal, ob sie noch gilt.
 - Lücken bleiben in `wiki/meta/luecken.md`, nicht in der Übergabe, außer als
   offene Rückfrage.
-- Zeilen ohne Frist, Aufgabe oder Entscheidung entfallen.
+- Zeilen ohne Frist, Aufgabe, Entscheidung oder Bestandszähler entfallen.
 
 ## 2 · Protokoll
 

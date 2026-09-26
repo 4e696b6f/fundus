@@ -59,8 +59,8 @@ location) `quellen/eingang` ein. Dort sucht der Agent nach Neuem.
 Klick in Obsidian links auf `SOUL.md`. Die Datei spricht den Agenten mit „du“
 an, in den eckigen Klammern bist du gemeint. Füll die Klammern aus und lösch
 sie dabei: wofür du das Wiki willst, mit welchen Themen du anfängst, wie der
-Agent dich ansprechen soll, und, wenn du magst, woran du gerade arbeitest. Zehn Minuten reichen, ändern kannst du die Datei
-jederzeit.
+Agent dich ansprechen soll, und, wenn du magst, woran du gerade arbeitest.
+Zehn Minuten reichen, ändern kannst du die Datei jederzeit.
 
 ## Schritt 4 · Claude Code installieren und anmelden
 
@@ -123,16 +123,26 @@ und in Obsidian stehen die Seiten links unter `wiki/`.
 Viele fangen nicht bei null an: Es gibt einen Ordner mit Word-Dateien und
 PDFs, vielleicht einen alten Obsidian-Vault. Abtippen musst du nichts.
 
-1. Kopier die Dateien nach `quellen/bestand/`, gern mit ihren Unterordnern.
-   Kopieren, nicht verschieben: So bleibt dein Original, wo es war.
+0. **Erst aussortieren.** Nimm heraus, was Angaben über andere Menschen
+   enthält: Namen oder anderes über Kinder, Eltern oder Kolleginnen, auch nur
+   Initialen mit Gruppe und Vorfall, etwa Protokolle oder Fallnotizen. Um
+   solche Angaben zu erkennen, muss der Agent die Datei lesen, und damit geht
+   sie an den Anbieter (siehe *Bevor du anfängst*).
+1. Kopier die übrigen Dateien nach `quellen/bestand/`, gern mit ihren
+   Unterordnern. Kopieren, nicht verschieben: So bleibt dein Original, wo es
+   war. Ein alter Obsidian-Vault darf samt seinem Ordner `.obsidian` hinein,
+   der stört nicht. Aus einem alten fundus-Wiki kopierst du nur `wiki/`.
 2. Schreib dem Agenten:
 
 > Ich habe meine alten Notizen nach quellen/bestand gelegt. Übernimm sie bitte.
 
 **Was der Agent tut.** Er sieht jede Datei durch und führt eine Liste in
-`wiki/meta/bestand.md`: was darin steht und wie weit er ist. Er schlägt dir
-Themenbereiche vor und wartet auf deine Antwort. Dann nimmt er sich zur Probe
-höchstens zehn Dateien vor und macht erst weiter, wenn du einverstanden bist.
+`wiki/meta/bestand.md`: was darin steht und wie weit er ist. Findet er doch
+eine Datei mit Angaben über andere Menschen, liest er nicht weiter, nennt sie
+dir zuerst, ohne die Angaben zu wiederholen, und verarbeitet sie nicht, bis
+du entschieden hast. Er schlägt dir Themenbereiche vor und wartet auf deine
+Antwort. Dann nimmt er sich zur Probe höchstens zehn Dateien vor. Danach
+entscheidest du: Runde für Runde weiter, oder du sagst „mach alles fertig“.
 Im Wiki entstehen Seiten zu deinen Themen, die auf die alten Dateien
 verweisen, mit einem Satz, was jeweils darin steht. Fragen beantwortet er aus
 dem Wiki: Was er noch nicht erschlossen hat, findet er dabei nicht.
@@ -140,17 +150,13 @@ dem Wiki: Was er noch nicht erschlossen hat, findet er dabei nicht.
 **Was er nicht tut.** Er ändert, verschiebt und löscht keine Datei in
 `quellen/bestand/`, auch nicht, wenn er fertig ist. Deine eigenen Anmerkungen
 kopiert er nicht ins Wiki, er verweist auf sie. Links in einem alten Vault,
-die ins Leere zeigen, zählt er, repariert sie aber nicht.
+die ins Leere zeigen, zählt er, repariert sie aber nicht. Soll eine alte Datei
+richtig ins Wiki aufgenommen werden, legst du eine Kopie nach
+`quellen/eingang/`.
 
-**Word-Dateien** (`.docx`) kann er nicht lesen. Öffne sie in Word, speichere
-sie über „Datei“ → „Speichern unter“ als PDF und leg das PDF daneben.
-
-**Angaben über andere Menschen.** Stehen in einer Datei Namen oder andere
-Angaben über Kinder, Eltern oder Kolleginnen, auch nur Initialen mit Gruppe
-und Vorfall, nennt er dir die Datei zuerst, ohne die Angaben zu wiederholen,
-und rührt sie nicht an, bis du entschieden hast. Besser legst du solche
-Dateien gar nicht erst hinein: Was der Agent liest, geht an den Anbieter
-(siehe *Bevor du anfängst*).
+**Word-Dateien** (`.docx`) und andere Formate, die er nicht lesen kann, zählt
+er nur. Öffne sie in Word, speichere sie über „Datei“ → „Speichern unter“ als
+PDF und leg das PDF daneben.
 
 ## So geht es weiter
 
@@ -164,8 +170,8 @@ stehen.“
 | „Was wissen wir über …?“ | Antwort mit Fundstellen, auf Wunsch als Seite gesichert. |
 | „Was hängt zusammen?“ | Verbindungen und Muster über Themen hinweg. |
 | „Prüf das Wiki.“ | Bericht: tote Links, Veraltetes, Widersprüche, Lücken, Abgleich von Wortlaut und Belegen mit den Quellen. |
-| „Übernimm meine alten Notizen.“ | Dein Bestand in `quellen/bestand/` wird ins Wiki verlinkt, in kleinen Runden (siehe oben). |
-| „Schreib mir einen Brief an …“ | Ein Entwurf aus deinem Wiki als Datei in `ausgaben/`. Die Belege stehen darunter, damit du sie prüfen kannst; vor dem Versand löschst du sie. |
+| „Übernimm meinen Bestand.“ | Dein Bestand in `quellen/bestand/` wird ins Wiki verlinkt, in kleinen Runden (siehe oben). |
+| „Schreib mir einen Brief an …“ | Ein Entwurf aus deinem Wiki als Datei in `ausgaben/`. Die Belege stehen in einem Abschnitt darunter, damit du sie prüfen kannst; vor dem Versand löschst du den Abschnitt. |
 | „Feierabend.“ | Der Agent schreibt die Übergabe für das nächste Mal. |
 
 Macht der Agent etwas falsch, sag es ihm. Was zweimal passiert, schlägt er

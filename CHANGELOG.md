@@ -43,8 +43,9 @@ sucht.
 
 **Neu: Schreiben.** Sagst du „Schreib mir ein Rundschreiben zu …“ (auch Brief
 oder Stellungnahme), sucht der Agent in deinem Wiki und legt einen Entwurf
-als Datei in `ausgaben/` ab. Jede Tatsache trägt eine Fußnote, die Belege
-stehen darunter, und vor dem Versand löschst du sie. Was dein Wiki nicht
+als Datei in `ausgaben/` ab. Der Text selbst bleibt frei von Belegzeichen;
+woher jede Tatsache stammt, steht in einem Abschnitt darunter, den du vor
+dem Versand als Ganzes löschst. Was dein Wiki nicht
 belegt, lässt er offen und sagt es dir. `ausgaben/` gehört dir: Der Agent
 schreibt dort nur auf Auftrag, ändert eine Ausgabe nur, wenn du darum
 bittest, und nimmt nichts daraus ins Wiki auf. Ein Modul kann seine
@@ -62,17 +63,19 @@ es beim Chat. Die Ansicht zeigt deine Ausgaben als eigene Liste.
   oben.
 
 **Neu: Bestand.** Alte Notizen und Dateien, auch ein alter Obsidian-Vault,
-kommen nach `quellen/bestand/` (kopieren, nicht verschieben). Sagst du
-„Übernimm meine alten Notizen“, macht der Agent eine Liste in
-`wiki/meta/bestand.md`, nennt dir zuerst Dateien mit Angaben über andere
-Menschen und fasst sie nicht an, bis du entschieden hast, schlägt
-Themenbereiche vor und verlinkt den Bestand dann in Runden von zehn Dateien
-aus Wiki-Seiten. Die Dateien selbst ändert, verschiebt und löscht er nie.
-Word-Dateien liest er nicht; speichere sie als PDF. Der Bestand zählt nicht
-als neue Quellen seit der letzten Prüfung, die Übergabe nennt nur den Zähler.
-Die Ansicht zeigt ihn unter Quellen; Links, Frontmatter und Tags alter
-Notizen zählen dort nicht zu deinem Wiki. Anleitung:
-`handbuch/EINRICHTEN.md` → *Du hast schon Notizen?*
+kommen nach `quellen/bestand/` (kopieren, nicht verschieben; Dateien mit
+Angaben über andere Menschen vorher herausnehmen). Sagst du „Übernimm meinen
+Bestand“, macht der Agent eine Liste in `wiki/meta/bestand.md`. Findet er
+Angaben über andere Menschen, liest er nicht weiter, nennt dir die Datei
+zuerst und verarbeitet sie nicht, bis du entschieden hast. Er schlägt
+Themenbereiche vor, verlinkt zur Probe höchstens zehn Dateien aus
+Wiki-Seiten und macht dann Runde für Runde weiter oder, wenn du es sagst, in
+einem Zug. Die Dateien selbst ändert, verschiebt und löscht er nie. Was er
+nicht lesen kann, etwa Word-Dateien, zählt er nur; speichere sie als PDF. Der
+Bestand zählt nicht als neue Quellen seit der letzten Prüfung, die Übergabe
+nennt nur den Zähler. Die Ansicht zeigt ihn unter Quellen; Links,
+Frontmatter und Tags alter Notizen zählen dort nicht zu deinem Wiki.
+Anleitung: `handbuch/EINRICHTEN.md` → *Du hast schon Notizen?*
 
 Übernehmen:
 

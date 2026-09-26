@@ -1557,7 +1557,7 @@ var FundusKern = (function () {
   function zeile(d, zellen) { return '<tr data-href="' + docHref(d.pfad) + '">' + zellen.join('') + '</tr>'; }
   function titelZelle(d, p) {
     var aus = p.q ? K.ausschnitt(d, p.q) : '';
-    return '<td><div class="titel">' + docLink(d) + (d.fmFehler ? ' <span class="chip fehler" title="' + esc(d.fmFehler) + '">Frontmatter fehlerhaft</span>' : '') + '</div><div class="pfad">' + esc(d.pfad) + '</div>' +
+    return '<td><div class="titel">' + docLink(d) + (d.fmFehler && !d.istBestand ? ' <span class="chip fehler" title="' + esc(d.fmFehler) + '">Frontmatter fehlerhaft</span>' : '') + '</div><div class="pfad">' + esc(d.pfad) + '</div>' +
       (aus ? '<div class="ausschnitt">' + esc(aus) + '</div>' : '') + '</td>';
   }
   function td(x, kl) { return '<td' + (kl ? ' class="' + kl + '"' : '') + '>' + x + '</td>'; }
@@ -1653,7 +1653,7 @@ var FundusKern = (function () {
     var rand = '';
     if (d.istMd) {
       var c = chips(d);
-      h += '<div class="chips">' + c.chips + (d.fmFehler ? '<span class="chip fehler">Frontmatter fehlerhaft</span>' : '') + (!d.hatFm && d.zone === 'wiki' ? '<span class="chip gedaempft">ohne Frontmatter</span>' : '') + '</div>';
+      h += '<div class="chips">' + c.chips + (d.fmFehler && !d.istBestand ? '<span class="chip fehler">Frontmatter fehlerhaft</span>' : '') + (!d.hatFm && d.zone === 'wiki' ? '<span class="chip gedaempft">ohne Frontmatter</span>' : '') + '</div>';
       if (d.fmFehler) h += '<div class="fm-fehler"><b>Frontmatter fehlerhaft:</b> ' + esc(d.fmFehler) + ' Obsidian zeigt die Eigenschaften dann meist rot. Die Seite ist trotzdem vollständig angezeigt.' + (d.fmRoh != null ? '<details><summary>Frontmatter als Text</summary><pre>' + esc(d.fmRoh) + '</pre></details>' : '') + '</div>';
       var qs = quellenWert(d);
       if (c.lang.length || qs) {

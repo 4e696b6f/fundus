@@ -27,8 +27,8 @@ Ordnernamen folgen den Regeln für Dateinamen. Neben `wiki/meta/` sind
 - Musterseiten heißen `muster-<wert>.md` nach ihrem `gleiche_form:`-Wert
   (`muster-rueckkopplung-verzoegert.md`). Eine Brücke heißt nie wie ein
   `gleiche_form:`-Wert.
-- Jeder Dateiname kommt im Vault nur einmal vor (Ordner mit Punkt vorn wie
-  `.obsidian/` ausgenommen). Vor dem Anlegen suchst du ihn; ist er belegt,
+- Jeder Dateiname kommt im Vault nur einmal vor, Groß- und Kleinschreibung
+  zählt nicht (Ordner mit Punkt vorn wie `.obsidian/` ausgenommen). Vor dem Anlegen suchst du ihn; ist er belegt,
   änderst du den Kurztitel.
 - Links als `[[dateiname]]`. **In beide Richtungen:** Verlinkt A auf B, bekommt
   B einen Link zurück auf A, mit einem Halbsatz, warum. Ausgenommen sind, in
@@ -226,7 +226,9 @@ Ein Text in `ausgaben/` (`agent/ablaeufe/schreiben.md`) ist keine Wiki-Seite:
 kein Typ, kein Gegenlink, nie in `quellen:`, seine Links zählen bei keiner
 Prüfung. Der Name folgt *Dateinamen und Links*. Frontmatter: `title`,
 `created`, `zielperson` (wer liest), `zweck` (was danach geschehen soll),
-`stimme: agent`.
+`stimme: agent`. Soll eine Ausgabe Quelle werden, sagst du, dass sie
+Wiki-Inhalt wiederholt; nur eigene Ergänzungen der Person darin nimmst du
+wie eine Notiz auf.
 
 ## Bestand: `wiki/meta/bestand.md`
 
@@ -236,16 +238,16 @@ Pfad ab `quellen/bestand/` in Backticks, nicht als Link:
 
 ```markdown
 Bestand: 12 von 38 erschlossen · 3 ausgelassen · 2 zurückgestellt · 4 nicht lesbar · 17 offen
-Tote Links im Bestand: 2 (`[[Elternabend]]`, `[[Liste Sprachen]]`)
+Tote Links im Bestand: 7
 
 | Datei | Art | Thema | Status | Seite |
 |---|---|---|---|---|
 | `Notizen/wortschatzkiste.md` | Notiz | Spiel mit Alltagsgegenständen | erschlossen | [[wortschatz-spiel]] |
-| `Team/Protokolle/` · Protokoll, enthält Namen | Notiz | Teamsitzung | zurückgestellt: Personendaten · bleibt liegen, 2026-09-26 | |
+| `Team/Protokolle/` · ohne Namensteil | Notiz | Protokoll | zurückgestellt: Personendaten · bleibt liegen, 2026-09-26 | |
 ```
 
 Status: `offen`, `erschlossen`, `ausgelassen`, `zurückgestellt: Personendaten`,
-`nicht lesbar: docx`; eine Entscheidung der Person steht mit Datum dahinter.
+`nicht lesbar: <Endung>`; eine Entscheidung der Person steht mit Datum dahinter.
 
 ## Protokoll: `wiki/log.md`
 

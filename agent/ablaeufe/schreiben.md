@@ -12,34 +12,46 @@ in der Antwort als Annahme mit Grund.
 ## 2 · Im Wiki suchen
 
 Je Thema wie `agent/ablaeufe/fragen.md` § 1 und § 2. Der Text sagt nur, was
-dort steht.
+dort steht. Hat das Wiki nichts Tragendes zum Thema, sagst du das vor dem
+Entwurf und fragst, ob ein Gerüst mit offenen Stellen gewünscht ist.
 
 ## 3 · Entwurf
 
-- Der Brieftext bleibt versandfähig: Jede Tatsache trägt eine Fußnote
-  `[^1]`; am Ende steht `## Belege (vor dem Versand löschen)` mit
-  `[^1]: [[seite]]` und der Stelle.
+- Der Text bleibt frei von Belegzeichen. Am Ende steht
+  `## Belege (vor dem Versand löschen)`, je Tatsache eine Zeile
+  `Stichwort der Aussage → [[seite]]`, eine Moduldatei als Pfad wie in
+  `agent/ablaeufe/fragen.md` § 3.
+- Was die Person im Auftrag selbst angibt (Frist, eigene Position), belegst
+  du mit `Angabe im Auftrag, JJJJ-MM-TT`.
 - Fehlt ein Beleg, bleibt die Stelle offen, nie aus allgemeinem Wissen
-  gefüllt: im Chat nennen, in `wiki/meta/luecken.md` eintragen.
-- Was eine Seite als veraltet, strittig oder abgelaufen führt, steht nicht
-  als geltend im Text; du nennst es im Chat.
-- `L03` gilt ohne Abstriche, auch für Kontaktdaten.
+  gefüllt: im Chat nennen, in `wiki/meta/luecken.md` eintragen (§ 4 geht
+  vor).
+- Was eine Seite mit `status: veraltet` oder `ersetzt`,
+  `sicherheit: strittig`, vorbeigegangenem `pruefen_bis:` oder als nicht
+  mehr gültig („galt bis“) führt, steht nicht als geltend im Text; du nennst
+  es im Chat.
+- Kurztitel, `zielperson:` und Log nennen eine Rolle, nie einen Namen. Im
+  Text gilt `L03` wie im Wiki: ein Name nur auf ausdrücklichen Wunsch, sonst
+  eine Rolle, und du fragst nach.
 
 ## 4 · Datei
 
 `ausgaben/JJJJ-MM-TT-kurztitel.md` nach `agent/regeln/SCHEMA.md` →
-*Ausgaben*. Bei einem Modul mit `ergebnisse: nur-bericht` entsteht keine
-Datei (`agent/leitplanken/FORMAT.md` → *Module*).
+*Ausgaben*. Berührt der Auftrag das Fachgebiet eines Moduls mit
+`ergebnisse: nur-bericht`, geht der Text in den Chat; kein Eintrag in
+`luecken.md`, keine Log-Zeile (`agent/leitplanken/FORMAT.md` → *Module*).
 
-Überarbeiten nur auf Auftrag, in derselben Datei, die du vorher neu liest;
-die Person kann darin geändert haben. Eine neue Datei nur für einen neuen
-Auftrag.
+Überarbeiten nur auf Auftrag, in derselben Datei; vorher neu lesen. Was die
+Person geändert hat, bleibt; Tatsachen darin ohne Beleg nennst du im Chat,
+statt sie zu ändern. Eine neue Datei nur für einen neuen Auftrag.
 
 ## 5 · Abschließen
 
-- Log-Eintrag vom Typ `ausgabe` mit den Zeilen `Datei:` und `Benutzt:` (die
-  Seiten), auch nach einer Überarbeitung.
-- An die Person: Datei, offene Stellen, Annahmen.
+- Log-Eintrag vom Typ `ausgabe`, auch nach einer Überarbeitung, mit den
+  Zeilen `Datei:` (Pfad in Backticks, nie `[[…]]`) und `Benutzt:` (die
+  Seiten).
+- An die Person: die Datei (bei `nur-bericht` der Text), offene Stellen,
+  Annahmen.
 - Steht im Text eine Einsicht, die noch keine Seite hat, bietest du sie als
   Seite an (`agent/ablaeufe/fragen.md` § 4), belegt mit Wiki-Seiten, nie mit
   der Ausgabe. Sonst ändert sich im Wiki nichts.
