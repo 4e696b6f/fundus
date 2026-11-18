@@ -11,12 +11,13 @@ Agenten.
 
 - **Übersicht:** den nächsten Schritt aus der letzten Übergabe, was fällig
   oder in den nächsten 14 Tagen fällig ist (Prüfdaten in Wiki-Seiten,
-  Leitplanken und Modulen), was im Eingang liegt, offene Lücken und
-  Widersprüche, deine Bereiche, eingehängte Module, die zuletzt geänderten
+  Leitplanken und Modulen), was im Eingang liegt, deine offenen Leitfragen,
+  offene Lücken und Widersprüche, deine Bereiche, eingehängte Module, die zuletzt geänderten
   Seiten und die Texte, die der Agent für dich in `ausgaben/` geschrieben hat.
 - **Liste:** alle Wiki-Seiten mit Filtern nach Bereich, Typ, Status, Stimme
   und Sicherheit und mit einer Suche. Eigene Reiter zeigen Quellen,
-  Ausgaben, Leitplanken, Module und die übrigen Dateien.
+  Ausgaben, Leitplanken (die von Fundus und deine eigenen aus
+  `eigen/leitplanken/`), Module und die übrigen Dateien.
 - **Dokument:** eine Seite mit Feldern, Text, Links und den Seiten, die auf
   sie verweisen. Ein rot gepunkteter Link führt ins Leere.
 

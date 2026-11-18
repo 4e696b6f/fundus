@@ -1,6 +1,9 @@
-# Ablauf: das Wiki prüfen
+# Ablauf: prüfen
 
-Auslöser: „prüfen“, „aufräumen“ oder dein angenommener Prüfvorschlag.
+**Wofür:** Wiki durchsehen: Fehler, Veraltetes, Widersprüche, Lücken.
+
+Auslöser: „prüfen“, „aufräumen“, `/pruefen` oder dein angenommener
+Prüfvorschlag.
 
 Du prüfst und berichtest. Was sich eindeutig und klein beheben lässt
 (fehlender Gegenlink, rotes Frontmatter, abweichender `[!ich]`-Block),
@@ -10,7 +13,7 @@ behebst du, mit neuem `updated:` und einer Zeile unter `## Verlauf`
 ## 0 · Grundlagen
 
 - **Umfang:** `wiki/`, dazu `pruefen_bis:` jeder Leitplanke, auch der
-  Module, und jeder `MODUL.md`; sonst nichts aus `agent/vorlagen/`, `handbuch/` und
+  eigenen (`eigen/leitplanken/`) und der Module, und jeder `MODUL.md`; sonst nichts aus `agent/vorlagen/`, `handbuch/` und
   `module/`.
 - **Werkzeug:** Lesen und Suchen genügt; läuft Code, legst du kein Skript im
   Repo ab.
@@ -23,8 +26,11 @@ behebst du, mit neuem `updated:` und einer Zeile unter `## Verlauf`
 
 - **Tote Links** → *Muss behoben werden*: `[[ziel]]` ohne Datei (Ziel: Teil
   vor `|` oder `#`).
-- **Doppelte Dateinamen** → *Muss behoben werden*: Ein Name aus `wiki/` kommt
-  im Vault zweimal vor. Umbenennen schlägst du nur vor.
+- **Doppelte Dateinamen:** Ein Name kommt in `wiki/` zweimal vor → *Muss
+  behoben werden*. Gleicht ein Name aus `wiki/` einer Datei in
+  `quellen/bestand/` oder `module/` → *Zur Kenntnis* (dort ändert niemand
+  etwas, `L01`); die festen Namen `index`, `log` und die Seiten in
+  `wiki/meta/` sind ausgenommen. Umbenennen schlägst du nur vor.
 - **Waisen:** Seiten ohne eingehenden Link. Ein Link von einer Meta-Seite
   zählt nicht, Meta-Seiten selbst prüfst du nicht. Die erste Seite eines
   neuen Bereichs, solange sie dort die einzige ist → *Zur Kenntnis*.
@@ -74,6 +80,10 @@ behebst du, mit neuem `updated:` und einer Zeile unter `## Verlauf`
 - **Dubletten:** kaum verlinkte Seiten, die dasselbe sagen wie eine andere
   → *Sollte behoben werden*, beide genannt; `mehrwert: niedrig` setzen
   (`agent/regeln/LINSEN.md`), Zusammenlegen nur vorschlagen (`L04`)
+- **Leitfragen:** nach `agent/regeln/SCHEMA.md` → *Leitfragen* als
+  beantwortet markieren oder nach *Offen* zurückholen → *Selbst behoben*.
+- **Einstieg im Index:** je Bereich neu bestimmen (`agent/regeln/SCHEMA.md`
+  → *Index*); geändert → *Selbst behoben*.
 - **Lücken:** Fragen, die in mehreren Seiten unter `## Offene Fragen`
   stehen, und oft verlinkte Themen ohne eigene Seite kommen nach
   `wiki/meta/luecken.md`.
@@ -90,8 +100,9 @@ von den übrigen eine Stichprobe, genannt unter *Wie geprüft*.
   `agent/regeln/SCHEMA.md` → *Die Stimme der Person*. Weicht er ab, kopierst du ihn
   neu; steht er auf einer Seite mit `stimme: agent`, setzt du `gemischt`.
   Beides → *Selbst behoben*.
-- **`[!ich]`-Blöcke ohne Rohdatei** (Zeile `*im Gespräch am …*` oder von der
-  Person im Wiki geschrieben) prüfst du nicht.
+- **`[!ich]`-Blöcke ohne Rohdatei** (Zeile `*im Gespräch am …*` oder
+  `*aus dem Steckbrief am …*`, oder von der Person im Wiki geschrieben)
+  prüfst du nicht.
 - **Fundstelle je Kernaussage:** Jede Aussage unter `## Kernaussagen` nennt,
   wo sie sich nachprüfen lässt.
 - **Stichprobe:** drei Kernaussagen von `begriff`- oder `bruecke`-Seiten (gibt
@@ -129,6 +140,6 @@ Wunsch, mit `verfaellt:` einen Monat später.
 
 - **Log:** ein Eintrag vom Typ `pruefen`. Ein fehlendes Ziel steht darin in
   Backticks, nicht als `[[ziel]]`.
-- **Übergabe:** In `agent/gedaechtnis/UEBERGABE.md` schreibst du die Zeilen *Quellen
+- **Übergabe:** In `eigen/gedaechtnis/UEBERGABE.md` schreibst du die Zeilen *Quellen
   seit letzter Prüfung* (jetzt 0), *Fällig* und *Bald fällig* neu, nach
-  `agent/ablaeufe/sitzung-beenden.md` § 1. Alles andere bleibt.
+  `agent/ablaeufe/feierabend.md` § 1. Alles andere bleibt.

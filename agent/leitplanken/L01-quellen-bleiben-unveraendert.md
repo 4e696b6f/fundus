@@ -17,8 +17,8 @@ stattdessen:
   - Findest du einen Fehler in einem Modul, ihn der Person nennen, mit dem Meldeweg aus kontakt in dessen MODUL.md.
 verweis: []
 fundstellen: []
-geprueft: 2026-09-23
-pruefen_bis: 2027-09-23
+geprueft: 2026-11-18
+pruefen_bis: 2027-11-18
 ---
 
 ## Begründung

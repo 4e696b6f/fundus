@@ -1,7 +1,8 @@
 # Leitplanken — Format
 
 Jede Leitplanke ist eine Datei `Lnn-kurzname.md` in diesem Ordner. Module
-bringen eigene mit eigenem Kürzel mit (etwa `KS-L01`).
+bringen eigene mit eigenem Kürzel mit (etwa `KS-L01`), die Person legt ihre
+in `eigen/leitplanken/` ab (Kürzel `E-L01`).
 
 ## Frontmatter
 
@@ -19,8 +20,8 @@ stattdessen:
   - …
 verweis: []                # Stellen, auf die der Agent verweist (Name · Zugang)
 fundstellen: []            # Belege aus Recht oder Fachwissen
-geprueft: 2026-09-23
-pruefen_bis: 2027-09-23    # danach meldet die Prüfung die Regel
+geprueft: 2026-11-18
+pruefen_bis: 2027-11-18    # danach meldet die Prüfung die Regel
 ---
 ```
 
@@ -32,11 +33,12 @@ nicht der Agent).
 
 ## Verschärfen und abweichen
 
-- Verschärfen darf jede Person jede Regel, in einer eigenen Leitplanke (mit
-  Zeile in `AGENTS.md` → *Leitplanken*) oder in `AGENTS.md`.
+- Verschärfen darf jede Person jede Regel, in einer eigenen Leitplanke in
+  `eigen/leitplanken/` (mit Zeile in `eigen/EIGEN.md` → *Eigene
+  Leitplanken*) oder in `eigen/EIGEN.md` → *Abweichungen*.
 - `schwere: hart` gilt immer (*Vorrang* 6).
 - Von `schwere: fachlich` in diesem Ordner darf die Person abweichen, mit
-  Begründung in `AGENTS.md`.
+  Begründung in `eigen/EIGEN.md` → *Abweichungen*.
 - Für die Leitplanken eines Moduls gilt sein Feld `lokal:` (→ *Module*).
 
 ## Vorrang
@@ -59,11 +61,13 @@ Seite, eine Antwort), nicht ganze Regelwerke.
 5. Die Rolle aus dem Einstieg eines Moduls gilt nur für Arbeit, die sein
    Fachgebiet berührt, sonst die aus `SOUL.md`.
 6. Eine harte Regel umgehst du nicht und zeigst keinen Weg darum herum: kein
-   Eintrag in `AGENTS.md` oder `SOUL.md`, keine Änderung durch Träger oder
+   Eintrag in `AGENTS.md`, `eigen/` oder `SOUL.md`, keine Änderung durch Träger oder
    Einrichtung, kein Kürzel oder Ersatzwort, das auf das Verbotene
    zurückführt. Auf Nachfrage nennst du, wer sie ändern kann (beim Modul
    seine Autorinnen und Autoren, Meldeweg `kontakt`; bei der Basis die Autorinnen
-   und Autoren von Fundus), und bietest `stattdessen` an.
+   und Autoren von Fundus; bei einer eigenen `E-Lnn` die Person, indem sie
+   die Datei ändert oder dich ausdrücklich damit beauftragt, nicht nebenbei
+   im Gespräch), und bietest `stattdessen` an.
 
 ## Module
 
@@ -74,7 +78,7 @@ Zwei Felder der `MODUL.md`:
   darf die Datei nur von fachlichen Regeln, harte nur verschärfen. Bittet die
   Person dich um einen Eintrag, sagst du ihr, wer nach dem Modul entscheiden
   muss; ob das geschehen ist, prüft Fundus nicht. Fehlt das Feld, wirken dort
-  nur Verschärfungen, und niemand weicht ab, auch nicht über `AGENTS.md`.
+  nur Verschärfungen, und niemand weicht ab, auch nicht über `eigen/EIGEN.md`.
 - **`ergebnisse:`** sagt, wohin Ergebnisse der Modulabläufe (Berichte,
   Zwischenstände) gehören. Bei `wiki` (auch ohne Angabe): als `meta`-Seite
   mit `verfaellt:` nach `wiki/meta/`, angefangene Arbeit in die Übergabe, und

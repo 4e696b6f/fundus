@@ -4,7 +4,7 @@ type: meta
 tags: [meta]
 created: {{date:YYYY-MM-DD}}
 updated: {{date:YYYY-MM-DD}}
-sicherheit:                          # hoch | mittel | niedrig | strittig
+sicherheit: hoch                     # hoch | mittel | niedrig | strittig
 status: skizze                       # aktiv | veraltet | ersetzt | skizze
 stimme: agent                        # gemischt mit [!ich]-Block
 # verfaellt: JJJJ-MM-TT              # Pflicht bei einem Befund zu einem Stand

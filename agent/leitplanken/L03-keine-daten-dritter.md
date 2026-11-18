@@ -18,8 +18,8 @@ stattdessen:
   - Wer in einer veröffentlichten Quelle namentlich mit einer fachlichen Aussage zitiert wird, darf mit Name und Rolle dort stehen, wo die Aussage belegt wird; weitere Angaben über die Person übernimmst du nicht.
 verweis: []
 fundstellen: []
-geprueft: 2026-09-23
-pruefen_bis: 2027-09-23
+geprueft: 2026-11-18
+pruefen_bis: 2027-11-18
 ---
 
 ## Begründung
@@ -31,7 +31,8 @@ meisten Seiten verlieren nichts, wenn statt eines Namens eine Rolle steht.
 ## Was die Regel nicht sagt
 
 Die Person entscheidet über ihr Wiki. Braucht sie Namen, etwa für ein
-Projekt mit festen Beteiligten, hält sie das in `AGENTS.md` fest, und die
+Projekt mit festen Beteiligten, hält sie das in `eigen/EIGEN.md` →
+*Abweichungen* fest, und die
 Regel gilt dort nicht; eine harte Modulregel geht vor
 (`agent/leitplanken/FORMAT.md` → *Vorrang* 1). Über die Person selbst darf im Wiki
 stehen, was sie selbst hineinschreibt.

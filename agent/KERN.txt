@@ -1,0 +1,46 @@
+# Kern-Dateien von Fundus
+#
+# Ein Update ersetzt genau diese Pfade (ein Pfad mit / am Ende: der ganze
+# Ordner) und nichts sonst. Ersetzen heißt: löschen und die Fassung aus der
+# neuen Version an dieselbe Stelle kopieren.
+#
+# Nicht von Fundus und nie ersetzt:
+# - der Person: SOUL.md, EINRICHTUNG.md, eigen/, quellen/, ausgaben/,
+#   module/<modulname>.lokal.md, .claude/commands/eigen-*.md,
+#   agent/vorlagen/eigen-*.md, .obsidian/*.json und alles Übrige in .claude/
+#   und .obsidian/
+# - dem Agenten: wiki/ (fehlt dort eine Datei, die eine neue Version braucht,
+#   etwa wiki/meta/leitfragen.md, legt der Agent sie an)
+# - den Autorinnen und Autoren eines Moduls: module/<modulname>/
+
+AGENTS.md
+CLAUDE.md
+README.md
+CHANGELOG.md
+LICENSE
+.gitignore
+agent/VERSION
+agent/KERN.txt
+agent/ablaeufe/
+agent/leitplanken/
+agent/regeln/
+ansicht/
+handbuch/
+module/.gitkeep
+.obsidian/snippets/ich-callout.css
+agent/vorlagen/akteur.md
+agent/vorlagen/begriff.md
+agent/vorlagen/bruecke.md
+agent/vorlagen/meta.md
+agent/vorlagen/notiz.md
+agent/vorlagen/projekt.md
+agent/vorlagen/quelle.md
+.claude/commands/aufnehmen.md
+.claude/commands/einrichten.md
+.claude/commands/feierabend.md
+.claude/commands/fragen.md
+.claude/commands/pruefen.md
+.claude/commands/schreiben.md
+.claude/commands/stand.md
+.claude/commands/uebernehmen.md
+.claude/commands/zusammenhaenge.md

@@ -1,6 +1,9 @@
-# Ablauf: Bestand erschließen
+# Ablauf: übernehmen
 
-Auslöser: „Bestand übernehmen“ oder „erschließen“.
+**Wofür:** Alte Notizen und Ordner aus `quellen/bestand/` ins Wiki einbinden.
+
+Auslöser: „übernehmen“, „Bestand übernehmen“, „erschließen“ oder
+`/uebernehmen`.
 
 Die Dateien bleiben (`L01`); zum Aufnehmen legt die Person eine Kopie nach
 `eingang/`. Zuerst liest du `wiki/meta/bestand.md`, falls vorhanden
@@ -23,7 +26,8 @@ zählst du nur. Dateien und Ordner mit Punkt vorn gehören nicht dazu.
 Zurückgestellte Dateien nennst du der Person zuerst, mit der Art der Angaben,
 ohne ihren Text; ihren Links folgst du nicht. Lässt der Name einer unlesbaren
 Datei Personendaten erwarten, sagst du es. Ihre Entscheidung steht beim
-Status, nicht im Log (`entscheidung`) oder in der Übergabe (`Entschieden:`).
+Status in `wiki/meta/bestand.md`, mit Datum, nicht im Log (`entscheidung`)
+oder in der Übergabe (`Entschieden:`); so fragt keine spätere Sitzung erneut.
 Nach einer Freigabe gilt `L03` weiter, auch in Linktitel und Pfad; eine
 Modul-Leitplanke geht vor (`agent/leitplanken/FORMAT.md` → *Vorrang*). Pfade
 mit `#`, `|`, `[` oder `]` und zurückgestellte Dateien, deren Name Personendaten
@@ -35,7 +39,8 @@ bittest, sie umzubenennen oder herauszunehmen.
 In einer Nachricht, dann wartest du auf die Antwort:
 
 - bis zu fünf Bereiche, geordnet nach `SOUL.md` → *Woran ich gerade
-  arbeite*; neue trägt die Person ein (`agent/ablaeufe/aufnehmen.md` § 2)
+  arbeite*; neue trägt die Person ein oder lässt sie mit `einrichten`
+  eintragen (`agent/ablaeufe/aufnehmen.md` § 2)
 - Dateien ohne Bereich: `ausgelassen`, einmal nachgefragt
 - Unlesbares: „als PDF speichern und daneben legen“, wo es geht
 
@@ -60,7 +65,7 @@ gesammelt.
 ## 5 · Nach jeder Runde
 
 Status und Zähler in `bestand.md`, Log-Eintrag `bestand` mit `Neu:` und
-`Geändert:` (Inventur: Zähler), dann `agent/ablaeufe/verknuepfen.md` für die
+`Geändert:` (Inventur: Zähler), dann `agent/ablaeufe/zusammenhaenge.md` für die
 Seiten der Runde; an die Person der Stand und die Frage nach der nächsten.
 
 Der Bestand zählt nicht bei *Quellen seit letzter Prüfung* und ist kein Stau.

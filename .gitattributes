@@ -1,0 +1,3 @@
+# Nur im Repository, nicht im ZIP-Download ("Download ZIP" auf GitHub)
+.gitattributes export-ignore
+handbuch/MODULE-BAUEN.md export-ignore

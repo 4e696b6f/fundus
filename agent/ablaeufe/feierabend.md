@@ -1,10 +1,13 @@
-# Ablauf: Sitzung beenden
+# Ablauf: Feierabend
 
-Auslöser: Die Person beendet die Arbeit („Feierabend“, „das war’s“).
+**Wofür:** Stand für das nächste Mal festhalten.
+
+Auslöser: Die Person beendet die Arbeit („Feierabend“, „das war’s“,
+`/feierabend`). Den Zwischenstand nach jedem Auftrag regelt § 5.
 
 ## 1 · Übergabe schreiben
 
-`agent/gedaechtnis/UEBERGABE.md` **ganz neu schreiben**, nicht anhängen, höchstens
+`eigen/gedaechtnis/UEBERGABE.md` **ganz neu schreiben**, nicht anhängen, höchstens
 eine Seite; Erledigtes steht im Log.
 
 Vorher liest du, was sonst verloren geht:
@@ -47,10 +50,11 @@ Ein Satz: womit die nächste Sitzung anfängt.
 *Nicht vergessen* steht immer da, seine ersten drei Zeilen auch mit 0 oder
 „nichts fällig“.
 
-- **n:** die bisherige Zahl plus die seitdem aufgenommenen Quellen, nach
-  einer Prüfung nur die danach; fehlt sie, zählst du im Log die Einträge
-  `aufnehmen` nach dem letzten `pruefen`.
-- **Fällig:** jede Seite in `wiki/`, jede Leitplanke, auch der Module, und
+- **n:** die Zahl der Einträge `aufnehmen` in `wiki/log.md` nach dem
+  letzten Eintrag `pruefen` (ohne einen, seit Beginn). Du zählst immer im
+  Log nach, nie auf die alte Zahl auf.
+- **Fällig:** jede Seite in `wiki/`, jede Leitplanke, auch die eigenen in
+  `eigen/leitplanken/` und die der Module, und
   jede `MODUL.md`, deren `pruefen_bis:` oder `verfaellt:` vor heute liegt;
   Treffer in Codeblöcken zählen nicht. **Bald fällig:** dasselbe in den
   nächsten zwei Wochen.
@@ -78,10 +82,13 @@ bis fünf Zeilen.
 ## 3 · Lernschleife
 
 Jede Korrektur der Person und jeder eigene Fehlgriff kommt sofort als Zeile
-in `agent/gedaechtnis/REIBUNG.md`; was fehlt, trägst du jetzt nach. Kommt derselbe
-Schlüssel zum zweiten Mal vor, schlägst du vor, die Lehre als Regel dort
-einzutragen, wo sie künftig gelesen wird: `AGENTS.md`, ein Ablauf oder eine
-Leitplanke. Die Person entscheidet.
+in `eigen/gedaechtnis/KORREKTUREN.md`; was fehlt, trägst du jetzt nach. Kommt derselbe
+Schlüssel zum zweiten Mal vor, schlägst du vor, die Lehre als Regel in
+`eigen/EIGEN.md` → *Aus Korrekturen gelernt* einzutragen (oder als eigene
+Leitplanke in `eigen/leitplanken/`), nie in `AGENTS.md` oder `agent/`: Die
+ersetzt jedes Update. Die Person entscheidet; trägst du ein, steht die Regel
+in `KORREKTUREN.md` unter *Zur Regel geworden*. Betrifft die Lehre Fundus
+selbst, schlägst du zusätzlich vor, sie als Issue zu melden.
 
 Einen Fehler einer früheren Sitzung trägst du nur mit Beleg (Datei, Zeile)
 ein. Erlaubten die Regeln das damalige Vorgehen, war es keiner, auch nicht in
@@ -89,4 +96,23 @@ dem, was du der Person sagst.
 
 ## 4 · Letzte Zeile an die Person
 
-Ein Satz: was die nächste Sitzung als Erstes tun wird.
+Ein Satz: was die nächste Sitzung als Erstes tun wird. Gibt es einen Ordner
+`.git` und Änderungen ohne Commit, fragst du in einem zweiten Satz, ob du
+den Stand sichern sollst: ein lokaler Commit des ganzen Ordners, kein
+Hochladen.
+
+## 5 · Zwischenstand nach jedem Auftrag
+
+Ist ein Auftrag abgeschlossen, der eine Datei geändert hat (etwa aufnehmen
+samt Zusammenhängen, eine Runde übernehmen, prüfen, schreiben, einrichten,
+eine Frage mit neuer Seite oder Lücke), ziehst du die Übergabe nach,
+ohne sie neu zu schreiben, damit eine Sitzung ohne „Feierabend“ nichts
+verliert:
+
+- *Nächster Schritt* neu, ein Satz;
+- unter *Offen* neue Rückfragen, Widersprüche und `Entschieden:`-Zeilen
+  ergänzen, erledigte streichen;
+- *Quellen seit letzter Prüfung* nach § 1 → **n**;
+- neue Fristen und vorgemerkte Aufgaben aus dem Log-Eintrag des Auftrags.
+
+Die Überschrift trägt das Datum des Zwischenstands. Kein Log-Eintrag dafür.

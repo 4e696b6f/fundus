@@ -1,7 +1,9 @@
-# Ablauf: eine Quelle aufnehmen
+# Ablauf: aufnehmen
+
+**Wofür:** Neue Dateien aus dem Eingang ins Wiki holen.
 
 Auslöser: Eine Datei liegt in `quellen/eingang/`, und die Person sagt
-„aufnehmen“, „verarbeiten“ oder „ingest“.
+„aufnehmen“, „verarbeiten“, „ingest“ oder `/aufnehmen`.
 
 **Quelle für Quelle.** Jede Datei geht ganz durch § 1 bis § 6, bevor du die
 nächste öffnest; nicht erst alle lesen und dann gebündelt schreiben. Braucht
@@ -28,6 +30,13 @@ Neue Seiten kommen in einen bestehenden Bereich oder einen aus `SOUL.md` →
 *Themenbereiche*. Passt keiner, fragst du im Bericht am Ende des Auftrags
 (§ 6), ob du einen neuen Bereich anlegen darfst; bis zur Antwort gilt § 7.
 Einen genehmigten Bereich trägst du nicht selbst in `SOUL.md` ein.
+
+Ist das Wiki nicht eingerichtet (`AGENTS.md` → *Sitzungsbeginn* 1) und gibt
+es noch keinen Bereich, fragst du vor dem ersten Lesen in einem Satz, ob die
+Person erst einrichten will (`agent/ablaeufe/einrichten.md`) oder ob du
+einen Bereich vorschlagen sollst; dann wartest du auf die Antwort, statt die
+Quelle bis zum Bericht liegen zu lassen. Ein so angelegter Bereich steht
+noch nicht in `SOUL.md`; ein späteres `einrichten` übernimmt ihn.
 
 Berührt die Quelle das Fachgebiet eines Moduls, gelten seine Leitplanken für
 jede Seite dieses Auftrags, auch für die Zusammenfassung der Quelle.
@@ -75,18 +84,21 @@ Eine neue `begriff`- oder `bruecke`-Seite bekommt `gegenposition:`, die
    gegen die Rohdatei halten: Art B gegen die ganze Notiz, Art C gegen den
    Text zwischen den Backticks.
 2. Die Datei von `quellen/eingang/` nach `quellen/archiv/` verschieben, ohne
-   Umbenennung, ohne Unterordner. Liegt dort schon eine Datei gleichen
+   Umbenennung, ohne Unterordner, und danach nachsehen, dass sie im Archiv
+   liegt und nicht mehr im Eingang. Liegt dort schon eine Datei gleichen
    Namens, fragst du die Person (§ 7).
 3. `wiki/index.md` ergänzen, wenn du einen Bereich neu angelegt hast
-   (`agent/regeln/SCHEMA.md` → *Index*).
+   (`agent/regeln/SCHEMA.md` → *Index*). Beantwortet eine neue Seite eine
+   offene Leitfrage, verschiebst du sie (`agent/regeln/SCHEMA.md` →
+   *Leitfragen*).
 4. Eintrag in `wiki/log.md` vom Typ `aufnehmen`, einer je Quelle, mit den
    Zeilen `Offen:` aus § 3.
 5. Der Person in drei bis fünf Sätzen sagen, was neu ist, was sich geändert
-   hat, welcher Widerspruch oder welche Lücke auftauchte; am Ende des
-   Auftrags auch die offenen Rückfragen.
+   hat, welcher Widerspruch, welche Lücke oder welche beantwortete
+   Leitfrage auftauchte; am Ende des Auftrags auch die offenen Rückfragen.
 
 Sind alle Quellen des Auftrags aufgenommen, außer denen, die auf eine Antwort
-warten, folgt einmal `agent/ablaeufe/verknuepfen.md`, ohne Nachfrage.
+warten, folgt einmal `agent/ablaeufe/zusammenhaenge.md`, ohne Nachfrage.
 
 ## 7 · Rückfrage mitten im Auftrag
 
@@ -97,7 +109,7 @@ Sitzungsende offen, steht sie in der Übergabe:
 2. Die übrigen nimmst du vollständig auf, archivierst und verknüpfst sie,
    ohne auf die Antwort zu warten.
 3. Nach der Antwort nimmst du die offene Quelle auf; für ihre Seiten läuft
-   `agent/ablaeufe/verknuepfen.md` noch einmal.
+   `agent/ablaeufe/zusammenhaenge.md` noch einmal.
 
 **Entscheidungen ohne Seitenänderung** (eine Datei bleibt im Eingang, kein
 neuer Bereich, keine Brücke) hältst du sofort fest, damit keine spätere
@@ -110,5 +122,5 @@ Sitzung erneut fragt:
    Die Person räumt die Datei selbst weg. Nicht aufnehmen, nicht erneut fragen.
    ```
 
-2. in `agent/gedaechtnis/UEBERGABE.md` unter *Offen* als Zeile `Entschieden: …`
-   (Form: `agent/ablaeufe/sitzung-beenden.md` § 1); der Rest bleibt stehen.
+2. in `eigen/gedaechtnis/UEBERGABE.md` unter *Offen* als Zeile `Entschieden: …`
+   (Form: `agent/ablaeufe/feierabend.md` § 1); der Rest bleibt stehen.

@@ -54,13 +54,26 @@ brauchst du das nicht.
 Für den Web Clipper trägst du in seinen Einstellungen als Ablageort (Note
 location) `quellen/eingang` ein. Dort sucht der Agent nach Neuem.
 
-## Schritt 3 · `SOUL.md` ausfüllen
+## Schritt 3 · Den Steckbrief ausfüllen (freiwillig)
 
-Klick in Obsidian links auf `SOUL.md`. Die Datei spricht den Agenten mit „du“
-an, in den eckigen Klammern bist du gemeint. Füll die Klammern aus und lösch
-sie dabei: wofür du das Wiki willst, mit welchen Themen du anfängst, wie der
-Agent dich ansprechen soll, und, wenn du magst, woran du gerade arbeitest.
-Zehn Minuten reichen, ändern kannst du die Datei jederzeit.
+Klick in Obsidian links auf `EINRICHTUNG.md`. Unter jeder Frage steht ein
+Beispiel in Schräglage; schreib deine Antwort darunter, Stichworte genügen:
+wofür du das Wiki willst, mit welchen Themen du anfängst, welche Fragen es
+einmal beantworten soll, wie der Agent dich ansprechen soll. Zehn Minuten
+reichen. Zum Abgucken liegen ausgefüllte Beispiele in `handbuch/steckbriefe/`,
+alle erfunden; nimm den, der dir am nächsten ist, kopier seinen Text in
+`EINRICHTUNG.md` und änder ihn, bis er stimmt:
+
+| Beispiel | Für wen |
+|---|---|
+| [lehrerin.md](steckbriefe/lehrerin.md) | Beruf: Unterricht vorbereiten, Fachwissen sammeln |
+| [verein.md](steckbriefe/verein.md) | Ehrenamt: Vorstand eines Vereins |
+| [buch.md](steckbriefe/buch.md) | Lesen: ein Buch oder eine Reihe begleiten |
+| [garten.md](steckbriefe/garten.md) | Privat: ein Hobby über Jahre |
+
+Du kannst den Schritt auch überspringen: Dann fragt der Agent in Schritt 5
+alles im Gespräch ab. Schreib Rollen statt Namen („meine Teamleitung“), denn
+auch der Steckbrief geht an den Anbieter.
 
 ## Schritt 4 · Claude Code installieren und anmelden
 
@@ -86,16 +99,23 @@ Zweifel den Vorschlag. Im Browser meldest du dich mit deinem Claude-Konto an,
 das bleibt gespeichert. Auf die Frage, ob du den Dateien im Ordner vertraust,
 wählst du Ja. Es sind nur Textdateien.
 
-## Schritt 5 · Die erste Sitzung
+## Schritt 5 · Die erste Sitzung: einrichten
 
 Tippe als Erstes:
 
-> Ich fange gerade an. Lies SOUL.md und sag mir, was du hier tust.
+> Richte mein Wiki ein.
 
-Der Agent liest seine Regeln und antwortet in ein paar Sätzen. Bevor er eine
-Datei anlegt, fragt Claude Code oft um Erlaubnis. Du kannst einmal zustimmen
-oder es ab dann immer erlauben. Das ist bequemer, denn eine Quelle berührt oft
-zehn und mehr Seiten.
+(oder kurz `/einrichten`). Der Agent liest seine Regeln und deinen
+Steckbrief, fragt in höchstens drei Runden nach, was noch fehlt, und zeigt
+dir dann einen Entwurf: wie er dich verstehen wird (`SOUL.md`), welche
+Themenbereiche er anlegt und welche Leitfragen er notiert. Erst nach deinem
+Ja schreibt er. Danach bietet er dir an, ein Sicherheitsnetz mit `git`
+einzurichten, falls das installiert ist.
+
+Bevor er eine Datei anlegt, fragt Claude Code oft um Erlaubnis. Du kannst
+einmal zustimmen oder es ab dann immer erlauben. Das ist bequemer, denn eine
+Quelle berührt oft zehn und mehr Seiten. Größere Aufträge kündigt der Agent
+vorher in einem Satz an, damit du weißt, was passiert.
 
 Stell die Fenster nebeneinander, links das Terminal, rechts Obsidian. Dann
 siehst du, was der Agent schreibt, während er es schreibt.
@@ -161,26 +181,32 @@ PDF und leg das PDF daneben.
 ## So geht es weiter
 
 Zum Weiterarbeiten Terminal öffnen, `cd` mit Leerzeichen, Ordner
-hineinziehen, Enter, `claude`. Dann: „Lies die Übergabe und sag mir, wo wir
-stehen.“
+hineinziehen, Enter, `claude`. Dann: „Wo stehen wir?“ (oder `/stand`).
+
+Am Anfang reichen drei Sätze:
 
 | Du sagst | Es passiert |
 |---|---|
 | „Nimm die neue Quelle auf.“ | Die Quelle wird Wissen im Wiki. |
 | „Was wissen wir über …?“ | Antwort mit Fundstellen, auf Wunsch als Seite gesichert. |
-| „Was hängt zusammen?“ | Verbindungen und Muster über Themen hinweg. |
-| „Prüf das Wiki.“ | Bericht: tote Links, Veraltetes, Widersprüche, Lücken, Abgleich von Wortlaut und Belegen mit den Quellen. |
-| „Übernimm meinen Bestand.“ | Dein Bestand in `quellen/bestand/` wird ins Wiki verlinkt, in kleinen Runden (siehe oben). |
-| „Schreib mir einen Brief an …“ | Ein Entwurf aus deinem Wiki als Datei in `ausgaben/`. Die Belege stehen in einem Abschnitt darunter, damit du sie prüfen kannst; vor dem Versand löschst du den Abschnitt. |
 | „Feierabend.“ | Der Agent schreibt die Übergabe für das nächste Mal. |
 
+Alles Weitere schlägt dir der Agent vor, wenn es passt: eine Prüfung nach
+zehn Quellen, das Übernehmen alter Notizen, einen Brief aus deinem Wiki. Die
+ganze Liste mit Kurzbefehlen steht in der [README](../README.md#drei-sätze-zum-anfangen),
+die Wörter, die dabei fallen, im [Glossar](GLOSSAR.md).
+
 Macht der Agent etwas falsch, sag es ihm. Was zweimal passiert, schlägt er
-dir als Regel vor, und du entscheidest.
+dir als Regel vor, und du entscheidest. Solche Regeln und alles, was du
+sonst anpasst, stehen in `eigen/`; dort bleiben sie bei jedem Update.
 
 ## Sicherheitsnetz
 
 Kopier den Wiki-Ordner jede Woche auf einen USB-Stick oder an einen anderen
-Ort. Mit `git` kannst du jede Änderung des Agenten nachsehen und zurücknehmen.
+Ort. Mit `git` kannst du jede Änderung des Agenten nachsehen und zurücknehmen;
+beim Einrichten bietet der Agent an, es für dich anzulegen. Hast du Fundus
+mit `git clone` geholt, lade dein Wiki nie zu GitHub hoch: Das
+Fundus-Repository ist öffentlich.
 
 ## Wenn es hakt
 
@@ -192,3 +218,4 @@ Ort. Mit `git` kannst du jede Änderung des Agenten nachsehen und zurücknehmen.
 | Der Agent weiß nichts von deinem Wiki. | Falscher Ordner: `/exit`, mit `cd` in den Wiki-Ordner, `claude`. |
 | Obsidian zeigt die neuen Seiten nicht. | Unten links auf den Vault-Namen, „Vaults verwalten“ (Manage vaults), deinen Wiki-Ordner öffnen. |
 | Der Agent tut etwas, das du nicht willst. | Esc drücken, dann sagen, was du stattdessen willst. |
+| `/` zeigt die Kurzbefehle nicht. | Claude Code im Wiki-Ordner neu starten. In anderen Programmen als Claude Code gibt es sie nicht; dort schreibst du die Sätze. |

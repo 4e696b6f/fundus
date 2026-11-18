@@ -1,12 +1,13 @@
 # Übergabe
 
 Startzustand, noch keine Sitzung. Der Agent schreibt diese Datei am Ende jeder
-Sitzung neu (`agent/ablaeufe/sitzung-beenden.md`).
+Sitzung neu und hält nach jedem Auftrag den Zwischenstand fest
+(`agent/ablaeufe/feierabend.md`).
 
 ## Nächster Schritt
 
-`SOUL.md` ausfüllen, dann die erste Quelle in `quellen/eingang/` legen und
-„aufnehmen“ sagen.
+Das Wiki einrichten: „einrichten“ sagen (oder `/einrichten`), wenn du magst
+vorher `EINRICHTUNG.md` ausfüllen.
 
 ## Offen
 

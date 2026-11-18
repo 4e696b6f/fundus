@@ -1,8 +1,11 @@
-# Ablauf: verknüpfen
+# Ablauf: Zusammenhänge
+
+**Wofür:** Verbindungen zwischen Themen suchen und Brücken vorschlagen.
 
 Auslöser: ein fertiger Auftrag zum Aufnehmen und jeder Nachzügler
 (`agent/ablaeufe/aufnehmen.md` § 6 und § 7), ohne Nachfrage; oder die Person sagt
-„verknüpfen“.
+„Zusammenhänge“, „verknüpfen“ oder `/zusammenhaenge`. Der Log-Typ heißt
+weiter `verknuepfen`.
 
 Jeder Lauf geht durch § 1 bis § 5, mit eigenem Log-Eintrag; ein Satz im
 Eintrag `aufnehmen` ersetzt ihn nicht.

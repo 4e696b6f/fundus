@@ -1,7 +1,9 @@
 # Ablauf: schreiben
 
+**Wofür:** Brief, Rundschreiben oder anderen Text aus deinem Wiki entwerfen.
+
 Auslöser: Die Person bittet um einen Text für andere („schreib mir …“,
-Brief, Rundschreiben, Stellungnahme).
+Brief, Rundschreiben, Stellungnahme, `/schreiben`).
 
 ## 1 · Zielperson und Zweck
 

@@ -57,5 +57,7 @@ aber ein Kandidat zum Zusammenlegen; das entscheidet die Person.
 
 ## Ausbauen
 
-Eigene Linsen (etwa eine Systemsicht: Hebel, Puffer) ergänzt die Person hier,
-je mit Frage, Feld und Regel, wann sie gilt.
+Eigene Linsen (etwa eine Systemsicht: Hebel, Puffer) ergänzt die Person in
+`eigen/EIGEN.md` → *Eigene Denkwerkzeuge*, je mit Frage, Feld und Regel, wann
+sie gilt; diese Datei ersetzt jedes Update. Für Menschen heißen die Linsen
+„Denkwerkzeuge“ (`handbuch/GLOSSAR.md`).

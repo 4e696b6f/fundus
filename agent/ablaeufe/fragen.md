@@ -1,7 +1,9 @@
-# Ablauf: eine Frage an das Wiki
+# Ablauf: fragen
 
-Auslöser: jede Sachfrage (was, warum, wie viel, was tun), auch mitten in
-anderer Arbeit und zu Seiten, die du gerade selbst geschrieben hast. Du suchst
+**Wofür:** Im Wiki nachschlagen, mit Fundstellen.
+
+Auslöser: jede Sachfrage (was, warum, wie viel, was tun), auch als
+`/fragen …`, auch mitten in anderer Arbeit und zu Seiten, die du gerade selbst geschrieben hast. Du suchst
 sie im Wiki, du beantwortest sie nicht aus dem Gesprächsverlauf. Erst liest du
 diesen Ablauf, dann suchst du, auch wenn die Einstiegsseite im Index die
 Antwort schon zu haben scheint. Fragen nach
@@ -51,6 +53,9 @@ Erst danach gilt: Dazu steht nichts im Wiki.
 Hat die Antwort etwas zusammengeführt, das so noch nirgends steht? Dann
 bietest du an, sie als Seite anzulegen, meist als `bruecke` oder als
 Ergänzung einer bestehenden Seite.
+
+Gleicht die Frage einer offenen Leitfrage und ist sie jetzt belegt
+beantwortet, markierst du sie (`agent/regeln/SCHEMA.md` → *Leitfragen*).
 
 Eintrag in `wiki/log.md` nur, wenn eine Seite entstanden oder geändert ist.
 Eine neue Zeile in `luecken.md` ist eine Änderung.

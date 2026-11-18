@@ -4,18 +4,20 @@ Fundus ist ein Ordner, in dem ein KI-Programm ein Wiki für dich führt: Du
 legst Quellen hinein, es schreibt daraus verlinkte Seiten.
 
 KI-Hinweis: Ich schreibe Fundus und die Anleitungen mit KI-Unterstützung.
-Version 0.2.1 hat außer mir noch niemand durchgesehen, es wird also etwas haken. Fehler und Fragen bitte in die
+Version 0.4 ist ein Entwurf und hat außer mir noch niemand durchgesehen, es
+wird also etwas haken. Fehler und Fragen bitte in die
 [Issues](https://github.com/4e696b6f/fundus/issues).
 
 ## Was du davon hast
 
 Du legst Artikel, PDFs oder Notizen ab. Der Agent, also das KI-Programm, fasst
-sie zusammen, verknüpft sie und meldet Veraltetes und Widersprüche. Deine
-eigenen Gedanken bleiben erkennbar: Eine eigene Notiz ist ganz deine Stimme,
-und in einem fremden Text markierst du deine Anmerkungen mit `Backticks`. Der
-Agent übernimmt beides wörtlich und setzt es farbig ab. Alles bleibt als
-Textdateien auf deinem Rechner. Obsidian, ein kostenloses Notizprogramm, zeigt
-sie als Wiki an.
+sie zusammen, verknüpft sie und meldet Veraltetes und Widersprüche. Beim
+Einrichten fragt er, womit du anfängst und welche Fragen dein Wiki einmal
+beantworten soll, und richtet es danach aus. Deine eigenen Gedanken bleiben
+erkennbar: Eine eigene Notiz ist ganz deine Stimme, und in einem fremden Text
+markierst du deine Anmerkungen mit `Backticks`. Der Agent übernimmt beides
+wörtlich und setzt es farbig ab. Alles bleibt als Textdateien auf deinem
+Rechner. Obsidian, ein kostenloses Notizprogramm, zeigt sie als Wiki an.
 
 Gedacht ist Fundus für alle, die viel lesen und sammeln, aber keine Zeit
 haben, daraus selbst Notizen zu pflegen.
@@ -37,47 +39,87 @@ Rechne mit einer halben Stunde. Jeder Klick steht in
    legen, etwa in „Dokumente“.
 2. In Obsidian „Ordner als Vault öffnen“ (Open folder as vault) wählen und den
    Ordner aussuchen. Vault nennt Obsidian so einen Ordner.
-3. In Obsidian `SOUL.md` öffnen und die Stellen in eckigen Klammern ausfüllen:
-   wofür das Wiki ist und wie der Agent klingen soll.
+3. Wenn du magst: `EINRICHTUNG.md` öffnen und die Fragen beantworten, wofür
+   das Wiki ist und womit du anfängst. Beispiele liegen in
+   `handbuch/steckbriefe/`.
 4. Claude Code installieren und im Ordner starten. Das läuft im Terminal, dem
    Fenster, in das man Befehle tippt. Wie das ohne Vorkenntnisse geht, steht im
    Handbuch unter Schritt 4.
-5. Eine Datei in `quellen/eingang/` legen und dem Agenten im Terminal
-   schreiben: „Nimm die neue Quelle auf.“ Er fragt dabei, ob er Dateien anlegen
-   darf. Danach stehen die neuen Seiten in Obsidian unter `wiki/`.
+5. Dem Agenten schreiben: „Richte mein Wiki ein.“ Er fragt nach, was im
+   Steckbrief fehlt, zeigt dir einen Entwurf und legt nach deinem Ja los.
+   Danach legst du die erste Datei in `quellen/eingang/`.
 
-## Was du sagen kannst
+## Drei Sätze zum Anfangen
 
 | Du sagst | Was passiert |
 |---|---|
 | „Nimm die neue Quelle auf.“ | Aus der Quelle werden Wiki-Seiten. |
 | „Was wissen wir über …?“ | Antwort aus deinem Wiki, mit Fundstellen. |
-| „Prüf das Wiki.“ | Bericht: tote Links, Veraltetes, Widersprüche, Lücken. |
-| „Übernimm meinen Bestand.“ | Alte Dateien aus `quellen/bestand/` werden ins Wiki verlinkt, ohne dass sich an ihnen etwas ändert ([Anleitung](handbuch/EINRICHTEN.md#du-hast-schon-notizen)). |
-| „Schreib mir ein Rundschreiben zu …“ | Ein Entwurf aus deinem Wiki in `ausgaben/`, die Belege in einem Abschnitt darunter. |
-| „Feierabend.“ | Der Agent schreibt auf, wo ihr steht. Beim nächsten Start weiß er es sonst nicht mehr. |
+| „Feierabend.“ | Der Agent schreibt auf, wo ihr steht. |
+
+Mehr brauchst du am Anfang nicht. Wenn es passt, schlägt der Agent dir den
+nächsten Schritt vor, etwa eine Prüfung. Alles, was er kann:
+
+| Du sagst | Kurzbefehl | Was passiert |
+|---|---|---|
+| „Richte mein Wiki ein.“ | `/einrichten` | Themen, Fragen und Ton festlegen, auch später zum Ändern. |
+| „Wo stehen wir?“ | `/stand` | Was anliegt und was als Nächstes dran ist. |
+| „Nimm die neue Quelle auf.“ | `/aufnehmen` | Aus der Quelle werden Wiki-Seiten. |
+| „Was wissen wir über …?“ | `/fragen` | Antwort aus deinem Wiki, mit Fundstellen. |
+| „Übernimm meinen Bestand.“ | `/uebernehmen` | Alte Dateien aus `quellen/bestand/` werden ins Wiki verlinkt, ohne dass sich an ihnen etwas ändert ([Anleitung](handbuch/EINRICHTEN.md#du-hast-schon-notizen)). |
+| „Schreib mir ein Rundschreiben zu …“ | `/schreiben` | Ein Entwurf aus deinem Wiki in `ausgaben/`, die Belege in einem Abschnitt darunter. |
+| „Prüf das Wiki.“ | `/pruefen` | Bericht: tote Links, Veraltetes, Widersprüche, Lücken. |
+| „Was hängt zusammen?“ | `/zusammenhaenge` | Verbindungen über deine Themen hinweg. |
+| „Feierabend.“ | `/feierabend` | Der Agent schreibt auf, wo ihr steht. |
+
+Die Kurzbefehle zeigt Claude Code, wenn du `/` tippst. Andere Programme
+verstehen die Sätze.
+
+## Welche Dateien gehen
+
+| Datei | Geht? |
+|---|---|
+| Markdown (`.md`), Text (`.txt`), Webseiten über den [Obsidian Web Clipper](https://obsidian.md/clipper) | ja |
+| PDF | ja, auch längere; eingescannte nur, wenn der Text erkennbar ist |
+| Bilder (`.png`, `.jpg`) | ja, der Agent sieht sie sich an |
+| Word (`.docx`) und andere | nein: in Word „Speichern unter“ → PDF |
+
+## Was Fundus nicht ist
+
+- **Kein Automat.** Nichts wird verarbeitet, bevor du es sagst. So prüft der
+  Agent vorher, ob eine Datei Angaben über andere Menschen enthält.
+- **Keine Suchmaschine im Netz.** Das Wiki weiß, was in deinen Quellen steht.
+  Was fehlt, sagt der Agent, statt es zu erfinden.
+- **Kein Speicher für Chats oder Akten über Menschen.** Namen und Angaben
+  über andere kommen nur auf deinen ausdrücklichen Wunsch hinein.
+- **Kein Löschwerkzeug.** Quellen bleiben, wie sie sind; Seiten löscht der
+  Agent nur auf deinen Auftrag.
+- **Nichts zum Installieren außer Obsidian und dem Agenten.** Keine
+  Datenbank, kein Programmierwissen.
 
 ## Was im Ordner liegt
 
 | Was | Wofür |
 |---|---|
-| `SOUL.md` | Füllst du aus: wofür das Wiki ist. |
+| `EINRICHTUNG.md` | Dein Steckbrief für die Einrichtung, freiwillig. |
+| `SOUL.md` | Wofür das Wiki ist und wie der Agent klingt. Füllt der Agent beim Einrichten mit dir aus. |
 | `quellen/` | Deine Quellen: `eingang/` neu, `archiv/` verarbeitet, `bestand/` deine alten Notizen und Dateien. |
 | `wiki/` | Schreibt der Agent. Du liest. |
 | `ausgaben/` | Texte, die der Agent auf deinen Auftrag für dich schreibt. Sie gehören dir. |
+| `eigen/` | Was du an Fundus anpasst, und das Gedächtnis des Agenten. Bleibt bei jedem Update. |
 | `ansicht/uebersicht.html` | Dein Wiki im Browser, ohne Internet ([Anleitung](handbuch/ANSICHT.md)). |
-| `handbuch/` | Anleitungen für dich. |
+| `handbuch/` | Anleitungen für dich, dazu ein [Glossar](handbuch/GLOSSAR.md). |
 | `module/` | Fertige Wissenspakete, siehe unten. |
 
-Alles andere (`AGENTS.md` und `agent/`) sind Regeln und Gedächtnis des Agenten,
-lesbar und änderbar. In `agent/` liegen seine Regeln, Abläufe, Leitplanken,
-Vorlagen und sein Gedächtnis; Obsidian blendet den Ordner in Suche und Graph
-aus, damit du dort nur dein Wiki findest.
-`CLAUDE.md` enthält nur den Verweis auf `AGENTS.md`, damit Claude Code die
-Regeln findet. `.obsidian/` hält die Einstellungen dieses Ordners, etwa die
-Farbe deiner Gedanken-Blöcke, nicht deine persönlichen. `CHANGELOG.md` listet,
-was sich je Version ändert. Das brauchst du erst, wenn du eine neue Version
-holst. Anfassen musst du nichts davon, löschen solltest du es nicht.
+Alles andere (`AGENTS.md`, `agent/` und `.claude/`) sind die Regeln und
+Kurzbefehle des Agenten, lesbar, aber bei jedem Update ersetzt, außer
+Dateien, deren Name mit `eigen-` beginnt; welche Dateien das sind, steht in
+`agent/KERN.txt`. Obsidian blendet `agent/` in
+Suche und Graph aus. `CLAUDE.md` enthält nur den Verweis auf `AGENTS.md`,
+damit Claude Code die Regeln findet. `.obsidian/` hält die Einstellungen
+dieses Ordners, etwa die Farbe deiner Gedanken-Blöcke. `CHANGELOG.md` listet,
+was sich je Version ändert. Anfassen musst du nichts davon, löschen solltest
+du es nicht.
 
 ## Module
 

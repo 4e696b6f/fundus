@@ -2,10 +2,109 @@
 
 Je Version: was sich geändert hat und ob bestehende Wikis etwas übernehmen
 müssen. Übernehmen heißt: die genannten Dateien aus der neuen Version in das
-eigene Wiki kopieren. `SOUL.md`, `wiki/`, `quellen/` und `agent/gedaechtnis/`
-bleiben dabei immer unberührt.
+eigene Wiki kopieren; welche das sind, steht ab 0.4 in `agent/KERN.txt`.
+`SOUL.md`, `EINRICHTUNG.md`, `eigen/`, `wiki/` und `quellen/` (bis 0.3 auch
+`agent/gedaechtnis/`) bleiben dabei immer unberührt.
 
-## 0.3 · in Arbeit
+## 0.4 · 2026-11-18 · Entwurf
+
+Enthält alles aus 0.3, das nicht einzeln veröffentlicht wurde. Ziel: ZIP
+laden, Obsidian öffnen, dem Agenten „Richte mein Wiki ein“ sagen, und das
+Wiki ist auf dich zugeschnitten.
+
+**Neu: einrichten.** `EINRICHTUNG.md` ist ein Steckbrief mit acht Fragen,
+freiwillig; Beispiele liegen in `handbuch/steckbriefe/`. Sagst du
+„einrichten“ (oder `/einrichten`), liest der Agent ihn, fragt in höchstens
+drei Runden nach, zeigt `SOUL.md`, Bereiche und Leitfragen als Entwurf und
+schreibt erst nach deinem Ja. Was du über ein Thema schon weißt, wird eine
+Notiz in deinen Worten; Tatsachen ergänzt er dabei keine. Auf Wunsch legt er
+ein `git`-Sicherheitsnetz an. Ein zweiter Lauf („Fokus ändern“) ergänzt nur.
+Solange `SOUL.md` keine Themenbereiche nennt, schlägt er das Einrichten zu
+Beginn jeder Sitzung vor.
+
+**Neu: Leitfragen.** `wiki/meta/leitfragen.md` sammelt, was dein Wiki einmal
+beantworten soll. Trägt eine belegte Seite eine Frage, markiert der Agent sie
+als beantwortet und sagt es dir. Die Ansicht zeigt die offenen als Kachel.
+
+**Neu: stand.** „Wo stehen wir?“ (oder `/stand`) fasst die Übergabe
+zusammen und schlägt genau einen nächsten Schritt vor.
+
+**Kurzbefehle und neue Namen.** Jeder Ablauf hat einen gleichnamigen
+Kurzbefehl in `.claude/commands/`, den Claude Code zeigt, wenn du `/`
+tippst; die Sätze funktionieren weiter, auch in anderen Programmen. Drei
+Abläufe heißen jetzt wie ihr Befehl: `bestand` → `uebernehmen`,
+`verknuepfen` → `zusammenhaenge`, `sitzung-beenden` → `feierabend`. Die
+Log-Vorgänge behalten ihre Namen. Eigene Kurzbefehle legst du als
+`.claude/commands/eigen-<name>.md` an; die ersetzt kein Update. Jeder Ablauf beginnt mit einer Zeile
+*Wofür*. Neu: `handbuch/GLOSSAR.md` mit zehn Wörtern.
+
+**Neu: `eigen/`.** Was du an Fundus anpasst, steht in `eigen/EIGEN.md`:
+Abweichungen von fachlichen Leitplanken, eigene Leitplanken
+(`eigen/leitplanken/`, Kürzel `E-L01`), eigene Abläufe und Denkwerkzeuge und
+Regeln, die aus Korrekturen entstanden sind. Kein Update überschreibt
+`eigen/`. Das Gedächtnis zieht dorthin um: `eigen/gedaechtnis/UEBERGABE.md`
+und `eigen/gedaechtnis/KORREKTUREN.md` (vorher `REIBUNG.md`). Welche Dateien
+ein Update ersetzt, steht in `agent/KERN.txt`, die Version in
+`agent/VERSION`.
+
+**Weniger Überraschungen.** Berührt ein Auftrag mehr als drei Seiten, sagt
+der Agent vorher in einem Satz, was er anlegt und ändert. Nach jedem
+abgeschlossenen Auftrag zieht er die Übergabe nach, ein vergessener
+„Feierabend“ kostet also nichts mehr. Ein Datum, das du nennst, gilt nur für
+die Sitzung. Eindeutige Dateinamen verlangt er nur noch für Namen, die er in
+`wiki/` vergibt; trifft ein Name aus dem Bestand oder einem Modul, meldet die
+Prüfung das nur zur Kenntnis.
+
+**Aufgeräumt.** `module/README.md` und die README in `handbuch/steckbriefe/`
+entfallen; was darin stand, steht in `handbuch/MODULE.md` und
+`handbuch/EINRICHTEN.md`. Wie man ein Modul baut, steht jetzt in
+`handbuch/MODULE-BAUEN.md`, nur im Repository, nicht im ZIP. Neu ist eine
+`.gitignore`, damit persönliche Dateien von Obsidian und Claude Code
+(`.obsidian/workspace.json`, `.claude/settings.local.json`) nie in einem
+`git`-Verlauf landen.
+
+**Kleineres.** Die Prüfdaten der Leitplanken L01–L04 und `FORMAT.md` laufen
+jetzt bis 2027-11-18. Die Vorlage `meta` setzt `sicherheit: hoch`. Der Graph
+in Obsidian zeigt nur Wiki-Seiten, ohne Index, Log und Meta-Seiten. Die
+Ansicht findet die Übergabe am neuen Ort und zeigt eigene Leitplanken.
+README und `handbuch/EINRICHTEN.md` führen über den Steckbrief und
+„einrichten“; die README sagt, welche Dateien gehen und was Fundus nicht ist.
+
+Übernehmen, wenn du mit 0.2 angefangen hast: erst die Liste unter 0.3, dann
+diese. Mit 0.3 aus dem Repository, in dieser Reihenfolge:
+
+1. **Sichern.** Kopier den ganzen Wiki-Ordner an einen anderen Ort.
+2. **Eigenes nach `eigen/`.** Leg im Hauptordner `eigen` an, darin
+   `leitplanken` und `ablaeufe`. Schieb `agent/gedaechtnis` nach `eigen/`,
+   sodass `eigen/gedaechtnis/` entsteht, und benenn darin `REIBUNG.md` in
+   `KORREKTUREN.md` um. Kopier `eigen/EIGEN.md` aus der neuen Version hinein.
+   Dann trägst du dort ein, was du bisher an Fundus-Dateien angepasst hast:
+   - eigene Leitplanken: von `agent/leitplanken/` nach `eigen/leitplanken/`
+     schieben, im Dateinamen und im Feld `id:` das Kürzel auf `E-L01`,
+     `E-L02` … ändern, je eine Zeile unter *Eigene Leitplanken*;
+   - Abweichungen und Verschärfungen aus `AGENTS.md` unter *Abweichungen*;
+   - eigene Linsen aus `agent/regeln/LINSEN.md` unter *Eigene Denkwerkzeuge*;
+   - eigene oder angepasste Vorlagen in `agent/vorlagen/`: in `eigen-<name>.md`
+     umbenennen und beiseitelegen, nach Schritt 3 zurück nach
+     `agent/vorlagen/`;
+   - was du sonst in `agent/` geändert hast: als Regel in `eigen/EIGEN.md`.
+3. **Ersetzen.** Jeden Pfad, der in `agent/KERN.txt` der neuen Version
+   steht: löschen und aus der neuen Version hineinkopieren; ein Ordner mit
+   `/` am Ende ganz. Lösch danach in `agent/ablaeufe/` die alten
+   `bestand.md`, `verknuepfen.md` und `sitzung-beenden.md`, dazu
+   `module/README.md`.
+4. **Neu dazu:** `EINRICHTUNG.md`, wenn du den Steckbrief nutzen willst, und
+   `wiki/meta/leitfragen.md`; trag in `wiki/index.md` unter *Meta* die Zeile
+   `- [[leitfragen]]: was das Wiki einmal beantworten soll` ein. Vergisst du
+   es, legt der Agent die Seite an, sobald er sie braucht.
+5. **Was bleibt:** `SOUL.md` ist deine. Die Zeile *Erfahrung* kannst du aus
+   der Vorlage übernehmen. Stehen deine Themenbereiche dort schon, gilt das
+   Wiki als eingerichtet; sonst schlägt der Agent `einrichten` vor.
+6. **Obsidian:** `.obsidian/` kopierst du nicht. Für den Graphen trägst du
+   in Obsidian im Graph unter *Filter* → *Suche* ein:
+   `path:wiki/ -path:"wiki/meta/" -path:"wiki/index.md" -path:"wiki/log.md"`.
+
+## 0.3 · in 0.4 aufgegangen
 
 **Umzug.** Die Ordner des Agenten `regeln/`, `ablaeufe/`, `leitplanken/`,
 `vorlagen/` und `gedaechtnis/` liegen jetzt zusammen in `agent/`. So stehen
@@ -154,75 +253,11 @@ steht jetzt in `ablaeufe/sitzung-beenden.md` § 3.
 ## 0.2.0 · 2026-09-23 · Entwurf
 
 Nach einem Lektorat und zwei Probeläufen, einer davon mit eingehängtem Modul.
-Veröffentlicht als Entwurf unter GPL-3.0 (vorher MIT).
-
-**Einsteigerweg.** README und `handbuch/EINRICHTEN.md` führen ohne Vorwissen
-bis zur ersten aufgenommenen Quelle: Download als ZIP statt `git`, ein eigener
-Schritt für Terminal, Installation und Anmeldung von Claude Code, ein Hinweis,
-was an den Anbieter geht, ein Sicherheitsnetz ohne `git` und eine Tabelle
-*Wenn es hakt*. `handbuch/MODULE.md` trennt das Einhängen eines Moduls vom
-Teil für Leute, die eins bauen.
-
-**Regelwerk nach zwei Probeläufen.**
-
-- Der Agent liest `SOUL.md` zu Beginn jeder Sitzung. Bereiche aus `SOUL.md` →
-  *Themenbereiche* legt er ohne Nachfrage an, jeden anderen erst nach
-  Rückfrage.
-- Die Pflichtfelder stehen nur noch in einer Tabelle in `regeln/SCHEMA.md`.
-  Eine `notiz` hat kein `sicherheit:` und bleibt `stimme: ich`. Was der Agent
-  ergänzt, steht unter der Zeile `*Ergänzt vom Agenten:*`. `quelle`-Seiten
-  tragen `quelle-` vorn im Dateinamen.
-- Backticks: Bei einer eigenen Notiz kommt der ganze Wortlaut in einen
-  `[!ich]`-Block, bei einer fremden Quelle mit Anmerkungen wird jede Stelle
-  ein eigener Block.
-- Widersprüche: `strittig` wird nur die Seite, deren Kernaussage betroffen
-  ist. Das Format in `wiki/meta/widersprueche.md` nennt zusätzlich die Seite,
-  auf der beide Aussagen stehen.
-- Die Übergabe zählt die Quellen seit der letzten Prüfung und führt *Fällig*
-  und *Bald fällig*. Der Agent schlägt die Prüfung ab zehn Quellen oder bei
-  einem Prüfdatum in der Vergangenheit vor.
-- Die Prüfung geht ohne Codeausführung und umfasst `wiki/` und die Prüfdaten
-  der Leitplanken. Links in Codeblöcken zählen nicht, und passt ein Datum
-  nicht zum Text der Seite, fragt der Agent, statt zu markieren.
-- Meta-Seiten (`index.md`, `log.md`, alles in `wiki/meta/`) sind von der
-  Gegenlink-Pflicht ausgenommen, in beide Richtungen.
-- Verknüpfen läuft einmal nach jedem Auftrag zum Aufnehmen, über dessen
-  Seiten. Ein Muster bekommt beim dritten Vorkommen eine Seite in
-  `wiki/muster/`.
-- Den eigenen Log-Eintrag derselben Sitzung darf der Agent berichtigen. Neue
-  Zeilen unter `## Verlauf` kommen ans Ende. Eigene Fehlgriffe landen wie
-  Korrekturen in `gedaechtnis/REIBUNG.md`.
-- `L02`: Eine Gegenposition braucht keine Fundstelle, Zahlen darin schon.
-  `L03`: Kontaktdaten eines Menschen übernimmt der Agent nie ohne Auftrag.
-  Wer in einer veröffentlichten Quelle fachlich zitiert wird, darf mit Name
-  und Rolle an der Fundstelle stehen.
-
-**Modul-Integration.**
-
-- Der Agent merkt sich zu Sitzungsbeginn die Titel der Module. Er lädt ein
-  Modul, sobald eine Frage, eine neue Quelle oder eine Seite, die er schreibt,
-  dessen Fachgebiet berührt.
-- Vorrang je Handlung (`leitplanken/FORMAT.md`): Eine harte Leitplanke eines
-  Moduls geht jeder fachlichen der Basis vor, sonst gilt die strengere.
-  Leitplanken gehen `SOUL.md` vor.
-- Einstellungen vor Ort stehen in `module/<modulname>.lokal.md`. Die Datei
-  gehört der Person und bleibt bei jedem Update erhalten (Ausnahme in `L01`).
-  Neue Felder in `MODUL.md`: `lokal:` und `ergebnisse:`.
-- Die Prüfung nimmt die Prüfdaten der Module auf. Eine abgelaufene Leitplanke
-  gilt weiter, bis ein Update sie ersetzt.
-- Widerspricht eine Quelle einer Moduldatei, steht das mit deren Pfad in
-  `widersprueche.md`. Kein Dateiname in `wiki/` gleicht einem in `module/`.
-
-**Ansicht.** `ansicht/uebersicht.html` zeigt den Vault im Browser: Ordner
-wählen, dann Übersicht (Fällig, Bald fällig, Eingang, Lücken, Widersprüche,
-Bereiche, Module, zuletzt geändert, Übergabe), Listen mit Filtern und Suche,
-Dokumentansicht mit Rückverweisen und „In Obsidian öffnen“. Eine Datei, kein
-Netz, liest nur. Anleitung: `handbuch/ANSICHT.md`.
-
-**Vorlagen.** `vorlagen/` enthält eine Obsidian-Vorlage je Seitentyp,
-abgeglichen mit `regeln/SCHEMA.md` und `regeln/LINSEN.md`. `.obsidian/` bringt
-drei Voreinstellungen mit: den Vorlagenordner, `quellen/anhaenge/` als Ablage
-für Anhänge und ein eigenes Aussehen für den `[!ich]`-Block.
+Veröffentlicht als Entwurf unter GPL-3.0 (vorher MIT). Neu waren der
+Einsteigerweg im Handbuch, die Pflichtfelder in einer Tabelle, Übergabe mit
+Zähler und Fristen, die Integration von Modulen (`lokal:`, `ergebnisse:`,
+Vorrang), die Ansicht und die Vorlagen für Obsidian. Die ausführliche
+Beschreibung steht in der Versionsgeschichte des Repositorys.
 
 Übernehmen, wenn du mit 0.1.0 angefangen hast:
 

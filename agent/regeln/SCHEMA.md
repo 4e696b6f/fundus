@@ -27,9 +27,12 @@ Ordnernamen folgen den Regeln für Dateinamen. Neben `wiki/meta/` sind
 - Musterseiten heißen `muster-<wert>.md` nach ihrem `gleiche_form:`-Wert
   (`muster-rueckkopplung-verzoegert.md`). Eine Brücke heißt nie wie ein
   `gleiche_form:`-Wert.
-- Jeder Dateiname kommt im Vault nur einmal vor, Groß- und Kleinschreibung
-  zählt nicht (Ordner mit Punkt vorn wie `.obsidian/` ausgenommen). Vor dem Anlegen suchst du ihn; ist er belegt,
-  änderst du den Kurztitel.
+- Jeder Dateiname, den du in `wiki/` vergibst, kommt im Vault nur einmal
+  vor, Groß- und Kleinschreibung zählt nicht (Ordner mit Punkt vorn wie
+  `.obsidian/` ausgenommen). Vor dem Anlegen suchst du ihn; ist er belegt,
+  änderst du den Kurztitel. Die festen Namen (`index`, `log`, die Seiten in
+  `wiki/meta/`) bleiben, auch wenn der Bestand oder ein Modul denselben
+  Namen mitbringt.
 - Links als `[[dateiname]]`. **In beide Richtungen:** Verlinkt A auf B, bekommt
   B einen Link zurück auf A, mit einem Halbsatz, warum. Ausgenommen sind, in
   beide Richtungen, Meta-Seiten (`wiki/index.md`, `wiki/log.md`, alles in
@@ -112,7 +115,7 @@ danach meldet `agent/ablaeufe/pruefen.md` die Seite.
   zu erwarten ist, sonst Aufnahmetag plus drei Monate.
 - Eine datierte Nebenangabe (Anmeldeschluss, Preis in einer Nebenzeile) gibt
   kein `pruefen_bis:`, sondern eine Frist in der Übergabe unter *Nicht
-  vergessen* (`agent/ablaeufe/sitzung-beenden.md`).
+  vergessen* (`agent/ablaeufe/feierabend.md`).
 - Ohne datierten Kernstoff kein Datum, außer von einer Moduldatei übernommen.
 
 **Moduldateien als Beleg:** Stützt sich eine Seite auf eine Moduldatei, steht
@@ -151,6 +154,11 @@ Backticks bei Art C.
 du genau so, darunter `*im Gespräch am JJJJ-MM-TT*`. Die erste Wiki-Seite
 damit gilt als Rohfassung, weitere Kopien kommen von dort, samt Zeile.
 
+**Aus dem Steckbrief:** Text aus `EINRICHTUNG.md` (`agent/ablaeufe/einrichten.md`)
+kopierst du aus dieser Datei, darunter `*aus dem Steckbrief am JJJJ-MM-TT*`.
+Die Person darf den Steckbrief später ändern; dann gilt wie beim Gespräch
+die erste Wiki-Seite als Rohfassung, und die Prüfung gleicht nicht ab.
+
 Backticks in einer Rohdatei markieren die Stimme der Person, je nach Art der
 Quelle (`agent/ablaeufe/aufnehmen.md` § 1):
 
@@ -172,7 +180,7 @@ die Abweichung so da, wie sie sie sagt.
 `` `#später` `` und Aufgabe), bleibt wörtlich im `[!ich]`-Block. Du
 erledigst es nicht ungefragt; es gehört weder unter `## Offene Fragen` noch
 nach `wiki/meta/luecken.md`, die Übergabe führt es als „Von dir vorgemerkt“
-(`agent/ablaeufe/sitzung-beenden.md`).
+(`agent/ablaeufe/feierabend.md`).
 
 ## Aufbau einer Seite
 
@@ -205,7 +213,7 @@ Alle zutreffenden Punkte halten:
 - Pflichtfelder gesetzt, `created:`, `tags:`, `stimme:` und `pruefen_bis:` nach ihren Absätzen oben, Frontmatter parst in Obsidian ohne roten Block
 - Dateiname nach *Dateinamen und Links*, im Vault nur einmal; eine Brücke liegt in `wiki/bruecken/`
 - `quellen:` zeigt auf eine existierende Datei in `quellen/archiv/`, `quellen/bestand/` oder in einem Modul
-- mindestens zwei ausgehende Links, je mit Begründung (hat der Bereich erst zwei Seiten, genügt einer; kein Link nur zum Auffüllen), Gegenlinks gesetzt
+- mindestens zwei ausgehende Links, je mit Begründung (hat der Bereich erst zwei Seiten, genügt einer, die erste Seite allein braucht keinen; kein Link nur zum Auffüllen), Gegenlinks gesetzt
 - jede Kernaussage an der Fundstelle nachprüfbar
 - wörtliche Übernahmen in Anführungszeichen oder als `>`-Zitat mit Fundstelle
 - `sicherheit:` ehrlich, eine schwache Quelle im Text benannt
@@ -233,7 +241,7 @@ wie eine Notiz auf.
 ## Bestand: `wiki/meta/bestand.md`
 
 Eine `meta`-Seite ohne `verfaellt:`, die du fortschreibst
-(`agent/ablaeufe/bestand.md`). Oben der Zähler, dann je Datei eine Zeile, der
+(`agent/ablaeufe/uebernehmen.md`). Oben der Zähler, dann je Datei eine Zeile, der
 Pfad ab `quellen/bestand/` in Backticks, nicht als Link:
 
 ```markdown
@@ -252,7 +260,9 @@ Status: `offen`, `erschlossen`, `ausgelassen`, `zurückgestellt: Personendaten`,
 ## Protokoll: `wiki/log.md`
 
 Nur anhängen. Ältere Einträge schreibst du nie um; den eigenen Eintrag
-derselben Sitzung darfst du berichtigen. Ein Eintrag je Vorgang:
+derselben Sitzung darfst du berichtigen. Die Reihenfolge ist die des
+Schreibens: Bestätigt die Person ein Datum vor dem letzten Eintrag
+(`AGENTS.md` → *Sitzungsbeginn*), steht der neue Eintrag trotzdem am Ende. Ein Eintrag je Vorgang:
 
 ```markdown
 ## [2026-09-23] aufnehmen | Artikel über verteiltes Wiederholen
@@ -261,17 +271,47 @@ Geändert: lernkurven.md, gedaechtnis.md
 Offen: Frist 2026-10-15: Anmeldeschluss Lernkurs (Randspalte) · [[quelle-artikel-wiederholen]]
 ```
 
-Vorgänge: `aufnehmen`, `frage`, `pruefen`, `verknuepfen`, `sitzung`,
+Vorgänge: `aufnehmen`, `frage`, `pruefen`, `verknuepfen`
+(`agent/ablaeufe/zusammenhaenge.md`), `sitzung` (`agent/ablaeufe/feierabend.md`),
 `entscheidung` (`agent/ablaeufe/aufnehmen.md` § 7), `ausgabe`
-(`agent/ablaeufe/schreiben.md`), `bestand` (`agent/ablaeufe/bestand.md`).
+(`agent/ablaeufe/schreiben.md`), `bestand` (`agent/ablaeufe/uebernehmen.md`),
+`einrichtung` (`agent/ablaeufe/einrichten.md`). Die Namen der Vorgänge
+bleiben, auch wo der Ablauf anders heißt, damit ältere Logs lesbar bleiben.
 
 `Offen:` steht nur für eine Frist, eine von der Person vorgemerkte Aufgabe
-oder eine Brückenidee, auch mehrfach; `agent/ablaeufe/sitzung-beenden.md` übernimmt
+oder eine Brückenidee, auch mehrfach; `agent/ablaeufe/feierabend.md` übernimmt
 sie in die Übergabe. Lücken nicht als `Offen:`.
 
 ## Index: `wiki/index.md`
 
 Unter *Bereiche* die Themenbereiche mit je einem Satz und dem Einstieg, nicht
-jede Seite. Einstieg ist die `begriff`-Seite mit den meisten eingehenden Links.
+jede Seite. Einstieg ist die `begriff`-Seite mit den meisten eingehenden Links;
+hat ein Bereich noch keine, seine erste Seite, und ohne Seite steht dort
+„noch keine Seite“. Beim Prüfen bestimmst du den Einstieg neu.
 Danach folgen, sobald es sie gibt, `wiki/bruecken/` (Einstieg: die Brücke mit
 den meisten eingehenden Links) und `wiki/muster/`.
+
+## Leitfragen: `wiki/meta/leitfragen.md`
+
+Fragen, die das Wiki einmal beantworten soll, in den Worten der Person, aus
+dem Steckbrief oder dem Gespräch (`agent/ablaeufe/einrichten.md`). Sie sind
+Ziele, keine Lücken: Eine Lücke fehlt einer Seite, eine Leitfrage gibt die
+Richtung vor. Eine Zeile je Frage, der Wortlaut unverändert:
+
+```markdown
+## Offen
+- Wie fördere ich Leseanfänger mit wenig Zeit? · Bereich: lesen · aus dem Steckbrief · seit 2026-11-18
+
+## Beantwortet
+- Wie fördere ich …? · Bereich: lesen · aus dem Steckbrief · seit 2026-11-18 · beantwortet 2026-12-02 → [[lautlesen-tandem]]
+```
+
+Beantwortet ist eine Frage, wenn die Kernaussagen mindestens einer
+`quelle`-, `begriff`- oder `bruecke`-Seite mit `sicherheit:` `mittel` oder
+`hoch` sie beantworten; eine `notiz` allein genügt nicht. Du verschiebst die
+Zeile ohne Nachfrage und sagst es der Person. Wird die tragende Seite
+`strittig`, `veraltet` oder `ersetzt` und trägt keine andere, kommt die
+Zeile zurück nach *Offen*, mit `wieder offen JJJJ-MM-TT`. Neue Leitfragen trägt nur die Person ein
+oder `einrichten`; eine Frage aus dem Gespräch kommt hinzu, wenn sie es
+will.
+

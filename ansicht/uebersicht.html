@@ -297,9 +297,10 @@ var FundusKern = (function () {
   function eigen(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
   /* ausgaben/: Texte der Person (agent/ablaeufe/schreiben.md), keine Wiki-Seiten; ihre Links geben keine Rückverweise. */
   var ZONEN = ohneProto({ wiki: 1, quellen: 1, module: 1, ausgaben: 1 });
-  /* Systemordner des Agenten: agent/leitplanken/ ist eine eigene Zone, alles andere in agent/ steht unter Weitere. */
+  /* Leitplanken der Basis (agent/leitplanken/) und eigene (eigen/leitplanken/) sind eine eigene Zone; alles andere in
+     agent/ und eigen/ steht unter Weitere. */
   function zoneVon(t) {
-    if (t[0] === 'agent' && t[1] === 'leitplanken' && t.length > 2) return 'leitplanken';
+    if ((t[0] === 'agent' || t[0] === 'eigen') && t[1] === 'leitplanken' && t.length > 2) return 'leitplanken';
     return ZONEN[t[0]] && t.length > 1 ? t[0] : 'weitere';
   }
   /* Ordner in wiki/, die kein Themenbereich sind (agent/regeln/SCHEMA.md): meta/ für Meta-Seiten, bruecken/ und muster/
@@ -700,7 +701,7 @@ var FundusKern = (function () {
       else { var ml = /^(.+)\.lokal\.md$/i.exec(t[1]); if (ml) { d.modul = ml[1]; d.istLokal = true; } }
     }
     d.istModulKopf = d.zone === 'module' && t.length === 3 && /^modul\.md$/i.test(t[2]);
-    // quellen/bestand/: alter Bestand der Person (agent/ablaeufe/bestand.md). Steht unter Quellen; Frontmatter, Links und
+    // quellen/bestand/: alter Bestand der Person (agent/ablaeufe/uebernehmen.md). Steht unter Quellen; Frontmatter, Links und
     // Tags seiner Notizen gehören nicht zum Wiki: keine Rückverweise, nicht in Links ohne Ziel, Frontmatter-Fehlern, Stand
     d.istBestand = d.zone === 'quellen' && t.length > 2 && t[1] === 'bestand';
     // Ort einer Leitplanke; Leitplanke ist sie erst mit id: im Frontmatter (FORMAT.md, SCHEMA.md eines Moduls sind keine)
@@ -904,11 +905,11 @@ var FundusKern = (function () {
       case 'sicherheit': return d.sicherheit || '(ohne)';
       case 'ort': return t.length > 2 ? t[1] : '(quellen/)';
       case 'ext': return d.ext || '(ohne)';
-      case 'herkunft': return d.zone === 'leitplanken' ? 'Basis' : 'Modul ' + d.modul;
+      case 'herkunft': return d.zone === 'leitplanken' ? (t[0] === 'eigen' ? 'Eigen' : 'Basis') : 'Modul ' + d.modul;
       case 'art': return text(d.fm.art) || '(ohne)';
       case 'schwere': return text(d.fm.schwere) || '(ohne)';
       case 'modul': return d.modul || '(module/)';
-      case 'ordner': return t[0] === 'agent' && t.length > 2 ? 'agent/' + t[1] : t.length > 1 ? t[0] : '(Wurzel)';
+      case 'ordner': return (t[0] === 'agent' || t[0] === 'eigen') && t.length > 2 ? t[0] + '/' + t[1] : t.length > 1 ? t[0] : '(Wurzel)';
     }
     return '';
   }
@@ -1415,9 +1416,11 @@ var FundusKern = (function () {
       '<div><dt>Links ohne Ziel</dt><dd>' + st.offen + '</dd></div></dl></div>';
 
     // Nächster Schritt
-    var ueb = K.uebergabe(idx.nachPfad['agent/gedaechtnis/UEBERGABE.md']);
+    // Ab 0.4 liegt die Übergabe in eigen/gedaechtnis/, davor in agent/gedaechtnis/
+    var uebPfad = idx.nachPfad['eigen/gedaechtnis/UEBERGABE.md'] ? 'eigen/gedaechtnis/UEBERGABE.md' : 'agent/gedaechtnis/UEBERGABE.md';
+    var ueb = K.uebergabe(idx.nachPfad[uebPfad]);
     if (ueb) {
-      var doc = idx.nachPfad['agent/gedaechtnis/UEBERGABE.md'];
+      var doc = idx.nachPfad[uebPfad];
       var rest = ueb.abschnitte.filter(function (a) { return a !== ueb.naechster && a.md; });
       h += '<section class="naechster"><div><div class="kachel-label">Übergabe' + (ueb.datum ? ' vom ' + K.datumDe(ueb.datum) : '') + ' · Nächster Schritt</div>' +
         '<div class="schritt">' + (ueb.naechster && ueb.naechster.md ? mdVon(doc, ueb.naechster.md) : 'Die Übergabe nennt keinen nächsten Schritt.') + '</div></div>' +
@@ -1451,6 +1454,7 @@ var FundusKern = (function () {
         leer: leer, fuss: '<a class="alle" href="' + docHref(pfad) + '">' + esc(K.basisname(pfad)) + ' öffnen</a>' });
     };
     var k4 = offenKachel('wiki/meta/luecken.md', 'Offene Lücken', 'Welche Fragen kann das Wiki noch nicht belegen?', 'Keine offenen Lücken. Fehlt dem Agenten ein Beleg, trägt er die Frage hier ein.');
+    var k11 = offenKachel('wiki/meta/leitfragen.md', 'Offene Leitfragen', 'Was soll dein Wiki noch beantworten?', 'Keine offenen Leitfragen. Sag deinem Agenten „einrichten“ oder nenn ihm eine Frage, die das Wiki einmal beantworten soll.');
     var k5 = offenKachel('wiki/meta/widersprueche.md', 'Offene Widersprüche', 'Wo widersprechen sich Quellen, und was musst du entscheiden?', 'Keine offenen Widersprüche. Findet der Agent einen, steht er hier, und du entscheidest.');
 
     // Nur Themenbereiche zählen; meta/, bruecken/, muster/ stehen darunter, ohne Balken und ohne Zählung
@@ -1497,7 +1501,7 @@ var FundusKern = (function () {
     var k9 = kachel({ klasse: zust.length ? '' : 'ruhig', label: 'Dateien', zahl: zust.length || null, frage: 'Hakt etwas an den Dateien selbst?',
       inhalt: zust.length ? '<ul class="eintraege">' + zust.join('') + '</ul>' : '', leer: 'Alle Frontmatter lesbar, jeder Link findet sein Ziel.' });
 
-    h += '<div class="raster">' + k1 + k2 + k3 + k4 + k5 + k9 + k6 + k7 + k8 + k10 + '</div>';
+    h += '<div class="raster">' + k1 + k2 + k3 + k11 + k4 + k5 + k9 + k6 + k7 + k8 + k10 + '</div>';
     haupt.innerHTML = h;
   }
   function reiterVon(pfad) {
