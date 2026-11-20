@@ -206,6 +206,14 @@ Ein bis drei Sätze: worum es geht und warum es hier steht.
 `## Offene Fragen` und `## Verlauf` dürfen fehlen, wenn sie leer wären. Neue
 Zeilen unter `## Verlauf` kommen ans Ende.
 
+## Diagramme
+
+Ein Mermaid-Block (```` ```mermaid ````) darf in einer Seite stehen, wenn er
+zeigt, was die Seite im Text belegt: einen Ablauf, eine Zeitachse, eine
+Gliederung. Jeder Knoten ist eine Aussage wie eine Zeile im Text; was nicht
+im Text mit Fundstelle steht, steht auch nicht im Diagramm, und Namen nur, wo
+die Seite sie nennen darf (`L03`).
+
 ## Wann eine Seite fertig ist
 
 Alle zutreffenden Punkte halten:
@@ -275,7 +283,8 @@ Vorgänge: `aufnehmen`, `frage`, `pruefen`, `verknuepfen`
 (`agent/ablaeufe/zusammenhaenge.md`), `sitzung` (`agent/ablaeufe/feierabend.md`),
 `entscheidung` (`agent/ablaeufe/aufnehmen.md` § 7), `ausgabe`
 (`agent/ablaeufe/schreiben.md`), `bestand` (`agent/ablaeufe/uebernehmen.md`),
-`einrichtung` (`agent/ablaeufe/einrichten.md`). Die Namen der Vorgänge
+`einrichtung` (`agent/ablaeufe/einrichten.md`), `ansicht`
+(`agent/ablaeufe/ansicht-bauen.md`). Die Namen der Vorgänge
 bleiben, auch wo der Ablauf anders heißt, damit ältere Logs lesbar bleiben.
 
 `Offen:` steht nur für eine Frist, eine von der Person vorgemerkte Aufgabe

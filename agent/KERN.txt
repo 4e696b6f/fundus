@@ -35,6 +35,7 @@ agent/vorlagen/meta.md
 agent/vorlagen/notiz.md
 agent/vorlagen/projekt.md
 agent/vorlagen/quelle.md
+.claude/commands/ansicht-bauen.md
 .claude/commands/aufnehmen.md
 .claude/commands/einrichten.md
 .claude/commands/feierabend.md

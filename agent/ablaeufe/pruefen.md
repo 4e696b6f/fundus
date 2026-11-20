@@ -46,6 +46,10 @@ behebst du, mit neuem `updated:` und einer Zeile unter `## Verlauf`
   `bruecke` und einem Bereichsnamen.
 - **Quellenpfade** → *Muss behoben werden*: `quellen:` zeigt auf eine fehlende
   Datei.
+- **Ansichten** in `eigen/ansichten/` und `ausgaben/` (HTML): Verstößt eine gegen
+  `L05` (Suche wie `agent/ablaeufe/ansicht-bauen.md` § 4) → *Muss behoben
+  werden*, ändern nur auf Auftrag. Ist ihr `fundus-kern` älter als
+  `KERN_VERSION` in `ansicht/uebersicht.html` → *Zur Kenntnis*.
 - **Stau im Eingang:** Dateien, die länger als zwei Wochen in
   `quellen/eingang/` liegen (Änderungsdatum, soweit dein Werkzeug es zeigt,
   sonst nur nennen); bei `Entschieden:` in der Übergabe nennst du die
