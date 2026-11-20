@@ -20,6 +20,12 @@ Agenten.
   `eigen/leitplanken/`), Module und die übrigen Dateien.
 - **Dokument:** eine Seite mit Feldern, Text, Links und den Seiten, die auf
   sie verweisen. Ein rot gepunkteter Link führt ins Leere.
+- **Auswertung:** wie weit deine Leitfragen sind, wie gut jeder Bereich
+  belegt ist, auf welchen Quellen dein Wissen ruht (und welche Seiten an
+  einer einzigen hängen), was wann dazukam, was in den nächsten zwölf Monaten
+  abläuft und wie viel davon in deinen Worten steht. Unter jeder Zahl steht,
+  was sie zählt; ein Klick führt zu den Seiten dahinter. Die Auswertung zählt
+  nur, sie bewertet nichts.
 
 PDFs und Bilder öffnen sich per Klick in einem neuen Tab.
 
@@ -44,3 +50,21 @@ Obsidian so heißt wie der Ordner. Das ist so, bis du ihn dort umbenennst. Ordne
 Punkt vorn (`.obsidian/`, `.git/`) und `agent/vorlagen/` liest die Ansicht nicht.
 Zeigt sie etwas Falsches, schreib es in die
 [Issues](https://github.com/4e696b6f/fundus/issues).
+
+## Eigene Ansichten
+
+Fehlt dir eine Sicht auf dein Wiki, sag dem Agenten, was du sehen willst:
+
+> Bau mir eine Übersicht, die zeigt, welche Methoden ich schon im Unterricht
+> ausprobiert habe und wie gut sie belegt sind.
+
+(oder kurz `/ansicht-bauen`). Er nimmt das kleinste Mittel, das passt: einen
+Hinweis auf die Auswertung, ein Diagramm in einer Seite, eine Karte in
+Obsidian oder eine eigene Ansicht in `eigen/ansichten/`. Die öffnest du wie
+diese: Doppelklick, Ordner wählen.
+
+Jede Ansicht, die er baut, bleibt auf deinem Rechner: Sie lädt nichts aus dem
+Internet, schickt nichts weg und ändert keine Datei (Leitplanke `L05`). Soll
+etwas daraus ins Wiki, bietet sie dir eine Notiz zum Herunterladen an, die du
+in `quellen/eingang/` legst. Deine Ansichten gehören dir, kein Update ändert
+sie.

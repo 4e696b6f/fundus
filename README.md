@@ -71,6 +71,7 @@ nächsten Schritt vor, etwa eine Prüfung. Alles, was er kann:
 | „Schreib mir ein Rundschreiben zu …“ | `/schreiben` | Ein Entwurf aus deinem Wiki in `ausgaben/`, die Belege in einem Abschnitt darunter. |
 | „Prüf das Wiki.“ | `/pruefen` | Bericht: tote Links, Veraltetes, Widersprüche, Lücken. |
 | „Was hängt zusammen?“ | `/zusammenhaenge` | Verbindungen über deine Themen hinweg. |
+| „Bau mir eine Übersicht, die zeigt …“ | `/ansicht-bauen` | Eine eigene Auswertung oder Grafik für den Browser, in `eigen/ansichten/`; sie bleibt auf deinem Rechner. |
 | „Feierabend.“ | `/feierabend` | Der Agent schreibt auf, wo ihr steht. |
 
 Die Kurzbefehle zeigt Claude Code, wenn du `/` tippst. Andere Programme
@@ -108,7 +109,7 @@ verstehen die Sätze.
 | `wiki/` | Schreibt der Agent. Du liest. |
 | `ausgaben/` | Texte, die der Agent auf deinen Auftrag für dich schreibt. Sie gehören dir. |
 | `eigen/` | Was du an Fundus anpasst, und das Gedächtnis des Agenten. Bleibt bei jedem Update. |
-| `ansicht/uebersicht.html` | Dein Wiki im Browser, ohne Internet ([Anleitung](handbuch/ANSICHT.md)). |
+| `ansicht/uebersicht.html` | Dein Wiki im Browser, ohne Internet, mit einer Auswertung deiner Leitfragen, Belege und Fristen ([Anleitung](handbuch/ANSICHT.md)). |
 | `handbuch/` | Anleitungen für dich, dazu ein [Glossar](handbuch/GLOSSAR.md). |
 | `module/` | Fertige Wissenspakete, siehe unten. |
 
