@@ -6,6 +6,17 @@ eigene Wiki kopieren; welche das sind, steht ab 0.4 in `agent/KERN.txt`.
 `SOUL.md`, `EINRICHTUNG.md`, `eigen/`, `wiki/` und `quellen/` (bis 0.3 auch
 `agent/gedaechtnis/`) bleiben dabei immer unberührt.
 
+## 0.4.1 · 2026-11-20 · Entwurf
+
+**Ohne Terminal.** Das Handbuch führt jetzt über die Claude-App für Mac und
+Windows: installieren, links **Code**, unter dem Eingabefeld den
+Wiki-Ordner öffnen. Kein Befehl zum Abtippen mehr, auch nicht beim
+täglichen Start. Das Terminal bleibt als Weg für Kundige.
+Änderungen an den Regeln des Agenten gibt es keine.
+
+Übernehmen: nichts. Wer will, kopiert `handbuch/EINRICHTEN.md`, `README.md`
+und `agent/VERSION` aus der neuen Version.
+
 ## 0.4 · 2026-11-18 · Entwurf
 
 Enthält alles aus 0.3, das nicht einzeln veröffentlicht wurde. Ziel: ZIP
