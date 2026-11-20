@@ -154,6 +154,7 @@ main { max-width: var(--breite); margin: 0 auto; padding: var(--a-5); }
 .raster .breit { grid-column: 1 / -1; }
 .vorbehalt { margin: 0 0 var(--a-4); color: var(--text-2); font-size: var(--t-2); max-width: var(--lese); }
 .gezaehlt { margin: var(--a-3) 0 0; font-size: var(--t-1); color: var(--text-3); }
+.eintraege .unter.fehler { color: var(--tot); }
 .kreuz { width: 100%; border-collapse: collapse; font-size: var(--t-2); font-variant-numeric: tabular-nums; }
 .kreuz th, .kreuz td { padding: 6px 8px; text-align: right; border-top: 1px solid var(--linie); }
 .kreuz th:first-child, .kreuz td:first-child { text-align: left; }
@@ -165,7 +166,7 @@ main { max-width: var(--breite); margin: 0 auto; padding: var(--a-5); }
 .stapel span { display: block; height: 100%; }
 .legende { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: var(--a-2) 0 0; padding: 0; list-style: none; font-size: var(--t-1); color: var(--text-2); }
 .legende i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
-.diagramm { width: 100%; height: auto; display: block; overflow: visible; }
+.diagramm { max-width: 100%; height: auto; display: block; overflow: visible; }
 .diagramm text { font-size: 10px; fill: var(--text-3); font-family: var(--schrift); }
 .kennzahlen.klein dd { font-size: var(--t-5); }
 
@@ -312,10 +313,12 @@ a.mehrdeutig { text-decoration: underline dotted; }
 var FundusKern = (function () {
   'use strict';
 
-  /* Datenvertrag für eigene Ansichten (agent/ablaeufe/ansicht-bauen.md): Was zurückgegeben wird und die Felder der
-     Dokumente (pfad, zone, bereich, typ, status, stimme, sicherheit, updated, tags, fm, links, eingehend, titel)
-     bleiben in derselben Hauptversion gleich. Ändert sich daran etwas, steigt KERN_VERSION. */
-  var KERN_VERSION = '1';
+  /* Datenvertrag für eigene Ansichten (agent/ablaeufe/ansicht-bauen.md). In derselben Hauptversion (vor dem Punkt)
+     bleiben gleich: liesOrdner(griff), ausDateiliste(files), leseTexte(eintraege), bereinige, baueIndex(vault, eintraege),
+     auswertung(idx, heute) mit ihren Teilen, faelligkeiten, zeilenUnter, renderMarkdown, inline, esc, datum, heuteIso,
+     und die Felder der Dokumente: pfad, zone, bereich, typ, status, stimme, sicherheit, updated, tags, fm, links,
+     eingehend, titel, text (nur HTML in eigen/ und ausgaben/). Eine Korrektur erhöht die Stelle nach dem Punkt. */
+  var KERN_VERSION = '1.0';
 
   var BILD = /\.(png|jpe?g|gif|webp|svg|bmp|avif)$/i;
   /* Nachschlagetabellen ohne Prototyp: Schlüssel kommen aus Dateien (Ordnernamen, Callout-Typen). */
@@ -733,7 +736,7 @@ var FundusKern = (function () {
     // Ort einer Leitplanke; Leitplanke ist sie erst mit id: im Frontmatter (FORMAT.md, SCHEMA.md eines Moduls sind keine)
     var leitplankenOrt = d.istMd && ((d.zone === 'leitplanken' && t.length === 3) || (d.zone === 'module' && t.length >= 4 && t[2] === 'leitplanken'));
     d.istLeitplanke = false;
-    if (!d.istMd) { d.titel = d.name; d.suchtext = p.toLowerCase(); if (d.zone === 'ausgaben') d.updated = datum(d.name.slice(0, 10)); return d; }
+    if (!d.istMd) { d.titel = d.name; d.suchtext = p.toLowerCase(); if (d.zone === 'ausgaben') d.updated = datum(d.name.slice(0, 10)); if (e.text != null) d.text = e.text; return d; }
     var f = parseFrontmatter(e.text || '');
     d.fm = f.daten; d.fmFehler = f.fehler; d.fmRoh = f.roh; d.koerper = f.koerper; d.hatFm = f.hat;
     d.istLeitplanke = leitplankenOrt && !!text(d.fm.id);
@@ -906,14 +909,92 @@ var FundusKern = (function () {
       .sort(function (a, b) { return a.updated < b.updated ? 1 : a.updated > b.updated ? -1 : a.pfad.localeCompare(b.pfad, 'de'); });
   }
 
+  /* ---------- Einlesen (ohne DOM, nur lesend) ---------- */
+
+  /* Ordner über einen Griff aus showDirectoryPicker({ mode: 'read' }) lesen; Punkt-Ordner und agent/vorlagen/ nicht */
+  function liesOrdner(h) {
+    var aus = [];
+    function lauf(dir, pre) {
+      var auftraege = [], it = dir.values();
+      function weiter() {
+        return it.next().then(function (r) {
+          if (r.done) return Promise.all(auftraege);
+          var e = r.value, p = pre ? pre + '/' + e.name : e.name;
+          if (e.name.charAt(0) !== '.' && !(pre === 'agent' && e.name === 'vorlagen' && e.kind === 'directory')) {
+            if (e.kind === 'directory') auftraege.push(lauf(e, p));
+            else auftraege.push(e.getFile().then(function (f) { aus.push({ pfad: p, datei: f }); }));
+          }
+          return weiter();
+        });
+      }
+      return weiter();
+    }
+    return lauf(h, '').then(function () { return aus; });
+  }
+  /* Dateien aus <input type="file" webkitdirectory> → { vault, liste } */
+  function ausDateiliste(fs) {
+    fs = Array.prototype.slice.call(fs || []);
+    var vault = fs.length ? (fs[0].webkitRelativePath || '').split('/')[0] || 'fundus' : 'fundus';
+    return { vault: vault, liste: fs.map(function (f) { var p = (f.webkitRelativePath || f.name).split('/'); return { pfad: p.slice(1).join('/') || f.name, datei: f }; }) };
+  }
+  /* Text lesen: alle .md, dazu HTML in eigen/ und ausgaben/ (für ansichtenPruefen). Liefert bereinige(…) mit Texten */
+  function leseTexte(liste) {
+    var roh = liste.map(function (e) { return { pfad: e.pfad, groesse: e.datei.size, geaendert: e.datei.lastModified, datei: e.datei }; });
+    var br = bereinige(roh);
+    return Promise.all(br.eintraege.map(function (e) {
+      var html = /\.html?$/i.test(e.pfad) && /^(eigen|ausgaben)\//.test(e.pfad);
+      return /\.md$/i.test(e.pfad) || html ? e.datei.text().then(function (t) { e.text = t; }) : null;
+    })).then(function () { return br; });
+  }
+
+  /* ---------- Eigene Ansichten prüfen (L05) ----------
+     Dieselben Regeln wie agent/ablaeufe/ansicht-bauen.md § 4 und die Prüfung A14. referenz = { csp, kern } aus dieser Datei. */
+  var RE_CSP = /<meta\s+http-equiv=["']Content-Security-Policy["']\s+content=(["'])([\s\S]*?)\1/i;
+  /* Muster als geteilte Zeichenketten (· wird entfernt), damit diese Datei und jede Ansicht mit kopiertem Kern sich nicht
+     selbst meldet; dieselbe Liste prüft A14 in der Werkstatt. */
+  var VERBOTEN = [
+    ['\\bfe·tch\\s*\\(', 'fe·tch'], ['\\bXMLHttp·Request\\b', 'XMLHttp·Request'], ['\\bWeb·Socket\\b', 'Web·Socket'], ['\\bsend·Beacon\\b', 'send·Beacon'],
+    ['\\bEvent·Source\\b', 'Event·Source'], ['\\bRTCPeer·Connection\\b', 'RTCPeer·Connection'], ['\\bservice·Worker\\b', 'service·Worker'],
+    ['\\bcreate·Writable\\b', 'create·Writable'], ['\\bremove·Entry\\b', 'remove·Entry'], ['\\bshowSave·FilePicker\\b', 'showSave·FilePicker'],
+    ['mode\\s*:\\s*["\']read·write', 'mode: read·write'], ['\\bwindow\\.op·en\\s*\\(', 'window.op·en'], ['\\bloca·tion\\.(?:assign|replace)\\s*\\(', 'loca·tion.assign/replace'],
+    ['\\bloca·tion(?:\\.href)?\\s*=(?!=)', 'loca·tion ='], ['http-equiv\\s*=\\s*["\']?re·fresh', 'meta re·fresh', 'i'],
+    ['rel\\s*=\\s*["\']?(?:dns-pre·fetch|pre·fetch|pre·connect|pre·render)', 'pre·fetch', 'i'],
+    ['\\b(?:src|srcset|action|data|poster)\\s*=\\s*["\']?\\s*(?:https?:)?/·/', 'lädt von außen', 'i'], ['<link\\b[^>]*\\bhref\\s*=\\s*["\']?\\s*(?:https?:)?/·/', 'lädt von außen', 'i'],
+    ['url\\(\\s*["\']?\\s*(?:https?:)?/·/', 'lädt von außen', 'i'], ['@im·port\\b', '@im·port', 'i'], ['\\bim·port\\s*\\(?\\s*["\'](?:https?:)?/·/', 'lädt von außen']
+  ].map(function (v) { return [new RegExp(v[0].replace(/·/g, ''), v[2] || ''), v[1].replace(/·/g, '')]; });
+  function kernBlock(t) { var m = /<script id="fundus-kern">([\s\S]*?)<\/script>/.exec(t || ''); return m ? m[1] : null; }
+  function ansichtenPruefen(idx, referenz) {
+    return idx.docs.filter(function (d) { return /\.html?$/i.test(d.pfad) && /^(eigen\/ansichten|ausgaben)\//.test(d.pfad) && d.text != null; }).map(function (d) {
+      var t = d.text, befunde = [], m = RE_CSP.exec(t), erstesSkript = t.search(/<script\b/i);
+      if (!m) befunde.push('Sicherheitszeile fehlt');
+      else {
+        if (referenz && referenz.csp && m[2] !== referenz.csp) befunde.push('Sicherheitszeile weicht ab');
+        if (erstesSkript >= 0 && erstesSkript < m.index) befunde.push('Sicherheitszeile steht nach einem Skript');
+      }
+      VERBOTEN.forEach(function (v) { if (v[0].test(t) && befunde.indexOf(v[1]) < 0) befunde.push(v[1]); });
+      var k = kernBlock(t), vm = /<meta\s+name=["']fundus-kern["']\s+content=["']([^"']*)["']/i.exec(t), version = vm ? vm[1] : '';
+      var kern = k == null ? 'ohne' : referenz && referenz.kern != null && k === referenz.kern ? 'gleich' : 'anders';
+      var haupt = function (v) { return String(v || '').split('.')[0]; };
+      if (kern === 'anders' && haupt(version) !== haupt(KERN_VERSION)) befunde.push('Kern einer anderen Hauptversion (' + (version || '?') + ')');
+      return { pfad: d.pfad, name: d.name, befunde: befunde, kern: kern, version: version, gebaut: !!vm };
+    }).sort(function (a, b) { return a.pfad.localeCompare(b.pfad, 'de'); });
+  }
+
   /* ---------- Auswertung ----------
      Zählt nur, was in den Dateien steht, und deutet nichts (agent/leitplanken/L05-ansichten-lokal-und-lesend.md).
      Die Oberfläche sagt bei jeder Zahl, was sie zählt. */
 
   var SICHERHEIT = ['hoch', 'mittel', 'niedrig', 'strittig'], STIMMEN = ['ich', 'gemischt', 'agent'];
-  /* Seiten mit Inhalt: in einem Ordner von wiki/, ohne Meta-Seiten (index.md und log.md liegen in keinem Ordner) */
+  /* Seiten mit Inhalt: in einem Ordner von wiki/, ohne Meta-Seiten (index.md und log.md liegen in keinem Ordner),
+     ohne veraltete und ersetzte Seiten */
   function inhaltsseiten(idx) {
-    return idx.docs.filter(function (d) { return d.zone === 'wiki' && d.istMd && d.bereich && d.typ !== 'meta' && d.bereich.toLowerCase() !== 'meta'; });
+    return idx.docs.filter(function (d) {
+      return d.zone === 'wiki' && d.istMd && d.bereich && d.typ !== 'meta' && d.bereich.toLowerCase() !== 'meta' && d.status !== 'veraltet' && d.status !== 'ersetzt';
+    });
+  }
+  /* Seiten direkt in wiki/ außer index.md und log.md: gehören zu keinem Bereich und fehlen in den Kacheln */
+  function ohneBereich(idx) {
+    return idx.docs.filter(function (d) { return d.zone === 'wiki' && d.istMd && !d.bereich && !/^wiki\/(index|log)\.md$/i.test(d.pfad); });
   }
   /* Kreuztabelle Bereich × Feldwert; Werte außerhalb der Liste zählen als 'ohne' */
   function kreuz(idx, feld, werte) {
@@ -922,13 +1003,13 @@ var FundusKern = (function () {
     inhaltsseiten(idx).forEach(function (d) {
       var z = m[d.bereich];
       if (!z) { z = m[d.bereich] = { name: d.bereich, gesamt: 0 }; spalten.forEach(function (w) { z[w] = 0; }); }
-      var w = werte.indexOf(d[feld]) >= 0 ? d[feld] : 'ohne';
+      var v = String(d[feld] || '').trim().toLowerCase(), w = werte.indexOf(v) >= 0 ? v : 'ohne';
       z[w]++; z.gesamt++; summe[w]++; summe.gesamt++;
     });
     var zeilen = Object.keys(m).map(function (k) { return m[k]; }).sort(function (a, b) {
       return (!!KEIN_THEMA[a.name.toLowerCase()] - !!KEIN_THEMA[b.name.toLowerCase()]) || b.gesamt - a.gesamt || a.name.localeCompare(b.name, 'de');
     });
-    return { feld: feld, spalten: spalten, zeilen: zeilen, summe: summe };
+    return { feld: feld, spalten: spalten, zeilen: zeilen, summe: summe, ohneBereich: ohneBereich(idx).length };
   }
   function beleglage(idx) { return kreuz(idx, 'sicherheit', SICHERHEIT); }
   function stimmen(idx) { return kreuz(idx, 'stimme', STIMMEN); }
@@ -952,9 +1033,10 @@ var FundusKern = (function () {
     };
   }
 
-  /* Worauf Seiten ruhen: Belege einer Seite sind die quelle-Seiten, auf die sie verlinkt, und die Dateien in quellen:.
-     Eine Datei in quellen/, für die es eine quelle-Seite gibt, zählt als diese Seite (nicht doppelt).
-     Ohne quelle- und notiz-Seiten selbst: Die geben ja eine Quelle wieder. */
+  /* Worauf Seiten ruhen: nur begriff- und akteur-Seiten, denn sie tragen Kernaussagen mit Fundstelle (Brücken, Projekte,
+     Notizen und Quellen stützen sich auf andere Seiten oder sind selbst die Quelle). Belege sind die verlinkten
+     quelle-Seiten (nicht veraltet oder ersetzt), Dateien in quellen: und Links in ein Modul. Eine Datei in quellen/, für
+     die es eine quelle-Seite gibt, zählt als diese Seite (nicht doppelt). */
   function belege(idx) {
     var alle = inhaltsseiten(idx), seiteZuDatei = Object.create(null);
     alle.forEach(function (d) {
@@ -963,13 +1045,14 @@ var FundusKern = (function () {
     });
     var traeger = Object.create(null), seiten = [];
     alle.forEach(function (d) {
-      if (d.typ === 'quelle' || d.typ === 'notiz') return;
+      if (d.typ !== 'begriff' && d.typ !== 'akteur') return;
       var b = Object.create(null);
       d.links.forEach(function (l) {
         if (!l.pfad || l.pfad === d.pfad) return;
         var z = idx.nachPfad[l.pfad];
         if (l.art === 'quelle') b[seiteZuDatei[l.pfad] || l.pfad] = 1;
-        else if (z && z.zone === 'wiki' && z.typ === 'quelle') b[l.pfad] = 1;
+        else if (z && z.zone === 'wiki' && z.typ === 'quelle' && z.status !== 'veraltet' && z.status !== 'ersetzt') b[l.pfad] = 1;
+        else if (z && z.zone === 'module') b[l.pfad] = 1;
       });
       var liste = Object.keys(b);
       liste.forEach(function (p) { (traeger[p] = traeger[p] || []).push(d.pfad); });
@@ -1347,7 +1430,8 @@ var FundusKern = (function () {
     datum: datum, plusTage: plusTage, tage: tage, heuteIso: heuteIso, datumDe: datumDe, relativ: relativ, groesse: groesse,
     teileWiki: teileWiki, loeseWiki: loeseWiki, loeseRelativ: loeseRelativ, baueIndex: baueIndex, statistik: statistik,
     faelligkeiten: faelligkeiten, offeneZeilen: offeneZeilen, zeilenUnter: zeilenUnter, auswertung: auswertung, beleglage: beleglage,
-    stimmen: stimmen, leitfragenStand: leitfragenStand, belege: belege, verlauf: verlauf, fristenJeMonat: fristenJeMonat, KERN_VERSION: KERN_VERSION, uebergabe: uebergabe, bereiche: bereiche, module: module,
+    stimmen: stimmen, leitfragenStand: leitfragenStand, belege: belege, verlauf: verlauf, fristenJeMonat: fristenJeMonat, KERN_VERSION: KERN_VERSION,
+    liesOrdner: liesOrdner, ausDateiliste: ausDateiliste, leseTexte: leseTexte, ansichtenPruefen: ansichtenPruefen, ohneBereich: ohneBereich, uebergabe: uebergabe, bereiche: bereiche, module: module,
     zuletzt: zuletzt, stand: stand, eingang: eingang, ausgaben: ausgaben, REITER: REITER, imReiter: imReiter, facette: facette, filtere: filtere,
     facettenWerte: facettenWerte, ausschnitt: ausschnitt, renderMarkdown: renderMarkdown, kontext: kontext, inline: inline,
     rendereDoc: rendereDoc, obsidianUri: obsidianUri, BILD: BILD, nfc: nfc, schluessel: schluessel, ohneProto: ohneProto
@@ -1396,35 +1480,12 @@ var FundusKern = (function () {
   }
 
   /* ---------- Einlesen ---------- */
-  function lieseGriff(h) {
-    var aus = [];
-    function lauf(dir, pre) {
-      var auftraege = [];
-      var it = dir.values();
-      function weiter() {
-        return it.next().then(function (r) {
-          if (r.done) return Promise.all(auftraege);
-          var e = r.value, p = pre ? pre + '/' + e.name : e.name;
-          if (e.name.charAt(0) !== '.' && !(pre === 'agent' && e.name === 'vorlagen' && e.kind === 'directory')) {
-            if (e.kind === 'directory') auftraege.push(lauf(e, p));
-            else auftraege.push(e.getFile().then(function (f) { aus.push({ pfad: p, datei: f }); }));
-          }
-          return weiter();
-        });
-      }
-      return weiter();
-    }
-    return lauf(h, '').then(function () { return aus; });
-  }
   function einlesen(vault, liste) {
     var t0 = performance.now();
     haupt.innerHTML = '<div class="start"><p class="laden">Lese ' + liste.length + ' Dateien …</p></div>';
-    var roh = liste.map(function (e) { return { pfad: e.pfad, groesse: e.datei.size, geaendert: e.datei.lastModified, datei: e.datei }; });
-    var br = K.bereinige(roh), b = br.eintraege;
-    if (br.unterordner) vault = br.unterordner;
-    return Promise.all(b.map(function (e) {
-      return /\.md$/i.test(e.pfad) ? e.datei.text().then(function (t) { e.text = t; }) : null;
-    })).then(function () {
+    var b;
+    return K.leseTexte(liste).then(function (br) {
+      b = br.eintraege; if (br.unterordner) vault = br.unterordner;
       Object.keys(S.urls).forEach(function (k) { URL.revokeObjectURL(S.urls[k]); });
       S.urls = Object.create(null); S.dateien = Object.create(null); S.liste = {}; S.scroll = {};
       S.idx = K.baueIndex(vault, b);
@@ -1443,12 +1504,10 @@ var FundusKern = (function () {
     });
   }
   function ausEingabe() {
-    var fs = Array.prototype.slice.call(eingabe.files || []);
-    if (!fs.length) return;
-    var vault = (fs[0].webkitRelativePath || '').split('/')[0] || 'fundus';
+    var dl = K.ausDateiliste(eingabe.files);
+    if (!dl.liste.length) return;
     S.griff = null;
-    einlesen(vault, fs.map(function (f) { var p = (f.webkitRelativePath || f.name).split('/'); return { pfad: p.slice(1).join('/') || f.name, datei: f }; }))
-      .catch(zeigeFehler);
+    einlesen(dl.vault, dl.liste).catch(zeigeFehler);
     eingabe.value = '';
   }
   eingabe.addEventListener('change', ausEingabe);
@@ -1458,7 +1517,7 @@ var FundusKern = (function () {
       if (p !== 'granted') { S.fehler = 'Der Browser hat den Zugriff auf „' + h.name + '“ nicht erlaubt. Wähle den Ordner neu.'; zeigeStart(); return; }
       S.griff = h;
       haupt.innerHTML = '<div class="start"><p class="laden">Lese den Ordner „' + esc(h.name) + '“ …</p></div>';
-      return lieseGriff(h).then(function (liste) { return einlesen(h.name, liste); });
+      return K.liesOrdner(h).then(function (liste) { return einlesen(h.name, liste); });
     });
   }
   function ordnerWaehlen() {
@@ -1653,7 +1712,18 @@ var FundusKern = (function () {
     var k9 = kachel({ klasse: zust.length ? '' : 'ruhig', label: 'Dateien', zahl: zust.length || null, frage: 'Hakt etwas an den Dateien selbst?',
       inhalt: zust.length ? '<ul class="eintraege">' + zust.join('') + '</ul>' : '', leer: 'Alle Frontmatter lesbar, jeder Link findet sein Ziel.' });
 
-    h += '<div class="raster">' + k1 + k2 + k3 + k11 + k4 + k5 + k9 + k6 + k7 + k8 + k10 + '</div>';
+    var cspMeta = document.querySelector('meta[http-equiv="Content-Security-Policy"]'), kernEl = document.getElementById('fundus-kern');
+    var ans = K.ansichtenPruefen(idx, { csp: cspMeta ? cspMeta.getAttribute('content') : '', kern: kernEl ? kernEl.textContent : null });
+    var ansFehler = ans.filter(function (a) { return a.befunde.length; });
+    var k12 = ans.length ? kachel({ klasse: ansFehler.length ? 'warn' : '', label: 'Eigene Ansichten', zahl: ans.length, frage: 'Bleiben meine Ansichten auf dem Rechner und lesen nur?',
+      inhalt: '<ul class="eintraege">' + ans.map(function (a) {
+        return '<li><span class="haupt"><a href="#" data-datei="' + esc(a.pfad) + '">' + esc(a.name) + '</a><span class="unter">' + esc(a.pfad) +
+          (a.befunde.length ? '</span><span class="unter fehler">' + esc(a.befunde.join(' · ')) : '') + '</span></span><span class="neben">' +
+          (a.befunde.length ? '✗ prüfen lassen' : a.kern === 'anders' ? 'ok · Kern weicht ab' : 'ok') + '</span></li>';
+      }).join('') + '</ul>',
+      fuss: '<p class="gezaehlt">Geprüft: Sicherheitszeile wie in dieser Datei und vor jedem Skript, nichts von außen, kein Senden, kein Schreiben (Leitplanke <code>L05</code>), und ob der eingebaute Kern dem dieser Ansicht gleicht. ' +
+        (ansFehler.length ? 'Öffne eine Ansicht mit ✗ nicht, sondern sag deinem Agenten „prüfen“.' : '') + '</p>' }) : '';
+    h += '<div class="raster">' + k12 + k1 + k2 + k3 + k11 + k4 + k5 + k9 + k6 + k7 + k8 + k10 + '</div>';
     haupt.innerHTML = h;
   }
   function reiterVon(pfad) {
@@ -1859,7 +1929,7 @@ var FundusKern = (function () {
   function saeulen(spalten, aria) {
     var max = spalten.reduce(function (m, s) { return Math.max(m, s.teile.reduce(function (a, t) { return a + t.wert; }, 0)); }, 0) || 1;
     var b = 22, abst = 8, h = 120, w = spalten.length * (b + abst);
-    var svg = '<svg class="diagramm" viewBox="0 -14 ' + w + ' ' + (h + 34) + '" role="img" aria-label="' + esc(aria) + '">';
+    var svg = '<svg class="diagramm" width="' + w + '" height="' + (h + 34) + '" viewBox="0 -14 ' + w + ' ' + (h + 34) + '" role="img" aria-label="' + esc(aria) + '">';
     spalten.forEach(function (s, i) {
       var x = i * (b + abst), y = h, summe = 0;
       s.teile.forEach(function (t) {
@@ -1878,6 +1948,7 @@ var FundusKern = (function () {
     var zelle = function (z, sp) {
       var n = z[sp]; if (!n) return '<td class="null">·</td>';
       var anteil = Math.round(n / z.gesamt * 100), filter = { bereich: z.name };
+      if (sp === 'ohne') return '<td class="zelle"><span title="' + esc(n + ' von ' + z.gesamt + ' Seiten in ' + z.name) + '" style="display:block;padding:2px 6px;border-radius:var(--r-1);background:color-mix(in srgb, ' + farbe(FARBE.ohne) + ' ' + Math.max(8, Math.round(anteil * 0.6)) + '%, transparent)">' + n + '</span></td>';
       filter[k.feld] = sp === 'ohne' ? '(ohne)' : sp;
       return '<td class="zelle"><a href="' + listeHash('wiki', filter) + '" title="' + esc(n + ' von ' + z.gesamt + ' Seiten in ' + z.name + ' (' + anteil + ' %)') +
         '" style="background:color-mix(in srgb, ' + farbe(FARBE[sp]) + ' ' + Math.max(8, Math.round(anteil * 0.6)) + '%, transparent)">' + n + '</a></td>';
@@ -1886,6 +1957,7 @@ var FundusKern = (function () {
       k.zeilen.map(function (z) { return '<tr><td>' + esc(z.name) + '</td>' + k.spalten.map(function (sp) { return zelle(z, sp); }).join('') + '<td>' + z.gesamt + '</td></tr>'; }).join('') +
       '</tbody><tfoot><tr><td>Summe</td>' + k.spalten.map(function (sp) { return '<td>' + (k.summe[sp] || '·') + '</td>'; }).join('') + '<td>' + k.summe.gesamt + '</td></tr></tfoot></table>';
   }
+  function seitenZahl(n) { return n === 1 ? '1 Seite' : n + ' Seiten'; }
   function gezaehlt(t) { return '<p class="gezaehlt">Gezählt: ' + t + '</p>'; }
 
   function zeigeAuswertung() {
@@ -1918,19 +1990,21 @@ var FundusKern = (function () {
       beInhalt = '<dl class="kennzahlen klein"><div><dt>ohne Beleg</dt><dd>' + be.ohne.length + '</dd></div><div><dt>eine Quelle</dt><dd>' + be.eine.length + '</dd></div><div><dt>mehrere</dt><dd>' + be.mehrere + '</dd></div></dl>' +
         (be.traeger.length ? '<h3 style="font-size:var(--t-2);margin:14px 0 4px">Quellen, die am meisten tragen</h3><ul class="eintraege">' + be.traeger.slice(0, 6).map(function (t) {
           var d = idx.nachPfad[t.pfad];
-          return '<li><span class="haupt">' + (d ? docLink(d, t.titel) : esc(t.titel)) + '</span><span class="neben">' + t.seiten + ' Seiten' + (t.allein ? ', ' + t.allein + ' nur auf ihr' : '') + '</span></li>';
+          return '<li><span class="haupt">' + (d ? docLink(d, t.titel) : esc(t.titel)) + '</span><span class="neben">' + seitenZahl(t.seiten) + (t.allein ? ', ' + t.allein + ' nur auf ihr' : '') + '</span></li>';
         }).join('') + '</ul>' : '') +
         (be.eine.length ? '<details style="margin-top:8px"><summary>Seiten an einer einzigen Quelle · ' + be.eine.length + '</summary><ul class="eintraege zeilen">' + be.eine.map(function (x) { return '<li>' + docLink(idx.nachPfad[x.pfad], x.titel) + ' <span class="typen">' + esc(x.bereich) + '</span></li>'; }).join('') + '</ul></details>' : '') +
         (be.ohne.length ? '<details style="margin-top:8px"><summary>Seiten ohne Beleg · ' + be.ohne.length + '</summary><ul class="eintraege zeilen">' + be.ohne.map(function (x) { return '<li>' + docLink(idx.nachPfad[x.pfad], x.titel) + ' <span class="typen">' + esc(x.bereich) + '</span></li>'; }).join('') + '</ul></details>' : '');
     }
-    h += kachel({ label: 'Belege', zahl: be.seiten || null, frage: 'Worauf ruht mein Wissen?', inhalt: beInhalt, klasse: be.ohne.length ? 'bald' : '',
-      leer: 'Noch keine Seiten außer Quellen und Notizen.',
-      fuss: gezaehlt('je Seite die verlinkten <code>quelle</code>-Seiten und die Dateien in <code>quellen:</code>, ohne Quellen- und Notizseiten selbst. Mehrere Belege sind kein Urteil über ihre Güte.') });
+    h += kachel({ label: 'Belege', zahl: be.seiten || null, frage: 'Worauf ruht mein Wissen?', inhalt: beInhalt,
+      leer: 'Noch keine Begriffs- oder Akteursseiten.',
+      fuss: gezaehlt('je <code>begriff</code>- und <code>akteur</code>-Seite die verlinkten <code>quelle</code>-Seiten (auch unter Verbindungen), die Dateien in <code>quellen:</code> und Links in ein Modul; ohne veraltete Seiten. Brücken, Projekte und Notizen stützen sich auf andere Seiten und zählen nicht. Mehrere Belege sind kein Urteil über ihre Güte.') });
 
     // Beleglage
     h += kachel({ klasse: 'breit', label: 'Sicherheit', zahl: a.beleglage.summe.gesamt || null, frage: 'Wo ist mein Wissen gut belegt, wo dünn?',
-      inhalt: a.beleglage.summe.gesamt ? kreuzTabelle(a.beleglage, { ohne: 'ohne Angabe' }, '') : '', leer: 'Noch keine Seiten in Bereichen.',
-      fuss: gezaehlt('<code>sicherheit:</code> der Seiten in Bereichsordnern, ohne Meta-Seiten. Notizen haben kein Feld, sie stehen unter „ohne Angabe“. Farbe = Anteil im Bereich.') });
+      inhalt: a.beleglage.summe.gesamt ? kreuzTabelle(a.beleglage, { ohne: 'ohne gültige Angabe' }, '') +
+        (a.beleglage.ohneBereich ? '<p class="leer" style="margin-top:8px">' + a.beleglage.ohneBereich + ' Seiten liegen direkt in <code>wiki/</code> und gehören zu keinem Bereich; sie fehlen hier.</p>' : '') : '',
+      leer: 'Noch keine Seiten in Bereichen.',
+      fuss: gezaehlt('<code>sicherheit:</code> der Seiten in Bereichsordnern, ohne Meta-Seiten und ohne veraltete oder ersetzte Seiten. Notizen haben kein Feld und stehen unter „ohne gültige Angabe“, ebenso unbekannte Werte. Farbe = Anteil im Bereich.') });
 
     // Verlauf
     var v = a.verlauf, vInhalt = '';
@@ -1952,15 +2026,15 @@ var FundusKern = (function () {
         '<ul class="eintraege" style="margin-top:10px">' + fr.monate.reduce(function (l, m) { return l.concat(m.eintraege); }, []).slice(0, 6).map(function (e) {
           var d = idx.nachPfad[e.pfad]; return '<li><span class="haupt">' + (d ? docLink(d, e.titel) : esc(e.titel)) + ' <span class="typen">' + esc(e.art) + '</span></span><span class="neben">' + K.datumDe(e.datum) + '</span></li>';
         }).join('') + '</ul>' : '');
-    h += kachel({ label: 'Fristen', zahl: frSumme || null, frage: 'Was muss ich in den nächsten zwölf Monaten neu prüfen?', inhalt: frInhalt, klasse: fr.abgelaufen.length ? 'warn' : '',
-      leer: 'In den nächsten zwölf Monaten läuft nichts ab.', fuss: gezaehlt('<code>pruefen_bis:</code> und <code>verfaellt:</code> in Wiki-Seiten, Leitplanken und Modulen.') });
+    h += kachel({ label: 'Fristen', zahl: frSumme || null, frage: 'Was läuft in den nächsten zwölf Monaten ab?', inhalt: frInhalt, klasse: fr.abgelaufen.length ? 'warn' : '',
+      leer: 'In den nächsten zwölf Monaten läuft nichts ab.', fuss: gezaehlt('<code>pruefen_bis:</code> und <code>verfaellt:</code> in Wiki-Seiten, Leitplanken und Modulen; die Art steht neben dem Titel. Leitplanken und Module prüfen ihre Autorinnen und Autoren.') });
 
     // Stimme
     var st = a.stimmen, stInhalt = '';
     if (st.summe.gesamt) {
       var tn = ['ich', 'gemischt', 'agent', 'ohne'];
       stInhalt = '<ul class="eintraege">' + st.zeilen.map(function (z) {
-        return '<li style="display:block"><span class="haupt">' + esc(z.name) + '</span> <span class="typen">' + z.gesamt + ' Seiten, ' + Math.round((z.ich + z.gemischt) / z.gesamt * 100) + ' % mit deinen Worten</span><div class="stapel" style="margin-top:4px">' +
+        return '<li style="display:block"><span class="haupt">' + esc(z.name) + '</span> <span class="typen">' + seitenZahl(z.gesamt) + ': ' + z.ich + ' ganz, ' + z.gemischt + ' teils in deinen Worten</span><div class="stapel" style="margin-top:4px">' +
           tn.map(function (t) { return z[t] ? '<span title="' + esc(t + ': ' + z[t]) + '" style="width:' + (z[t] / z.gesamt * 100) + '%;background:' + farbe(FARBE[t]) + '"></span>' : ''; }).join('') + '</div></li>';
       }).join('') + '</ul>' + legende([{ name: 'ich', farbe: FARBE.ich }, { name: 'gemischt', farbe: FARBE.gemischt }, { name: 'agent', farbe: FARBE.agent }, { name: 'ohne Angabe', farbe: FARBE.ohne }]);
     }
