@@ -6,6 +6,25 @@ eigene Wiki kopieren; welche das sind, steht ab 0.4 in `agent/KERN.txt`.
 `SOUL.md`, `EINRICHTUNG.md`, `eigen/`, `wiki/` und `quellen/` (bis 0.3 auch
 `agent/gedaechtnis/`) bleiben dabei immer unberührt.
 
+## 0.5 · in Arbeit
+
+**Neu: Auswertung.** Die Ansicht hat einen dritten Reiter: wie weit deine
+Leitfragen sind, wie gut jeder Bereich belegt ist, auf welchen Quellen dein
+Wissen ruht, was wann dazukam, was in den nächsten zwölf Monaten abläuft und
+wie viel davon in deinen Worten steht. Jede Zahl sagt, was sie zählt.
+
+**Neu: eigene Ansichten.** „Bau mir eine Übersicht, die …“ (oder
+`/ansicht-bauen`): Der Agent baut dir eine Auswertung oder Grafik nach
+`agent/ablaeufe/ansicht-bauen.md`, als Diagramm in einer Seite, als Karte in
+Obsidian oder als eigene Ansicht in `eigen/ansichten/`. Neue harte
+Leitplanke `L05`: Eine Ansicht lädt nichts aus dem Netz, sendet nichts und
+schreibt nichts. Seiten dürfen Mermaid-Diagramme enthalten
+(`agent/regeln/SCHEMA.md` → *Diagramme*); `prüfen` meldet Ansichten, die
+gegen `L05` verstoßen.
+
+Übernehmen: die Pfade aus `agent/KERN.txt` wie unter 0.4, Schritt 3; dazu
+den Ordner `eigen/ansichten/` anlegen.
+
 ## 0.4.1 · 2026-11-20 · Entwurf
 
 **Ohne Terminal.** Das Handbuch führt jetzt über die Claude-App für Mac und
