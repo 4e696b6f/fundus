@@ -16,8 +16,8 @@ stattdessen:
   - Der Person sagen, welche Art von Quelle die Lücke schließen würde.
 verweis: []
 fundstellen: []
-geprueft: 2026-11-18
-pruefen_bis: 2027-11-18
+geprueft: 2026-11-20
+pruefen_bis: 2027-11-20
 ---
 
 ## Begründung

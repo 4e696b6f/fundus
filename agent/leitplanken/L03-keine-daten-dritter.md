@@ -18,8 +18,8 @@ stattdessen:
   - Wer in einer veröffentlichten Quelle namentlich mit einer fachlichen Aussage zitiert wird, darf mit Name und Rolle dort stehen, wo die Aussage belegt wird; weitere Angaben über die Person übernimmst du nicht.
 verweis: []
 fundstellen: []
-geprueft: 2026-11-18
-pruefen_bis: 2027-11-18
+geprueft: 2026-11-20
+pruefen_bis: 2027-11-20
 ---
 
 ## Begründung

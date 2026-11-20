@@ -1,12 +1,14 @@
 # Änderungen
 
 Je Version: was sich geändert hat und ob bestehende Wikis etwas übernehmen
-müssen. Übernehmen heißt: die genannten Dateien aus der neuen Version in das
+müssen. Ab 0.5 übernimmt das der Agent: ZIP in den Wiki-Ordner legen,
+„aktualisieren“ sagen (`handbuch/EINRICHTEN.md` → *Neue Fundus-Version*).
+Bis 0.4 hieß Übernehmen: die genannten Dateien aus der neuen Version in das
 eigene Wiki kopieren; welche das sind, steht ab 0.4 in `agent/KERN.txt`.
 `SOUL.md`, `EINRICHTUNG.md`, `eigen/`, `wiki/` und `quellen/` (bis 0.3 auch
 `agent/gedaechtnis/`) bleiben dabei immer unberührt.
 
-## 0.5 · in Arbeit
+## 0.5 · 2026-11-20 · Entwurf
 
 **Neu: Auswertung.** Die Ansicht hat einen dritten Reiter: wie weit deine
 Leitfragen sind, wie gut jeder Bereich belegt ist, auf welchen Quellen dein
@@ -19,11 +21,24 @@ wie viel davon in deinen Worten steht. Jede Zahl sagt, was sie zählt.
 Obsidian oder als eigene Ansicht in `eigen/ansichten/`. Neue harte
 Leitplanke `L05`: Eine Ansicht lädt nichts aus dem Netz, sendet nichts und
 schreibt nichts. Seiten dürfen Mermaid-Diagramme enthalten
-(`agent/regeln/SCHEMA.md` → *Diagramme*); `prüfen` meldet Ansichten, die
-gegen `L05` verstoßen.
+(`agent/regeln/SCHEMA.md` → *Diagramme*); `prüfen` und die Übersicht
+(Kachel *Eigene Ansichten*) melden HTML-Dateien in `eigen/ansichten/` und
+`ausgaben/`, die gegen `L05` verstoßen, auch solche, die du selbst
+angelegt hast.
 
-Übernehmen: die Pfade aus `agent/KERN.txt` wie unter 0.4, Schritt 3; dazu
-den Ordner `eigen/ansichten/` anlegen.
+**Neu: aktualisieren.** Neue Versionen übernimmt der Agent: ZIP in den
+Wiki-Ordner legen, „aktualisieren“ sagen. Er sichert vorher, ersetzt nur
+die Pfade aus `agent/KERN.txt` und arbeitet die Migrationsdatei ab
+(`agent/migration/`); deine Dateien bleiben unberührt.
+
+**Kleineres.** Die Prüfdaten der Leitplanken laufen bis 2027-11-20. Die
+Auswertung zählt veraltete und ersetzte Seiten nicht mit.
+
+Übernehmen von 0.4: ZIP in den Wiki-Ordner legen und schreiben:
+„Aktualisiere Fundus mit der ZIP im Ordner. Der Ablauf steht in der ZIP
+unter agent/ablaeufe/aktualisieren.md.“ Von Hand geht es wie unter 0.4,
+Schritt 3, dazu der Ordner `eigen/ansichten/`; was neu ist, steht in
+`agent/migration/0.4-zu-0.5.md` → *An die Person*.
 
 ## 0.4.1 · 2026-11-20 · Entwurf
 

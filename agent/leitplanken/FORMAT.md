@@ -20,8 +20,8 @@ stattdessen:
   - …
 verweis: []                # Stellen, auf die der Agent verweist (Name · Zugang)
 fundstellen: []            # Belege aus Recht oder Fachwissen
-geprueft: 2026-11-18
-pruefen_bis: 2027-11-18    # danach meldet die Prüfung die Regel
+geprueft: 2026-11-20
+pruefen_bis: 2027-11-20    # danach meldet die Prüfung die Regel
 ---
 ```
 
