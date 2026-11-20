@@ -207,6 +207,24 @@ Macht der Agent etwas falsch, sag es ihm. Was zweimal passiert, schlägt er
 dir als Regel vor, und du entscheidest. Solche Regeln und alles, was du
 sonst anpasst, stehen in `eigen/`; dort bleiben sie bei jedem Update.
 
+## Neue Fundus-Version
+
+Auf [github.com/4e696b6f/fundus](https://github.com/4e696b6f/fundus) „Code“ →
+„Download ZIP“ drücken und die ZIP-Datei, ohne sie zu entpacken, in deinen
+Wiki-Ordner legen. Dann dem Agenten schreiben:
+
+> Aktualisiere Fundus mit der ZIP im Ordner.
+
+(oder `/aktualisieren`). Er sagt dir, was neu ist, sichert vorher (mit `git`
+selbst, sonst bittet er dich, den Ordner zu kopieren), tauscht nur die
+Dateien von Fundus aus und lässt deine unberührt: `SOUL.md`, `EINRICHTUNG.md`,
+`eigen/`, `quellen/`, `wiki/`, `ausgaben/`. Danach kannst du die ZIP löschen.
+
+Kommst du von 0.4, kennt dein Agent den Befehl noch nicht. Schreib dann:
+
+> Aktualisiere Fundus mit der ZIP im Ordner. Der Ablauf steht in der ZIP
+> unter agent/ablaeufe/aktualisieren.md.
+
 ## Sicherheitsnetz
 
 Kopier den Wiki-Ordner jede Woche auf einen USB-Stick oder an einen anderen

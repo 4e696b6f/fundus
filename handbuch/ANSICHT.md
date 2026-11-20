@@ -64,7 +64,9 @@ Obsidian oder eine eigene Ansicht in `eigen/ansichten/`. Die öffnest du wie
 diese: Doppelklick, Ordner wählen.
 
 Jede Ansicht, die er baut, bleibt auf deinem Rechner: Sie lädt nichts aus dem
-Internet, schickt nichts weg und ändert keine Datei (Leitplanke `L05`). Soll
+Internet, schickt nichts weg und ändert keine Datei (Leitplanke `L05`). Die
+Übersicht prüft das bei jedem Einlesen in der Kachel *Eigene Ansichten*;
+steht dort ✗, öffne die Ansicht nicht und sag deinem Agenten „prüfen“. Soll
 etwas daraus ins Wiki, bietet sie dir eine Notiz zum Herunterladen an, die du
 in `quellen/eingang/` legst. Deine Ansichten gehören dir, kein Update ändert
 sie.

@@ -72,6 +72,7 @@ nächsten Schritt vor, etwa eine Prüfung. Alles, was er kann:
 | „Prüf das Wiki.“ | `/pruefen` | Bericht: tote Links, Veraltetes, Widersprüche, Lücken. |
 | „Was hängt zusammen?“ | `/zusammenhaenge` | Verbindungen über deine Themen hinweg. |
 | „Bau mir eine Übersicht, die zeigt …“ | `/ansicht-bauen` | Eine eigene Auswertung oder Grafik für den Browser, in `eigen/ansichten/`; sie bleibt auf deinem Rechner. |
+| „Aktualisiere Fundus mit der ZIP im Ordner.“ | `/aktualisieren` | Eine neue Fundus-Version übernehmen; deine Dateien bleiben, wie sie sind ([Anleitung](handbuch/EINRICHTEN.md#neue-fundus-version)). |
 | „Feierabend.“ | `/feierabend` | Der Agent schreibt auf, wo ihr steht. |
 
 Die Kurzbefehle zeigt Claude Code, wenn du `/` tippst. Andere Programme
