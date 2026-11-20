@@ -17,6 +17,7 @@
 -->
 <style>
 :root {
+  --ich-farbe: rgb(var(--ich));
   --schrift: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   --t-1: 12px; --t-2: 13px; --t-3: 15px; --t-4: 17px; --t-5: 21px; --t-6: 28px;
@@ -149,6 +150,25 @@ main { max-width: var(--breite); margin: 0 auto; padding: var(--a-5); }
 .typen { font-size: var(--t-1); color: var(--text-3); }
 .kachel .alle { display: inline-block; margin-top: var(--a-2); font-size: var(--t-2); font-weight: 600; }
 
+/* Auswertung */
+.raster .breit { grid-column: 1 / -1; }
+.vorbehalt { margin: 0 0 var(--a-4); color: var(--text-2); font-size: var(--t-2); max-width: var(--lese); }
+.gezaehlt { margin: var(--a-3) 0 0; font-size: var(--t-1); color: var(--text-3); }
+.kreuz { width: 100%; border-collapse: collapse; font-size: var(--t-2); font-variant-numeric: tabular-nums; }
+.kreuz th, .kreuz td { padding: 6px 8px; text-align: right; border-top: 1px solid var(--linie); }
+.kreuz th:first-child, .kreuz td:first-child { text-align: left; }
+.kreuz thead th { border-top: 0; color: var(--text-3); font-weight: 600; font-size: var(--t-1); }
+.kreuz tfoot td { font-weight: 650; }
+.kreuz td.zelle a { display: block; color: var(--text); border-radius: var(--r-1); padding: 2px 6px; }
+.kreuz td.null { color: var(--text-3); }
+.stapel { display: flex; height: 10px; border-radius: 5px; overflow: hidden; background: var(--flaeche-3); }
+.stapel span { display: block; height: 100%; }
+.legende { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: var(--a-2) 0 0; padding: 0; list-style: none; font-size: var(--t-1); color: var(--text-2); }
+.legende i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+.diagramm { width: 100%; height: auto; display: block; overflow: visible; }
+.diagramm text { font-size: 10px; fill: var(--text-3); font-family: var(--schrift); }
+.kennzahlen.klein dd { font-size: var(--t-5); }
+
 /* Liste */
 .reiter { display: flex; gap: var(--a-1); border-bottom: 1px solid var(--linie); margin-bottom: var(--a-4); overflow-x: auto; }
 .reiter a { padding: 10px 14px; color: var(--text-2); font-weight: 600; border-bottom: 3px solid transparent; margin-bottom: -1px; white-space: nowrap; }
@@ -274,6 +294,7 @@ a.mehrdeutig { text-decoration: underline dotted; }
     <nav class="navi" id="navi" hidden>
       <a href="#uebersicht" data-navi="uebersicht">Übersicht</a>
       <a href="#liste" data-navi="liste">Liste</a>
+      <a href="#auswertung" data-navi="auswertung">Auswertung</a>
     </nav>
     <div class="leiste-rechts">
       <span class="lesezeit" id="lesezeit"></span>
@@ -290,6 +311,11 @@ a.mehrdeutig { text-decoration: underline dotted; }
 /* Kern: reine Logik ohne DOM. Wird von der Oberfläche und von Tests benutzt. */
 var FundusKern = (function () {
   'use strict';
+
+  /* Datenvertrag für eigene Ansichten (agent/ablaeufe/ansicht-bauen.md): Was zurückgegeben wird und die Felder der
+     Dokumente (pfad, zone, bereich, typ, status, stimme, sicherheit, updated, tags, fm, links, eingehend, titel)
+     bleiben in derselben Hauptversion gleich. Ändert sich daran etwas, steigt KERN_VERSION. */
+  var KERN_VERSION = '1';
 
   var BILD = /\.(png|jpe?g|gif|webp|svg|bmp|avif)$/i;
   /* Nachschlagetabellen ohne Prototyp: Schlüssel kommen aus Dateien (Ordnernamen, Callout-Typen). */
@@ -813,9 +839,11 @@ var FundusKern = (function () {
     }
     return drin ? aus.join('\n') : null;
   }
-  function offeneZeilen(doc) {
+  function offeneZeilen(doc) { return zeilenUnter(doc, 'Offen'); }
+  /* Punkte der obersten Ebene unter einer Überschrift ## titel; null ohne Datei, [] ohne Abschnitt */
+  function zeilenUnter(doc, titel) {
     if (!doc) return null;
-    var t = abschnitt(doc.koerper, 'Offen'); if (t == null) return [];
+    var t = abschnitt(doc.koerper, titel); if (t == null) return [];
     // Nur Punkte der obersten Ebene zählen; eingerückte Unterpunkte und Folgezeilen hängen am Punkt davor
     var aus = [], zaun = false, basis = -1;
     t.split('\n').forEach(function (z) {
@@ -876,6 +904,129 @@ var FundusKern = (function () {
   function ausgaben(idx) {
     return idx.docs.filter(function (d) { return d.zone === 'ausgaben'; })
       .sort(function (a, b) { return a.updated < b.updated ? 1 : a.updated > b.updated ? -1 : a.pfad.localeCompare(b.pfad, 'de'); });
+  }
+
+  /* ---------- Auswertung ----------
+     Zählt nur, was in den Dateien steht, und deutet nichts (agent/leitplanken/L05-ansichten-lokal-und-lesend.md).
+     Die Oberfläche sagt bei jeder Zahl, was sie zählt. */
+
+  var SICHERHEIT = ['hoch', 'mittel', 'niedrig', 'strittig'], STIMMEN = ['ich', 'gemischt', 'agent'];
+  /* Seiten mit Inhalt: in einem Ordner von wiki/, ohne Meta-Seiten (index.md und log.md liegen in keinem Ordner) */
+  function inhaltsseiten(idx) {
+    return idx.docs.filter(function (d) { return d.zone === 'wiki' && d.istMd && d.bereich && d.typ !== 'meta' && d.bereich.toLowerCase() !== 'meta'; });
+  }
+  /* Kreuztabelle Bereich × Feldwert; Werte außerhalb der Liste zählen als 'ohne' */
+  function kreuz(idx, feld, werte) {
+    var spalten = werte.concat(['ohne']), m = Object.create(null), summe = { name: 'Summe', gesamt: 0 };
+    spalten.forEach(function (w) { summe[w] = 0; });
+    inhaltsseiten(idx).forEach(function (d) {
+      var z = m[d.bereich];
+      if (!z) { z = m[d.bereich] = { name: d.bereich, gesamt: 0 }; spalten.forEach(function (w) { z[w] = 0; }); }
+      var w = werte.indexOf(d[feld]) >= 0 ? d[feld] : 'ohne';
+      z[w]++; z.gesamt++; summe[w]++; summe.gesamt++;
+    });
+    var zeilen = Object.keys(m).map(function (k) { return m[k]; }).sort(function (a, b) {
+      return (!!KEIN_THEMA[a.name.toLowerCase()] - !!KEIN_THEMA[b.name.toLowerCase()]) || b.gesamt - a.gesamt || a.name.localeCompare(b.name, 'de');
+    });
+    return { feld: feld, spalten: spalten, zeilen: zeilen, summe: summe };
+  }
+  function beleglage(idx) { return kreuz(idx, 'sicherheit', SICHERHEIT); }
+  function stimmen(idx) { return kreuz(idx, 'stimme', STIMMEN); }
+
+  /* Leitfragen offen und beantwortet, gesamt und je Bereich (Zeilenformat agent/regeln/SCHEMA.md → Leitfragen) */
+  function leitfragenStand(idx) {
+    var d = idx.nachPfad['wiki/meta/leitfragen.md'];
+    if (!d) return null;
+    var offen = zeilenUnter(d, 'Offen'), beantwortet = zeilenUnter(d, 'Beantwortet'), je = Object.create(null);
+    function zaehle(liste, art) {
+      liste.forEach(function (z) {
+        var m = /Bereich:\s*([^\s·|,]+)/i.exec(z), b = m ? m[1].replace(/[`*_]/g, '') : '(ohne Bereich)';
+        var e = je[b] = je[b] || { name: b, offen: 0, beantwortet: 0 };
+        e[art]++;
+      });
+    }
+    zaehle(offen, 'offen'); zaehle(beantwortet, 'beantwortet');
+    return {
+      pfad: d.pfad, offen: offen, beantwortet: beantwortet,
+      bereiche: Object.keys(je).map(function (k) { return je[k]; }).sort(function (a, b) { return (b.offen + b.beantwortet) - (a.offen + a.beantwortet) || a.name.localeCompare(b.name, 'de'); })
+    };
+  }
+
+  /* Worauf Seiten ruhen: Belege einer Seite sind die quelle-Seiten, auf die sie verlinkt, und die Dateien in quellen:.
+     Eine Datei in quellen/, für die es eine quelle-Seite gibt, zählt als diese Seite (nicht doppelt).
+     Ohne quelle- und notiz-Seiten selbst: Die geben ja eine Quelle wieder. */
+  function belege(idx) {
+    var alle = inhaltsseiten(idx), seiteZuDatei = Object.create(null);
+    alle.forEach(function (d) {
+      if (d.typ !== 'quelle') return;
+      d.links.forEach(function (l) { if (l.art === 'quelle' && l.pfad) seiteZuDatei[l.pfad] = d.pfad; });
+    });
+    var traeger = Object.create(null), seiten = [];
+    alle.forEach(function (d) {
+      if (d.typ === 'quelle' || d.typ === 'notiz') return;
+      var b = Object.create(null);
+      d.links.forEach(function (l) {
+        if (!l.pfad || l.pfad === d.pfad) return;
+        var z = idx.nachPfad[l.pfad];
+        if (l.art === 'quelle') b[seiteZuDatei[l.pfad] || l.pfad] = 1;
+        else if (z && z.zone === 'wiki' && z.typ === 'quelle') b[l.pfad] = 1;
+      });
+      var liste = Object.keys(b);
+      liste.forEach(function (p) { (traeger[p] = traeger[p] || []).push(d.pfad); });
+      seiten.push({ pfad: d.pfad, titel: d.titel, bereich: d.bereich, sicherheit: d.sicherheit, belege: liste.length });
+    });
+    var nachTitel = function (a, b) { return a.titel.localeCompare(b.titel, 'de'); };
+    return {
+      seiten: seiten.length,
+      ohne: seiten.filter(function (x) { return x.belege === 0; }).sort(nachTitel),
+      eine: seiten.filter(function (x) { return x.belege === 1; }).sort(nachTitel),
+      mehrere: seiten.filter(function (x) { return x.belege > 1; }).length,
+      traeger: Object.keys(traeger).map(function (p) {
+        var q = idx.nachPfad[p];
+        return { pfad: p, titel: q ? q.titel : basisname(p), seiten: traeger[p].length, allein: traeger[p].filter(function (sp) { return seiten.some(function (x) { return x.pfad === sp && x.belege === 1; }); }).length };
+      }).sort(function (a, b) { return b.seiten - a.seiten || a.titel.localeCompare(b.titel, 'de'); })
+    };
+  }
+
+  function monatPlus(monat, n) { var j = +monat.slice(0, 4), m = +monat.slice(5, 7) - 1 + n; j += Math.floor(m / 12); m = ((m % 12) + 12) % 12; return j + '-' + ('0' + (m + 1)).slice(-2); }
+  function monateVon(von, bis) { var aus = []; for (var m = von; m <= bis && aus.length < 600; m = monatPlus(m, 1)) aus.push(m); return aus; }
+
+  /* Verlauf aus wiki/log.md (## [JJJJ-MM-TT] vorgang | …) und aus created: der Inhaltsseiten, je Monat, höchstens die letzten 24 */
+  function verlauf(idx, heute) {
+    var log = idx.nachPfad['wiki/log.md'], ein = [], zaun = false;
+    if (log) log.koerper.split('\n').forEach(function (z) {
+      if (/^ {0,3}(`{3,}|~{3,})/.test(z)) { zaun = !zaun; return; }
+      var m = !zaun && /^##\s+\[(\d{4}-\d{2}-\d{2})\]\s+([^|\n]+?)\s*(?:\|.*)?$/.exec(z);
+      if (m) ein.push({ datum: m[1], vorgang: m[2].trim().toLowerCase() });
+    });
+    var angelegt = inhaltsseiten(idx).map(function (d) { return datum(d.fm.created); }).filter(Boolean);
+    var monate = ein.map(function (e) { return e.datum.slice(0, 7); }).concat(angelegt.map(function (a) { return a.slice(0, 7); }));
+    if (!monate.length) return { monate: [], vorgaenge: [], eintraege: 0, angelegt: 0 };
+    monate.sort();
+    var bis = monate[monate.length - 1], h = (heute || heuteIso()).slice(0, 7); if (h > bis) bis = h;
+    var von = monate[0]; if (von < monatPlus(bis, -23)) von = monatPlus(bis, -23);
+    var achse = monateVon(von, bis), zeile = Object.create(null), vorg = Object.create(null);
+    achse.forEach(function (m) { zeile[m] = { monat: m, vorgaenge: Object.create(null), log: 0, angelegt: 0 }; });
+    ein.forEach(function (e) { var z = zeile[e.datum.slice(0, 7)]; if (!z) return; z.vorgaenge[e.vorgang] = (z.vorgaenge[e.vorgang] || 0) + 1; z.log++; vorg[e.vorgang] = (vorg[e.vorgang] || 0) + 1; });
+    angelegt.forEach(function (a) { var z = zeile[a.slice(0, 7)]; if (z) z.angelegt++; });
+    return {
+      monate: achse.map(function (m) { return zeile[m]; }),
+      vorgaenge: Object.keys(vorg).sort(function (a, b) { return vorg[b] - vorg[a] || a.localeCompare(b, 'de'); }),
+      eintraege: ein.length, angelegt: angelegt.length
+    };
+  }
+
+  /* Was in den nächsten zwölf Monaten abläuft (pruefen_bis, verfaellt), je Monat; dazu, was schon abgelaufen ist */
+  function fristenJeMonat(idx, heute) {
+    heute = heute || heuteIso();
+    var f = faelligkeiten(idx, heute, 366), h = heute.slice(0, 7), achse = monateVon(h, monatPlus(h, 11)), z = Object.create(null);
+    achse.forEach(function (m) { z[m] = { monat: m, eintraege: [] }; });
+    f.bald.forEach(function (e) { var b = z[e.datum.slice(0, 7)]; if (b) b.eintraege.push(e); });
+    return { abgelaufen: f.faellig, monate: achse.map(function (m) { return z[m]; }), unlesbar: f.unlesbar };
+  }
+
+  function auswertung(idx, heute) {
+    return { beleglage: beleglage(idx), stimmen: stimmen(idx), leitfragen: leitfragenStand(idx), belege: belege(idx), verlauf: verlauf(idx, heute), fristen: fristenJeMonat(idx, heute) };
   }
 
   /* ---------- Liste ---------- */
@@ -1195,7 +1346,8 @@ var FundusKern = (function () {
     istIgnoriert: istIgnoriert, bereinige: bereinige, parseFrontmatter: parseFrontmatter,
     datum: datum, plusTage: plusTage, tage: tage, heuteIso: heuteIso, datumDe: datumDe, relativ: relativ, groesse: groesse,
     teileWiki: teileWiki, loeseWiki: loeseWiki, loeseRelativ: loeseRelativ, baueIndex: baueIndex, statistik: statistik,
-    faelligkeiten: faelligkeiten, offeneZeilen: offeneZeilen, uebergabe: uebergabe, bereiche: bereiche, module: module,
+    faelligkeiten: faelligkeiten, offeneZeilen: offeneZeilen, zeilenUnter: zeilenUnter, auswertung: auswertung, beleglage: beleglage,
+    stimmen: stimmen, leitfragenStand: leitfragenStand, belege: belege, verlauf: verlauf, fristenJeMonat: fristenJeMonat, KERN_VERSION: KERN_VERSION, uebergabe: uebergabe, bereiche: bereiche, module: module,
     zuletzt: zuletzt, stand: stand, eingang: eingang, ausgaben: ausgaben, REITER: REITER, imReiter: imReiter, facette: facette, filtere: filtere,
     facettenWerte: facettenWerte, ausschnitt: ausschnitt, renderMarkdown: renderMarkdown, kontext: kontext, inline: inline,
     rendereDoc: rendereDoc, obsidianUri: obsidianUri, BILD: BILD, nfc: nfc, schluessel: schluessel, ohneProto: ohneProto
@@ -1286,7 +1438,7 @@ var FundusKern = (function () {
       document.getElementById('knopf-ordner').hidden = false;
       document.getElementById('knopf-neu').hidden = !S.griff;
       document.title = S.idx.vault + ' · fundus';
-      if (!/^#(doc|liste)/.test(location.hash)) history.replaceState(null, '', '#uebersicht');
+      if (!/^#(doc|liste|auswertung)/.test(location.hash)) history.replaceState(null, '', '#uebersicht');
       route();
     });
   }
@@ -1693,6 +1845,132 @@ var FundusKern = (function () {
     return false;
   }
 
+
+  /* ---------- Auswertung ---------- */
+  var FARBE = { hoch: '--gut', mittel: '--info', niedrig: '--bald', strittig: '--warn', ohne: '--text-3', ich: '--ich-farbe', gemischt: '--lila', agent: '--info' };
+  var REIHE = ['--primaer', '--info', '--lila', '--bald', '--gut', '--warn', '--text-2', '--text-3'];
+  var MONAT = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+  function monatKurz(m) { return MONAT[+m.slice(5, 7) - 1] + ' ' + m.slice(2, 4); }
+  function farbe(v) { return 'var(' + v + ')'; }
+  function legende(eintraege) {
+    return '<ul class="legende">' + eintraege.map(function (e) { return '<li><i style="background:' + farbe(e.farbe) + '"></i>' + esc(e.name) + '</li>'; }).join('') + '</ul>';
+  }
+  /* Säulen ohne Bibliothek: spalten = [{ label, teile: [{ wert, farbe, titel }] }] */
+  function saeulen(spalten, aria) {
+    var max = spalten.reduce(function (m, s) { return Math.max(m, s.teile.reduce(function (a, t) { return a + t.wert; }, 0)); }, 0) || 1;
+    var b = 22, abst = 8, h = 120, w = spalten.length * (b + abst);
+    var svg = '<svg class="diagramm" viewBox="0 -14 ' + w + ' ' + (h + 34) + '" role="img" aria-label="' + esc(aria) + '">';
+    spalten.forEach(function (s, i) {
+      var x = i * (b + abst), y = h, summe = 0;
+      s.teile.forEach(function (t) {
+        if (!t.wert) return;
+        var hh = t.wert / max * h; y -= hh; summe += t.wert;
+        svg += '<rect x="' + x + '" y="' + y.toFixed(1) + '" width="' + b + '" height="' + hh.toFixed(1) + '" style="fill:' + farbe(t.farbe) + '"><title>' + esc(s.label + ' · ' + t.titel + ': ' + t.wert) + '</title></rect>';
+      });
+      if (summe) svg += '<text x="' + (x + b / 2) + '" y="' + (y - 3).toFixed(1) + '" text-anchor="middle">' + summe + '</text>';
+      svg += '<text x="' + (x + b / 2) + '" y="' + (h + 14) + '" text-anchor="middle">' + esc(s.label.split(' ')[0]) + '</text>';
+      if (i === 0 || s.label.slice(0, 3) === 'Jan') svg += '<text x="' + (x + b / 2) + '" y="' + (h + 26) + '" text-anchor="middle">' + esc("'" + s.label.split(' ')[1]) + '</text>';
+    });
+    return svg + '<line x1="0" x2="' + w + '" y1="' + h + '" y2="' + h + '" style="stroke:var(--linie-2)"/></svg>';
+  }
+  function kreuzTabelle(k, namen, leer) {
+    if (!k.summe.gesamt) return '<p class="leer">' + leer + '</p>';
+    var zelle = function (z, sp) {
+      var n = z[sp]; if (!n) return '<td class="null">·</td>';
+      var anteil = Math.round(n / z.gesamt * 100), filter = { bereich: z.name };
+      filter[k.feld] = sp === 'ohne' ? '(ohne)' : sp;
+      return '<td class="zelle"><a href="' + listeHash('wiki', filter) + '" title="' + esc(n + ' von ' + z.gesamt + ' Seiten in ' + z.name + ' (' + anteil + ' %)') +
+        '" style="background:color-mix(in srgb, ' + farbe(FARBE[sp]) + ' ' + Math.max(8, Math.round(anteil * 0.6)) + '%, transparent)">' + n + '</a></td>';
+    };
+    return '<table class="kreuz"><thead><tr><th>Bereich</th>' + k.spalten.map(function (sp) { return '<th>' + esc(namen[sp] || sp) + '</th>'; }).join('') + '<th>Seiten</th></tr></thead><tbody>' +
+      k.zeilen.map(function (z) { return '<tr><td>' + esc(z.name) + '</td>' + k.spalten.map(function (sp) { return zelle(z, sp); }).join('') + '<td>' + z.gesamt + '</td></tr>'; }).join('') +
+      '</tbody><tfoot><tr><td>Summe</td>' + k.spalten.map(function (sp) { return '<td>' + (k.summe[sp] || '·') + '</td>'; }).join('') + '<td>' + k.summe.gesamt + '</td></tr></tfoot></table>';
+  }
+  function gezaehlt(t) { return '<p class="gezaehlt">Gezählt: ' + t + '</p>'; }
+
+  function zeigeAuswertung() {
+    setzeNavi('auswertung');
+    var idx = S.idx, heute = S.heute, a = K.auswertung(idx, heute), h = '';
+    h += '<div class="kopf"><div><div class="kopf-label">Auswertung</div><h1>' + esc(idx.vault) + '</h1>' +
+      '<p class="kopf-stand">Stand beim Einlesen · heute ' + K.datumDe(heute) + '</p></div></div>';
+    h += '<p class="vorbehalt">Diese Seite zählt, was in deinen Dateien steht. Sie wertet nicht: Viele Seiten heißen nicht viel Wissen, und eine leere Stelle heißt nicht, dass etwas falsch ist. Ein Klick auf eine Zahl zeigt die Seiten dahinter.</p>';
+    h += '<div class="raster">';
+
+    // Leitfragen
+    var lf = a.leitfragen, lfInhalt = '', lfZahl = null;
+    if (lf) {
+      var gesamt = lf.offen.length + lf.beantwortet.length; lfZahl = lf.beantwortet.length + '/' + gesamt;
+      if (gesamt) {
+        lfInhalt = '<div class="stapel" title="' + lf.beantwortet.length + ' von ' + gesamt + ' beantwortet"><span style="width:' + (lf.beantwortet.length / gesamt * 100) + '%;background:var(--gut)"></span></div>' +
+          '<ul class="eintraege" style="margin-top:12px">' + lf.bereiche.map(function (b) {
+            return '<li><span class="haupt">' + esc(b.name) + '</span><span class="neben">' + b.beantwortet + ' von ' + (b.offen + b.beantwortet) + ' beantwortet</span></li>';
+          }).join('') + '</ul>' +
+          (lf.offen.length ? '<details style="margin-top:8px"><summary>Offen · ' + lf.offen.length + '</summary><ul class="eintraege zeilen">' + lf.offen.map(function (z) { return '<li>' + inlineVon(idx.nachPfad[lf.pfad], z) + '</li>'; }).join('') + '</ul></details>' : '');
+      }
+    }
+    h += kachel({ label: 'Leitfragen', zahl: lfZahl, frage: 'Wie weit ist mein Wiki bei meinen Fragen?', inhalt: lfInhalt,
+      leer: lf ? 'Noch keine Leitfragen. Sie entstehen beim Einrichten.' : 'Es gibt keine <code>wiki/meta/leitfragen.md</code>.',
+      fuss: gezaehlt('Zeilen unter <em>Offen</em> und <em>Beantwortet</em> in <code>wiki/meta/leitfragen.md</code>, je Bereich nach „Bereich:“ in der Zeile.') });
+
+    // Worauf es ruht
+    var be = a.belege, beInhalt = '';
+    if (be.seiten) {
+      beInhalt = '<dl class="kennzahlen klein"><div><dt>ohne Beleg</dt><dd>' + be.ohne.length + '</dd></div><div><dt>eine Quelle</dt><dd>' + be.eine.length + '</dd></div><div><dt>mehrere</dt><dd>' + be.mehrere + '</dd></div></dl>' +
+        (be.traeger.length ? '<h3 style="font-size:var(--t-2);margin:14px 0 4px">Quellen, die am meisten tragen</h3><ul class="eintraege">' + be.traeger.slice(0, 6).map(function (t) {
+          var d = idx.nachPfad[t.pfad];
+          return '<li><span class="haupt">' + (d ? docLink(d, t.titel) : esc(t.titel)) + '</span><span class="neben">' + t.seiten + ' Seiten' + (t.allein ? ', ' + t.allein + ' nur auf ihr' : '') + '</span></li>';
+        }).join('') + '</ul>' : '') +
+        (be.eine.length ? '<details style="margin-top:8px"><summary>Seiten an einer einzigen Quelle · ' + be.eine.length + '</summary><ul class="eintraege zeilen">' + be.eine.map(function (x) { return '<li>' + docLink(idx.nachPfad[x.pfad], x.titel) + ' <span class="typen">' + esc(x.bereich) + '</span></li>'; }).join('') + '</ul></details>' : '') +
+        (be.ohne.length ? '<details style="margin-top:8px"><summary>Seiten ohne Beleg · ' + be.ohne.length + '</summary><ul class="eintraege zeilen">' + be.ohne.map(function (x) { return '<li>' + docLink(idx.nachPfad[x.pfad], x.titel) + ' <span class="typen">' + esc(x.bereich) + '</span></li>'; }).join('') + '</ul></details>' : '');
+    }
+    h += kachel({ label: 'Belege', zahl: be.seiten || null, frage: 'Worauf ruht mein Wissen?', inhalt: beInhalt, klasse: be.ohne.length ? 'bald' : '',
+      leer: 'Noch keine Seiten außer Quellen und Notizen.',
+      fuss: gezaehlt('je Seite die verlinkten <code>quelle</code>-Seiten und die Dateien in <code>quellen:</code>, ohne Quellen- und Notizseiten selbst. Mehrere Belege sind kein Urteil über ihre Güte.') });
+
+    // Beleglage
+    h += kachel({ klasse: 'breit', label: 'Sicherheit', zahl: a.beleglage.summe.gesamt || null, frage: 'Wo ist mein Wissen gut belegt, wo dünn?',
+      inhalt: a.beleglage.summe.gesamt ? kreuzTabelle(a.beleglage, { ohne: 'ohne Angabe' }, '') : '', leer: 'Noch keine Seiten in Bereichen.',
+      fuss: gezaehlt('<code>sicherheit:</code> der Seiten in Bereichsordnern, ohne Meta-Seiten. Notizen haben kein Feld, sie stehen unter „ohne Angabe“. Farbe = Anteil im Bereich.') });
+
+    // Verlauf
+    var v = a.verlauf, vInhalt = '';
+    if (v.monate.length) {
+      var farbeVon = function (vg) { return REIHE[v.vorgaenge.indexOf(vg) % REIHE.length]; };
+      vInhalt = '<h3 style="font-size:var(--t-2);margin:0 0 4px">Vorgänge im Protokoll · ' + v.eintraege + '</h3>' +
+        saeulen(v.monate.map(function (m) { return { label: monatKurz(m.monat), teile: v.vorgaenge.map(function (vg) { return { wert: m.vorgaenge[vg] || 0, farbe: farbeVon(vg), titel: vg }; }) }; }), 'Vorgänge je Monat') +
+        legende(v.vorgaenge.map(function (vg) { return { name: vg, farbe: farbeVon(vg) }; })) +
+        '<h3 style="font-size:var(--t-2);margin:16px 0 4px">Angelegte Seiten · ' + v.angelegt + '</h3>' +
+        saeulen(v.monate.map(function (m) { return { label: monatKurz(m.monat), teile: [{ wert: m.angelegt, farbe: '--primaer', titel: 'angelegt' }] }; }), 'Angelegte Seiten je Monat');
+    }
+    h += kachel({ klasse: 'breit', label: 'Verlauf', frage: 'Wann ist was dazugekommen?', inhalt: vInhalt, leer: 'Noch keine Einträge im Protokoll und keine Seiten mit <code>created:</code>.',
+      fuss: gezaehlt('Überschriften <code>## [Datum] vorgang</code> in <code>wiki/log.md</code> und <code>created:</code> der Seiten in Bereichen, je Monat, höchstens 24 Monate.') });
+
+    // Fristen
+    var fr = a.fristen, frSumme = fr.monate.reduce(function (n, m) { return n + m.eintraege.length; }, 0);
+    var frInhalt = (fr.abgelaufen.length ? '<p class="hinweis fehler" style="margin:0 0 8px">' + fr.abgelaufen.length + ' schon abgelaufen, siehe <a href="#uebersicht">Übersicht</a>.</p>' : '') +
+      (frSumme ? saeulen(fr.monate.map(function (m) { return { label: monatKurz(m.monat), teile: [{ wert: m.eintraege.length, farbe: '--bald', titel: m.eintraege.map(function (e) { return e.titel; }).join(', ') }] }; }), 'Ablaufende Prüfdaten je Monat') +
+        '<ul class="eintraege" style="margin-top:10px">' + fr.monate.reduce(function (l, m) { return l.concat(m.eintraege); }, []).slice(0, 6).map(function (e) {
+          var d = idx.nachPfad[e.pfad]; return '<li><span class="haupt">' + (d ? docLink(d, e.titel) : esc(e.titel)) + ' <span class="typen">' + esc(e.art) + '</span></span><span class="neben">' + K.datumDe(e.datum) + '</span></li>';
+        }).join('') + '</ul>' : '');
+    h += kachel({ label: 'Fristen', zahl: frSumme || null, frage: 'Was muss ich in den nächsten zwölf Monaten neu prüfen?', inhalt: frInhalt, klasse: fr.abgelaufen.length ? 'warn' : '',
+      leer: 'In den nächsten zwölf Monaten läuft nichts ab.', fuss: gezaehlt('<code>pruefen_bis:</code> und <code>verfaellt:</code> in Wiki-Seiten, Leitplanken und Modulen.') });
+
+    // Stimme
+    var st = a.stimmen, stInhalt = '';
+    if (st.summe.gesamt) {
+      var tn = ['ich', 'gemischt', 'agent', 'ohne'];
+      stInhalt = '<ul class="eintraege">' + st.zeilen.map(function (z) {
+        return '<li style="display:block"><span class="haupt">' + esc(z.name) + '</span> <span class="typen">' + z.gesamt + ' Seiten, ' + Math.round((z.ich + z.gemischt) / z.gesamt * 100) + ' % mit deinen Worten</span><div class="stapel" style="margin-top:4px">' +
+          tn.map(function (t) { return z[t] ? '<span title="' + esc(t + ': ' + z[t]) + '" style="width:' + (z[t] / z.gesamt * 100) + '%;background:' + farbe(FARBE[t]) + '"></span>' : ''; }).join('') + '</div></li>';
+      }).join('') + '</ul>' + legende([{ name: 'ich', farbe: FARBE.ich }, { name: 'gemischt', farbe: FARBE.gemischt }, { name: 'agent', farbe: FARBE.agent }, { name: 'ohne Angabe', farbe: FARBE.ohne }]);
+    }
+    h += kachel({ label: 'Stimme', frage: 'Wie viel davon ist von mir?', inhalt: stInhalt, leer: 'Noch keine Seiten in Bereichen.',
+      fuss: gezaehlt('<code>stimme:</code> der Seiten in Bereichen: <em>ich</em> = deine Notiz, <em>gemischt</em> = mit einem Block in deinen Worten.') });
+
+    h += '</div>';
+    haupt.innerHTML = h;
+  }
+
   /* ---------- Navigation ---------- */
   function leseHash() {
     var h = location.hash.replace(/^#/, '');
@@ -1707,6 +1985,7 @@ var FundusKern = (function () {
       (m[2] || '').split('&').forEach(function (x) { if (!x) return; var kv = x.split('='); try { par[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1] || ''); } catch (e) { /* überspringen */ } });
       return { ansicht: 'liste', reiter: m[1] || 'wiki', p: par };
     }
+    if (h === 'auswertung') return { ansicht: 'auswertung' };
     return { ansicht: 'uebersicht' };
   }
   function route() {
@@ -1715,6 +1994,7 @@ var FundusKern = (function () {
     var r = leseHash(), gescrollt = false;
     if (r.ansicht === 'doc') gescrollt = zeigeDoc(r.pfad, r.anker);
     else if (r.ansicht === 'liste') zeigeListe(r.reiter, r.p);
+    else if (r.ansicht === 'auswertung') zeigeAuswertung();
     else zeigeUebersicht();
     if (!gescrollt) window.scrollTo(0, S.scroll[location.hash] || 0);
     S.letzterHash = location.hash;
