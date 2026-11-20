@@ -323,7 +323,6 @@ var FundusKern = (function () {
   var BILD = /\.(png|jpe?g|gif|webp|svg|bmp|avif)$/i;
   /* Nachschlagetabellen ohne Prototyp: Schlüssel kommen aus Dateien (Ordnernamen, Callout-Typen). */
   function ohneProto(o) { var t = Object.create(null); for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) t[k] = o[k]; return t; }
-  function eigen(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
   /* ausgaben/: Texte der Person (agent/ablaeufe/schreiben.md), keine Wiki-Seiten; ihre Links geben keine Rückverweise. */
   var ZONEN = ohneProto({ wiki: 1, quellen: 1, module: 1, ausgaben: 1 });
   /* Leitplanken der Basis (agent/leitplanken/) und eigene (eigen/leitplanken/) sind eine eigene Zone; alles andere in
@@ -370,6 +369,7 @@ var FundusKern = (function () {
     if (typeof v === 'object') return Object.keys(v).map(function (k) { return k + ': ' + text(v[k]); }).join(' · ');
     return String(v);
   }
+  function wert(v) { return text(v).trim().toLowerCase(); }
   function liste(v) {
     if (v == null || v === '') return [];
     if (Array.isArray(v)) { var a = []; v.forEach(function (x) { a = a.concat(Array.isArray(x) ? liste(x) : [text(x)]); }); return a.filter(Boolean); }
@@ -745,7 +745,8 @@ var FundusKern = (function () {
     var titel = text(fm.title) || text(fm.titel);
     d.titel = titel || (h1 ? h1[1].trim() : ohneMd(d.name));
     if (d.istLeitplanke && fm.id) d.titel = text(fm.id) + ' · ' + (titel || (h1 ? h1[1].trim() : ohneMd(d.name)));
-    d.typ = text(fm.type); d.status = text(fm.status); d.stimme = text(fm.stimme); d.sicherheit = text(fm.sicherheit);
+    /* Aufzählungsfelder klein und ohne Leerraum: „Hoch“ zählt in Auswertung und Liste als hoch */
+    d.typ = wert(fm.type); d.status = wert(fm.status); d.stimme = wert(fm.stimme); d.sicherheit = wert(fm.sicherheit);
     d.updated = datum(fm.updated) || datum(fm.stand) || datum(fm.geprueft);
     if (d.zone === 'ausgaben') d.updated = datum(fm.updated) || datum(fm.created) || datum(d.name.slice(0, 10));
     d.tags = liste(fm.tags); d.aliases = liste(fm.aliases);
@@ -965,7 +966,7 @@ var FundusKern = (function () {
   function kernBlock(t) { var m = /<script id="fundus-kern">([\s\S]*?)<\/script>/.exec(t || ''); return m ? m[1] : null; }
   function ansichtenPruefen(idx, referenz) {
     return idx.docs.filter(function (d) { return /\.html?$/i.test(d.pfad) && /^(eigen\/ansichten|ausgaben)\//.test(d.pfad) && d.text != null; }).map(function (d) {
-      var t = d.text, befunde = [], m = RE_CSP.exec(t), erstesSkript = t.search(/<script\b/i);
+      var t = d.text.replace(/\r\n?/g, '\n'), befunde = [], m = RE_CSP.exec(t), erstesSkript = t.search(/<script\b/i);
       if (!m) befunde.push('Sicherheitszeile fehlt');
       else {
         if (referenz && referenz.csp && m[2] !== referenz.csp) befunde.push('Sicherheitszeile weicht ab');
@@ -973,9 +974,11 @@ var FundusKern = (function () {
       }
       VERBOTEN.forEach(function (v) { if (v[0].test(t) && befunde.indexOf(v[1]) < 0) befunde.push(v[1]); });
       var k = kernBlock(t), vm = /<meta\s+name=["']fundus-kern["']\s+content=["']([^"']*)["']/i.exec(t), version = vm ? vm[1] : '';
-      var kern = k == null ? 'ohne' : referenz && referenz.kern != null && k === referenz.kern ? 'gleich' : 'anders';
+      var refKern = referenz && referenz.kern != null ? String(referenz.kern).replace(/\r\n?/g, '\n') : null;
+      var kern = k == null ? 'ohne' : refKern != null && k === refKern ? 'gleich' : 'anders';
       var haupt = function (v) { return String(v || '').split('.')[0]; };
-      if (kern === 'anders' && haupt(version) !== haupt(KERN_VERSION)) befunde.push('Kern einer anderen Hauptversion (' + (version || '?') + ')');
+      if (kern === 'anders' && !version) befunde.push('Kern weicht ab, ohne Versionsangabe');
+      else if (kern === 'anders' && haupt(version) !== haupt(KERN_VERSION)) befunde.push('Kern einer anderen Hauptversion (' + version + ')');
       return { pfad: d.pfad, name: d.name, befunde: befunde, kern: kern, version: version, gebaut: !!vm };
     }).sort(function (a, b) { return a.pfad.localeCompare(b.pfad, 'de'); });
   }
@@ -988,9 +991,10 @@ var FundusKern = (function () {
   /* Seiten mit Inhalt: in einem Ordner von wiki/, ohne Meta-Seiten (index.md und log.md liegen in keinem Ordner),
      ohne veraltete und ersetzte Seiten */
   function inhaltsseiten(idx) {
-    return idx.docs.filter(function (d) {
+    if (idx.inhaltsseiten) return idx.inhaltsseiten;
+    return (idx.inhaltsseiten = idx.docs.filter(function (d) {
       return d.zone === 'wiki' && d.istMd && d.bereich && d.typ !== 'meta' && d.bereich.toLowerCase() !== 'meta' && d.status !== 'veraltet' && d.status !== 'ersetzt';
-    });
+    }));
   }
   /* Seiten direkt in wiki/ außer index.md und log.md: gehören zu keinem Bereich und fehlen in den Kacheln */
   function ohneBereich(idx) {
@@ -1003,7 +1007,7 @@ var FundusKern = (function () {
     inhaltsseiten(idx).forEach(function (d) {
       var z = m[d.bereich];
       if (!z) { z = m[d.bereich] = { name: d.bereich, gesamt: 0 }; spalten.forEach(function (w) { z[w] = 0; }); }
-      var v = String(d[feld] || '').trim().toLowerCase(), w = werte.indexOf(v) >= 0 ? v : 'ohne';
+      var w = werte.indexOf(d[feld]) >= 0 ? d[feld] : 'ohne';
       z[w]++; z.gesamt++; summe[w]++; summe.gesamt++;
     });
     var zeilen = Object.keys(m).map(function (k) { return m[k]; }).sort(function (a, b) {
@@ -1021,7 +1025,7 @@ var FundusKern = (function () {
     var offen = zeilenUnter(d, 'Offen'), beantwortet = zeilenUnter(d, 'Beantwortet'), je = Object.create(null);
     function zaehle(liste, art) {
       liste.forEach(function (z) {
-        var m = /Bereich:\s*([^\s·|,]+)/i.exec(z), b = m ? m[1].replace(/[`*_]/g, '') : '(ohne Bereich)';
+        var m = /Bereich:\s*([^\s·|,]+)/i.exec(z), b = m ? m[1].replace(/[`*_\[\]]/g, '') || '(ohne Bereich)' : '(ohne Bereich)';
         var e = je[b] = je[b] || { name: b, offen: 0, beantwortet: 0 };
         e[art]++;
       });
@@ -1043,6 +1047,11 @@ var FundusKern = (function () {
       if (d.typ !== 'quelle') return;
       d.links.forEach(function (l) { if (l.art === 'quelle' && l.pfad) seiteZuDatei[l.pfad] = d.pfad; });
     });
+    /* inhaltsseiten() lässt veraltete und ersetzte weg; deren Dateien in quellen: zählen ebenfalls nicht */
+    idx.docs.forEach(function (d) {
+      if (d.zone !== 'wiki' || d.typ !== 'quelle' || (d.status !== 'veraltet' && d.status !== 'ersetzt')) return;
+      d.links.forEach(function (l) { if (l.art === 'quelle' && l.pfad && !seiteZuDatei[l.pfad]) seiteZuDatei[l.pfad] = null; });
+    });
     var traeger = Object.create(null), seiten = [];
     alle.forEach(function (d) {
       if (d.typ !== 'begriff' && d.typ !== 'akteur') return;
@@ -1050,7 +1059,7 @@ var FundusKern = (function () {
       d.links.forEach(function (l) {
         if (!l.pfad || l.pfad === d.pfad) return;
         var z = idx.nachPfad[l.pfad];
-        if (l.art === 'quelle') b[seiteZuDatei[l.pfad] || l.pfad] = 1;
+        if (l.art === 'quelle') { if (seiteZuDatei[l.pfad] !== null) b[seiteZuDatei[l.pfad] || l.pfad] = 1; }
         else if (z && z.zone === 'wiki' && z.typ === 'quelle' && z.status !== 'veraltet' && z.status !== 'ersetzt') b[l.pfad] = 1;
         else if (z && z.zone === 'module') b[l.pfad] = 1;
       });
@@ -1059,6 +1068,7 @@ var FundusKern = (function () {
       seiten.push({ pfad: d.pfad, titel: d.titel, bereich: d.bereich, sicherheit: d.sicherheit, belege: liste.length });
     });
     var nachTitel = function (a, b) { return a.titel.localeCompare(b.titel, 'de'); };
+    var einzeln = Object.create(null); seiten.forEach(function (x) { if (x.belege === 1) einzeln[x.pfad] = 1; });
     return {
       seiten: seiten.length,
       ohne: seiten.filter(function (x) { return x.belege === 0; }).sort(nachTitel),
@@ -1066,7 +1076,7 @@ var FundusKern = (function () {
       mehrere: seiten.filter(function (x) { return x.belege > 1; }).length,
       traeger: Object.keys(traeger).map(function (p) {
         var q = idx.nachPfad[p];
-        return { pfad: p, titel: q ? q.titel : basisname(p), seiten: traeger[p].length, allein: traeger[p].filter(function (sp) { return seiten.some(function (x) { return x.pfad === sp && x.belege === 1; }); }).length };
+        return { pfad: p, titel: q ? q.titel : basisname(p), seiten: traeger[p].length, allein: traeger[p].filter(function (sp) { return einzeln[sp]; }).length };
       }).sort(function (a, b) { return b.seiten - a.seiten || a.titel.localeCompare(b.titel, 'de'); })
     };
   }
@@ -1079,15 +1089,18 @@ var FundusKern = (function () {
     var log = idx.nachPfad['wiki/log.md'], ein = [], zaun = false;
     if (log) log.koerper.split('\n').forEach(function (z) {
       if (/^ {0,3}(`{3,}|~{3,})/.test(z)) { zaun = !zaun; return; }
-      var m = !zaun && /^##\s+\[(\d{4}-\d{2}-\d{2})\]\s+([^|\n]+?)\s*(?:\|.*)?$/.exec(z);
-      if (m) ein.push({ datum: m[1], vorgang: m[2].trim().toLowerCase() });
+      var m = !zaun && /^##\s+\[([^\]]*)\]\s*([^|\n]*?)\s*(?:\|.*)?$/.exec(z);
+      if (m) ein.push({ datum: datum(m[1]), vorgang: m[2].trim().toLowerCase() || '(ohne Vorgang)' });
     });
-    var angelegt = inhaltsseiten(idx).map(function (d) { return datum(d.fm.created); }).filter(Boolean);
+    /* Ungültige Daten und Daten nach heute (Tippfehler) kommen nicht auf die Achse, sie werden nur gezählt */
+    heute = heute || heuteIso();
+    var unbrauchbar = ein.filter(function (e) { return !e.datum || e.datum > heute; }).length;
+    ein = ein.filter(function (e) { return e.datum && e.datum <= heute; });
+    var angelegt = inhaltsseiten(idx).map(function (d) { return datum(d.fm.created); }).filter(function (a) { return a && a <= heute; });
     var monate = ein.map(function (e) { return e.datum.slice(0, 7); }).concat(angelegt.map(function (a) { return a.slice(0, 7); }));
-    if (!monate.length) return { monate: [], vorgaenge: [], eintraege: 0, angelegt: 0 };
+    if (!monate.length) return { monate: [], vorgaenge: [], eintraege: 0, angelegt: 0, unbrauchbar: unbrauchbar };
     monate.sort();
-    var bis = monate[monate.length - 1], h = (heute || heuteIso()).slice(0, 7); if (h > bis) bis = h;
-    var von = monate[0]; if (von < monatPlus(bis, -23)) von = monatPlus(bis, -23);
+    var bis = heute.slice(0, 7), von = monate[0]; if (von < monatPlus(bis, -23)) von = monatPlus(bis, -23);
     var achse = monateVon(von, bis), zeile = Object.create(null), vorg = Object.create(null);
     achse.forEach(function (m) { zeile[m] = { monat: m, vorgaenge: Object.create(null), log: 0, angelegt: 0 }; });
     ein.forEach(function (e) { var z = zeile[e.datum.slice(0, 7)]; if (!z) return; z.vorgaenge[e.vorgang] = (z.vorgaenge[e.vorgang] || 0) + 1; z.log++; vorg[e.vorgang] = (vorg[e.vorgang] || 0) + 1; });
@@ -1095,7 +1108,7 @@ var FundusKern = (function () {
     return {
       monate: achse.map(function (m) { return zeile[m]; }),
       vorgaenge: Object.keys(vorg).sort(function (a, b) { return vorg[b] - vorg[a] || a.localeCompare(b, 'de'); }),
-      eintraege: ein.length, angelegt: angelegt.length
+      eintraege: ein.length, angelegt: angelegt.length, unbrauchbar: unbrauchbar
     };
   }
 
@@ -1487,7 +1500,7 @@ var FundusKern = (function () {
     return K.leseTexte(liste).then(function (br) {
       b = br.eintraege; if (br.unterordner) vault = br.unterordner;
       Object.keys(S.urls).forEach(function (k) { URL.revokeObjectURL(S.urls[k]); });
-      S.urls = Object.create(null); S.dateien = Object.create(null); S.liste = {}; S.scroll = {};
+      S.urls = Object.create(null); S.dateien = Object.create(null); S.liste = {}; S.scroll = {}; S.auswertung = null; S.ansichten = null;
       S.idx = K.baueIndex(vault, b);
       b.forEach(function (e) { S.dateien[e.pfad] = e.datei; });
       S.stat = K.statistik(S.idx);
@@ -1713,11 +1726,11 @@ var FundusKern = (function () {
       inhalt: zust.length ? '<ul class="eintraege">' + zust.join('') + '</ul>' : '', leer: 'Alle Frontmatter lesbar, jeder Link findet sein Ziel.' });
 
     var cspMeta = document.querySelector('meta[http-equiv="Content-Security-Policy"]'), kernEl = document.getElementById('fundus-kern');
-    var ans = K.ansichtenPruefen(idx, { csp: cspMeta ? cspMeta.getAttribute('content') : '', kern: kernEl ? kernEl.textContent : null });
+    var ans = S.ansichten || (S.ansichten = K.ansichtenPruefen(idx, { csp: cspMeta ? cspMeta.getAttribute('content') : '', kern: kernEl ? kernEl.textContent : null }));
     var ansFehler = ans.filter(function (a) { return a.befunde.length; });
     var k12 = ans.length ? kachel({ klasse: ansFehler.length ? 'warn' : '', label: 'Eigene Ansichten', zahl: ans.length, frage: 'Bleiben meine Ansichten auf dem Rechner und lesen nur?',
       inhalt: '<ul class="eintraege">' + ans.map(function (a) {
-        return '<li><span class="haupt"><a href="#" data-datei="' + esc(a.pfad) + '">' + esc(a.name) + '</a><span class="unter">' + esc(a.pfad) +
+        return '<li><span class="haupt"><a href="' + docHref(a.pfad) + '" data-datei="' + esc(a.pfad) + '">' + esc(a.name) + '</a><span class="unter">' + esc(a.pfad) +
           (a.befunde.length ? '</span><span class="unter fehler">' + esc(a.befunde.join(' · ')) : '') + '</span></span><span class="neben">' +
           (a.befunde.length ? '✗ prüfen lassen' : a.kern === 'anders' ? 'ok · Kern weicht ab' : 'ok') + '</span></li>';
       }).join('') + '</ul>',
@@ -1962,7 +1975,7 @@ var FundusKern = (function () {
 
   function zeigeAuswertung() {
     setzeNavi('auswertung');
-    var idx = S.idx, heute = S.heute, a = K.auswertung(idx, heute), h = '';
+    var idx = S.idx, heute = S.heute, a = S.auswertung || (S.auswertung = K.auswertung(idx, heute)), h = '';
     h += '<div class="kopf"><div><div class="kopf-label">Auswertung</div><h1>' + esc(idx.vault) + '</h1>' +
       '<p class="kopf-stand">Stand beim Einlesen · heute ' + K.datumDe(heute) + '</p></div></div>';
     h += '<p class="vorbehalt">Diese Seite zählt, was in deinen Dateien steht. Sie wertet nicht: Viele Seiten heißen nicht viel Wissen, und eine leere Stelle heißt nicht, dass etwas falsch ist. Ein Klick auf eine Zahl zeigt die Seiten dahinter.</p>';
@@ -2017,7 +2030,8 @@ var FundusKern = (function () {
         saeulen(v.monate.map(function (m) { return { label: monatKurz(m.monat), teile: [{ wert: m.angelegt, farbe: '--primaer', titel: 'angelegt' }] }; }), 'Angelegte Seiten je Monat');
     }
     h += kachel({ klasse: 'breit', label: 'Verlauf', frage: 'Wann ist was dazugekommen?', inhalt: vInhalt, leer: 'Noch keine Einträge im Protokoll und keine Seiten mit <code>created:</code>.',
-      fuss: gezaehlt('Überschriften <code>## [Datum] vorgang</code> in <code>wiki/log.md</code> und <code>created:</code> der Seiten in Bereichen, je Monat, höchstens 24 Monate.') });
+      fuss: gezaehlt('Überschriften <code>## [Datum] vorgang</code> in <code>wiki/log.md</code> und <code>created:</code> der Seiten in Bereichen, je Monat, höchstens 24 Monate bis heute.' +
+        (v.unbrauchbar ? ' ' + v.unbrauchbar + ' Einträge im Protokoll mit ungültigem Datum oder Datum nach heute sind nicht dabei.' : '')) });
 
     // Fristen
     var fr = a.fristen, frSumme = fr.monate.reduce(function (n, m) { return n + m.eintraege.length; }, 0);
