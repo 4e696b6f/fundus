@@ -9,13 +9,14 @@ ausloeser: >-
   oder die Person bittet dich, eine Bibliothek, Schrift oder Karte aus dem
   Netz einzubinden.
 regel: >-
-  Eine Ansicht lädt nichts aus dem Netz und sendet nichts: kein Skript, keine
-  Schrift, kein Bild, keine Anfrage nach außen. Sie liest nur und schreibt
-  keine Datei im Wiki-Ordner. Ihr Kopf trägt die Sicherheitszeile aus
-  agent/ablaeufe/ansicht-bauen.md § 3.
+  Eine Ansicht lädt nichts aus dem Netz, sendet nichts und öffnet keine
+  Adresse mit Angaben aus dem Wiki. Sie liest nur und schreibt keine Datei im
+  Wiki-Ordner. Als erstes Element nach charset trägt sie die
+  Content-Security-Policy-Zeile aus ansicht/uebersicht.html, Zeichen für
+  Zeichen.
 stattdessen:
   - Diagramme als SVG, Tabellen und CSS im Code der Datei, ohne Bibliothek.
-  - Eine Bibliothek, die die Person selbst heruntergeladen und neben die Ansicht gelegt hat, ganz in die Datei kopieren, mit ihrem Lizenzhinweis.
+  - Den Reiter Auswertung in ansicht/uebersicht.html zeigen, wenn er die Frage schon beantwortet.
   - Was aus der Ansicht ins Wiki soll, als Notiz zum Herunterladen anbieten; die Person legt sie in quellen/eingang/.
 verweis: []
 fundstellen: []
@@ -30,16 +31,20 @@ Menschen. Lädt sie ein Skript von einem fremden Server, kann dieses Skript
 alles lesen und weitergeben, was die Ansicht liest, und niemand sieht es.
 Schreibt sie selbst ins Wiki, umgeht sie die Vorprüfung beim Aufnehmen
 (`L03`) und die Regeln für Quellen und Löschen (`L01`, `L04`). Lesen bleibt
-harmlos; was zurück ins Wiki soll, geht über den Eingang.
+harmlos; was zurück ins Wiki soll, geht über den Eingang. Fremde
+Bibliotheken bleiben draußen, weil sie Netzcode enthalten, den niemand
+prüft.
 
 ## Was die Regel nicht sagt
 
 - Ein gewöhnlicher Link, den die Person selbst anklickt, ist erlaubt, solange
   die Ansicht keine Angaben aus dem Wiki in seine Adresse schreibt.
   `obsidian://`-Links zum Öffnen einer Seite sind erlaubt.
-- Mermaid-Diagramme in Seiten und Obsidian-Canvas-Dateien führen keinen
-  fremden Code aus; für sie gilt `agent/regeln/SCHEMA.md`, nicht diese Regel.
+- Mermaid-Diagramme ohne `click` und Obsidian-Canvas-Dateien ohne
+  Link-Knoten führen keinen fremden Code aus; für sie gilt
+  `agent/regeln/SCHEMA.md` → *Diagramme*.
 - Die Ansicht darf sich im Browser merken, welchen Ordner sie zuletzt gelesen
-  hat; das ist kein Schreiben im Wiki-Ordner.
+  hat, und eine Datei zum Herunterladen anbieten; das ist kein Schreiben im
+  Wiki-Ordner.
 - Dateien, die die Person selbst schreibt, gehören ihr. Die Regel bindet dich,
-  wenn du baust oder änderst, und `agent/ablaeufe/pruefen.md` meldet Verstöße.
+  wenn du baust oder änderst; `agent/ablaeufe/pruefen.md` meldet Verstöße.

@@ -212,7 +212,8 @@ Ein Mermaid-Block (```` ```mermaid ````) darf in einer Seite stehen, wenn er
 zeigt, was die Seite im Text belegt: einen Ablauf, eine Zeitachse, eine
 Gliederung. Jeder Knoten ist eine Aussage wie eine Zeile im Text; was nicht
 im Text mit Fundstelle steht, steht auch nicht im Diagramm, und Namen nur, wo
-die Seite sie nennen darf (`L03`).
+die Seite sie nennen darf (`L03`). Kein `click`. In einer `notiz` steht es
+unter *Ergänzt vom Agenten*. Wie jede Änderung: `updated:`, `## Verlauf`.
 
 ## Wann eine Seite fertig ist
 
@@ -245,6 +246,11 @@ Prüfung. Der Name folgt *Dateinamen und Links*. Frontmatter: `title`,
 `stimme: agent`. Soll eine Ausgabe Quelle werden, sagst du, dass sie
 Wiki-Inhalt wiederholt; nur eigene Ergänzungen der Person darin nimmst du
 wie eine Notiz auf.
+
+Ein Bericht als HTML (`agent/ablaeufe/ansicht-bauen.md` § 2.5) trägt
+dieselben Angaben als `<title>` und `<meta name="created|zielperson|zweck">`,
+die Belege in einem Abschnitt *Belege* am Ende und die Sicherheitszeile nach
+`L05`; den Kern nur, wenn er beim Öffnen liest. Log: `ansicht`.
 
 ## Bestand: `wiki/meta/bestand.md`
 

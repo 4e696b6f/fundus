@@ -17,38 +17,42 @@ Auftrag offenlässt, fragst du in einer Nachricht.
 Das erste, das passt:
 
 1. Die Auswertung in `ansicht/uebersicht.html` (Reiter *Auswertung*) zeigt
-   es schon → du sagst, wo. Ihre Zahlen nennst du nicht selbst: Die Person
-   liest sie dort ab, so gezählt, wie die Kachel sagt.
+   es schon → du sagst, wo. Ihre Zahlen wiederholst du nicht geschätzt;
+   nennst du eine, zählst du so, wie die Kachel unter „Gezählt“ sagt.
 2. Ein Ablauf, eine Zeitachse oder eine Gliederung, die eine Seite belegt →
    Mermaid-Block in dieser Seite (`agent/regeln/SCHEMA.md` → *Diagramme*).
 3. Eine Karte, die die Person selbst weiter ordnen will → Obsidian-Canvas
-   `eigen/ansichten/<name>.canvas`; Karten verweisen auf Wiki-Seiten statt
-   ihren Text zu kopieren.
+   `eigen/ansichten/<name>.canvas` nur mit Datei-, Text- und Gruppenknoten;
+   Karten verweisen auf Wiki-Seiten, statt ihren Text zu kopieren.
 4. Eine Ansicht, die bei jedem Öffnen den aktuellen Stand liest →
    `eigen/ansichten/<name>.html` (§ 3).
 5. Ein Bericht zu einem Stand, zum Drucken oder Weitergeben →
-   `ausgaben/JJJJ-MM-TT-<name>.html` mit eingebetteten Zahlen, Belegen und
-   Datum; für Inhalt und Namen gilt `agent/ablaeufe/schreiben.md` § 3.
+   `ausgaben/JJJJ-MM-TT-<name>.html` nach `agent/regeln/SCHEMA.md` →
+   *Ausgaben*, für Inhalt und Namen `agent/ablaeufe/schreiben.md` § 3.
 
 ## 3 · HTML-Ansicht
 
-- **Gerüst aus `ansicht/uebersicht.html`:** die Zeile
-  `<meta http-equiv="Content-Security-Policy" …>` wörtlich, dazu das Skript
-  `fundus-kern` unverändert (Einlesen, Frontmatter, Links, Auswertung).
-  Deine Logik steht in einem eigenen Skript. Im Kopf
-  `<meta name="fundus-kern" content="…">` mit `KERN_VERSION` aus dem Kern und
-  ein Kommentar: Zweck, Datum, auf Wunsch der Person.
-- **Einlesen** wie die Übersicht: Ordner wählen, nur lesend
-  (`showDirectoryPicker` mit `mode: 'read'`, sonst `webkitdirectory`).
+- **Gerüst:** `ansicht/uebersicht.html` als Datei kopieren, nicht abtippen.
+  Kopf mit der Sicherheitszeile und das Skript `fundus-kern` (Einlesen,
+  Frontmatter, Links, Auswertung) bleiben Zeichen für Zeichen; du ersetzt
+  Titel, Stil und das Skript `fundus-ui` durch deine. Im Kopf
+  `<meta name="fundus-kern" content="…">` mit `KERN_VERSION` und ein
+  Kommentar: Zweck, Datum, auf Wunsch der Person.
+- **Einlesen** über den Kern: `K.liesOrdner` nach `showDirectoryPicker` mit
+  `mode: 'read'`, sonst `K.ausDateiliste` aus `webkitdirectory`, dann
+  `K.leseTexte` und `K.baueIndex`.
 - **Darstellung:** Tabellen, CSS, SVG im Code; keine Bibliothek (`L05`).
+  Text aus dem Wiki setzt du nur über `K.esc`, `K.inline` oder
+  `K.renderMarkdown` ein.
 - **Ehrlich zählen:** Jede Zahl sagt in einem Satz, was sie zählt. Wo
   Aussagen erscheinen, bleibt `sicherheit:` sichtbar. Die Ansicht deutet
   nicht und ordnet nicht nach Wichtigkeit.
 - **Menschen:** Auswertungen nach Personen, die nicht öffentlich handeln,
   nur auf ausdrücklichen Wunsch (`L03`).
-- **Rückweg:** Soll ein Ergebnis ins Wiki, bietet die Ansicht eine
-  Markdown-Notiz zum Herunterladen an; die Person legt sie in
-  `quellen/eingang/`.
+- **Rückweg:** Soll etwas ins Wiki, bietet die Ansicht eine Notiz zum
+  Herunterladen an, mit nur dem, was die Person in der Ansicht selbst
+  eingibt, und Links auf die Seiten, um die es geht; keine Zahlen oder
+  Aussagen aus dem Wiki. Die Person legt sie in `quellen/eingang/`.
 - **Eigene Felder:** Braucht die Ansicht ein Feld, das `agent/regeln/SCHEMA.md`
   nicht kennt, schlägst du es vor; nach dem Ja steht es in `eigen/EIGEN.md` →
   *Eigene Denkwerkzeuge*, und du setzt es nur auf Seiten, die du ohnehin
@@ -56,15 +60,21 @@ Das erste, das passt:
 
 ## 4 · Prüfen
 
-Vor der Übergabe durchsuchst du die Datei: keine Adresse mit `http`, `//`
-oder `@import` in `src`, `href` von `<link>`, `url(`; kein `fetch`,
-`XMLHttpRequest`, `WebSocket`, `sendBeacon`, `EventSource`,
-`createWritable`, `removeEntry`, `mode: 'readwrite'`; die Sicherheitszeile
-steht. Findest du etwas, behebst du es, bevor du die Datei nennst.
+Vor der Übergabe öffnet die Person `ansicht/uebersicht.html`: Die Kachel
+*Eigene Ansichten* prüft jede Datei. Ohne Browser durchsuchst du sie selbst:
+Sicherheitszeile wie in `ansicht/uebersicht.html` und vor jedem `<script>`;
+keine Adresse mit `http` oder `//` in `src`, `srcset`, `href` von `<link>`,
+`url(`, `@import`; kein `fetch`, `XMLHttpRequest`, `WebSocket`,
+`sendBeacon`, `EventSource`, `RTCPeerConnection`, `serviceWorker`,
+`createWritable`, `removeEntry`, `showSaveFilePicker`, `mode: 'readwrite'`,
+`window.open`, `location =` oder `location.assign`/`replace`, kein
+`refresh` und kein `prefetch`. Findest du etwas, behebst du es, bevor du
+die Datei nennst.
 
 ## 5 · Abschließen
 
-- Log-Eintrag vom Typ `ansicht` mit `Datei:` (Pfad in Backticks).
+- Log-Eintrag vom Typ `ansicht` mit `Datei:` (Pfad in Backticks), bei einem
+  Diagramm in einer Seite mit `Geändert:`.
 - An die Person: wie sie die Ansicht öffnet (Doppelklick, Ordner wählen;
   am besten in Chrome oder Edge), was sie zeigt und was nicht.
 - Ändern nur auf Auftrag, in derselben Datei; `eigen/` gehört der Person.

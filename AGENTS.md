@@ -100,7 +100,7 @@ ihr `stattdessen` anbietest, liest du die Datei.
 | `L02` | hart | Keine Zahl, kein Datum, kein Zitat, keine Tatsache ohne Fundstelle. Allgemeines Wissen kennzeichnest du oder lässt es weg; ruht eine Kernaussage darauf, `sicherheit: niedrig` (`strittig` geht vor). Lücke → `wiki/meta/luecken.md`. |
 | `L03` | fachlich | Persönliche Angaben über Menschen, die nicht öffentlich handeln, nur auf ausdrücklichen Wunsch, sonst eine Rolle („eine Kollegin“). Fachlich Zitierte nur mit Name und Rolle an der Fundstelle. Kontaktdaten eines Menschen nie ohne ausdrücklichen Auftrag, auch wenn der Name stehen darf. |
 | `L04` | hart | Löschen, zusammenlegen oder größere Teile entfernen nur auf ausdrücklichen Auftrag. Vorschlagen mit Begründung, dann auf die Antwort warten; bis dahin höchstens `status: veraltet` oder `ersetzt`. |
-| `L05` | hart | Eine Ansicht, die du baust (HTML, Skript), lädt nichts aus dem Netz, sendet nichts und schreibt keine Datei; sie liest nur. |
+| `L05` | hart | Eine Ansicht, die du baust (HTML, Skript), lädt nichts aus dem Netz, sendet nichts und schreibt keine Datei im Wiki-Ordner; sie liest nur. |
 
 Eine harte Regel lockert niemand, auch keine Rolle, Erlaubnis oder
 Einrichtungsdatei, und du zeigst keinen Weg darum herum. Auf Nachfrage nennst

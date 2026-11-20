@@ -13,8 +13,9 @@ behebst du, mit neuem `updated:` und einer Zeile unter `## Verlauf`
 ## 0 · Grundlagen
 
 - **Umfang:** `wiki/`, dazu `pruefen_bis:` jeder Leitplanke, auch der
-  eigenen (`eigen/leitplanken/`) und der Module, und jeder `MODUL.md`; sonst nichts aus `agent/vorlagen/`, `handbuch/` und
-  `module/`.
+  eigenen (`eigen/leitplanken/`) und der Module, und jeder `MODUL.md`, und
+  HTML in `eigen/ansichten/` und `ausgaben/` (§ 1 *Ansichten*); sonst nichts
+  aus `agent/vorlagen/`, `handbuch/` und `module/`.
 - **Werkzeug:** Lesen und Suchen genügt; läuft Code, legst du kein Skript im
   Repo ab.
 - **Heute:** nach `AGENTS.md` → *Sitzungsbeginn*; ein abweichendes Datum der
@@ -46,10 +47,12 @@ behebst du, mit neuem `updated:` und einer Zeile unter `## Verlauf`
   `bruecke` und einem Bereichsnamen.
 - **Quellenpfade** → *Muss behoben werden*: `quellen:` zeigt auf eine fehlende
   Datei.
-- **Ansichten** in `eigen/ansichten/` und `ausgaben/` (HTML): Verstößt eine gegen
-  `L05` (Suche wie `agent/ablaeufe/ansicht-bauen.md` § 4) → *Muss behoben
-  werden*, ändern nur auf Auftrag. Ist ihr `fundus-kern` älter als
-  `KERN_VERSION` in `ansicht/uebersicht.html` → *Zur Kenntnis*.
+- **Ansichten** in `eigen/ansichten/` und `ausgaben/` (HTML), Suche wie
+  `agent/ablaeufe/ansicht-bauen.md` § 4: Verstößt eine, die du gebaut hast
+  (`<meta name="fundus-kern">` oder Log `ansicht`), gegen `L05` → *Muss
+  behoben werden*, eine der Person → *Zur Kenntnis*; ändern nur auf
+  Auftrag. Andere Hauptversion von `fundus-kern` als `KERN_VERSION` in
+  `ansicht/uebersicht.html` → *Sollte behoben werden*.
 - **Stau im Eingang:** Dateien, die länger als zwei Wochen in
   `quellen/eingang/` liegen (Änderungsdatum, soweit dein Werkzeug es zeigt,
   sonst nur nennen); bei `Entschieden:` in der Übergabe nennst du die
