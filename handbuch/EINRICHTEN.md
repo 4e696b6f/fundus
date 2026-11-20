@@ -4,19 +4,20 @@
 > KI-Hinweis der [README](../README.md).
 
 In einer halben Stunde, plus Installationszeit, kommst du bis zur ersten
-aufgenommenen Quelle. Programmieren musst du nicht: Du tippst ein paar Zeilen
-ab und sprichst sonst mit dem Agenten wie in einem Chat.
+aufgenommenen Quelle. Programmieren musst du nicht, ein Terminal brauchst du
+auch nicht: Du installierst zwei Programme und sprichst dann mit dem Agenten
+wie in einem Chat.
 
 ## Was du brauchst
 
-- Einen Mac oder Windows-Rechner mit Internet. Die nötige Systemversion
-  steht auf der [Installationsseite](https://code.claude.com/docs/de/setup).
+- Einen Mac oder Windows-Rechner mit Internet.
 - [Obsidian](https://obsidian.md), kostenlos und ohne Anmeldung. Es zeigt dir
   das Wiki an.
-- Claude Code, das KI-Werkzeug, das in deinem Ordner Dateien liest und
-  schreibt. Es braucht ein bezahltes Claude-Konto, siehe
-  [Preise](https://claude.com/pricing). Ein Chatfenster im Browser reicht
-  nicht, andere Werkzeuge, die `AGENTS.md` lesen, etwa Codex, gehen auch.
+- Die Claude-App für Mac oder Windows. Darin steckt Claude Code, das
+  KI-Werkzeug, das in deinem Ordner Dateien liest und schreibt. Es braucht
+  ein bezahltes Claude-Konto, siehe [Preise](https://claude.com/pricing). Ein
+  Chatfenster im Browser reicht nicht; andere Werkzeuge, die `AGENTS.md`
+  lesen, etwa Codex, gehen auch.
 - Wenn du magst, den [Obsidian Web Clipper](https://obsidian.md/clipper), der
   Webseiten mit einem Klick als Quelle ablegt.
 
@@ -75,29 +76,32 @@ Du kannst den Schritt auch überspringen: Dann fragt der Agent in Schritt 5
 alles im Gespräch ab. Schreib Rollen statt Namen („meine Teamleitung“), denn
 auch der Steckbrief geht an den Anbieter.
 
-## Schritt 4 · Claude Code installieren und anmelden
+## Schritt 4 · Die Claude-App einrichten
 
-Claude Code läuft im Terminal, einem Fenster, in das du Befehle tippst.
+Auf der [Seite zur Claude-App](https://code.claude.com/docs/de/desktop-quickstart)
+den Download für dein System wählen und die App installieren wie jedes
+andere Programm. Starten und mit deinem Claude-Konto anmelden.
 
-- Mac: Cmd + Leertaste, „Terminal“ tippen, Enter.
-- Windows: Auf die Suche in der Taskleiste klicken, „PowerShell“ tippen,
-  Enter.
+Oben in der Seitenleiste auf **Code** klicken. Darunter steht ein
+Eingabefeld und unter ihm eine Zeile mit Schaltern:
 
-Öffne die
-[Terminal-Anleitung für neue Benutzer](https://code.claude.com/docs/de/terminal-guide)
-und kopier dort den Installationsbefehl für dein System. Füg ihn ins Terminal
-ein (Mac: Cmd + V, Windows: Strg + V) und drück Enter. Wenn der Installer
-meldet, dass er fertig ist, schließ das Terminal und öffne ein neues.
+1. **Umgebung** (der erste Schalter): den obersten Eintrag unter „Lokal“
+   (Local) wählen. So arbeitet der Agent auf deinem Rechner.
+2. **Ordner** (daneben): „Ordner öffnen …“ (Open folder …) und deinen
+   Wiki-Ordner aussuchen.
+3. **Modus**: „Änderungen akzeptieren“ (Accept edits). Dann legt der Agent
+   Seiten an, ohne bei jeder einzelnen zu fragen; alles andere fragt er
+   weiter vorher. Eine Quelle berührt oft zehn und mehr Seiten.
+4. Steht dort ein Schalter **Worktree**, lass ihn aus. Sonst schreibt der
+   Agent in eine Kopie und nicht in dein Wiki.
 
-Jetzt in den Wiki-Ordner wechseln: `cd` und ein Leerzeichen tippen, den
-Ordner aus dem Finder oder Explorer ins Terminal ziehen, Enter. Am Anfang der
-Zeile steht nun der Name deines Ordners.
+Fragt die App, ob du den Dateien im Ordner vertraust, wählst du Ja. Es sind
+nur Textdateien.
 
-Dann `claude` tippen und Enter. Beim ersten Start fragt Claude Code ein paar
-Einstellungen ab. Du wählst mit den Pfeiltasten und bestätigst mit Enter, im
-Zweifel den Vorschlag. Im Browser meldest du dich mit deinem Claude-Konto an,
-das bleibt gespeichert. Auf die Frage, ob du den Dateien im Ordner vertraust,
-wählst du Ja. Es sind nur Textdateien.
+**Lieber im Terminal?** Wer es kennt: Claude Code nach der
+[Terminal-Anleitung](https://code.claude.com/docs/de/terminal-guide)
+installieren, im Wiki-Ordner `claude` starten. Alles Weitere gilt genauso;
+wo hier ein Knopf steht, drückst du dort Esc.
 
 ## Schritt 5 · Die erste Sitzung: einrichten
 
@@ -112,12 +116,13 @@ Themenbereiche er anlegt und welche Leitfragen er notiert. Erst nach deinem
 Ja schreibt er. Danach bietet er dir an, ein Sicherheitsnetz mit `git`
 einzurichten, falls das installiert ist.
 
-Bevor er eine Datei anlegt, fragt Claude Code oft um Erlaubnis. Du kannst
-einmal zustimmen oder es ab dann immer erlauben. Das ist bequemer, denn eine
-Quelle berührt oft zehn und mehr Seiten. Größere Aufträge kündigt der Agent
-vorher in einem Satz an, damit du weißt, was passiert.
+Größere Aufträge kündigt der Agent vorher in einem Satz an, damit du
+weißt, was passiert. Was er geändert hat, zeigt die App als kleine Zahl wie
+`+12 -1`; ein Klick darauf zeigt es Zeile für Zeile. Fragt er um Erlaubnis
+für einen Befehl, etwa für das Sicherheitsnetz, kannst du einmal zustimmen
+oder es für diesen Ordner immer erlauben.
 
-Stell die Fenster nebeneinander, links das Terminal, rechts Obsidian. Dann
+Stell die Fenster nebeneinander, links die Claude-App, rechts Obsidian. Dann
 siehst du, was der Agent schreibt, während er es schreibt.
 
 ## Schritt 6 · Die erste Quelle
@@ -125,7 +130,8 @@ siehst du, was der Agent schreibt, während er es schreibt.
 Leg im Finder oder Explorer eine Datei nach `quellen/eingang/`, etwa ein PDF,
 einen Artikel aus dem Web Clipper oder eine eigene Notiz. Die Notiz legst du
 in Obsidian an: Rechtsklick links auf `eingang` → „Neue Notiz“ (New note), ein
-paar Sätze schreiben.
+paar Sätze schreiben. Zieh Quellen nicht ins Eingabefeld der App: Dort landen
+sie nicht im Eingang, und der Agent kann sie nicht archivieren.
 
 Was du in `Backticks` setzt, auch in einer fremden Quelle, übernimmt der Agent
 wörtlich als deine Stimme in einen farbig abgesetzten `[!ich]`-Block. Eine
@@ -180,8 +186,9 @@ PDF und leg das PDF daneben.
 
 ## So geht es weiter
 
-Zum Weiterarbeiten Terminal öffnen, `cd` mit Leerzeichen, Ordner
-hineinziehen, Enter, `claude`. Dann: „Wo stehen wir?“ (oder `/stand`).
+Zum Weiterarbeiten die Claude-App öffnen, **Code**, eine neue Sitzung; unter
+dem Eingabefeld deinen Wiki-Ordner wählen, falls er nicht schon dort steht.
+Dann: „Wo stehen wir?“ (oder `/stand`).
 
 Am Anfang reichen drei Sätze:
 
@@ -212,10 +219,11 @@ Fundus-Repository ist öffentlich.
 
 | Was du siehst | Was du tust |
 |---|---|
-| „command not found“ oder „nicht erkannt“ bei `claude`. | Terminal schließen, neu öffnen, noch einmal. Sonst hilft „Troubleshooting“ in der [Terminal-Anleitung](https://code.claude.com/docs/de/terminal-guide). |
-| `cd` findet den Ordner nicht. | Den Ordner ins Fenster ziehen, statt den Namen zu tippen. |
-| Die Anmeldung klappt nicht. | Prüfen, ob dein Claude-Konto bezahlt ist. |
-| Der Agent weiß nichts von deinem Wiki. | Falscher Ordner: `/exit`, mit `cd` in den Wiki-Ordner, `claude`. |
+| **Code** fehlt, oder die App will ein Upgrade. | Prüfen, ob dein Claude-Konto bezahlt ist; nach der Anmeldung die App neu starten. |
+| Windows: Die App verlangt Git. | Die App aktualisieren; ältere Versionen fragten danach, obwohl es nicht nötig ist. |
+| Der Agent weiß nichts von deinem Wiki. | Falscher Ordner: neue Sitzung, unter dem Eingabefeld den Wiki-Ordner wählen. |
+| Der Agent sagt, er habe Seiten angelegt, aber Obsidian zeigt sie nicht. | Unter dem Eingabefeld ist **Worktree** an: neue Sitzung, Worktree aus, den Auftrag noch einmal geben. |
 | Obsidian zeigt die neuen Seiten nicht. | Unten links auf den Vault-Namen, „Vaults verwalten“ (Manage vaults), deinen Wiki-Ordner öffnen. |
-| Der Agent tut etwas, das du nicht willst. | Esc drücken, dann sagen, was du stattdessen willst. |
-| `/` zeigt die Kurzbefehle nicht. | Claude Code im Wiki-Ordner neu starten. In anderen Programmen als Claude Code gibt es sie nicht; dort schreibst du die Sätze. |
+| Der Agent tut etwas, das du nicht willst. | Auf den Stopp-Knopf klicken (im Terminal: Esc), dann sagen, was du stattdessen willst. |
+| `/` zeigt die Kurzbefehle nicht. | Neue Sitzung im Wiki-Ordner starten. In anderen Programmen als Claude Code gibt es sie nicht; dort schreibst du die Sätze. |
+| Im Terminal: „command not found“ bei `claude`. | Terminal schließen, neu öffnen, noch einmal; sonst „Troubleshooting“ in der [Terminal-Anleitung](https://code.claude.com/docs/de/terminal-guide). |

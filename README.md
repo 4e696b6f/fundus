@@ -24,9 +24,9 @@ haben, daraus selbst Notizen zu pflegen.
 
 ## Was du brauchst
 
-Einen Mac oder Windows-Rechner, [Obsidian](https://obsidian.md) und Claude
-Code. Das ist das KI-Programm, das hier den Agenten macht. Es braucht ein
-bezahltes Claude-Konto. Was der Agent liest, geht an Anthropic, den Anbieter
+Einen Mac oder Windows-Rechner, [Obsidian](https://obsidian.md) und die
+Claude-App mit Claude Code. Das ist das KI-Programm, das hier den Agenten
+macht. Es braucht ein bezahltes Claude-Konto, ein Terminal brauchst du nicht. Was der Agent liest, geht an Anthropic, den Anbieter
 von Claude. Leg nur ab, was dort hin darf.
 
 ## So fängst du an
@@ -42,9 +42,10 @@ Rechne mit einer halben Stunde. Jeder Klick steht in
 3. Wenn du magst: `EINRICHTUNG.md` öffnen und die Fragen beantworten, wofür
    das Wiki ist und womit du anfängst. Beispiele liegen in
    `handbuch/steckbriefe/`.
-4. Claude Code installieren und im Ordner starten. Das läuft im Terminal, dem
-   Fenster, in das man Befehle tippt. Wie das ohne Vorkenntnisse geht, steht im
-   Handbuch unter Schritt 4.
+4. Die Claude-App installieren, links **Code** wählen und unter dem
+   Eingabefeld deinen Wiki-Ordner öffnen. Welche Schalter du stellst, steht
+   im Handbuch unter Schritt 4. Wer lieber im Terminal arbeitet, startet dort
+   `claude` im Ordner.
 5. Dem Agenten schreiben: „Richte mein Wiki ein.“ Er fragt nach, was im
    Steckbrief fehlt, zeigt dir einen Entwurf und legt nach deinem Ja los.
    Danach legst du die erste Datei in `quellen/eingang/`.
