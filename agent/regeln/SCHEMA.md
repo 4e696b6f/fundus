@@ -290,7 +290,8 @@ Vorgänge: `aufnehmen`, `frage`, `pruefen`, `verknuepfen`
 `entscheidung` (`agent/ablaeufe/aufnehmen.md` § 7), `ausgabe`
 (`agent/ablaeufe/schreiben.md`), `bestand` (`agent/ablaeufe/uebernehmen.md`),
 `einrichtung` (`agent/ablaeufe/einrichten.md`), `ansicht`
-(`agent/ablaeufe/ansicht-bauen.md`). Die Namen der Vorgänge
+(`agent/ablaeufe/ansicht-bauen.md`), `aktualisierung`
+(`agent/ablaeufe/aktualisieren.md`). Die Namen der Vorgänge
 bleiben, auch wo der Ablauf anders heißt, damit ältere Logs lesbar bleiben.
 
 `Offen:` steht nur für eine Frist, eine von der Person vorgemerkte Aufgabe

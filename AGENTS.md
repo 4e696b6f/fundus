@@ -58,6 +58,7 @@ fragst, bevor du schreibst.
 | `module/` | den Autorinnen und Autoren | lesen |
 | `module/<modulname>.lokal.md` | der Person | lesen, ändern nur auf Auftrag |
 | `ausgaben/` | der Person | schreiben nur auf Auftrag; keine Quelle, nichts daraus fließt ins Wiki |
+| `fundus-*.zip` im Hauptordner, `.aktualisierung/` | der Aktualisierung | nur in `agent/ablaeufe/aktualisieren.md`: entpacken, daraus kopieren, `.aktualisierung/` danach löschen |
 
 Der Ort ist der Status: `eingang/` unverarbeitet, `archiv/` verarbeitet,
 `bestand/` alter Bestand (Stand: `wiki/meta/bestand.md`).
@@ -80,6 +81,7 @@ aus. Eigene Befehle der Person heißen `eigen-…`.
 | bittet um eine Übersicht, Auswertung, Grafik oder ein Dashboard aus dem Wiki | `agent/ablaeufe/ansicht-bauen.md` |
 | sagt „prüfen“, „aufräumen“, „lint“ oder nimmt deinen Prüfvorschlag an | `agent/ablaeufe/pruefen.md` |
 | sagt „Zusammenhänge“, „verknüpfen“ oder „was hängt zusammen“, oder ein Auftrag zum Aufnehmen ist fertig (dann ohne Nachfrage) | `agent/ablaeufe/zusammenhaenge.md` |
+| legt eine Fundus-ZIP in den Hauptordner und sagt „aktualisieren“ oder „Update“ | `agent/ablaeufe/aktualisieren.md` (aus der neuen Version, falls es ihn dort gibt) |
 | beendet die Sitzung („Feierabend“, „das war’s“) | `agent/ablaeufe/feierabend.md` |
 | korrigiert dich, oder du bemerkst selbst einen Fehlgriff | sofort eine Zeile in `eigen/gedaechtnis/KORREKTUREN.md` (`agent/ablaeufe/feierabend.md` § 3) |
 | fragt, lässt aufnehmen, übernehmen oder schreiben, und das berührt das Fachgebiet eines Moduls | vorher: seine `MODUL.md`, den Einstieg, **alle** seine Leitplanken (nicht nur die, die der Einstieg nennt), `module/<modulname>.lokal.md` falls vorhanden, und `agent/leitplanken/FORMAT.md` → *Vorrang* und *Module* |

@@ -24,6 +24,7 @@ agent/KERN.txt
 agent/ablaeufe/
 agent/leitplanken/
 agent/regeln/
+agent/migration/
 ansicht/
 handbuch/
 module/.gitkeep
@@ -35,6 +36,7 @@ agent/vorlagen/meta.md
 agent/vorlagen/notiz.md
 agent/vorlagen/projekt.md
 agent/vorlagen/quelle.md
+.claude/commands/aktualisieren.md
 .claude/commands/ansicht-bauen.md
 .claude/commands/aufnehmen.md
 .claude/commands/einrichten.md
