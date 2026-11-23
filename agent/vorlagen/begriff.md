@@ -20,7 +20,7 @@ gegenposition: ''                    # Pflicht
 
 # {{title}}
 
-<!-- Ein bis drei Sätze: worum es geht und warum es hier steht. Regeln: agent/regeln/SCHEMA.md -->
+<!-- Themenseite: ein bis drei Sätze, worum es geht und warum es hier steht. Kernaussagen aus allen Quellen, je mit Fundstelle; ein Widerspruch steht hier, beide Aussagen nebeneinander. Regeln: agent/regeln/SCHEMA.md -->
 
 ## Kernaussagen
 

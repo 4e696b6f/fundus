@@ -14,7 +14,7 @@ stimme: agent                        # gemischt mit [!ich]-Block
 
 # {{title}}
 
-<!-- Person, Organisation oder Institution und ihre Rolle im Wiki. Regeln: agent/regeln/SCHEMA.md -->
+<!-- Öffentlich handelnde Person, Organisation oder Institution (L03) und ihre Rolle im Wiki. Regeln: agent/regeln/SCHEMA.md -->
 
 ## Kernaussagen
 
