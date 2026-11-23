@@ -2,19 +2,19 @@
 
 **Wofür:** Verbindungen zwischen Themen suchen und Brücken vorschlagen.
 
-Auslöser: ein fertiger Auftrag zum Aufnehmen und jeder Nachzügler
-(`agent/ablaeufe/aufnehmen.md` § 6 und § 7), ohne Nachfrage; oder die Person sagt
-„Zusammenhänge“, „verknüpfen“ oder `/zusammenhaenge`. Der Log-Typ heißt
-weiter `verknuepfen`.
-
 Jeder Lauf geht durch § 1 bis § 5, mit eigenem Log-Eintrag; ein Satz im
 Eintrag `aufnehmen` ersetzt ihn nicht.
 
 ## 1 · Umfang festlegen
 
-Nach einem Auftrag: die Seiten, die er neu angelegt oder geändert hat. Nach
-einem Nachzügler: nur dessen Seiten. Auf Zuruf: die heute neuen oder
-geänderten, wenn die Person nichts anderes nennt. Nie das ganze Wiki.
+- Nach einem Auftrag zum Aufnehmen (ohne Nachfrage): die Seiten, die er
+  angelegt oder geändert hat.
+- Nach einem Nachzügler (`agent/ablaeufe/aufnehmen.md` § 7): nur dessen
+  Seiten.
+- Auf Zuruf: die heute neuen oder geänderten, wenn die Person nichts
+  anderes nennt.
+
+Nie das ganze Wiki.
 
 ## 2 · Je Seite
 
@@ -24,16 +24,17 @@ geänderten, wenn die Person nichts anderes nennt. Nie das ganze Wiki.
 - **Projekte und Vorhaben:** Berührt die Seite ein laufendes `projekt` oder
   ein Vorhaben aus `SOUL.md` → *Woran ich gerade arbeite*, sagst du es der
   Person sofort, in einem Satz. Ist der Abschnitt leer (auch nur mit dem
-  Klammertext der Vorlage), fragst du nicht nach.
+  Klammertext der Vorlage), fragst du nicht nach. Ein errechneter Termin ist
+  eine Frist (`agent/ablaeufe/feierabend.md` § 1).
 - **Linsen:** fehlende `gegenposition:` nachtragen, `gleiche_form:` prüfen;
   ab dem dritten Vorkommen die Musterseite anlegen (`agent/regeln/LINSEN.md` →
   *Gleiche Form*).
 
 ## 3 · Muster über Bereiche hinweg
 
-Der wichtigste Schritt: zwei Seiten aus verschiedenen Themenbereichen mit
-derselben Struktur, nicht nur demselben Stichwort. Bei nur einem Bereich
-entfällt die Suche nach Paaren.
+Gesucht: zwei Seiten aus verschiedenen Themenbereichen mit derselben
+Struktur, nicht nur demselben Stichwort. Bei nur einem Bereich entfällt die
+Suche nach Paaren.
 
 1. **Anlegen nur nach Zustimmung der Person.** Du schlägst vor.
 2. **Struktur:** Für jede Seite im Umfang fragst du, ob eine Seite aus einem
@@ -44,7 +45,8 @@ entfällt die Suche nach Paaren.
 4. **Jeder Vorschlag** und jede Idee, die später Brücke werden könnte, wird
    eine Zeile `Offen: Brückenidee …` im Log-Eintrag (§ 5).
 5. **Zustimmung:** Die Seite entsteht nach `agent/regeln/SCHEMA.md`, `[!ich]` aus
-   der Rohdatei. Einen neuen Ordner `wiki/bruecken/` oder `wiki/muster/`
+   der Rohdatei, danach die Belegprobe (`agent/regeln/SCHEMA.md` →
+   *Belegprobe*). Einen neuen Ordner `wiki/bruecken/` oder `wiki/muster/`
    trägst du in `wiki/index.md` ein.
 6. **Ablehnung:** festhalten nach `agent/ablaeufe/aufnehmen.md` § 7.
 
@@ -58,7 +60,9 @@ vorgehen wie `agent/ablaeufe/aufnehmen.md` § 4.
 An die Person, kurz: gesetzte Links, vorgeschlagene Brücken, neue
 Widersprüche, betroffene Projekte und Vorhaben. Dazu ein Log-Eintrag vom Typ
 `verknuepfen`: was du gesucht und was du gefunden hast, auch wenn es nichts
-war. „Geprüft“ allein genügt nicht.
+war. „Geprüft“ allein genügt nicht. Zum Schluss das Prüfwerkzeug:
+`node agent/werkzeug/pruefen.js`, seine Befunde zu diesem Auftrag beheben
+(`agent/ablaeufe/pruefen.md` § 0).
 
 ```markdown
 ## [2026-09-23] verknuepfen | Auftrag Artikel Wiederholen, Notiz Lernplan

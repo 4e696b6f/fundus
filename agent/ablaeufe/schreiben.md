@@ -2,14 +2,11 @@
 
 **Wofür:** Brief, Rundschreiben oder anderen Text aus deinem Wiki entwerfen.
 
-Auslöser: Die Person bittet um einen Text für andere („schreib mir …“,
-Brief, Rundschreiben, Stellungnahme, `/schreiben`).
-
 ## 1 · Zielperson und Zweck
 
 Wer liest, was soll danach geschehen, Anrede, Umfang: Was der Auftrag
-offenlässt, fragst du vor dem Entwurf in einer Nachricht, oder du nennst es
-in der Antwort als Annahme mit Grund.
+offenlässt, fragst du vor dem Entwurf in einer Nachricht oder nennst es als
+Annahme mit Grund.
 
 ## 2 · Im Wiki suchen
 
@@ -33,8 +30,12 @@ Entwurf und fragst, ob ein Gerüst mit offenen Stellen gewünscht ist.
   mehr gültig („galt bis“) führt, steht nicht als geltend im Text; du nennst
   es im Chat.
 - Kurztitel, `zielperson:` und Log nennen eine Rolle, nie einen Namen. Im
-  Text gilt `L03` wie im Wiki: ein Name nur auf ausdrücklichen Wunsch, sonst
-  eine Rolle, und du fragst nach.
+  Text gilt `L03` wie im Wiki; einen Namen aus dem Auftrag übernimmst du,
+  wie die Person ihn schreibt, ohne Vorname oder Titel aus anderen Dateien.
+- Vor dem Speichern die Belegprobe (`agent/regeln/SCHEMA.md` →
+  *Belegprobe*), auch für Angaben aus dem Auftrag: Du fügst ihnen nichts
+  hinzu. Ein errechneter Termin ist eine Frist
+  (`agent/ablaeufe/feierabend.md` § 1).
 
 ## 4 · Datei
 
@@ -50,8 +51,11 @@ statt sie zu ändern. Eine neue Datei nur für einen neuen Auftrag.
 ## 5 · Abschließen
 
 - Log-Eintrag vom Typ `ausgabe`, auch nach einer Überarbeitung, mit den
-  Zeilen `Datei:` (Pfad in Backticks, nie `[[…]]`) und `Benutzt:` (die
-  Seiten).
+  Zeilen `Datei:` (Pfad in Backticks, nie `[[…]]`), `Benutzt:` (die
+  Seiten) und `Belegprobe:`.
+- **Prüfwerkzeug:** `node agent/werkzeug/pruefen.js`, seine Befunde zu diesem Auftrag beheben
+  (`agent/ablaeufe/pruefen.md` § 0); es meldet auch einen falschen
+  Wochentag in `ausgaben/`.
 - An die Person: die Datei (bei `nur-bericht` der Text), offene Stellen,
   Annahmen.
 - Steht im Text eine Einsicht, die noch keine Seite hat, bietest du sie als
