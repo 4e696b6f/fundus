@@ -4,29 +4,58 @@
 > KI-Hinweis der [README](../README.md).
 
 In einer halben Stunde, plus Installationszeit, kommst du bis zur ersten
-aufgenommenen Quelle. Programmieren musst du nicht, ein Terminal brauchst du
-auch nicht: Du installierst zwei Programme und sprichst dann mit dem Agenten
-wie in einem Chat.
+aufgenommenen Quelle. Programmieren musst du nicht: Du installierst zwei
+Programme und sprichst dann mit dem Agenten wie in einem Chat. Ob du dafür
+ein Terminal brauchst, hängt vom Programm ab, das du wählst.
 
 ## Was du brauchst
 
 - Einen Mac oder Windows-Rechner mit Internet.
 - [Obsidian](https://obsidian.md), kostenlos und ohne Anmeldung. Es zeigt dir
   das Wiki an.
-- Die Claude-App für Mac oder Windows. Darin steckt Claude Code, das
-  KI-Werkzeug, das in deinem Ordner Dateien liest und schreibt. Es braucht
-  ein bezahltes Claude-Konto, siehe [Preise](https://claude.com/pricing). Ein
-  Chatfenster im Browser reicht nicht; andere Werkzeuge, die `AGENTS.md`
-  lesen, etwa Codex, gehen auch.
+- Ein Agenten-Programm: ein KI-Programm, das in deinem Ordner Dateien liest
+  und schreibt. Welches, wählst du gleich unter *Programm wählen*. Ein
+  Chatfenster im Browser reicht nicht.
 - Wenn du magst, den [Obsidian Web Clipper](https://obsidian.md/clipper), der
   Webseiten mit einem Klick als Quelle ablegt.
 
+## Programm wählen
+
+Fundus ist an kein Programm gebunden. Die Regeln stehen in `AGENTS.md`, einer
+Datei, die viele Agenten-Programme von sich aus lesen; die Befehle liegen für
+jedes der folgenden Programme bereit. Nimm das, für das du schon ein Konto
+hast. Hast du keins und willst kein Terminal, nimm die Claude-App.
+
+| Programm | Für wen | Konto und Kosten (Art) | Wohin deine Texte gehen | Start |
+|---|---|---|---|---|
+| **Claude-App** mit Claude Code | Einstieg ohne Terminal, empfohlen | bezahltes Claude-Konto ([Pläne](https://claude.com/pricing)) | an Anthropic ([Datennutzung](https://code.claude.com/docs/de/data-usage)) | in der App **Code**, dann den Ordner öffnen |
+| **Codex** | wer ein ChatGPT-Konto hat; Terminal oder ChatGPT-Desktop-App | bezahltes ChatGPT-Konto oder API-Schlüssel mit Abrechnung nach Verbrauch ([Preise](https://learn.chatgpt.com/docs/pricing)) | an OpenAI ([Anmeldung und Datenregeln](https://learn.chatgpt.com/docs/auth)) | `codex` im Ordner |
+| **Gemini CLI** | Terminal; wer einen Gemini-API-Schlüssel oder eine Lizenz über seine Organisation hat | API-Schlüssel oder Lizenz der Organisation; mit privatem Google-Konto seit Juni 2026 nicht mehr ([Hinweis von Google](https://developers.google.com/gemini-code-assist/docs/deprecations/code-assist-individuals)) | an Google ([Bedingungen und Datenschutz](https://geminicli.com/docs/resources/tos-privacy/)) | `gemini` im Ordner |
+| **pi** | Terminal; eigenes oder lokales Modell | Abo oder API-Schlüssel bei einem Anbieter deiner Wahl, oder ein lokales Modell ([Anleitung](https://docs.pi.dev/latest/quickstart)) | an den Anbieter, den du wählst; bei einem lokalen Modell an ein Programm auf deinem Rechner | `pi` im Ordner |
+| **opencode** | Terminal oder Desktop-App; eigenes oder lokales Modell | Konto oder API-Schlüssel bei einem Anbieter deiner Wahl, oder ein lokales Modell ohne Konto ([Anbieter](https://opencode.ai/docs/providers)) | an den Anbieter, den du wählst; bei einem lokalen Modell an ein Programm auf deinem Rechner | `opencode` im Ordner |
+
+Preise nennen wir nicht, sie ändern sich; die Links führen zu den Seiten der
+Hersteller. Wie du das gewählte Programm einrichtest, steht in Schritt 4.
+
+Erprobt ist Fundus bisher mit Claude-Modellen, zuletzt mit pi. Codex, Gemini
+CLI und opencode sind vorbereitet, aber noch nicht im Test gelaufen: Hakt
+dort etwas, schreib es in die
+[Issues](https://github.com/4e696b6f/fundus/issues).
+
+Auch ein anderes Programm geht, wenn es `AGENTS.md` liest und in deinem
+Ordner Dateien lesen und schreiben kann. Befehle hat es dann vielleicht
+keine; die Sätze aus dieser Anleitung wirken trotzdem.
+
 ## Bevor du anfängst: Was wohin geht
 
-Alles, was der Agent liest, geht an den Anbieter des Werkzeugs, bei Claude
-Code an Anthropic. Lege nur Quellen ab, die dort hin dürfen, und kläre
-Dienstliches vorher mit deiner Organisation. Lokale Modelle vermeiden das,
-halten sich aber nach unserer Erfahrung deutlich schlechter an die Abläufe.
+Alles, was der Agent liest, geht an den Anbieter deines Programms: welcher
+das ist, steht in der Tabelle oben. Lege nur Quellen ab, die dort hin dürfen,
+und kläre Dienstliches vorher mit deiner Organisation. Was der Anbieter mit
+den Texten tut, etwa wie lange er sie aufbewahrt, hängt von deinem Konto und
+seinen Einstellungen ab; lies dazu die verlinkte Seite. Ein lokales Modell
+läuft auf deinem eigenen Rechner, dann gehen deine Texte an keinen Anbieter
+eines Modells. Lokale Modelle halten sich aber nach unserer Erfahrung
+deutlich schlechter an die Abläufe.
 
 ## Schritt 1 · Den Ordner holen
 
@@ -92,7 +121,30 @@ auch der Steckbrief geht an den Anbieter. Steht doch ein Name darin, bleibt
 er im Steckbrief stehen, die Datei gehört dir; ins Wiki schreibt der Agent
 an seiner Stelle die Rolle.
 
-## Schritt 4 · Die Claude-App einrichten
+## Schritt 4 · Dein Programm einrichten
+
+Lies nur den Abschnitt zu deinem Programm. Am Ende ist es überall gleich: Das
+Programm ist in deinem Wiki-Ordner gestartet, und du kannst dem Agenten
+schreiben.
+
+Jeden Auftrag kannst du als Satz schreiben („Nimm die neue Quelle auf.“)
+oder als Befehl geben. Die Befehle heißen überall gleich, nur das Zeichen
+davor ist verschieden:
+
+| Programm | So gibst du den Befehl „einrichten“ |
+|---|---|
+| Claude Code | `/einrichten` |
+| Codex | `$einrichten`; die Liste zeigt `/skills` |
+| Gemini CLI | `/einrichten` |
+| pi | `/skill:einrichten` |
+| opencode | `/einrichten` |
+
+Kann dein Programm etwas nicht, etwa keine PDFs lesen oder keine Befehle auf
+deinem Rechner ausführen, sagt der Agent das und bittet dich um den
+fehlenden Schritt. Was er dann stattdessen tut, steht in
+`agent/regeln/PROGRAMME.md`.
+
+### Claude-App
 
 Auf der [Seite zur Claude-App](https://code.claude.com/docs/de/desktop-quickstart)
 den Download für dein System wählen und die App installieren wie jedes
@@ -119,13 +171,88 @@ nur Textdateien.
 installieren, im Wiki-Ordner `claude` starten. Alles Weitere gilt genauso;
 wo hier ein Knopf steht, drückst du dort Esc.
 
+### Codex
+
+Codex nach der [Anleitung von OpenAI](https://learn.chatgpt.com/docs/codex/cli)
+installieren, im Terminal in den Wiki-Ordner wechseln und `codex` starten.
+Beim ersten Start meldest du dich mit deinem ChatGPT-Konto an („Sign in with
+ChatGPT“) oder mit einem API-Schlüssel.
+
+Wichtig: Dein Wiki-Ordner steht anfangs nicht unter `git`. Für solche Ordner
+schlägt Codex beim Start vor, nur zu lesen. Dann kann der Agent keine Seiten
+anlegen. Stell mit `/permissions` um auf „Auto“: Damit darf er im Wiki-Ordner
+lesen, schreiben und Befehle ausführen und fragt für alles außerhalb
+([Rechte in Codex](https://learn.chatgpt.com/docs/agent-approvals-security)).
+
+Ohne Terminal: Die
+[ChatGPT-Desktop-App](https://learn.chatgpt.com/docs/app) installieren,
+anmelden, deinen Wiki-Ordner öffnen, „Codex“ wählen und einen neuen Chat
+beginnen.
+
+### Gemini CLI
+
+Gemini CLI nach der
+[Anleitung](https://geminicli.com/docs/get-started/installation/)
+installieren (sie braucht Node.js), im Terminal in den Wiki-Ordner wechseln
+und `gemini` starten. Zum Anmelden brauchst du einen API-Schlüssel oder eine
+Lizenz deiner Organisation; wie das geht, steht unter
+[Anmeldung](https://geminicli.com/docs/get-started/authentication/). Gemini
+CLI liest die Regeln über die Datei `GEMINI.md`, die auf `AGENTS.md`
+verweist; ändern musst du daran nichts.
+
+Die Anmeldung mit einem privaten Google-Konto, kostenlos oder mit
+Google-Abo, hat Google im Juni 2026 abgestellt und verweist dafür auf sein
+neues Programm Antigravity
+([Hinweis von Google](https://developers.google.com/gemini-code-assist/docs/deprecations/code-assist-individuals)).
+Nach dessen Anleitung liest Antigravity `AGENTS.md` und die Befehle aus
+`.agents/skills/`, also dieselben Dateien, die Fundus mitbringt
+([Regeln](https://antigravity.google/docs/rules),
+[Umstieg von Gemini CLI](https://antigravity.google/docs/cli/gcli-migration)).
+Mit Fundus ausprobiert haben wir Antigravity noch nicht.
+
+### pi
+
+pi nach dem [Quickstart](https://docs.pi.dev/latest/quickstart)
+installieren, im Terminal in den Wiki-Ordner wechseln und `pi` starten. Mit
+`/login` wählst du einen Anbieter und meldest dich mit einem Abo oder einem
+API-Schlüssel an, mit `/model` wählst du das Modell. Für ein lokales Modell
+folgst du der Anleitung zu
+[lokalen Modellen](https://docs.pi.dev/latest/models). Unter Windows braucht
+pi für Befehle [Git für Windows](https://docs.pi.dev/latest/windows).
+
+pi fragt nicht vor jedem Schritt um Erlaubnis
+([Sicherheit](https://docs.pi.dev/latest/security)). Richte deshalb das
+Sicherheitsnetz ein, das der Agent dir in Schritt 5 anbietet, oder kopier den
+Ordner vorher.
+
+### opencode
+
+opencode nach der [Anleitung](https://opencode.ai/docs/) installieren; dort
+gibt es auch eine Desktop-App für Mac und Windows. Im Terminal in den
+Wiki-Ordner wechseln und `opencode` starten. Mit `/connect` verbindest du
+ein Konto bei einem Anbieter, mit `/models` wählst du das Modell
+([Anbieter](https://opencode.ai/docs/providers)). Läuft auf deinem Rechner
+Ollama mit einem Modell, findet opencode es von selbst, ohne Konto.
+
+opencode fragt, bevor der Agent etwas tut, für das du noch keine Regel
+festgelegt hast ([Rechte](https://opencode.ai/docs/permissions)). Eine Quelle
+berührt oft zehn und mehr Seiten: Wähl beim Schreiben von Seiten „Allow
+always“, dann gilt die Erlaubnis für diesen Ordner weiter.
+
+### Ein anderes Programm
+
+Starte es im Wiki-Ordner und frag als Erstes: „Welche Regeln hast du
+gelesen?“ Nennt der Agent `AGENTS.md`, kann es losgehen. Sonst schreib ihm:
+„Lies AGENTS.md und halte dich daran.“
+
 ## Schritt 5 · Die erste Sitzung: einrichten
 
 Tippe als Erstes:
 
 > Richte mein Wiki ein.
 
-(oder kurz `/einrichten`). Der Agent liest seine Regeln und deinen
+(oder den Befehl „einrichten“ deines Programms, siehe Schritt 4). Der Agent
+liest seine Regeln und deinen
 Steckbrief, fragt in höchstens drei Runden nach, was noch fehlt, und zeigt
 dir dann einen Entwurf: was er in `SOUL.md` einträgt, welche Themenbereiche
 er anlegt, welche Leitfragen er notiert und welche Seiten entstehen. Erst
@@ -149,12 +276,12 @@ dann ein, wenn du später im Einzelfall etwas anderes möchtest, bis du sie
 änderst.
 
 Größere Aufträge kündigt der Agent vorher in einem Satz an, damit du
-weißt, was passiert. Was er geändert hat, zeigt die App als kleine Zahl wie
-`+12 -1`; ein Klick darauf zeigt es Zeile für Zeile. Fragt er um Erlaubnis
-für einen Befehl, etwa für das Sicherheitsnetz, kannst du einmal zustimmen
-oder es für diesen Ordner immer erlauben.
+weißt, was passiert. Was er geändert hat, zeigt dir dein Programm; die
+Claude-App etwa als kleine Zahl wie `+12 -1`, ein Klick darauf zeigt es
+Zeile für Zeile. Fragt das Programm um Erlaubnis für einen Befehl, etwa für
+das Sicherheitsnetz, kannst du zustimmen.
 
-Stell die Fenster nebeneinander, links die Claude-App, rechts Obsidian. Dann
+Stell die Fenster nebeneinander, links dein Programm, rechts Obsidian. Dann
 siehst du, was der Agent schreibt, während er es schreibt.
 
 ## Schritt 6 · Die erste Quelle
@@ -162,8 +289,8 @@ siehst du, was der Agent schreibt, während er es schreibt.
 Leg im Finder oder Explorer eine Datei nach `quellen/eingang/`, etwa ein PDF,
 einen Artikel aus dem Web Clipper oder eine eigene Notiz. Die Notiz legst du
 in Obsidian an: Rechtsklick links auf `eingang` → „Neue Notiz“ (New note), ein
-paar Sätze schreiben. Zieh Quellen nicht ins Eingabefeld der App: Dort landen
-sie nicht im Eingang, und der Agent kann sie nicht archivieren.
+paar Sätze schreiben. Zieh Quellen nicht ins Eingabefeld deines Programms:
+Dort landen sie nicht im Eingang, und der Agent kann sie nicht archivieren.
 
 Was du in `Backticks` setzt, auch in einer fremden Quelle, übernimmt der Agent
 wörtlich als deine Stimme in einen farbig abgesetzten `[!ich]`-Block. Eine
@@ -235,9 +362,10 @@ PDF und leg das PDF daneben.
 
 ## So geht es weiter
 
-Zum Weiterarbeiten die Claude-App öffnen, **Code**, eine neue Sitzung; unter
-dem Eingabefeld deinen Wiki-Ordner wählen, falls er nicht schon dort steht.
-Dann: „Wo stehen wir?“ (oder `/stand`).
+Zum Weiterarbeiten dein Programm wieder im Wiki-Ordner starten und eine neue
+Sitzung beginnen. In der Claude-App: **Code**, neue Sitzung, unter dem
+Eingabefeld deinen Wiki-Ordner wählen, falls er nicht schon dort steht. Dann:
+„Wo stehen wir?“ (oder der Befehl „stand“).
 
 Am Anfang reichen drei Sätze:
 
@@ -251,7 +379,7 @@ Alles Weitere schlägt dir der Agent vor, wenn es passt: eine Prüfung nach
 zehn Quellen, das Übernehmen alter Notizen, einen Brief aus deinem Wiki.
 Meint er, eine deiner Leitfragen sei beantwortet, fragt er dich; erst nach
 deinem Ja gilt sie als beantwortet. Die
-ganze Liste mit Kurzbefehlen steht in der [README](../README.md#drei-sätze-zum-anfangen),
+ganze Liste mit Befehlen steht in der [README](../README.md#drei-sätze-zum-anfangen),
 die Wörter, die dabei fallen, im [Glossar](GLOSSAR.md).
 
 Was sich nachzählen lässt (Links ins Leere, fehlende Angaben, Daten in der
@@ -274,7 +402,7 @@ Wiki-Ordner legen. Dann dem Agenten schreiben:
 
 > Aktualisiere Fundus mit der ZIP im Ordner.
 
-(oder `/aktualisieren`). Er sagt dir, was neu ist, sichert vorher (mit `git`
+(oder der Befehl „aktualisieren“). Er sagt dir, was neu ist, sichert vorher (mit `git`
 selbst, sonst bittet er dich, den Ordner zu kopieren), tauscht nur die
 Dateien von Fundus aus und lässt deine unberührt: `SOUL.md`, `EINRICHTUNG.md`,
 `eigen/`, `quellen/`, `wiki/`, `ausgaben/`. Danach kannst du die ZIP löschen.
@@ -284,7 +412,10 @@ sagt dir, was neu ist. Beim Schritt auf 0.6 heißt das: Er bringt die
 Übergabe in die neue Form, bietet einmal an, aus deiner `SOUL.md` die
 Abschnitte zu entfernen, die jetzt in seinen Regeln stehen, und legt dir die
 Leitfragen vor, die bisher als beantwortet galten. An `SOUL.md` ändert er
-nichts ohne dein Ja.
+nichts ohne dein Ja. Beim Schritt auf 0.7 kommen die Befehle für die
+anderen Programme dazu. Eigene Befehle, die du dir hast anlegen lassen,
+bleiben; der Agent bietet an, sie auch für das Programm anzulegen, mit dem
+du jetzt arbeitest.
 
 Kommst du von 0.4, kennt dein Agent den Befehl noch nicht. Schreib dann:
 
@@ -302,16 +433,29 @@ Fundus-Repository ist öffentlich.
 
 ## Wenn es hakt
 
+In jedem Programm:
+
 | Was du siehst | Was du tust |
 |---|---|
-| **Code** fehlt, oder die App will ein Upgrade. | Prüfen, ob dein Claude-Konto bezahlt ist; nach der Anmeldung die App neu starten. |
-| Windows: Die App verlangt Git. | Die App aktualisieren; ältere Versionen fragten danach, obwohl es nicht nötig ist. |
-| Der Agent weiß nichts von deinem Wiki. | Falscher Ordner: neue Sitzung, unter dem Eingabefeld den Wiki-Ordner wählen. |
-| Der Agent sagt, er habe Seiten angelegt, aber Obsidian zeigt sie nicht. | Unter dem Eingabefeld ist **Worktree** an: neue Sitzung, Worktree aus, den Auftrag noch einmal geben. |
+| Der Agent weiß nichts von deinem Wiki. | Falscher Ordner: Das Programm im Wiki-Ordner neu starten (Claude-App: neue Sitzung, unter dem Eingabefeld den Wiki-Ordner wählen). |
+| Der Agent kennt seine Regeln nicht. | Frag: „Welche Regeln hast du gelesen?“ Fehlt `AGENTS.md`, schreib: „Lies AGENTS.md und halte dich daran.“ |
 | Obsidian zeigt die neuen Seiten nicht. | Unten links auf den Vault-Namen, „Vaults verwalten“ (Manage vaults), deinen Wiki-Ordner öffnen. |
 | Der Agent sagt, er habe „von Hand geprüft“. | Auf deinem Rechner fehlt `node`. Du musst nichts tun; den gerechneten Bericht zeigt die [Ansicht](ANSICHT.md#prüfung) unter „Prüfung“. |
 | Die Ansicht warnt vor einem Datum in der Zukunft. | Meist hat der Agent ein Datum geraten. Sag ihm „prüfen“ und welcher Tag heute ist. |
 | Der Agent kann ein eingescanntes PDF nicht lesen. | Nicht jedes Programm liest Scans. Leg die Seite als Bild ab (`.png`, `.jpg`), das sieht sich der Agent an; sonst den Text abtippen. |
-| Der Agent tut etwas, das du nicht willst. | Auf den Stopp-Knopf klicken (im Terminal: Esc), dann sagen, was du stattdessen willst. |
-| `/` zeigt die Kurzbefehle nicht. | Neue Sitzung im Wiki-Ordner starten. In anderen Programmen als Claude Code gibt es sie nicht; dort schreibst du die Sätze. |
-| Im Terminal: „command not found“ bei `claude`. | Terminal schließen, neu öffnen, noch einmal; sonst „Troubleshooting“ in der [Terminal-Anleitung](https://code.claude.com/docs/de/terminal-guide). |
+| Der Agent tut etwas, das du nicht willst. | Unterbrechen (Claude-App: Stopp-Knopf, im Terminal Esc), dann sagen, was du stattdessen willst. |
+| Die Befehle fehlen. | Neue Sitzung im Wiki-Ordner starten und das Zeichen aus Schritt 4 prüfen. Die Sätze wirken immer, auch ohne Befehl. |
+
+Je Programm:
+
+| Programm | Was du siehst | Was du tust |
+|---|---|---|
+| Claude-App | **Code** fehlt, oder die App will ein Upgrade. | Prüfen, ob dein Claude-Konto bezahlt ist; nach der Anmeldung die App neu starten. |
+| Claude-App | Windows: Die App verlangt Git. | Die App aktualisieren; ältere Versionen fragten danach, obwohl es nicht nötig ist. |
+| Claude-App | Der Agent sagt, er habe Seiten angelegt, aber Obsidian zeigt sie nicht. | Unter dem Eingabefeld ist **Worktree** an: neue Sitzung, Worktree aus, den Auftrag noch einmal geben. |
+| Claude Code im Terminal | „command not found“ bei `claude`. | Terminal schließen, neu öffnen, noch einmal; sonst „Fehlerbehebung“ in der [Terminal-Anleitung](https://code.claude.com/docs/de/terminal-guide). |
+| Codex | Der Agent liest, schreibt aber nichts. | Codex läuft nur lesend: mit `/permissions` auf „Auto“ stellen ([Rechte](https://learn.chatgpt.com/docs/agent-approvals-security)). |
+| Gemini CLI | Die Anmeldung mit dem Google-Konto geht nicht. | Für private Konten abgestellt, siehe Schritt 4: API-Schlüssel nehmen oder ein anderes Programm. |
+| pi | Kein Modell wählbar. | Mit `/login` bei einem Anbieter anmelden, dann `/model` ([Anbieter](https://docs.pi.dev/latest/providers)). |
+| pi | Windows: Befehle des Agenten scheitern. | [Git für Windows](https://docs.pi.dev/latest/windows) installieren. |
+| opencode | Kein Modell wählbar. | Mit `/connect` einen Anbieter verbinden, dann `/models` ([Anbieter](https://opencode.ai/docs/providers)). |

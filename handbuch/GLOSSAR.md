@@ -4,7 +4,7 @@ Sechzehn Wörter, mehr brauchst du für Fundus nicht.
 
 | Wort | Was es heißt |
 |---|---|
-| **Agent** | Das KI-Programm (etwa Claude Code), das dein Wiki führt. Es liest, schreibt Seiten und hält sich an die Regeln in diesem Ordner. |
+| **Agent** | Das KI-Programm, das dein Wiki führt. Es liest, schreibt Seiten und hält sich an die Regeln in diesem Ordner. Welches Programm das ist, wählst du selbst ([Programm wählen](EINRICHTEN.md#programm-wählen)); die Regeln sind für alle dieselben. |
 | **Quelle** | Eine Datei, aus der Wissen kommt: Artikel, PDF, eigene Notiz. Neue legst du in `quellen/eingang/`, verarbeitete liegen in `quellen/archiv/`, alte Sammlungen in `quellen/bestand/`. |
 | **Bereich** | Ein Themenordner in `wiki/`, etwa `wiki/garten/`. Mit welchen du anfängst, steht in `SOUL.md`. |
 | **Themenseite** | Die Seite zu einem Thema, über alle Quellen hinweg. Hier schlägst du nach. Die Seiten zu einzelnen Quellen (ihr Name beginnt mit `quelle-`) sind die Belege dazu. |
