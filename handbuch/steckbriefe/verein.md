@@ -8,11 +8,12 @@ haben und welche Regeln gelten.
 
 ## Mit welchen Themen fängst du an?
 
-- Vereinsrecht: Satzung, Mitgliederversammlung. Ändert sich selten, aber
-  wenn, dann wichtig.
-- Fördermittel: Zuschüsse von Stadt und Verband. Fristen ändern sich jedes
-  Jahr.
-- Ehrenamt gewinnen: wie wir Leute für Aufgaben finden.
+- Vereinsrecht: Satzung, Mitgliederversammlung. Auch: MV, Vereinsregeln.
+  Ändert sich langsam, aber wenn, dann wichtig.
+- Fördermittel: Zuschüsse von Stadt und Verband. Auch: Zuschuss, Förderung.
+  Ändert sich schnell, die Fristen sind jedes Jahr andere.
+- Ehrenamt gewinnen: wie wir Leute für Aufgaben finden. Ich sage oft
+  „Nachwuchsproblem“. Ändert sich langsam.
 
 ## Welche Fragen soll dein Wiki einmal beantworten?
 

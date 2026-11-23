@@ -7,9 +7,11 @@ und Handlungsstränge. Das Wiki soll mich beim Lesen begleiten.
 
 ## Mit welchen Themen fängst du an?
 
-- Figuren: wer mit wem, wer auf welcher Seite steht.
-- Orte: wo was spielt.
-- Themen und Motive: was immer wieder vorkommt.
+- Figuren: wer mit wem, wer auf welcher Seite steht. Auch: Charaktere,
+  Personen. Ändert sich schnell, mit jedem Kapitel.
+- Orte: wo was spielt. Auch: Schauplätze. Ändert sich langsam.
+- Themen und Motive: was immer wieder vorkommt. Auch: Leitmotive, Symbole.
+  Ändert sich langsam.
 
 ## Welche Fragen soll dein Wiki einmal beantworten?
 

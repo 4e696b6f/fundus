@@ -41,6 +41,10 @@ Heraus kommt ein Ordner wie `fundus-main`. Verschieb ihn an einen festen
 Platz, etwa nach „Dokumente“, und benenne ihn um, zum Beispiel in `mein-wiki`.
 Nimm einen Namen ohne Leerzeichen. Dieser Ordner ist ab jetzt dein Wiki.
 
+Dateien, deren Name mit einem Punkt beginnt (`.gitkeep`, `.gitignore`),
+kannst du ignorieren. Sie halten unter anderem die leeren Ordner, die diese
+Anleitung nennt; löschen musst du sie nicht.
+
 ## Schritt 2 · In Obsidian öffnen
 
 Obsidian installieren und starten. Im Startfenster „Ordner als Vault öffnen“
@@ -60,9 +64,19 @@ location) `quellen/eingang` ein. Dort sucht der Agent nach Neuem.
 Klick in Obsidian links auf `EINRICHTUNG.md`. Unter jeder Frage steht ein
 Beispiel in Schräglage; schreib deine Antwort darunter, Stichworte genügen:
 wofür du das Wiki willst, mit welchen Themen du anfängst, welche Fragen es
-einmal beantworten soll, wie der Agent dich ansprechen soll. Zehn Minuten
-reichen. Zum Abgucken liegen ausgefüllte Beispiele in `handbuch/steckbriefe/`,
-alle erfunden; nimm den, der dir am nächsten ist, kopier seinen Text in
+einmal beantworten soll, woran du gerade arbeitest, welchen Quellen du traust
+und wie der Agent dich ansprechen soll. Zehn Minuten reichen.
+
+Zwei Angaben helfen dem Agenten besonders:
+
+- **Bei jedem Thema:** welche anderen Wörter du dafür benutzt und ob es sich
+  langsam, mittel oder schnell ändert. Mit den Wörtern findet er später, was
+  du meinst; am Tempo erkennt er, wann eine Quelle zu alt ist.
+- **Bei einem Vorhaben:** der Termin, falls es einen gibt. Daraus wird eine
+  Frist, an die er dich erinnert.
+
+Zum Abgucken liegen ausgefüllte Beispiele in `handbuch/steckbriefe/`, alle
+erfunden; nimm den, der dir am nächsten ist, kopier seinen Text in
 `EINRICHTUNG.md` und änder ihn, bis er stimmt:
 
 | Beispiel | Für wen |
@@ -74,7 +88,9 @@ alle erfunden; nimm den, der dir am nächsten ist, kopier seinen Text in
 
 Du kannst den Schritt auch überspringen: Dann fragt der Agent in Schritt 5
 alles im Gespräch ab. Schreib Rollen statt Namen („meine Teamleitung“), denn
-auch der Steckbrief geht an den Anbieter.
+auch der Steckbrief geht an den Anbieter. Steht doch ein Name darin, bleibt
+er im Steckbrief stehen, die Datei gehört dir; ins Wiki schreibt der Agent
+an seiner Stelle die Rolle.
 
 ## Schritt 4 · Die Claude-App einrichten
 
@@ -111,10 +127,26 @@ Tippe als Erstes:
 
 (oder kurz `/einrichten`). Der Agent liest seine Regeln und deinen
 Steckbrief, fragt in höchstens drei Runden nach, was noch fehlt, und zeigt
-dir dann einen Entwurf: wie er dich verstehen wird (`SOUL.md`), welche
-Themenbereiche er anlegt und welche Leitfragen er notiert. Erst nach deinem
-Ja schreibt er. Danach bietet er dir an, ein Sicherheitsnetz mit `git`
-einzurichten, falls das installiert ist.
+dir dann einen Entwurf: was er in `SOUL.md` einträgt, welche Themenbereiche
+er anlegt, welche Leitfragen er notiert und welche Seiten entstehen. Erst
+nach deinem Ja schreibt er. Danach bietet er dir an, ein Sicherheitsnetz mit
+`git` einzurichten, falls das installiert ist.
+
+`SOUL.md` gehört dir. Sie besteht aus kurzen Feldern in eckigen Klammern: für
+wen der Agent arbeitet, Ton, wofür das Wiki da ist, Themenbereiche, woran du
+gerade arbeitest, welchen Quellen du traust und was der Agent bei dir lassen
+soll. Der Agent ersetzt nur die Klammern und zeigt dir vorher je Feld, was
+dort stand und was dort stehen wird. Was du selbst formuliert hast,
+übernimmt er im Wortlaut. Du kannst die Datei jederzeit selbst ändern.
+
+Für jedes Vorhaben legt er eine eigene Seite an, mit deinem Satz. Nennst du
+einen Termin, steht er danach als Frist in der Übergabe.
+
+Kommen Namen oder Dienstliches vor, schlägt der Agent eine strengere Regel
+für Angaben über andere Menschen vor und nennt ein Beispiel, was danach nicht
+mehr geht. Überleg kurz, ob du das willst: Eine solche Regel hält er auch
+dann ein, wenn du später im Einzelfall etwas anderes möchtest, bis du sie
+änderst.
 
 Größere Aufträge kündigt der Agent vorher in einem Satz an, damit du
 weißt, was passiert. Was er geändert hat, zeigt die App als kleine Zahl wie
@@ -139,10 +171,27 @@ Aufgabe mit `` `#später` `` steht am Ende der Sitzung in der Übergabe. Dann sc
 
 > Nimm die neue Quelle auf.
 
-Der Agent legt Seiten in `wiki/` an, verknüpft sie mit dem Bestand und
-verschiebt die Quelle nach `quellen/archiv/`. Fragt er, ob er einen neuen
-Bereich anlegen darf, sag Ja. Nach ein paar Minuten sagt er dir, was neu ist,
-und in Obsidian stehen die Seiten links unter `wiki/`.
+Der Agent legt eine Seite zur Quelle an und schreibt, was sie zu deinen
+Themen sagt, auf Themenseiten: eine Seite je Thema, über alle Quellen
+hinweg. Dort schlägst du später nach, die Seite zur Quelle ist der Beleg.
+Dann verschiebt er die Quelle nach `quellen/archiv/`. Fragt er, ob er einen
+neuen Bereich anlegen darf, sag Ja. Nach ein paar Minuten sagt er dir, was
+neu ist, und in Obsidian stehen die Seiten links unter `wiki/`. Wie fertige
+Seiten aussehen, zeigen die [Beispiele](beispiele/README.md).
+
+Gut zu wissen:
+
+- **Mehrere Dateien** nimmt er eine nach der anderen auf und meldet sich
+  nach jeder („2 von 8: … aufgenommen“).
+- **Lange PDFs** (Richtwert: über 30 Seiten) liest er nicht ganz, sondern
+  die Teile, die zu deinen Leitfragen und Vorhaben passen. Welche das waren,
+  steht auf der Seite zur Quelle im Feld `gelesen:`. Suchst du etwas
+  anderes darin, frag einfach: Er sieht dann in der Datei selbst nach.
+- **Rückfragen** zu einer Datei halten die anderen nicht auf. Deine Antwort
+  merkt er sich mit deinem Satz und fragt nicht noch einmal.
+- **Soll eine Datei nicht ins Wiki,** sag es. Sie bleibt im Eingang liegen,
+  bis du sie selbst im Finder oder Explorer löschst; der Agent löscht keine
+  Quellen.
 
 ## Du hast schon Notizen?
 
@@ -199,11 +248,21 @@ Am Anfang reichen drei Sätze:
 | „Feierabend.“ | Der Agent schreibt die Übergabe für das nächste Mal. |
 
 Alles Weitere schlägt dir der Agent vor, wenn es passt: eine Prüfung nach
-zehn Quellen, das Übernehmen alter Notizen, einen Brief aus deinem Wiki. Die
+zehn Quellen, das Übernehmen alter Notizen, einen Brief aus deinem Wiki.
+Meint er, eine deiner Leitfragen sei beantwortet, fragt er dich; erst nach
+deinem Ja gilt sie als beantwortet. Die
 ganze Liste mit Kurzbefehlen steht in der [README](../README.md#drei-sätze-zum-anfangen),
 die Wörter, die dabei fallen, im [Glossar](GLOSSAR.md).
 
-Macht der Agent etwas falsch, sag es ihm. Was zweimal passiert, schlägt er
+Was sich nachzählen lässt (Links ins Leere, fehlende Angaben, Daten in der
+Zukunft, Fristen), rechnet ein mitgeliefertes Prüfwerkzeug aus. Der Agent
+startet es selbst, nach jedem Auftrag, der Seiten ändert, wenn auf deinem
+Rechner `node` vorhanden ist. Installieren musst du dafür nichts: Ohne
+`node` prüft er von Hand und sagt dir das, und denselben Bericht siehst du
+jederzeit in der [Ansicht](ANSICHT.md#prüfung) unter „Prüfung“.
+
+Macht der Agent etwas falsch, sag es ihm. Er notiert die Korrektur und nennt
+dir bei „Feierabend“, wie viele es waren. Was zweimal passiert, schlägt er
 dir als Regel vor, und du entscheidest. Solche Regeln und alles, was du
 sonst anpasst, stehen in `eigen/`; dort bleiben sie bei jedem Update.
 
@@ -220,6 +279,13 @@ selbst, sonst bittet er dich, den Ordner zu kopieren), tauscht nur die
 Dateien von Fundus aus und lässt deine unberührt: `SOUL.md`, `EINRICHTUNG.md`,
 `eigen/`, `quellen/`, `wiki/`, `ausgaben/`. Danach kannst du die ZIP löschen.
 
+Nach dem Austausch stellt der Agent dein Wiki auf die neue Version um und
+sagt dir, was neu ist. Beim Schritt auf 0.6 heißt das: Er bringt die
+Übergabe in die neue Form, bietet einmal an, aus deiner `SOUL.md` die
+Abschnitte zu entfernen, die jetzt in seinen Regeln stehen, und legt dir die
+Leitfragen vor, die bisher als beantwortet galten. An `SOUL.md` ändert er
+nichts ohne dein Ja.
+
 Kommst du von 0.4, kennt dein Agent den Befehl noch nicht. Schreib dann:
 
 > Aktualisiere Fundus mit der ZIP im Ordner. Der Ablauf steht in der ZIP
@@ -229,7 +295,8 @@ Kommst du von 0.4, kennt dein Agent den Befehl noch nicht. Schreib dann:
 
 Kopier den Wiki-Ordner jede Woche auf einen USB-Stick oder an einen anderen
 Ort. Mit `git` kannst du jede Änderung des Agenten nachsehen und zurücknehmen;
-beim Einrichten bietet der Agent an, es für dich anzulegen. Hast du Fundus
+beim Einrichten bietet der Agent an, es für dich anzulegen. „Gesichert“
+sagt er nur, wenn er wirklich gesichert hat. Hast du Fundus
 mit `git clone` geholt, lade dein Wiki nie zu GitHub hoch: Das
 Fundus-Repository ist öffentlich.
 
@@ -242,6 +309,9 @@ Fundus-Repository ist öffentlich.
 | Der Agent weiß nichts von deinem Wiki. | Falscher Ordner: neue Sitzung, unter dem Eingabefeld den Wiki-Ordner wählen. |
 | Der Agent sagt, er habe Seiten angelegt, aber Obsidian zeigt sie nicht. | Unter dem Eingabefeld ist **Worktree** an: neue Sitzung, Worktree aus, den Auftrag noch einmal geben. |
 | Obsidian zeigt die neuen Seiten nicht. | Unten links auf den Vault-Namen, „Vaults verwalten“ (Manage vaults), deinen Wiki-Ordner öffnen. |
+| Der Agent sagt, er habe „von Hand geprüft“. | Auf deinem Rechner fehlt `node`. Du musst nichts tun; den gerechneten Bericht zeigt die [Ansicht](ANSICHT.md#prüfung) unter „Prüfung“. |
+| Die Ansicht warnt vor einem Datum in der Zukunft. | Meist hat der Agent ein Datum geraten. Sag ihm „prüfen“ und welcher Tag heute ist. |
+| Der Agent kann ein eingescanntes PDF nicht lesen. | Nicht jedes Programm liest Scans. Leg die Seite als Bild ab (`.png`, `.jpg`), das sieht sich der Agent an; sonst den Text abtippen. |
 | Der Agent tut etwas, das du nicht willst. | Auf den Stopp-Knopf klicken (im Terminal: Esc), dann sagen, was du stattdessen willst. |
 | `/` zeigt die Kurzbefehle nicht. | Neue Sitzung im Wiki-Ordner starten. In anderen Programmen als Claude Code gibt es sie nicht; dort schreibst du die Sätze. |
 | Im Terminal: „command not found“ bei `claude`. | Terminal schließen, neu öffnen, noch einmal; sonst „Troubleshooting“ in der [Terminal-Anleitung](https://code.claude.com/docs/de/terminal-guide). |

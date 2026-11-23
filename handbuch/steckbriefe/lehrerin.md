@@ -10,9 +10,10 @@ gelesen habe.
 
 - Leseförderung: Lesetandems kenne ich, Lautlesen habe ich ausprobiert. Ich
   sage oft „Leseflüssigkeit“. Ändert sich langsam.
-- Elternarbeit: Elternabende, Elternbriefe. Ändert sich kaum.
-- Diagnostik: Lesetests, die wir an der Schule nutzen. Kann sich mit neuen
-  Vorgaben ändern.
+- Elternarbeit: Elternabende, Elternbriefe. Auch: Elterngespräche. Ändert
+  sich langsam.
+- Diagnostik: Lesetests, die wir an der Schule nutzen. Auch: Lernstand,
+  Lesetest. Ändert sich mittel, mit jeder neuen Vorgabe.
 
 ## Welche Fragen soll dein Wiki einmal beantworten?
 
@@ -21,7 +22,7 @@ gelesen habe.
 
 ## Woran arbeitest du gerade?
 
-Elternabend im März vorbereiten.
+Elternabend vorbereiten, er ist am 12.03.2027.
 
 ## Welchen Quellen traust du, welchen nicht?
 

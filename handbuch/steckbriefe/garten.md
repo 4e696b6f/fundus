@@ -7,9 +7,11 @@ Ich will Artikel, Tipps und meine eigenen Beobachtungen zusammenbringen.
 
 ## Mit welchen Themen fängst du an?
 
-- Gemüse: Tomaten, Bohnen, Salat. Ich kenne die Grundlagen.
-- Boden: Kompost, Mulchen. Ich sage oft „Bodenpflege“.
-- Schädlinge: Schnecken vor allem.
+- Gemüse: Tomaten, Bohnen, Salat. Ich kenne die Grundlagen. Auch: Anbau,
+  Beet. Ändert sich langsam.
+- Boden: Kompost, Mulchen. Ich sage oft „Bodenpflege“. Ändert sich langsam.
+- Schädlinge: Schnecken vor allem. Auch: Schneckenplage, Fraß. Ändert sich
+  langsam.
 
 ## Welche Fragen soll dein Wiki einmal beantworten?
 
@@ -18,7 +20,8 @@ Ich will Artikel, Tipps und meine eigenen Beobachtungen zusammenbringen.
 
 ## Woran arbeitest du gerade?
 
-Beetplan für nächstes Frühjahr.
+Beetplan für nächstes Frühjahr: das Hochbeet und die zwei langen Beete. Am
+17.04.2027 will ich auspflanzen.
 
 ## Welchen Quellen traust du, welchen nicht?
 
