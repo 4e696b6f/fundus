@@ -33,8 +33,8 @@ du die Suche, Stufe für Stufe:
 3. die übrigen Module in `module/`, falls das Thema dort vorkommen könnte
 4. **die Rohdateien**, immer, auch bei `gelesen: 'ganz'`: die Datei im
    Archiv jeder thematisch passenden `quelle`-Seite mit den Suchwörtern
-   durchsuchen (PDF: Text herausziehen, etwa `pdftotext <datei> - | grep -n
-   -i <wort>`), ebenso Passendes im Bestand laut `wiki/meta/bestand.md`. Bei einem Treffer
+   durchsuchen (PDF: Text herausziehen, sonst
+   `agent/regeln/PROGRAMME.md`), ebenso Passendes im Bestand laut `wiki/meta/bestand.md`. Bei einem Treffer
    antwortest du mit der Fundstelle aus der Rohdatei, ergänzt die
    `quelle`-Seite samt `gelesen:` und berichtigst jede Lücke oder Aussage,
    die das Gegenteil sagt.
@@ -72,5 +72,5 @@ beantwortet, schlägst du das vor (`agent/regeln/SCHEMA.md` → *Leitfragen*).
 
 Eintrag in `wiki/log.md` nur, wenn eine Seite entstanden oder geändert ist;
 eine neue Zeile in `luecken.md` ist eine Änderung. Dann auch das
-Prüfwerkzeug: `node agent/werkzeug/pruefen.js`, seine Befunde zu diesem Auftrag beheben
+Prüfwerkzeug: `node agent/werkzeug/pruefen.js`
 (`agent/ablaeufe/pruefen.md` § 0).

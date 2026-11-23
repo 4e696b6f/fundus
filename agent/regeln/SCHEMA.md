@@ -249,7 +249,7 @@ Pflicht nach jeder Brücke, Themenseite, Ausgabe und Antwort mit Zahl:
    bzw. allgemeines Wissen gekennzeichnet (dann `sicherheit: niedrig`).
 3. Namen ergänzt du nie: kein Vorname zu „Frau X“.
 4. Wochentage, Fristen und Abstände („in vier Monaten“) rechnet das Prüfwerkzeug:
-   `node agent/werkzeug/pruefen.js tag JJJJ-MM-TT [+n|-n]`, ohne `node` ein
+   `node agent/werkzeug/pruefen.js tag JJJJ-MM-TT [+n|-n]`, sonst ein
    anderer Rechenbefehl, nie der Kopf; geht keiner, steht kein Wochentag da.
 5. Log-Zeile `Belegprobe: n Angaben, m geändert`; ohne Log-Eintrag nennst
    du die Zahlen im Chat.
@@ -297,7 +297,8 @@ Status: `offen`, `erschlossen`, `ausgelassen`, `zurückgestellt: Personendaten`,
 ## Protokoll: `wiki/log.md`
 
 Einträge **nur anhängen**, mit einem Befehl, der ans Dateiende schreibt
-(`cat >>` o. ä.), nie per Textersetzung mitten in der Datei, auch bei einem
+(`cat >>` o. ä.; sonst `agent/regeln/PROGRAMME.md`), nie per Textersetzung mitten in
+der Datei, auch bei einem
 Datum vor dem letzten Eintrag (`AGENTS.md` → *Sitzungsbeginn*). Ältere
 Einträge schreibst du nie um; im eigenen Eintrag derselben Sitzung darfst du
 einen Fehler berichtigen. Ein Eintrag je Vorgang, Kopfzeile

@@ -14,9 +14,9 @@ unter `## Verlauf` (`L04`). Alles andere schlägst du vor.
   je Befund den Prüfpunkt aus § 1 oder § 2, am Ende die Zeile `Zahlen:`.
   Seine Befunde übernimmst du ungekürzt in den Bericht; selbst prüfst du
   nur, was Urteil braucht: die Punkte mit *(du)*, § 3 und § 4.
-- **Ohne `node`** prüfst du § 1 und § 2 von Hand, Punkt für Punkt, und sagst
-  das unter *Wie geprüft*; denselben Bericht zeigt `ansicht/uebersicht.html`
-  unter „Prüfung“. Ein eigenes Skript legst du nicht im Wiki-Ordner ab.
+- **Läuft es nicht** (`agent/regeln/PROGRAMME.md`), prüfst du § 1 und § 2
+  von Hand, Punkt für Punkt, und sagst das unter *Wie geprüft*; denselben
+  Bericht zeigt `ansicht/uebersicht.html` unter „Prüfung“. Ein eigenes Skript legst du nicht im Wiki-Ordner ab.
 - **Nach jedem Auftrag, der Seiten ändert, und vor „Feierabend“** läuft nur
   das Prüfwerkzeug, ohne Bericht und Log-Eintrag: *Muss behoben werden* und
   was es zur Übergabe, zum Protokoll und zu Seiten dieses Auftrags meldet,

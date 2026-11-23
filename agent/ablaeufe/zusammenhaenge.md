@@ -61,8 +61,7 @@ An die Person, kurz: gesetzte Links, vorgeschlagene Brücken, neue
 Widersprüche, betroffene Projekte und Vorhaben. Dazu ein Log-Eintrag vom Typ
 `verknuepfen`: was du gesucht und was du gefunden hast, auch wenn es nichts
 war. „Geprüft“ allein genügt nicht. Zum Schluss das Prüfwerkzeug:
-`node agent/werkzeug/pruefen.js`, seine Befunde zu diesem Auftrag beheben
-(`agent/ablaeufe/pruefen.md` § 0).
+`node agent/werkzeug/pruefen.js` (`agent/ablaeufe/pruefen.md` § 0).
 
 ```markdown
 ## [2026-09-23] verknuepfen | Auftrag Artikel Wiederholen, Notiz Lernplan

@@ -58,15 +58,15 @@ was nicht im Wiki steht (`L02`). Ist nichts offen, steht unter *Offen*
 die übrigen nur, wenn es etwas gibt.
 
 **Zahlen:** Die ersten vier Zeilen und die Zahl der Bestandsdateien nimmst
-du aus dem Prüfwerkzeug (`Zahlen:` und die Zeilen darüber). Ohne `node`:
+du aus dem Prüfwerkzeug (`Zahlen:` und die Zeilen darüber). Läuft es nicht:
 
-- **n:** Einträge `aufnehmen` in `wiki/log.md` nach dem letzten Eintrag
-  `pruefen` (ohne einen: alle), im Log nachgezählt.
+- **n:** Einträge `aufnehmen` in `wiki/log.md` nach dem letzten `pruefen`
+  (ohne einen: alle), nachgezählt.
 - **Fällig**, **Bald fällig:** nach `agent/ablaeufe/pruefen.md` § 2, also
   auch Leitplanken (eigene, Module) und jede `MODUL.md`; für sie steht statt
   `[[seite]]` Kürzel oder Pfad.
-- **Nächstes Prüfdatum:** im selben Umfang das früheste Datum, das nicht
-  vorbei ist.
+- **Nächstes Prüfdatum:** im selben Umfang das früheste, das nicht vorbei
+  ist.
 
 **Zeilen:**
 
@@ -80,7 +80,7 @@ du aus dem Prüfwerkzeug (`Zahlen:` und die Zeilen darüber). Ohne `node`:
 - **Eingang:** Nach einem Auftrag `aufnehmen` hat jede Datei, die noch in
   `quellen/eingang/` liegt, genau eine Zeile `Rückfrage:` oder
   `Entschieden:`; eine frisch abgelegte hat keine.
-- **Frist:** je Termin für das Wiki oder die Person, auch jede datierte
+- **Frist:** je Termin mit genauem Tag („März 2027“ ist keine), auch jede datierte
   Nebenangabe (`agent/ablaeufe/aufnehmen.md` § 3). Einen Termin, den du
   errechnest („Einladung spätestens am …“), trägst du sofort ein, den
   Rechenweg auf der `projekt`-Seite des Vorhabens. Eine vorbeigegangene

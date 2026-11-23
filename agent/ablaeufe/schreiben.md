@@ -53,7 +53,7 @@ statt sie zu ändern. Eine neue Datei nur für einen neuen Auftrag.
 - Log-Eintrag vom Typ `ausgabe`, auch nach einer Überarbeitung, mit den
   Zeilen `Datei:` (Pfad in Backticks, nie `[[…]]`), `Benutzt:` (die
   Seiten) und `Belegprobe:`.
-- **Prüfwerkzeug:** `node agent/werkzeug/pruefen.js`, seine Befunde zu diesem Auftrag beheben
+- **Prüfwerkzeug:** `node agent/werkzeug/pruefen.js`
   (`agent/ablaeufe/pruefen.md` § 0); es meldet auch einen falschen
   Wochentag in `ausgaben/`.
 - An die Person: die Datei (bei `nur-bericht` der Text), offene Stellen,

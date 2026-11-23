@@ -28,7 +28,7 @@ die Person ab, bleibt alles, wie es war.
 
 ## 1 · Datenschutz
 
-Zwei Sätze an die Person: Was du liest, geht an den Anbieter des Werkzeugs;
+Zwei Sätze an die Person: Was du liest, geht an den Anbieter deines Programms;
 in `SOUL.md` und im Wiki stehen Rollen statt Namen (`L03`). Dann:
 
 - Nennt der Steckbrief einen Namen, sagst du ihr, dass er dort stehen bleibt
@@ -84,7 +84,7 @@ das Wiki „eingerichtet“:
 1. **Leitfragen** in `wiki/meta/leitfragen.md` unter *Offen*, je Frage eine
    Zeile im Wortlaut der Person (`agent/regeln/SCHEMA.md` → *Leitfragen*).
 2. **Bereiche:** Je Fokusthema, zu dem die Person mehr als einen Satz
-   Vorwissen genannt hat, eine `notiz`
+   Vorwissen genannt hat, eine `notiz` mit `stimme: ich`
    `JJJJ-MM-TT-<bereich>-ausgangslage.md` in `wiki/<bereich>/`: ihr Wortlaut
    in einem `[!ich]`-Block nach `agent/regeln/SCHEMA.md` → *Die Stimme der
    Person*, darunter `*Ergänzt vom Agenten:*` und `## Verbindungen` nur zu

@@ -5,7 +5,7 @@
 Du liest nur, ohne Log-Eintrag. Grundlage ist, was der Sitzungsbeginn
 gelesen hat (`AGENTS.md`), dazu `wiki/meta/leitfragen.md`. Zahlen schätzt du
 nicht: Sie kommen aus der Zeile `Zahlen:` des Prüfwerkzeugs
-(`agent/ablaeufe/pruefen.md` § 0), ohne `node` aus der Übergabe.
+(`agent/ablaeufe/pruefen.md` § 0), sonst aus der Übergabe.
 
 ## 1 · Bericht
 
