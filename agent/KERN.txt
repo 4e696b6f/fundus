@@ -25,6 +25,7 @@ agent/ablaeufe/
 agent/leitplanken/
 agent/regeln/
 agent/migration/
+agent/werkzeug/
 ansicht/
 handbuch/
 module/.gitkeep

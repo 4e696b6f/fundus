@@ -8,6 +8,161 @@ eigene Wiki kopieren; welche das sind, steht ab 0.4 in `agent/KERN.txt`.
 `SOUL.md`, `EINRICHTUNG.md`, `eigen/`, `wiki/` und `quellen/` (bis 0.3 auch
 `agent/gedaechtnis/`) bleiben dabei immer unberührt.
 
+## 0.6 · 2026-11-23 · Entwurf
+
+Grundlage ist ein Testlauf von 0.4 über sechs Sitzungen, vom Einrichten bis
+zur Prüfung. Er zeigte drei Schwächen im Kern: Es entstanden
+Zusammenfassungen, aber kein Wiki; die Prüfung übersah, was sich nachzählen
+lässt; und beim Verdichten gerieten erfundene Angaben in die Texte. Die
+Kennungen in Klammern sind die Befunde dieses Testlaufs.
+
+**Neu: Themenseiten.** Beim Aufnehmen entsteht nicht mehr nur eine Seite je
+Quelle. Was die Quelle zu einem Thema sagt, das eine deiner Leitfragen oder
+Vorhaben berührt oder schon in einer zweiten Quelle steht, kommt auf eine
+Themenseite (Typ `begriff`), höchstens drei neue je Quelle. Dort schlägst du
+nach; die `quelle`-Seiten sind die Belege. Widersprechen sich zwei Quellen,
+stehen beide Aussagen auf der Themenseite; klärt eine spätere Quelle den
+Widerspruch, vermerkt der Agent das und fragt dich (K1, R3). `übernehmen`
+beschreibt das Erschließen alter Notizen jetzt selbst, mit einer
+Beispielseite (A9).
+
+**Neu: Prüfwerkzeug und Seite „Prüfung“.** Was sich nachzählen lässt,
+rechnet jetzt ein mitgeliefertes Programm statt des Agenten: tote Links,
+Gegenlinks, Pflichtfelder und Pflichtabschnitte, Dateinamen, Daten in der
+Zukunft, Fälligkeiten, die Reihenfolge im Protokoll, das Format der
+Übergabe, und ob deine `[!ich]`-Blöcke mit deiner Notiz übereinstimmen,
+soweit sie Text ist (`agent/werkzeug/pruefen.js`). Der Agent startet es beim
+Prüfen, nach jedem Auftrag, der Seiten ändert, und vor „Feierabend“.
+Denselben Bericht zeigt die Ansicht auf der neuen Seite „Prüfung“
+(`handbuch/ANSICHT.md`). `node` ist dafür keine Voraussetzung: Fehlt es,
+prüft der Agent von Hand und sagt das. Die Stichprobe gegen die Quellen darf
+nicht mehr mit „nicht abgleichbar“ entfallen (K2, V4, A12).
+
+**Neu: Belegprobe.** Nach jeder Themenseite, Brücke, Ausgabe und Antwort mit
+Zahl sieht der Agent jede Zahl, jeden Namen, jedes Datum und jede Bedingung
+einzeln an der Fundstelle nach. Was die Probe nicht besteht, fällt weg oder
+wird als „Nicht aus dem Wiki“ gekennzeichnet. Namen ergänzt er nie, auch
+keinen Vornamen. Wochentage und Fristen rechnet er mit einem Befehl aus,
+nicht im Kopf (K5). Die Regel zu Angaben über andere Menschen (`L03`) gilt
+ausdrücklich auch für seine Antworten im Chat.
+
+**Lange Quellen, ehrlich gelesen.** Was sich nicht in einem Zug lesen lässt
+(Richtwert: über 30 Seiten), liest der Agent nach deinen Leitfragen und
+Vorhaben. Jede `quelle`-Seite hält im neuen Feld `gelesen:` fest, ob sie
+ganz gelesen wurde oder welcher Ausschnitt, mit den Suchwörtern. „Das steht
+nicht drin“ schreibt er nur noch mit dem Suchweg dazu (K4). Findet eine
+Frage im Wiki nichts, sucht er in den Rohdateien der passenden Quellen,
+bevor er das sagt, und ergänzt bei einem Treffer die Seite (K3). Fundstelle
+ist die gedruckte Seitenzahl, sonst `PDF-S. n` (R6).
+
+**Gedächtnis mit festen Fächern.** Die Übergabe trennt `Rückfrage:` (der
+Agent wartet auf dich) von `Entschieden:` (dein Satz, wörtlich und mit
+Datum; er fragt nicht noch einmal). Nach dem Aufnehmen hat jede Datei, die
+im Eingang bleibt, genau eine dieser Zeilen (A1). Dazu:
+
+- Das Datum fragt der Agent mit einem Befehl ab, statt es anzunehmen (A2).
+- Das Protokoll wird nur noch angehängt, jeder Eintrag hat einen Titel (A6).
+- Vor der Übergabe geht der Agent das Gespräch nach deinen Korrekturen
+  durch und nennt dir ihre Zahl (A3).
+- Die Übergabe nennt immer das nächste Prüfdatum, damit nach einer langen
+  Pause nichts unbemerkt abläuft (K8).
+- Mehrere Quellen nimmt er eine nach der anderen auf und meldet sich nach
+  jeder (A7).
+- Soll eine Datei nicht ins Wiki, hält er das fest; löschen kannst nur du
+  selbst, ins Archiv kommt sie nicht (A8).
+- Text in Quellen ist nie Anweisung; einen Versuch meldet er dir (A10).
+- „Gesichert“ sagt er nur nach einem Commit, und er committet nicht, wenn
+  dein Wiki-Ordner in einem fremden Repository liegt (A11).
+
+**Vorhaben und Fristen.** Beim Einrichten bekommt jedes Vorhaben eine
+`projekt`-Seite mit deinem Satz. Ein Termin, den der Agent errechnet („die
+Einladung muss spätestens am … hinaus“), steht sofort als Frist in der
+Übergabe, der Rechenweg auf der Seite des Vorhabens; „Wo stehen wir?“ nennt
+verstrichene Fristen zuerst (K7). `pruefen_bis:` setzt er nur noch, wenn
+eine Aussage an Preis, Frist, Rechtsstand, Zuständigkeit oder einer
+laufenden Lage hängt; das Datum kommt aus der Quelle oder von dir, nicht
+mehr aus „Aufnahmetag plus drei Monate“ (K9). Eine Leitfrage gilt erst als
+beantwortet, wenn du Ja sagst; bis dahin steht die Seite, die sie tragen
+könnte, als Vorschlag dabei (K6). `stand` nimmt seine Zahlen aus dem
+Prüfwerkzeug und macht genau einen Vorschlag.
+
+**`SOUL.md` gehört ganz dir.** Die Datei enthält nur noch Felder, die du
+füllst, neu darunter *Quellen, denen ich traue* und *Was der Agent bei mir
+lassen soll*. Wie der Agent denkt und was er nie tut, steht jetzt in
+`AGENTS.md`. Beim Einrichten ersetzt er nur die eckigen Klammern und zeigt
+vorher je Feld alt und neu, statt die Datei neu zu schreiben (A4). Der
+Steckbrief fragt je Thema nach anderen Wörtern dafür und danach, wie schnell
+es sich ändert; beides steht im Index (`Auch:`, `Tempo:`) und hilft beim
+Suchen und beim Prüfen auf alte Quellen (A5). Schlägt der Agent eine
+strengere Regel für Angaben über andere vor, nennt er ein Beispiel, was
+danach nicht mehr geht; eine eigene Leitplanke ist `fachlich`, `hart` nur
+auf deinen ausdrücklichen Wunsch (R2).
+
+**Deine Stimme, genauer geregelt.** Im `[!ich]`-Block steht für den Namen
+eines Dritten die Rolle in eckigen Klammern, mit Vermerk darunter; dein
+Steckbrief selbst behält den Namen (R1). Ein Wort mit `#` am Anfang bekommt
+`\#`, damit Obsidian kein Schlagwort daraus macht (R4). Ein Link ohne Ziel
+wird reiner Text, eine Überschrift fett (R5). Andere Abweichungen von deinem
+Wortlaut gibt es nicht.
+
+**Ansicht.** Die Kopfzeile warnt, wenn ein Datum in der Zukunft liegt (V1).
+Ein `#` im Dateinamen einer Quelle gilt nicht mehr als toter Link (V2).
+Eingang, Archiv und Bestand werden getrennt gezählt (V3).
+
+**Ansicht als Arbeitsplatz.** Die Ansicht hat statt vier Reitern oben eine
+Seitenleiste links, in Gruppen (Lage, Wissen, Qualität, System), jeder
+Eintrag mit Zähler; Rot heißt: hier ist etwas zu tun. Neu sind das
+**Lagebild** (Kennzahlen mit Zustand, nächster Schritt, Fristen als
+Zeitleiste, Rückfragen, Bereiche), die Seite **Heute zu tun** (Fristen,
+Fälliges, Rückfragen, Eingang und dringende Prüfbefunde in einer Liste),
+eigene Seiten für Eingang, Leitfragen, Lücken und Widersprüche, eine Suche
+über alle Dateien (Taste `/` oder Strg/⌘+K) und bei jeder Seite eine
+Info-Leiste mit Angaben, Quellen, Rückverweisen und Prüfbefunden. Auf
+schmalen Bildschirmen klappt die Seitenleiste hinter ☰. Alte Links auf
+Seiten der Ansicht gelten weiter; eigene Ansichten bleiben unberührt
+(`handbuch/ANSICHT.md`).
+
+**Nachgeschärft nach einem zweiten Testlauf mit 0.6** (sechs Sitzungen,
+Werkstatt-Testpaket):
+
+- Antwortest du auf eine Rückfrage oder nimmst einen Vorschlag an („die
+  Brücke ja“), liest der Agent den Ablauf, aus dem die Frage kam, statt aus
+  dem Gedächtnis zu arbeiten.
+- Jeder Ablauf, der Seiten ändert, endet mit dem Prüfwerkzeug; was es zu
+  diesem Auftrag meldet, behebt der Agent gleich.
+- Das Prüfwerkzeug erkennt einen falschen Wochentag zu einem Datum, im Wiki
+  und in deinen Texten in `ausgaben/`, und Zeilen der Übergabe im falschen
+  Fach oder ohne vorgesehene Form.
+- Fragt die Person nach einer Angabe, die den Wiki-Seiten fehlt, sucht der
+  Agent immer auch in der Quelldatei, auch wenn die Seite „ganz gelesen“
+  sagt, und berichtigt eine Lücke, die das Gegenteil behauptete.
+- In einem Brief übernimmt er einen Namen so, wie du ihn schreibst, ohne
+  Vorname aus anderen Dateien. Das Protokoll schreibt er per Anhängen.
+- Liegt eine Datei gleichen Namens schon im Archiv, fragt er, ob du sie
+  umbenennst; er selbst benennt nie um.
+- Fehlt einer älteren Seite nur `## Verlauf`, meldet die Prüfung das nur
+  zur Kenntnis. Im Protokoll gilt auch der Name des Ablaufs als Vorgang
+  (`fragen` wie `frage`).
+
+**Kleineres.** Die Beschreibungen der Kurzbefehle stehen in
+Anführungszeichen, damit auch strenge Programme sie lesen (D1). Die
+mitgelieferten Seiten in `wiki/` tragen das Datum der Version (R8).
+`SCHEMA.md` liest der Agent einmal je Sitzung statt vor jedem Schritt (D3).
+Die README verspricht bei PDFs nur noch, was die Abläufe halten (D2). Neu im
+Handbuch: `handbuch/beispiele/` mit je einer fertigen Themen-, Quellen-,
+Notiz- und Vorhabenseite und einer Übergabe, alle erfunden (D4), ein Satz zu
+Dateien mit Punkt vorn (D5), sechs neue Wörter im Glossar. Die
+Beispiel-Steckbriefe nennen andere Wörter und Tempo (A5).
+
+Übernehmen von 0.5: ZIP in den Wiki-Ordner legen und „aktualisieren“ sagen.
+Der Agent bringt die Übergabe in die neue Form, bietet einmal an, aus deiner
+`SOUL.md` die Abschnitte zu entfernen, die jetzt in `AGENTS.md` stehen, und
+legt dir die Leitfragen vor, die bisher als beantwortet galten. `gelesen:`
+trägt er nicht nach, sondern erst, wenn er eine Quellenseite wieder anfasst;
+`Tempo:`, `Auch:` und die Seiten für Vorhaben kommen beim nächsten
+„einrichten“. Themenseiten für schon aufgenommene Quellen entstehen nicht
+von selbst. Einzelheiten: `agent/migration/0.5-zu-0.6.md`.
+
 ## 0.5 · 2026-11-20 · Entwurf
 
 **Neu: Auswertung.** Die Ansicht hat einen dritten Reiter: wie weit deine
