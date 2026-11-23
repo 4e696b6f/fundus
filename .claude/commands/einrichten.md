@@ -1,5 +1,5 @@
 ---
-description: Dein Wiki auf dich zuschneiden: Themen, Fragen, Ton
+description: 'Dein Wiki auf dich zuschneiden: Themen, Fragen, Ton'
 argument-hint: "[was sich ändern soll]"
 disable-model-invocation: true
 ---

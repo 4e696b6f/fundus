@@ -1,5 +1,5 @@
 ---
-description: Verbindungen zwischen Themen suchen und Brücken vorschlagen
+description: 'Verbindungen zwischen Themen suchen und Brücken vorschlagen'
 argument-hint: "[Seiten oder Zeitraum]"
 disable-model-invocation: true
 ---

@@ -1,5 +1,5 @@
 ---
-description: Eine eigene Übersicht, Auswertung oder Grafik aus deinem Wiki für den Browser bauen
+description: 'Eine eigene Übersicht, Auswertung oder Grafik aus deinem Wiki für den Browser bauen'
 argument-hint: "[was die Ansicht zeigen soll]"
 disable-model-invocation: true
 ---

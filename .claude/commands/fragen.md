@@ -1,5 +1,5 @@
 ---
-description: Im Wiki nachschlagen, mit Fundstellen
+description: 'Im Wiki nachschlagen, mit Fundstellen'
 argument-hint: "[deine Frage]"
 disable-model-invocation: true
 ---

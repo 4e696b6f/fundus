@@ -1,5 +1,5 @@
 ---
-description: Neue Dateien aus dem Eingang ins Wiki holen
+description: 'Neue Dateien aus dem Eingang ins Wiki holen'
 argument-hint: "[Datei]"
 disable-model-invocation: true
 ---

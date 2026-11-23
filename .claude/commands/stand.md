@@ -1,5 +1,5 @@
 ---
-description: Wo stehen wir, und was ist als Nächstes dran?
+description: 'Wo stehen wir, und was ist als Nächstes dran?'
 disable-model-invocation: true
 ---
 

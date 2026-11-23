@@ -1,5 +1,5 @@
 ---
-description: Alte Notizen und Ordner aus quellen/bestand/ ins Wiki einbinden
+description: 'Alte Notizen und Ordner aus quellen/bestand/ ins Wiki einbinden'
 argument-hint: "[Ordner]"
 disable-model-invocation: true
 ---

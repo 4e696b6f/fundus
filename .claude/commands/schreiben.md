@@ -1,5 +1,5 @@
 ---
-description: Brief, Rundschreiben oder anderen Text aus deinem Wiki entwerfen
+description: 'Brief, Rundschreiben oder anderen Text aus deinem Wiki entwerfen'
 argument-hint: "[was, für wen]"
 disable-model-invocation: true
 ---

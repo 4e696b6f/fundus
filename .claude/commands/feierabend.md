@@ -1,5 +1,5 @@
 ---
-description: Stand für das nächste Mal festhalten
+description: 'Stand für das nächste Mal festhalten'
 disable-model-invocation: true
 ---
 

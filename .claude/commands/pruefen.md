@@ -1,5 +1,5 @@
 ---
-description: Wiki durchsehen: Fehler, Veraltetes, Widersprüche, Lücken
+description: 'Wiki durchsehen: Fehler, Veraltetes, Widersprüche, Lücken'
 disable-model-invocation: true
 ---
 
