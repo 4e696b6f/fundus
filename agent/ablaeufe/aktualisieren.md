@@ -2,9 +2,6 @@
 
 **Wofür:** Eine neue Fundus-Version übernehmen, ohne dass sich an deinen Dateien etwas ändert.
 
-Auslöser: Die Person legt eine Fundus-ZIP in den Hauptordner und sagt
-„aktualisieren“, „Update“ oder `/aktualisieren`.
-
 Dieser Ablauf ist der ausdrückliche Auftrag, die Pfade aus `agent/KERN.txt`
 zu ersetzen und die Schritte der Migrationsdateien auszuführen, sonst
 nichts. `SOUL.md`, `EINRICHTUNG.md`, `eigen/`, `quellen/`, `module/`,
@@ -23,13 +20,14 @@ nichts. `SOUL.md`, `EINRICHTUNG.md`, `eigen/`, `quellen/`, `module/`,
 
 ## 2 · Vorher sagen und sichern
 
-In einer Nachricht: alt → neu, was die Abschnitte des neuen `CHANGELOG.md`
-seit alt ändern (je ein Satz), welche Migrationsdateien
+In einer Nachricht: alt → neu, was das neue `CHANGELOG.md` seit alt ändert
+(je Abschnitt ein Satz), welche Migrationsdateien
 (`agent/migration/<von>-zu-<nach>.md` der neuen Version, von der
 Hauptversion von alt bis neu, lückenlos) du ausführst.
 
-- Mit `.git`: Commit aller Dateien „vor Aktualisierung auf <neu>“, dann weiter.
-- Ohne `.git`: Bitte die Person, den ganzen Ordner zu kopieren, und warte
+- Im eigenen Repository (`agent/ablaeufe/feierabend.md` § 4): Commit aller
+  Dateien „vor Aktualisierung auf <neu>“, dann weiter.
+- Sonst: Bitte die Person, den ganzen Ordner zu kopieren, und warte
   auf ihr Ja.
 - Fehlt eine Migrationsdatei in der Kette, hörst du hier auf und sagst es.
 
@@ -58,8 +56,7 @@ lässt du stehen.
 - `.aktualisierung/` löschen. Die ZIP bleibt; die Person kann sie löschen.
 - Log-Eintrag vom Typ `aktualisierung` mit `Version:` alt → neu und
   `Migration:` (die Dateien); Zwischenstand der Übergabe.
-- Mit `.git`: Commit „Aktualisierung auf <neu>“.
-- An die Person: was neu ist, in drei Sätzen, und was sie selbst tun kann
-  (etwa einen neuen Befehl ausprobieren). Hat Obsidian Einstellungen, die
-  die neue Version mitbringt (`.obsidian/`), nennst du sie; kopiert werden
-  sie nicht.
+- Im eigenen Repository: Commit „Aktualisierung auf <neu>“.
+- An die Person: was neu ist, in drei Sätzen, und was sie selbst tun kann.
+  Bringt die neue Version Obsidian-Einstellungen mit (`.obsidian/`), nennst
+  du sie; kopiert werden sie nicht.
