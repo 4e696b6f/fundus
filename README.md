@@ -4,14 +4,17 @@ Fundus ist ein Ordner, in dem ein KI-Programm ein Wiki für dich führt: Du
 legst Quellen hinein, es schreibt daraus verlinkte Seiten.
 
 KI-Hinweis: Ich schreibe Fundus und die Anleitungen mit KI-Unterstützung.
-Version 0.5 ist ein Entwurf und hat außer mir noch niemand durchgesehen, es
+Version 0.6 ist ein Entwurf und hat außer mir noch niemand durchgesehen, es
 wird also etwas haken. Fehler und Fragen bitte in die
 [Issues](https://github.com/4e696b6f/fundus/issues).
 
 ## Was du davon hast
 
 Du legst Artikel, PDFs oder Notizen ab. Der Agent, also das KI-Programm, fasst
-sie zusammen, verknüpft sie und meldet Veraltetes und Widersprüche. Beim
+jede Quelle auf einer Seite zusammen und trägt, was sie zu deinen Themen sagt,
+auf Themenseiten ein: eine Seite je Thema, über alle Quellen hinweg, jede
+Aussage mit Fundstelle. Dort schlägst du nach. Er verknüpft die Seiten und
+meldet Veraltetes und Widersprüche. Beim
 Einrichten fragt er, womit du anfängst und welche Fragen dein Wiki einmal
 beantworten soll, und richtet es danach aus. Deine eigenen Gedanken bleiben
 erkennbar: Eine eigene Notiz ist ganz deine Stimme, und in einem fremden Text
@@ -69,7 +72,7 @@ nächsten Schritt vor, etwa eine Prüfung. Alles, was er kann:
 | „Was wissen wir über …?“ | `/fragen` | Antwort aus deinem Wiki, mit Fundstellen. |
 | „Übernimm meinen Bestand.“ | `/uebernehmen` | Alte Dateien aus `quellen/bestand/` werden ins Wiki verlinkt, ohne dass sich an ihnen etwas ändert ([Anleitung](handbuch/EINRICHTEN.md#du-hast-schon-notizen)). |
 | „Schreib mir ein Rundschreiben zu …“ | `/schreiben` | Ein Entwurf aus deinem Wiki in `ausgaben/`, die Belege in einem Abschnitt darunter. |
-| „Prüf das Wiki.“ | `/pruefen` | Bericht: tote Links, Veraltetes, Widersprüche, Lücken. |
+| „Prüf das Wiki.“ | `/pruefen` | Bericht: tote Links, Veraltetes, Widersprüche, Lücken. Was sich nachzählen lässt, rechnet ein Prüfwerkzeug aus. |
 | „Was hängt zusammen?“ | `/zusammenhaenge` | Verbindungen über deine Themen hinweg. |
 | „Bau mir eine Übersicht, die zeigt …“ | `/ansicht-bauen` | Eine eigene Auswertung oder Grafik für den Browser, in `eigen/ansichten/`; sie bleibt auf deinem Rechner. |
 | „Aktualisiere Fundus mit der ZIP im Ordner.“ | `/aktualisieren` | Eine neue Fundus-Version übernehmen; deine Dateien bleiben, wie sie sind ([Anleitung](handbuch/EINRICHTEN.md#neue-fundus-version)). |
@@ -83,7 +86,7 @@ verstehen die Sätze.
 | Datei | Geht? |
 |---|---|
 | Markdown (`.md`), Text (`.txt`), Webseiten über den [Obsidian Web Clipper](https://obsidian.md/clipper) | ja |
-| PDF | ja, auch längere; eingescannte nur, wenn der Text erkennbar ist |
+| PDF | ja; lange (Richtwert: über 30 Seiten) liest der Agent in Ausschnitten und sagt, welche. Eingescannte liest nicht jedes Programm: Dann sagt der Agent das, und du legst die Seite als Bild ab. |
 | Bilder (`.png`, `.jpg`) | ja, der Agent sieht sie sich an |
 | Word (`.docx`) und andere | nein: in Word „Speichern unter“ → PDF |
 
@@ -98,7 +101,9 @@ verstehen die Sätze.
 - **Kein Löschwerkzeug.** Quellen bleiben, wie sie sind; Seiten löscht der
   Agent nur auf deinen Auftrag.
 - **Nichts zum Installieren außer Obsidian und dem Agenten.** Keine
-  Datenbank, kein Programmierwissen.
+  Datenbank, kein Programmierwissen. Das mitgelieferte Prüfwerkzeug nutzt
+  der Agent, wenn auf deinem Rechner `node` vorhanden ist; nötig ist das
+  nicht, denselben Bericht zeigt die Ansicht im Browser.
 
 ## Was im Ordner liegt
 
@@ -110,8 +115,8 @@ verstehen die Sätze.
 | `wiki/` | Schreibt der Agent. Du liest. |
 | `ausgaben/` | Texte, die der Agent auf deinen Auftrag für dich schreibt. Sie gehören dir. |
 | `eigen/` | Was du an Fundus anpasst, und das Gedächtnis des Agenten. Bleibt bei jedem Update. |
-| `ansicht/uebersicht.html` | Dein Wiki im Browser, ohne Internet, mit einer Auswertung deiner Leitfragen, Belege und Fristen ([Anleitung](handbuch/ANSICHT.md)). |
-| `handbuch/` | Anleitungen für dich, dazu ein [Glossar](handbuch/GLOSSAR.md). |
+| `ansicht/uebersicht.html` | Dein Wiki im Browser, ohne Internet, mit einer Auswertung deiner Leitfragen, Belege und Fristen und einer Prüfung, die tote Links, fehlende Angaben und falsche Daten nachzählt ([Anleitung](handbuch/ANSICHT.md)). |
+| `handbuch/` | Anleitungen für dich, dazu ein [Glossar](handbuch/GLOSSAR.md) und [Beispiele](handbuch/beispiele/README.md) fertiger Seiten. |
 | `module/` | Fertige Wissenspakete, siehe unten. |
 
 Alles andere (`AGENTS.md`, `agent/` und `.claude/`) sind die Regeln und
