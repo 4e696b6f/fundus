@@ -2,93 +2,122 @@
 
 **Wofür:** Wiki durchsehen: Fehler, Veraltetes, Widersprüche, Lücken.
 
-Auslöser: „prüfen“, „aufräumen“, `/pruefen` oder dein angenommener
-Prüfvorschlag.
-
 Du prüfst und berichtest. Was sich eindeutig und klein beheben lässt
-(fehlender Gegenlink, rotes Frontmatter, abweichender `[!ich]`-Block),
-behebst du, mit neuem `updated:` und einer Zeile unter `## Verlauf`
-(`L04`). Alles andere schlägst du vor.
+(fehlender Gegenlink, rotes Frontmatter, abweichender `[!ich]`-Block,
+Bereich fehlt im Index), behebst du, mit neuem `updated:` und einer Zeile
+unter `## Verlauf` (`L04`). Alles andere schlägst du vor.
 
-## 0 · Grundlagen
+## 0 · Zuerst das Prüfwerkzeug
 
-- **Umfang:** `wiki/`, dazu `pruefen_bis:` jeder Leitplanke, auch der
-  eigenen (`eigen/leitplanken/`) und der Module, und jeder `MODUL.md`, und
-  HTML in `eigen/ansichten/` und `ausgaben/` (§ 1 *Ansichten*); sonst nichts
-  aus `agent/vorlagen/`, `handbuch/` und `module/`.
-- **Werkzeug:** Lesen und Suchen genügt; läuft Code, legst du kein Skript im
-  Repo ab.
+- **Prüfwerkzeug:** `node agent/werkzeug/pruefen.js` im Wiki-Ordner (gilt
+  nicht das Systemdatum, mit `--heute JJJJ-MM-TT`). Es liest nur und meldet
+  je Befund den Prüfpunkt aus § 1 oder § 2, am Ende die Zeile `Zahlen:`.
+  Seine Befunde übernimmst du ungekürzt in den Bericht; selbst prüfst du
+  nur, was Urteil braucht: die Punkte mit *(du)*, § 3 und § 4.
+- **Ohne `node`** prüfst du § 1 und § 2 von Hand, Punkt für Punkt, und sagst
+  das unter *Wie geprüft*; denselben Bericht zeigt `ansicht/uebersicht.html`
+  unter „Prüfung“. Ein eigenes Skript legst du nicht im Wiki-Ordner ab.
+- **Nach jedem Auftrag, der Seiten ändert, und vor „Feierabend“** läuft nur
+  das Prüfwerkzeug, ohne Bericht und Log-Eintrag: *Muss behoben werden* und
+  was es zur Übergabe, zum Protokoll und zu Seiten dieses Auftrags meldet,
+  behebst du sofort, wenn es eindeutig und klein ist, sonst nennst du es der
+  Person in einer Zeile.
+- **Umfang:** `wiki/`, Übergabe und Eingang; `pruefen_bis:` jeder
+  Leitplanke, auch der eigenen und der Module, und jeder `MODUL.md`; HTML in
+  `eigen/ansichten/` und `ausgaben/`; nicht `agent/vorlagen/`, `handbuch/`
+  und `module/`. Links in Codeblöcken und Inline-Code zählen nie; Ziel eines
+  Links ist der Teil vor `|` oder `#`. Meta-Seiten
+  (`agent/regeln/SCHEMA.md` → *Dateinamen und Links*) zählen bei Links in
+  keiner Richtung.
 - **Heute:** nach `AGENTS.md` → *Sitzungsbeginn*; ein abweichendes Datum der
   Person nennst du vor dem Bericht.
-- **Meta-Seiten:** `agent/regeln/SCHEMA.md` → *Dateinamen und Links*.
-- Links in Codeblöcken und Inline-Code zählen bei keinem Prüfpunkt.
 
 ## 1 · Aufbau
 
-- **Tote Links** → *Muss behoben werden*: `[[ziel]]` ohne Datei (Ziel: Teil
-  vor `|` oder `#`).
-- **Doppelte Dateinamen:** Ein Name kommt in `wiki/` zweimal vor → *Muss
-  behoben werden*. Gleicht ein Name aus `wiki/` einer Datei in
-  `quellen/bestand/` oder `module/` → *Zur Kenntnis* (dort ändert niemand
-  etwas, `L01`); die festen Namen `index`, `log` und die Seiten in
-  `wiki/meta/` sind ausgenommen. Umbenennen schlägst du nur vor.
-- **Waisen:** Seiten ohne eingehenden Link. Ein Link von einer Meta-Seite
-  zählt nicht, Meta-Seiten selbst prüfst du nicht. Die erste Seite eines
-  neuen Bereichs, solange sie dort die einzige ist → *Zur Kenntnis*.
-- **Fehlende Gegenlinks:** A verlinkt auf B, B nicht zurück (Ausnahmen:
-  `agent/regeln/SCHEMA.md` → *Dateinamen und Links*).
-- **Zu wenig Links:** weniger ausgehende, als
-  `agent/regeln/SCHEMA.md` → *Wann eine Seite fertig ist* verlangt.
-- **Frontmatter:** Ein Pflichtfeld fehlt oder ist leer, oder ein Wert steht
-  nicht in der Liste in `agent/regeln/SCHEMA.md`. Parst der Block nicht (etwa freier
-  Text mit `:`, `#` oder `[[` ohne einfache Anführungszeichen, ein Tabulator,
-  ein doppelter Schlüssel) → *Muss behoben werden*.
-- **Einzel-Tags:** ein Tag, den nur eine Seite trägt, außer ihrem ersten Tag,
-  `bruecke` und einem Bereichsnamen.
-- **Quellenpfade** → *Muss behoben werden*: `quellen:` zeigt auf eine fehlende
-  Datei.
-- **Ansichten** in `eigen/ansichten/` und `ausgaben/` (HTML), Suche wie
-  `agent/ablaeufe/ansicht-bauen.md` § 4: Verstößt eine, die du gebaut hast
-  (`<meta name="fundus-kern">` oder Log `ansicht`), gegen `L05` → *Muss
-  behoben werden*, eine der Person → *Zur Kenntnis*; ändern nur auf
-  Auftrag. Andere Hauptversion von `fundus-kern` als `KERN_VERSION` in
-  `ansicht/uebersicht.html` → *Sollte behoben werden*.
-- **Stau im Eingang:** Dateien, die länger als zwei Wochen in
-  `quellen/eingang/` liegen (Änderungsdatum, soweit dein Werkzeug es zeigt,
-  sonst nur nennen); bei `Entschieden:` in der Übergabe nennst du die
-  Entscheidung, statt zu fragen.
+Die Prüfpunkte des Werkzeugs stehen nur hier und in § 2, unter dem Namen,
+den es meldet. **M** heißt *Muss behoben werden*, **K** *Zur Kenntnis*, ohne
+Angabe *Sollte behoben werden*.
+
+- **Tote Links** (M): `[[ziel]]` ohne Seite, auch wenn nur eine gleichnamige
+  Datei in Bestand oder Modul passt.
+- **Doppelte Dateinamen** (M): ein Name zweimal in `wiki/`. Gleicht eine
+  Seite einer Datei in `quellen/bestand/` oder `module/`: K (`L01`).
+  Umbenennen schlägst du nur vor.
+- **Waisen:** Seite ohne eingehenden Link. Einzige Seite ihres Bereichs: K.
+- **Fehlende Gegenlinks:** A verlinkt B, B nicht A.
+- **Zu wenig Links:** `agent/regeln/SCHEMA.md` → *Wann eine Seite fertig
+  ist*.
+- **Frontmatter:** Pflichtfeld fehlt oder leer, Wert nicht in der Liste,
+  `sicherheit:` bei einer `notiz` (`agent/regeln/SCHEMA.md` →
+  *Frontmatter*). Fehlt der Block oder parst er nicht: M. *(du)*: `quellen:`
+  bei einer `notiz` aus einer Datei, `verfaellt:` bei einer `meta`-Seite.
+- **Stimme:** `notiz` ohne `stimme: ich`; `[!ich]`-Block bei `stimme: agent`;
+  `gemischt` ohne Block.
+- **Pflichtabschnitte:** `agent/regeln/SCHEMA.md` → *Aufbau einer Seite*;
+  fehlt nur `## Verlauf`: *Zur Kenntnis*.
+- **Dateinamen:** `agent/regeln/SCHEMA.md` → *Dateinamen und Links*, auch
+  für Ordner; `bruecke` außerhalb von `wiki/bruecken/`.
+- **Erster Tag:** nicht der Bereich.
+- **Einzel-Tags:** Thementag auf nur einer Seite.
+- **Quellenpfade** (M): `quellen:` nennt eine fehlende Datei. Liegt sie
+  nicht in Archiv, Bestand oder Modul: *Sollte*.
+- **Gelesen** (K): `quelle` ohne `gelesen:`; du trägst es nach, wenn du die
+  Seite das nächste Mal anfasst.
+- **Datum in der Zukunft** (M): `created:`, `updated:`, Log-Eintrag oder
+  Übergabe nach heute.
+- **Wochentag** (M): Wochentag passt nicht zum Datum dahinter, in `wiki/`
+  und `ausgaben/`.
+- **Protokoll:** Kopfzeile, Vorgang, Titel oder Reihenfolge der Daten nicht
+  nach `agent/regeln/SCHEMA.md` → *Protokoll*. Ältere Einträge meldest du
+  nur.
+- **Index:** Ein Ordner in `wiki/` (auch `bruecken`, `muster`) fehlt dort;
+  `Tempo:` nicht `langsam`, `mittel`, `schnell`. Ohne `Tempo:`: K.
+- **Leitfragen:** Zeile nicht nach `agent/regeln/SCHEMA.md` → *Leitfragen*.
+- **Übergabe:** Format oder Zahlen nicht nach
+  `agent/ablaeufe/feierabend.md` § 1. Eingangsdatei ohne Zeile, anderer
+  Zeilenanfang unter *Offen*: K.
+- **Stau im Eingang:** Datei liegt länger als zwei Wochen dort. Mit
+  `Entschieden:`: K, du nennst die Entscheidung, statt zu fragen.
+- **Wortlaut:** `[!ich]`-Block weicht von seiner Rohdatei ab, soweit sie
+  Text ist (`.md`, `.txt`; sonst § 4).
+- **Ansichten** (Suche wie `agent/ablaeufe/ansicht-bauen.md` § 4): Verstoß
+  gegen `L05` in einer, die du gebaut hast (`<meta name="fundus-kern">`
+  oder Log `ansicht`): M; in einer der Person: K, ändern nur auf Auftrag.
+  Andere Hauptversion von `fundus-kern` als `KERN_VERSION` in
+  `ansicht/uebersicht.html`: *Sollte*.
 
 ## 2 · Verfall
 
-- **Seite mit `pruefen_bis:` vorbei** → *Sollte behoben werden*, „neu
-  prüfen“; `status: veraltet` erst, wenn eine Quelle einen neuen Stand
-  belegt, gelöscht wird nichts (`L04`).
-- **`meta`-Seite mit `verfaellt:` vorbei** → *Zur Kenntnis*, sie bleibt.
-- **Leitplanke mit `pruefen_bis:` vorbei**, auch eines Moduls → *Muss behoben
-  werden*; sie gilt weiter, bis ein Update sie ersetzt. **`MODUL.md` mit
-  `pruefen_bis:` vorbei:** Update vorschlagen (`handbuch/MODULE.md` →
-  *Einhängen*), in `module/` nichts markieren (`L01`).
-- **Alte Quelle, schnelles Thema:** `status: aktiv`, jüngste Quelle alt,
-  Thema schnelllebig (Technik, Recht, Preise); die Grenze setzt du je Bereich
-  und nennst sie.
-- **Feld gegen Text:** Nennt der Text ein künftiges Gültigkeitsende, das nicht
-  zu `pruefen_bis:` oder `verfaellt:` passt, ohne Halbsatz „Wiedervorlage“
-  oder „galt bis“, fragst du die Person, statt zu ändern.
-
-*Bald fällig* (die nächsten zwei Wochen) nennst du unter *Zur Kenntnis*.
+- **Verfall:** `pruefen_bis:` oder `verfaellt:` ist vorbei oder kein Datum.
+  - Seite: „neu prüfen“; `status: veraltet` erst, wenn eine Quelle einen
+    neuen Stand belegt (`L04`).
+  - `meta`-Seite mit `verfaellt:` (K): Sie bleibt.
+  - Leitplanke, auch eines Moduls (M): Sie gilt weiter, bis ein Update sie
+    ersetzt.
+  - `MODUL.md`: Update vorschlagen (`handbuch/MODULE.md` → *Einhängen*), in
+    `module/` nichts markieren (`L01`).
+  - Bald fällig (K): dasselbe in den nächsten zwei Wochen.
+- **Alte Quelle, schnelles Thema** *(du)*: `status: aktiv`, jüngste Quelle
+  älter als die Grenze des Bereichs. Sie folgt `Tempo:` im Index
+  (`schnell`: ein Jahr, `mittel`: drei Jahre, `langsam`: keine); ohne
+  `Tempo:` setzt du sie und nennst sie.
+- **Feld gegen Text** *(du)*: Nennt der Text ein künftiges Gültigkeitsende,
+  das nicht zu `pruefen_bis:` oder `verfaellt:` passt, fragst du die Person,
+  statt zu ändern.
 
 ## 3 · Denken
 
-- `begriff` und `bruecke` ohne `gegenposition:`, `bruecke` ohne
-  `gleiche_form:`
-- offene Einträge in `wiki/meta/widersprueche.md`: Hat eine neue Quelle sie
-  entschieden?
-- Themenbereiche mit vielen Quellen, aber keiner `begriff`-Seite
-- **Dubletten:** kaum verlinkte Seiten, die dasselbe sagen wie eine andere
-  → *Sollte behoben werden*, beide genannt; `mehrwert: niedrig` setzen
-  (`agent/regeln/LINSEN.md`), Zusammenlegen nur vorschlagen (`L04`)
-- **Leitfragen:** nach `agent/regeln/SCHEMA.md` → *Leitfragen* als
-  beantwortet markieren oder nach *Offen* zurückholen → *Selbst behoben*.
+- **Widersprüche:** Hat eine neue Quelle einen offenen Eintrag in
+  `wiki/meta/widersprueche.md` geklärt (`agent/regeln/SCHEMA.md` →
+  `sicherheit:`)?
+- **Themenseiten:** Bereiche mit vielen Quellen, aber keiner
+  `begriff`-Seite.
+- **Dubletten:** kaum verlinkte Seiten, die dasselbe sagen wie eine andere,
+  beide genannt; `mehrwert: niedrig` setzen (`agent/regeln/LINSEN.md`),
+  Zusammenlegen nur vorschlagen (`L04`).
+- **Leitfragen:** Trägt eine Seite eine offene Frage, schlägst du
+  „beantwortet“ vor (`agent/regeln/SCHEMA.md` → *Leitfragen*), im Bericht
+  ein Satz. Zurückholen nach *Offen* → *Selbst behoben*.
 - **Einstieg im Index:** je Bereich neu bestimmen (`agent/regeln/SCHEMA.md`
   → *Index*); geändert → *Selbst behoben*.
 - **Lücken:** Fragen, die in mehreren Seiten unter `## Offene Fragen`
@@ -100,16 +129,16 @@ behebst du, mit neuem `updated:` und einer Zeile unter `## Verlauf`
 Umfang: seit der letzten Prüfung neue oder geänderte Seiten (`wiki/log.md`),
 von den übrigen eine Stichprobe, genannt unter *Wie geprüft*.
 
-- **`[!ich]`-Blöcke mit Rohdatei:** Eine Rohdatei hat ein Block, wenn seine
-  Seite in `quellen:` auf eine Datei in `quellen/archiv/` zeigt oder der Block
-  die Seite verlinkt, von der er stammt (dann deren `quellen:`). Jeden solchen
-  Block, auch jede Kopie, hältst du Zeile für Zeile gegen die Rohdatei, nach
-  `agent/regeln/SCHEMA.md` → *Die Stimme der Person*. Weicht er ab, kopierst du ihn
-  neu; steht er auf einer Seite mit `stimme: agent`, setzt du `gemischt`.
-  Beides → *Selbst behoben*.
-- **`[!ich]`-Blöcke ohne Rohdatei** (Zeile `*im Gespräch am …*` oder
-  `*aus dem Steckbrief am …*`, oder von der Person im Wiki geschrieben)
-  prüfst du nicht.
+- **`[!ich]`-Blöcke mit Rohdatei** (die Seite nennt in `quellen:` eine Datei
+  in `quellen/archiv/`, oder der Block verlinkt die Seite, von der er
+  stammt): Ist die Rohdatei kein Text oder lief das Prüfwerkzeug nicht,
+  hältst du jeden Block, auch jede Kopie, Zeile für Zeile gegen sie
+  (`agent/regeln/SCHEMA.md` → *Die Stimme der Person*, mit den erlaubten
+  Abweichungen). Einen abweichenden kopierst du neu; steht er auf einer
+  Seite mit `stimme: agent`, setzt du `gemischt`. Beides → *Selbst behoben*.
+- **Ohne Rohdatei** (Zeile `*im Gespräch am …*` oder
+  `*aus dem Steckbrief am …*`, oder von der Person im Wiki geschrieben):
+  kein Abgleich.
 - **Fundstelle je Kernaussage:** Jede Aussage unter `## Kernaussagen` nennt,
   wo sie sich nachprüfen lässt.
 - **Stichprobe:** drei Kernaussagen von `begriff`- oder `bruecke`-Seiten (gibt
@@ -118,9 +147,10 @@ von den übrigen eine Stichprobe, genannt unter *Wie geprüft*.
   Aussage stammt, und diese gegen die Rohdatei. Verdichtungsfehler → *Muss
   behoben werden*, Satz der Seite und der Quelle nebeneinander: **Zahl**
   anders, gerundet, falsche Bezugsgröße · **Richtung** umgekehrt ·
-  **Bedingung** der Quelle fehlt · **Zeitraum** verschoben. Verfehlt eine
-  dabei gelesene Seite sonst `agent/regeln/SCHEMA.md` → *Wann eine Seite fertig
-  ist*, meldest du das auch.
+  **Bedingung** der Quelle fehlt · **Zeitraum** verschoben.
+- **Keine Ausrede:** Was du beim Aufnehmen lesen konntest (auch ein PDF),
+  kannst du prüfen; „nicht abgleichbar“ gibt es nicht. Geht es wirklich
+  nicht, steht die Aussage mit Grund unter *Wie geprüft*.
 
 ## 5 · Bericht
 
@@ -134,11 +164,10 @@ von den übrigen eine Stichprobe, genannt unter *Wie geprüft*.
 ### Wie geprüft
 ```
 
-Wohin ein Befund gehört, steht beim Prüfpunkt; ohne Angabe unter *Sollte
-behoben werden*. Ein leerer Abschnitt bleibt mit „nichts“ stehen. Unter *Wie
-geprüft* stehen die Werkzeuge (auch ob Code lief), die Zahl der abgeglichenen
-und der nicht geprüften `[!ich]`-Blöcke, die Stichprobe, die auf Fundstellen
-gelesenen Seiten und was du nicht prüfen konntest.
+Ein leerer Abschnitt bleibt mit „nichts“ stehen. Unter *Wie geprüft* steht,
+ob das Prüfwerkzeug lief oder du von Hand geprüft hast, die Zahl der
+abgeglichenen und der nicht geprüften `[!ich]`-Blöcke, die Stichprobe und
+was du nicht prüfen konntest.
 
 Als Datei `wiki/meta/pruefung-<datum>.md` speicherst du den Bericht nur auf
 Wunsch, mit `verfaellt:` einen Monat später.
@@ -147,6 +176,6 @@ Wunsch, mit `verfaellt:` einen Monat später.
 
 - **Log:** ein Eintrag vom Typ `pruefen`. Ein fehlendes Ziel steht darin in
   Backticks, nicht als `[[ziel]]`.
-- **Übergabe:** In `eigen/gedaechtnis/UEBERGABE.md` schreibst du die Zeilen *Quellen
-  seit letzter Prüfung* (jetzt 0), *Fällig* und *Bald fällig* neu, nach
+- **Übergabe:** die ersten vier Zeilen unter *Nicht vergessen* neu (*Quellen
+  seit letzter Prüfung* jetzt 0) und die `Rückfrage:`-Zeilen aus § 3, nach
   `agent/ablaeufe/feierabend.md` § 1. Alles andere bleibt.
