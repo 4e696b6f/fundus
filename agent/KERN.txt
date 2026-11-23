@@ -6,15 +6,18 @@
 #
 # Nicht von Fundus und nie ersetzt:
 # - der Person: SOUL.md, EINRICHTUNG.md, eigen/, quellen/, ausgaben/,
-#   module/<modulname>.lokal.md, .claude/commands/eigen-*.md,
-#   agent/vorlagen/eigen-*.md, .obsidian/*.json und alles Übrige in .claude/
-#   und .obsidian/
+#   module/<modulname>.lokal.md, agent/vorlagen/eigen-*.md, eigene Befehle
+#   (.claude/commands/eigen-*.md, .agents/skills/eigen-*/,
+#   .gemini/commands/eigen-*.toml, .opencode/commands/eigen-*.md),
+#   .obsidian/*.json und alles Übrige in .claude/, .agents/, .gemini/,
+#   .opencode/ und .obsidian/
 # - dem Agenten: wiki/ (fehlt dort eine Datei, die eine neue Version braucht,
 #   etwa wiki/meta/leitfragen.md, legt der Agent sie an)
 # - den Autorinnen und Autoren eines Moduls: module/<modulname>/
 
 AGENTS.md
 CLAUDE.md
+GEMINI.md
 README.md
 CHANGELOG.md
 LICENSE
@@ -48,3 +51,36 @@ agent/vorlagen/quelle.md
 .claude/commands/stand.md
 .claude/commands/uebernehmen.md
 .claude/commands/zusammenhaenge.md
+.agents/skills/aktualisieren/
+.agents/skills/ansicht-bauen/
+.agents/skills/aufnehmen/
+.agents/skills/einrichten/
+.agents/skills/feierabend/
+.agents/skills/fragen/
+.agents/skills/pruefen/
+.agents/skills/schreiben/
+.agents/skills/stand/
+.agents/skills/uebernehmen/
+.agents/skills/zusammenhaenge/
+.gemini/commands/aktualisieren.toml
+.gemini/commands/ansicht-bauen.toml
+.gemini/commands/aufnehmen.toml
+.gemini/commands/einrichten.toml
+.gemini/commands/feierabend.toml
+.gemini/commands/fragen.toml
+.gemini/commands/pruefen.toml
+.gemini/commands/schreiben.toml
+.gemini/commands/stand.toml
+.gemini/commands/uebernehmen.toml
+.gemini/commands/zusammenhaenge.toml
+.opencode/commands/aktualisieren.md
+.opencode/commands/ansicht-bauen.md
+.opencode/commands/aufnehmen.md
+.opencode/commands/einrichten.md
+.opencode/commands/feierabend.md
+.opencode/commands/fragen.md
+.opencode/commands/pruefen.md
+.opencode/commands/schreiben.md
+.opencode/commands/stand.md
+.opencode/commands/uebernehmen.md
+.opencode/commands/zusammenhaenge.md

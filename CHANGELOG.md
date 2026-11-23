@@ -8,6 +8,90 @@ eigene Wiki kopieren; welche das sind, steht ab 0.4 in `agent/KERN.txt`.
 `SOUL.md`, `EINRICHTUNG.md`, `eigen/`, `wiki/` und `quellen/` (bis 0.3 auch
 `agent/gedaechtnis/`) bleiben dabei immer unberührt.
 
+## 0.7 · 2026-11-23 · Entwurf
+
+Fundus war bisher auf ein Programm gebaut: Die Anleitungen führten durch die
+Claude-App, die Befehle lagen nur in deren Format vor, und die Regeln
+nannten an einigen Stellen Claude Code. Die Regeln selbst hingen kaum daran;
+der Testlauf zu 0.6 lief schon mit einem anderen Programm. 0.7 löst die
+Bindung: Du wählst dein Agenten-Programm selbst. Am Verhalten des Agenten
+ändert sich nichts.
+
+**Neu: Befehle für fünf Programme.** Jeden Ablauf gibt es jetzt als Befehl
+für Claude Code (`.claude/commands/`, wie bisher), für Codex, pi und andere
+Programme, die „Skills“ lesen (`.agents/skills/`), für Gemini CLI
+(`.gemini/commands/`) und für opencode (`.opencode/commands/`). Die Befehle
+heißen überall gleich; nur das Zeichen davor ist verschieden: `/aufnehmen`
+in Claude Code, Gemini CLI und opencode, `$aufnehmen` in Codex,
+`/skill:aufnehmen` in pi. Jede dieser Dateien sagt dem Agenten nur, welchen
+Ablauf in `agent/ablaeufe/` er lesen soll; Regeln stehen darin keine. So
+bleibt eine einzige Anleitung je Ablauf, gleich in welchem Programm. Die
+Sätze („Nimm die neue Quelle auf.“) wirken weiter überall, auch in einem
+Programm ohne Befehle.
+
+**Regeln ohne Programmnamen.** `AGENTS.md` bleibt die einzige Regeldatei;
+`CLAUDE.md` und neu `GEMINI.md` enthalten nur den Verweis darauf, damit
+Claude Code und Gemini CLI sie finden. `AGENTS.md` und `agent/` nennen kein
+Programm und keinen Anbieter mehr. Wo welches Programm seine Regeln und
+Befehle sucht, steht an einer Stelle: in der neuen Datei
+`agent/regeln/PROGRAMME.md`.
+
+**Neu: Was dein Programm nicht kann.** Bisher setzten die Abläufe still
+voraus, dass der Agent Befehle auf deinem Rechner ausführen, PDFs lesen und
+Dateien verschieben kann. Nicht jedes Programm und nicht jedes Modell kann
+das. Der Agent probiert zuerst aus, ob es geht, ein PDF etwa auch über
+einen Befehl; in einer ersten Probe hatte er sonst vorschnell aufgegeben.
+Geht es nicht, sagt `agent/regeln/PROGRAMME.md`, was er stattdessen tut:
+
+- Kann er keine Befehle ausführen, fragt er dich nach dem Datum und sagt,
+  dass es von dir stammt; er prüft von Hand statt mit dem Prüfwerkzeug.
+- Kann er ein PDF oder Bild nicht lesen, bittet er dich um eine Textfassung;
+  die Datei bleibt mit einer Rückfrage im Eingang.
+- Fasst sein Modell wenig auf einmal, liest er Regeln und Quellen in Teilen
+  und hält auf der Quellenseite unter `gelesen:` fest, welche.
+- Kann er keine Datei verschieben, bittet er dich darum und notiert das als
+  Rückfrage.
+
+Die Abläufe verweisen an diesen Stellen auf den einen Abschnitt, statt je
+einen eigenen Rückfall zu beschreiben.
+
+**Eigene Befehle.** Einen eigenen Ablauf legt der Agent wie bisher in
+`eigen/ablaeufe/` an und trägt den Satz, der ihn auslöst, in
+`eigen/EIGEN.md` ein. Eine Befehlsdatei dazu legt er nur für das Programm
+an, mit dem du arbeitest; ihr Name beginnt mit `eigen-`, und sie gehört dir.
+
+**Anleitungen ohne Bindung, mit Empfehlung.** README und
+`handbuch/EINRICHTEN.md` beginnen jetzt mit „Du brauchst ein
+Agenten-Programm“ und einer Tabelle: Claude-App, Codex, Gemini CLI, pi,
+opencode, je mit der Art des Kontos, mit dem Anbieter, an den deine Texte
+gehen, und dem Start im Ordner. Preise stehen nicht darin, nur Links zu den
+Seiten der Hersteller. Für den Einstieg ohne Terminal empfehlen wir weiter
+die Claude-App. Schritt 4 heißt „Dein Programm einrichten“ und hat einen
+Abschnitt je Programm; „Wenn es hakt“ hat eine Tabelle je Programm. Zwei
+Dinge, die dabei auffielen:
+
+- Gemini CLI lässt sich seit Juni 2026 nicht mehr mit einem privaten
+  Google-Konto nutzen, nur noch mit API-Schlüssel oder einer Lizenz über
+  eine Organisation. Google verweist auf sein neues Programm Antigravity;
+  nach dessen Anleitung liest es `AGENTS.md` und `.agents/skills/`.
+  Ausprobiert haben wir es noch nicht.
+- Codex schlägt für Ordner ohne `git` vor, nur zu lesen. Das Handbuch sagt,
+  wie du das umstellst.
+
+**Ehrlich zum Stand.** Erprobt ist Fundus mit Claude-Modellen, zuletzt mit
+pi, das `AGENTS.md` und die Befehle wie bei dir selbst findet (Einrichten
+und Aufnehmen, ohne die Dateien für Claude Code im Ordner). Nebenbei
+nachgeschärft: Eine Frist braucht einen genauen Tag („März 2027“ ist
+keine), und die Seiten zur Ausgangslage beim Einrichten tragen
+`stimme: ich`. Codex, Gemini CLI und opencode sind nach deren Anleitungen vorbereitet,
+aber noch nicht im Test gelaufen; Tests mit anderen Modellen folgen.
+
+Übernehmen von 0.6: ZIP in den Wiki-Ordner legen und „aktualisieren“ sagen.
+Die neuen Befehlsdateien kommen von selbst mit. Eigene Befehle unter
+`.claude/commands/eigen-*.md` bleiben; arbeitest du mit einem anderen
+Programm, bietet der Agent an, sie auch dafür anzulegen. An deinen Seiten
+ändert sich nichts. Einzelheiten: `agent/migration/0.6-zu-0.7.md`.
+
 ## 0.6 · 2026-11-23 · Entwurf
 
 Grundlage ist ein Testlauf von 0.4 über sechs Sitzungen, vom Einrichten bis
