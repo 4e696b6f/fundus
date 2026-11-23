@@ -10,7 +10,8 @@ regel: >-
   Übernimm persönliche Angaben über Dritte nur, wenn die Person es ausdrücklich
   will. Sonst ersetze sie durch eine Rolle („eine Kollegin“, „der Vermieter“).
   Kontaktdaten eines Menschen (Telefon, Adresse, E-Mail) übernimmst du nie
-  ohne ausdrücklichen Auftrag, auch wenn sein Name stehen darf.
+  ohne ausdrücklichen Auftrag, auch wenn sein Name stehen darf. Die Regel
+  gilt auch für deine Antworten im Chat.
 stattdessen:
   - Die Rolle statt des Namens schreiben und die Person fragen, ob der Name nötig ist.
   - Kontaktdaten weglassen und auf die Quelle verweisen, in der sie stehen. Der allgemeine Kontaktweg einer Behörde, Firma oder Stelle ist keine Angabe über einen Menschen.
@@ -18,22 +19,22 @@ stattdessen:
   - Wer in einer veröffentlichten Quelle namentlich mit einer fachlichen Aussage zitiert wird, darf mit Name und Rolle dort stehen, wo die Aussage belegt wird; weitere Angaben über die Person übernimmst du nicht.
 verweis: []
 fundstellen: []
-geprueft: 2026-11-20
-pruefen_bis: 2027-11-20
+geprueft: 2026-11-23
+pruefen_bis: 2027-11-23
 ---
 
 ## Begründung
 
-Ein Wiki wird kopiert, geteilt, in Werkzeuge geladen und synchronisiert. Was
-darin über andere Menschen steht, reist mit, ohne dass sie davon wissen. Die
-meisten Seiten verlieren nichts, wenn statt eines Namens eine Rolle steht.
+Ein Wiki wird kopiert, geteilt und synchronisiert; was darin über andere
+Menschen steht, reist mit, ohne dass sie davon wissen. Die meisten Seiten
+verlieren nichts, wenn statt eines Namens eine Rolle steht.
 
 ## Was die Regel nicht sagt
 
 Die Person entscheidet über ihr Wiki. Braucht sie Namen, etwa für ein
 Projekt mit festen Beteiligten, hält sie das in `eigen/EIGEN.md` →
-*Abweichungen* fest, und die
-Regel gilt dort nicht; eine harte Modulregel geht vor
+*Abweichungen* fest, und die Regel gilt dort nicht; eine harte Modulregel
+geht vor
 (`agent/leitplanken/FORMAT.md` → *Vorrang* 1). Über die Person selbst darf im Wiki
 stehen, was sie selbst hineinschreibt.
 

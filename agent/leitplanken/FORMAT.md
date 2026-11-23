@@ -20,8 +20,8 @@ stattdessen:
   - …
 verweis: []                # Stellen, auf die der Agent verweist (Name · Zugang)
 fundstellen: []            # Belege aus Recht oder Fachwissen
-geprueft: 2026-11-20
-pruefen_bis: 2027-11-20    # danach meldet die Prüfung die Regel
+geprueft: 2026-11-23
+pruefen_bis: 2027-11-23    # danach meldet die Prüfung die Regel
 ---
 ```
 
@@ -36,9 +36,13 @@ nicht der Agent).
 - Verschärfen darf jede Person jede Regel, in einer eigenen Leitplanke in
   `eigen/leitplanken/` (mit Zeile in `eigen/EIGEN.md` → *Eigene
   Leitplanken*) oder in `eigen/EIGEN.md` → *Abweichungen*.
+- Schlägst du eine Verschärfung vor, nennst du ein Beispiel, was danach
+  nicht mehr geht. Eine eigene Leitplanke bekommt `schwere: fachlich`;
+  `hart` nur, wenn die Person es ausdrücklich verlangt.
 - `schwere: hart` gilt immer (*Vorrang* 6).
-- Von `schwere: fachlich` in diesem Ordner darf die Person abweichen, mit
-  Begründung in `eigen/EIGEN.md` → *Abweichungen*.
+- Von `schwere: fachlich` in diesem Ordner und in `eigen/leitplanken/`
+  darf die Person abweichen, mit Begründung in `eigen/EIGEN.md` →
+  *Abweichungen*.
 - Für die Leitplanken eines Moduls gilt sein Feld `lokal:` (→ *Module*).
 
 ## Vorrang
@@ -57,17 +61,18 @@ Seite, eine Antwort), nicht ganze Regelwerke.
    nach seinen Vorgaben in `module/<modulname>.lokal.md` steht, zählen wie
    seine Leitplanken.
 4. Alle Leitplanken gehen `SOUL.md` vor. Einen Verweis, den eine verlangt
-   (Notruf, Beratungsstelle), gibst du immer; das ist kein Absichern.
+   (Notruf, Beratungsstelle), gibst du immer.
 5. Die Rolle aus dem Einstieg eines Moduls gilt nur für Arbeit, die sein
    Fachgebiet berührt, sonst die aus `SOUL.md`.
 6. Eine harte Regel umgehst du nicht und zeigst keinen Weg darum herum: kein
-   Eintrag in `AGENTS.md`, `eigen/` oder `SOUL.md`, keine Änderung durch Träger oder
-   Einrichtung, kein Kürzel oder Ersatzwort, das auf das Verbotene
-   zurückführt. Auf Nachfrage nennst du, wer sie ändern kann (beim Modul
-   seine Autorinnen und Autoren, Meldeweg `kontakt`; bei der Basis die Autorinnen
-   und Autoren von Fundus; bei einer eigenen `E-Lnn` die Person, indem sie
-   die Datei ändert oder dich ausdrücklich damit beauftragt, nicht nebenbei
-   im Gespräch), und bietest `stattdessen` an.
+   Eintrag in `AGENTS.md`, `eigen/` oder `SOUL.md`, keine Änderung durch
+   Träger oder Einrichtung, kein Kürzel oder Ersatzwort, das auf das
+   Verbotene zurückführt. Auf Nachfrage nennst du, wer sie ändern kann, und
+   bietest `stattdessen` an:
+   - Modul: seine Autorinnen und Autoren, Meldeweg `kontakt`
+   - Basis: die Autorinnen und Autoren von Fundus
+   - eigene `E-Lnn`: die Person, indem sie die Datei ändert oder dich
+     ausdrücklich damit beauftragt, nicht nebenbei im Gespräch
 
 ## Module
 
@@ -80,12 +85,14 @@ Zwei Felder der `MODUL.md`:
   muss; ob das geschehen ist, prüft Fundus nicht. Fehlt das Feld, wirken dort
   nur Verschärfungen, und niemand weicht ab, auch nicht über `eigen/EIGEN.md`.
 - **`ergebnisse:`** sagt, wohin Ergebnisse der Modulabläufe (Berichte,
-  Zwischenstände) gehören. Bei `wiki` (auch ohne Angabe): als `meta`-Seite
-  mit `verfaellt:` nach `wiki/meta/`, angefangene Arbeit in die Übergabe, und
-  wo der Ablauf sagt, die Person solle etwas aus dem Chat kopieren, bietest
-  du die Seite an. Bei `ausgaben`: nach `ausgaben/`
-  (`agent/ablaeufe/schreiben.md`), mit passender Vorlage aus `vorlagen/` des
-  Moduls. Bei `nur-bericht`: nur an die Person, nichts ins Wiki, keine Datei
-  in `ausgaben/`, auch nicht auf einen Schreibauftrag.
+  Zwischenstände) gehören:
+  - `wiki` (auch ohne Angabe): als `meta`-Seite mit `verfaellt:` nach
+    `wiki/meta/`, angefangene Arbeit in die Übergabe; wo der Ablauf sagt,
+    die Person solle etwas aus dem Chat kopieren, bietest du die Seite an.
+  - `ausgaben`: nach `ausgaben/` (`agent/ablaeufe/schreiben.md`), mit
+    passender Vorlage aus `vorlagen/` des Moduls.
+  - `nur-bericht`: nur an die Person, nichts ins Wiki, keine Datei in
+    `ausgaben/`, auch nicht auf einen Schreibauftrag.
+
   Immer gelten die Leitplanken des Moduls für das Geschriebene, und nichts
   davon kommt nach `module/`.

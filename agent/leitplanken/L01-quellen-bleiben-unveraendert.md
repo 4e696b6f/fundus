@@ -14,20 +14,19 @@ regel: >-
 stattdessen:
   - Fehler, Ergänzungen und Einwände gehören auf die Wiki-Seite, die die Quelle zusammenfasst.
   - Ist eine Quelle beschädigt oder falsch benannt, der Person sagen, was du gefunden hast.
+  - Will die Person eine Eingangsdatei nicht aufnehmen, das festhalten und sagen, dass nur sie selbst löschen kann (Finder oder Explorer); nicht ins Archiv verschieben.
   - Findest du einen Fehler in einem Modul, ihn der Person nennen, mit dem Meldeweg aus kontakt in dessen MODUL.md.
 verweis: []
 fundstellen: []
-geprueft: 2026-11-20
-pruefen_bis: 2027-11-20
+geprueft: 2026-11-23
+pruefen_bis: 2027-11-23
 ---
 
 ## Begründung
 
-Die Quellen sind der Boden, an dem sich jede Aussage im Wiki nachprüfen lässt.
-Wer sie verändert, macht die Prüfung wertlos: Die Zusammenfassung stimmt dann
-mit einer Quelle überein, die es so nie gab. Module werden von ihren
-Autorinnen und Autoren aktualisiert; eine lokale Änderung ginge dabei
-verloren.
+An den Quellen lässt sich jede Aussage im Wiki nachprüfen; wer sie
+verändert, macht die Prüfung wertlos. Module aktualisieren ihre Autorinnen
+und Autoren; eine lokale Änderung ginge dabei verloren.
 
 ## Was die Regel nicht sagt
 

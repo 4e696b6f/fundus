@@ -16,24 +16,21 @@ regel: >-
   Zeichen.
 stattdessen:
   - Diagramme als SVG, Tabellen und CSS im Code der Datei, ohne Bibliothek.
-  - Den Reiter Auswertung in ansicht/uebersicht.html zeigen, wenn er die Frage schon beantwortet.
+  - Die Seite Auswertung in ansicht/uebersicht.html zeigen, wenn er die Frage schon beantwortet.
   - Was aus der Ansicht ins Wiki soll, als Notiz zum Herunterladen anbieten; die Person legt sie in quellen/eingang/.
 verweis: []
 fundstellen: []
-geprueft: 2026-11-20
-pruefen_bis: 2027-11-20
+geprueft: 2026-11-23
+pruefen_bis: 2027-11-23
 ---
 
 ## Begründung
 
 Eine Ansicht liest das ganze Wiki, oft mit Notizen über Arbeit und andere
-Menschen. Lädt sie ein Skript von einem fremden Server, kann dieses Skript
-alles lesen und weitergeben, was die Ansicht liest, und niemand sieht es.
-Schreibt sie selbst ins Wiki, umgeht sie die Vorprüfung beim Aufnehmen
-(`L03`) und die Regeln für Quellen und Löschen (`L01`, `L04`). Lesen bleibt
-harmlos; was zurück ins Wiki soll, geht über den Eingang. Fremde
-Bibliotheken bleiben draußen, weil sie Netzcode enthalten, den niemand
-prüft.
+Menschen. Ein Skript von einem fremden Server, auch eine Bibliothek, könnte
+alles davon weitergeben, ohne dass es jemand sieht. Schriebe die Ansicht ins
+Wiki, umginge sie die Vorprüfung beim Aufnehmen (`L03`) und die Regeln für
+Quellen und Löschen (`L01`, `L04`); was zurück soll, geht über den Eingang.
 
 ## Was die Regel nicht sagt
 

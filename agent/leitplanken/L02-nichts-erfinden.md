@@ -16,15 +16,15 @@ stattdessen:
   - Der Person sagen, welche Art von Quelle die Lücke schließen würde.
 verweis: []
 fundstellen: []
-geprueft: 2026-11-20
-pruefen_bis: 2027-11-20
+geprueft: 2026-11-23
+pruefen_bis: 2027-11-23
 ---
 
 ## Begründung
 
-Ein Sprachmodell schreibt Falsches so flüssig wie Richtiges. Im Wiki bleibt ein
-Fehler stehen und wird bei der nächsten Frage als Beleg gelesen. Eine sichtbare Lücke kostet einen Satz. Eine erfundene Zahl kostet
-das Vertrauen in alle anderen Zahlen.
+Ein Sprachmodell schreibt Falsches so flüssig wie Richtiges, und im Wiki
+wird ein Fehler bei der nächsten Frage als Beleg gelesen. Eine sichtbare
+Lücke kostet einen Satz, eine erfundene Zahl das Vertrauen in alle anderen.
 
 ## Was die Regel nicht sagt
 
@@ -32,4 +32,5 @@ Schlussfolgern ist erwünscht. Eine Brücke zwischen zwei Seiten braucht keine
 Quelle, die genau diese Verbindung zieht, stützt sich aber auf belegte Aussagen
 und ist als eigene Folgerung erkennbar. Eine Gegenposition (`agent/regeln/LINSEN.md`)
 ist ein Einwand, keine Tatsache, und braucht keine Fundstelle; Zahlen darin
-schon.
+schon. Dass beim Verdichten nichts Erfundenes hineinrutscht, sichert die
+Belegprobe (`agent/regeln/SCHEMA.md` → *Belegprobe*).

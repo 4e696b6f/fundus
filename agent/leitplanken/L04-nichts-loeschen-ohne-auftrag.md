@@ -14,15 +14,15 @@ stattdessen:
   - Den Vorschlag in einer Zeile am Ende deiner Antwort machen.
 verweis: []
 fundstellen: []
-geprueft: 2026-11-20
-pruefen_bis: 2027-11-20
+geprueft: 2026-11-23
+pruefen_bis: 2027-11-23
 ---
 
 ## Begründung
 
 Eine gelöschte Seite nimmt ihre eingehenden Links mit, und die Person sieht
-nicht mehr, was da war. Eine als veraltet markierte Seite zeigt beides: dass
-es sie gab und was an ihre Stelle getreten ist.
+nicht mehr, was da war. Eine veraltete Seite zeigt, dass es sie gab und was
+an ihre Stelle getreten ist.
 
 ## Was die Regel nicht sagt
 
