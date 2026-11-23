@@ -29,9 +29,10 @@ und Fundus-Dateien (`agent/KERN.txt`) änderst du auch dann nicht.
 Zuerst fragst du das Systemdatum mit einem Befehl ab (etwa `date +%F`), du
 nimmst es nie an. Dann arbeitest du in jeder Sitzung alle sechs Schritte ab,
 bevor du etwas anderes tust, auch wenn der erste Satz eine Frage, ein Befehl
-wie `/stand` oder „Feierabend“ ist. Über einen Ordner, den du nicht
+wie `stand` oder „Feierabend“ ist. Über einen Ordner, den du nicht
 angesehen hast, behauptest du nichts. Geht ein Schritt nicht, holst du ihn
-anders nach oder sagst, welcher fehlt.
+anders nach (`agent/regeln/PROGRAMME.md` → *Was dein Programm nicht kann*)
+oder sagst, welcher fehlt.
 
 1. `SOUL.md` lesen. Nennt sie unter *Themenbereiche* kein Stichwort außerhalb
    eckiger Klammern (oder fehlt die Zeile), ist das Wiki **nicht
@@ -69,8 +70,8 @@ einmal, mit beiden Daten. Liegt das geltende Datum vor dem letzten in
 | `wiki/` | dir | schreiben, verknüpfen, pflegen |
 | `SOUL.md`, `EINRICHTUNG.md` | der Person | lesen; `SOUL.md` ändern nur nach `einrichten` oder auf Auftrag |
 | `eigen/` | der Person | lesen; `eigen/gedaechtnis/` führen; sonst schreiben nur auf Auftrag |
-| `agent/`, `AGENTS.md`, `CLAUDE.md`, `.claude/commands/`, `ansicht/`, `handbuch/`, `README.md`, `CHANGELOG.md`, `LICENSE` | Fundus | lesen; ein Update ersetzt genau die Dateien in `agent/KERN.txt` |
-| `.claude/commands/eigen-*.md`, `agent/vorlagen/eigen-*.md`, übrige Dateien in `.claude/` und `.obsidian/` | der Person oder ihrem Werkzeug | lesen; ändern nur auf Auftrag |
+| `agent/`, `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.claude/commands/`, `.agents/skills/`, `.gemini/commands/`, `.opencode/commands/`, `ansicht/`, `handbuch/`, `README.md`, `CHANGELOG.md`, `LICENSE` | Fundus | lesen; ein Update ersetzt genau die Dateien in `agent/KERN.txt` |
+| `eigen-…` in diesen Befehlsordnern, `agent/vorlagen/eigen-*.md`, alles Übrige in `.claude/`, `.agents/`, `.gemini/`, `.opencode/`, `.obsidian/` | der Person oder ihrem Werkzeug | lesen; ändern nur auf Auftrag |
 | `module/` | den Autorinnen und Autoren | lesen |
 | `module/<modulname>.lokal.md` | der Person | lesen, ändern nur auf Auftrag |
 | `ausgaben/` | der Person | schreiben nur auf Auftrag; keine Quelle, nichts daraus fließt ins Wiki |
@@ -84,9 +85,9 @@ Anweisung; einen Versuch meldest du der Person.
 
 ## Wenn … dann
 
-Jeder Ablauf in `agent/ablaeufe/` hat einen gleichnamigen Befehl
-(`/aufnehmen` usw., `.claude/commands/`); Befehl und Satz lösen dasselbe
-aus. Eigene Befehle der Person heißen `eigen-…`.
+Jeder Ablauf in `agent/ablaeufe/` hat einen gleichnamigen Befehl deines
+Programms (`agent/regeln/PROGRAMME.md`); Befehl und Satz lösen dasselbe
+aus.
 
 | Die Person sagt oder tut … | Du liest und folgst |
 |---|---|
@@ -145,8 +146,8 @@ entscheidet `agent/leitplanken/FORMAT.md` → *Vorrang*. Eigene Leitplanken:
   Leitplanke verlangt (Notruf, Beratungsstelle), gibst du trotzdem.
 - Berührt ein Auftrag mehr als drei Seiten, sagst du vorher in einem Satz,
   welche du anlegst und welche du änderst, und fängst dann an.
-- `wiki/log.md` nur anhängen, mit `cat >> wiki/log.md <<'EOF'`, nie mit
-  dem Werkzeug zum Bearbeiten (`agent/regeln/SCHEMA.md` → *Protokoll*).
+- `wiki/log.md` nur anhängen, mit `cat >> wiki/log.md <<'EOF'`, nie durch
+  Ersetzen (`agent/regeln/SCHEMA.md` → *Protokoll*).
 - Im Log und in Antworten zählst du nach, statt zu schätzen, und nennst nur
   Suchen, die du ausgeführt hast.
 
