@@ -2,39 +2,43 @@
 
 **Wofür:** Stand für das nächste Mal festhalten.
 
-Auslöser: Die Person beendet die Arbeit („Feierabend“, „das war’s“,
-`/feierabend`). Den Zwischenstand nach jedem Auftrag regelt § 5.
+Den Zwischenstand nach jedem Auftrag regelt § 5.
+
+## 0 · Vorher
+
+Bevor du die Übergabe schreibst, in dieser Reihenfolge:
+
+1. Systemdatum abfragen (`AGENTS.md` → *Sitzungsbeginn*).
+2. Lernschleife (§ 3).
+3. Prüfwerkzeug (`agent/ablaeufe/pruefen.md` § 0); seine Schlusszeile
+   `Zahlen:` brauchst du in § 1.
 
 ## 1 · Übergabe schreiben
 
 `eigen/gedaechtnis/UEBERGABE.md` **ganz neu schreiben**, nicht anhängen, höchstens
-eine Seite; Erledigtes steht im Log.
+eine Seite; Erledigtes steht im Log. Das Format ist fest, das Prüfwerkzeug
+prüft es.
 
 Vorher liest du, was sonst verloren geht:
 
-- die bisherige Übergabe, auch wenn `agent/ablaeufe/pruefen.md` § 6 sie in dieser
-  Sitzung neu geschrieben hat: Zeilen unter *Offen* und *Nicht vergessen*, die
-  weiter gelten, übernimmst du (Regeln unten);
+- die bisherige Übergabe: was unter *Offen* und *Nicht vergessen* weiter
+  gilt, übernimmst du;
 - in `wiki/log.md` alles nach dem letzten Eintrag `sitzung`: jeden Eintrag
-  `entscheidung` und jede Zeile `Offen:` (Frist, vorgemerkte Aufgabe,
-  unbeantwortete Brückenidee);
-- die offenen Einträge in `wiki/meta/widersprueche.md` und deine
-  Rückfragen ohne Antwort (auch aus dem Aufnehmen und Verknüpfen), auch wenn
-  eine zugleich Lücke ist:
-  je eine Zeile unter *Offen*, ein Widerspruch mit Link auf die Seite hinter
-  „beide Aussagen auf“.
+  `entscheidung` und jede Zeile `Offen:`;
+- die offenen Einträge in `wiki/meta/widersprueche.md` (je eine Zeile, mit
+  Link auf die Seite hinter „beide Aussagen auf“) und deine Rückfragen ohne
+  Antwort, auch wenn eine zugleich Lücke ist.
 
 ```markdown
-# Übergabe · [Datum]
+# Übergabe · JJJJ-MM-TT
 
 ## Nächster Schritt
 Ein Satz: womit die nächste Sitzung anfängt.
 
 ## Offen
-- Entscheidungen, die bei der Person liegen (Rückfrage, auch eine, auf die
-  eine Quelle im Eingang wartet; Brückenidee)
+- Rückfrage: Frage · zu <datei oder [[seite]]> · seit JJJJ-MM-TT
+- Entschieden: „wörtlicher Satz der Person“ · zu <datei oder [[seite]]> · am JJJJ-MM-TT · nicht erneut fragen
 - Widerspruch: worin · [[seite]] · seit JJJJ-MM-TT
-- Entschieden: was, zu welcher Datei · seit JJJJ-MM-TT · nicht erneut fragen
 - angefangene Arbeit, mit Datei (bei einem Modul mit `ergebnisse: nur-bericht`
   nur Ablauf und Schritt, ohne Inhalt)
 
@@ -42,37 +46,51 @@ Ein Satz: womit die nächste Sitzung anfängt.
 - Quellen seit letzter Prüfung: n
 - Fällig: [[seite]] · pruefen_bis JJJJ-MM-TT (oder: nichts fällig)
 - Bald fällig: [[seite]] · pruefen_bis JJJJ-MM-TT (oder: nichts bald fällig)
+- Nächstes Prüfdatum: JJJJ-MM-TT · [[seite]] (oder: keins)
 - Frist JJJJ-MM-TT: was · [[seite]]
 - Von dir vorgemerkt: Aufgabe · [[seite]]
-- Bestand: x von y erschlossen · … (die Zählerzeile aus `wiki/meta/bestand.md`, falls es sie gibt)
+- Bestand: n Dateien (gibt es `wiki/meta/bestand.md`: deren Zählerzeile)
 ```
 
-*Nicht vergessen* steht immer da, seine ersten drei Zeilen auch mit 0 oder
-„nichts fällig“.
+Die Überschrift trägt das Datum von heute. *Nächster Schritt* nennt nichts,
+was nicht im Wiki steht (`L02`). Ist nichts offen, steht unter *Offen*
+„- nichts“. Die ersten vier Zeilen unter *Nicht vergessen* stehen immer da,
+die übrigen nur, wenn es etwas gibt.
 
-- **n:** die Zahl der Einträge `aufnehmen` in `wiki/log.md` nach dem
-  letzten Eintrag `pruefen` (ohne einen, seit Beginn). Du zählst immer im
-  Log nach, nie auf die alte Zahl auf.
-- **Fällig:** jede Seite in `wiki/`, jede Leitplanke, auch die eigenen in
-  `eigen/leitplanken/` und die der Module, und
-  jede `MODUL.md`, deren `pruefen_bis:` oder `verfaellt:` vor heute liegt;
-  Treffer in Codeblöcken zählen nicht. **Bald fällig:** dasselbe in den
-  nächsten zwei Wochen.
-- **Frist:** eine Zeile je Termin für das Wiki oder die Person, auch jede
-  datierte Nebenangabe (`agent/ablaeufe/aufnehmen.md` § 3). Eine vorbeigegangene
-  nennst du der Person einmal, dann entfällt sie.
-- **Von dir vorgemerkt:** nur je Aufgabe, die die Person in einem `[!ich]`-Block
-  notiert hat (etwa `` `#später` ``), eine Zeile mit Link auf die Seite. Die
-  Aufgabe steht wörtlich, ein Wort mit `#` am Anfang in Backticks. Sie
-  bleibt, bis die Person sie erledigt oder streicht.
-- **Entschieden** (unter *Offen*): je Log-Eintrag `entscheidung`
-  (`agent/ablaeufe/aufnehmen.md` § 7) eine Zeile; sie bleibt, solange die
-  Entscheidung gilt, etwa die Datei im Eingang liegt.
-- Ist eine Zeile *Von dir vorgemerkt* oder `Entschieden:` älter als vier
-  Wochen, fragst du einmal, ob sie noch gilt.
-- Lücken bleiben in `wiki/meta/luecken.md`, nicht in der Übergabe, außer als
-  offene Rückfrage.
-- Zeilen ohne Frist, Aufgabe, Entscheidung oder Bestandszähler entfallen.
+**Zahlen:** Die ersten vier Zeilen und die Zahl der Bestandsdateien nimmst
+du aus dem Prüfwerkzeug (`Zahlen:` und die Zeilen darüber). Ohne `node`:
+
+- **n:** Einträge `aufnehmen` in `wiki/log.md` nach dem letzten Eintrag
+  `pruefen` (ohne einen: alle), im Log nachgezählt.
+- **Fällig**, **Bald fällig:** nach `agent/ablaeufe/pruefen.md` § 2, also
+  auch Leitplanken (eigene, Module) und jede `MODUL.md`; für sie steht statt
+  `[[seite]]` Kürzel oder Pfad.
+- **Nächstes Prüfdatum:** im selben Umfang das früheste Datum, das nicht
+  vorbei ist.
+
+**Zeilen:**
+
+- **Rückfrage:** jede Frage von dir ohne Antwort, auch dein Befund zu einer
+  Datei („lässt sich nicht lesen, bitte als PDF“).
+- **Entschieden:** nur mit dem wörtlichen Satz der Person in
+  Anführungszeichen und dem Datum; ohne ihren Satz ist es eine `Rückfrage:`.
+  Je Log-Eintrag `entscheidung` (`agent/ablaeufe/aufnehmen.md` § 7) eine
+  Zeile. Sie ersetzt die `Rückfrage:` zur selben Sache und bleibt, solange
+  die Entscheidung gilt, etwa die Datei im Eingang liegt.
+- **Eingang:** Nach einem Auftrag `aufnehmen` hat jede Datei, die noch in
+  `quellen/eingang/` liegt, genau eine Zeile `Rückfrage:` oder
+  `Entschieden:`; eine frisch abgelegte hat keine.
+- **Frist:** je Termin für das Wiki oder die Person, auch jede datierte
+  Nebenangabe (`agent/ablaeufe/aufnehmen.md` § 3). Einen Termin, den du
+  errechnest („Einladung spätestens am …“), trägst du sofort ein, den
+  Rechenweg auf der `projekt`-Seite des Vorhabens. Eine vorbeigegangene
+  Frist nennst du der Person einmal, dann entfällt sie.
+- **Von dir vorgemerkt:** je Aufgabe, die die Person in einem `[!ich]`-Block
+  notiert hat, wörtlich wie dort (etwa `\#später`), mit Link auf die Seite.
+  Sie bleibt, bis die Person sie erledigt oder streicht.
+- Ist eine Zeile `Rückfrage:`, `Entschieden:` oder *Von dir vorgemerkt*
+  älter als vier Wochen, fragst du einmal, ob sie noch gilt.
+- Lücken bleiben in `wiki/meta/luecken.md`, außer als offene Rückfrage.
 
 ## 2 · Protokoll
 
@@ -81,14 +99,18 @@ bis fünf Zeilen.
 
 ## 3 · Lernschleife
 
-Jede Korrektur der Person und jeder eigene Fehlgriff kommt sofort als Zeile
-in `eigen/gedaechtnis/KORREKTUREN.md`; was fehlt, trägst du jetzt nach. Kommt derselbe
-Schlüssel zum zweiten Mal vor, schlägst du vor, die Lehre als Regel in
-`eigen/EIGEN.md` → *Aus Korrekturen gelernt* einzutragen (oder als eigene
-Leitplanke in `eigen/leitplanken/`), nie in `AGENTS.md` oder `agent/`: Die
-ersetzt jedes Update. Die Person entscheidet; trägst du ein, steht die Regel
-in `KORREKTUREN.md` unter *Zur Regel geworden*. Betrifft die Lehre Fundus
-selbst, schlägst du zusätzlich vor, sie als Issue zu melden.
+Du gehst das Gespräch dieser Sitzung durch: Wo hat die Person dich
+korrigiert („nein“, „falsch“, „dein Fehler“, „nicht so“)? Wo hast du selbst
+einen Fehlgriff bemerkt, auch durch das Prüfwerkzeug? Je Fund steht eine
+Zeile in `eigen/gedaechtnis/KORREKTUREN.md`; was fehlt, trägst du jetzt
+nach. Die Zahl der Zeilen aus dieser Sitzung nennst du in § 4, auch die 0.
+
+Kommt derselbe Schlüssel zum zweiten Mal vor, schlägst du vor, die Lehre als
+Regel in `eigen/EIGEN.md` → *Aus Korrekturen gelernt* einzutragen (oder als
+eigene Leitplanke in `eigen/leitplanken/`), nie in `AGENTS.md` oder `agent/`:
+Die ersetzt jedes Update. Die Person entscheidet; trägst du ein, steht die
+Regel in `KORREKTUREN.md` unter *Zur Regel geworden*. Betrifft die Lehre
+Fundus selbst, schlägst du vor, sie als Issue zu melden.
 
 Einen Fehler einer früheren Sitzung trägst du nur mit Beleg (Datei, Zeile)
 ein. Erlaubten die Regeln das damalige Vorgehen, war es keiner, auch nicht in
@@ -96,23 +118,28 @@ dem, was du der Person sagst.
 
 ## 4 · Letzte Zeile an die Person
 
-Ein Satz: was die nächste Sitzung als Erstes tun wird. Gibt es einen Ordner
-`.git` und Änderungen ohne Commit, fragst du in einem zweiten Satz, ob du
-den Stand sichern sollst: ein lokaler Commit des ganzen Ordners, kein
-Hochladen.
+Ein Satz: was die nächste Sitzung als Erstes tun wird, dazu die Zahl der
+Korrekturen (§ 3) und, was das Prüfwerkzeug unter *Muss behoben werden* noch
+meldet.
+
+**Sichern:** Nennt `git rev-parse --show-toplevel` den Wiki-Ordner (eigenes
+Repository) und gibt es Änderungen ohne Commit, fragst du in einem zweiten
+Satz, ob du den Stand sichern sollst: ein lokaler Commit des ganzen Ordners,
+kein Hochladen. Nennt der Befehl einen Ordner darüber (fremdes Repository):
+kein Commit, nur der Hinweis. „Gesichert“ sagst du nur nach einem Commit.
 
 ## 5 · Zwischenstand nach jedem Auftrag
 
-Ist ein Auftrag abgeschlossen, der eine Datei geändert hat (etwa aufnehmen
-samt Zusammenhängen, eine Runde übernehmen, prüfen, schreiben, einrichten,
-eine Frage mit neuer Seite oder Lücke), ziehst du die Übergabe nach,
-ohne sie neu zu schreiben, damit eine Sitzung ohne „Feierabend“ nichts
-verliert:
+Nach jedem Auftrag, der eine Datei geändert hat (auch eine Frage mit neuer
+Seite oder Lücke), ziehst du die Übergabe nach, ohne sie neu zu schreiben:
 
-- *Nächster Schritt* neu, ein Satz;
-- unter *Offen* neue Rückfragen, Widersprüche und `Entschieden:`-Zeilen
-  ergänzen, erledigte streichen;
-- *Quellen seit letzter Prüfung* nach § 1 → **n**;
+- zuerst das Prüfwerkzeug (`agent/ablaeufe/pruefen.md` § 0), danach seine
+  Befunde zu diesem Auftrag beheben;
+- Überschrift mit dem Datum von heute, *Nächster Schritt* neu, ein Satz;
+- unter *Offen* neue Zeilen `Rückfrage:`, `Widerspruch:` und `Entschieden:`
+  ergänzen, erledigte streichen; nach `aufnehmen` gilt § 1 → **Eingang**;
+- die ersten vier Zeilen unter *Nicht vergessen* nach § 1 → **Zahlen**;
 - neue Fristen und vorgemerkte Aufgaben aus dem Log-Eintrag des Auftrags.
 
-Die Überschrift trägt das Datum des Zwischenstands. Kein Log-Eintrag dafür.
+Kein Log-Eintrag dafür. Eine Entscheidung der Person und eine errechnete
+Frist warten nicht darauf: Die Zeile schreibst du sofort.
