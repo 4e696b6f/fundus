@@ -2,8 +2,7 @@
 
 **Wofür:** Eine eigene Übersicht, Auswertung oder Grafik aus deinem Wiki für den Browser bauen.
 
-Auslöser: „bau mir eine Übersicht, Auswertung, Grafik, ein Dashboard …“,
-`/ansicht-bauen`. Vorher liest du `L05`
+Vorher liest du `L05`
 (`agent/leitplanken/L05-ansichten-lokal-und-lesend.md`).
 
 ## 1 · Wunsch klären
@@ -16,7 +15,7 @@ Auftrag offenlässt, fragst du in einer Nachricht.
 
 Das erste, das passt:
 
-1. Die Auswertung in `ansicht/uebersicht.html` (Reiter *Auswertung*) zeigt
+1. Die Auswertung in `ansicht/uebersicht.html` (Seite *Auswertung*) zeigt
    es schon → du sagst, wo. Ihre Zahlen wiederholst du nicht geschätzt;
    nennst du eine, zählst du so, wie die Kachel unter „Gezählt“ sagt.
 2. Ein Ablauf, eine Zeitachse oder eine Gliederung, die eine Seite belegt →
@@ -60,16 +59,20 @@ Das erste, das passt:
 
 ## 4 · Prüfen
 
-Vor der Übergabe öffnet die Person `ansicht/uebersicht.html`: Die Kachel
-*Eigene Ansichten* prüft jede Datei. Ohne Browser durchsuchst du sie selbst:
-Sicherheitszeile wie in `ansicht/uebersicht.html` und vor jedem `<script>`;
-keine Adresse mit `http` oder `//` in `src`, `srcset`, `href` von `<link>`,
-`url(`, `@import`; kein `fetch`, `XMLHttpRequest`, `WebSocket`,
-`sendBeacon`, `EventSource`, `RTCPeerConnection`, `serviceWorker`,
-`createWritable`, `removeEntry`, `showSaveFilePicker`, `mode: 'readwrite'`,
-`window.open`, `location =` oder `location.assign`/`replace`, kein
-`refresh` und kein `prefetch`. Findest du etwas, behebst du es, bevor du
-die Datei nennst.
+Bevor du die Datei nennst, läuft das Prüfwerkzeug (Prüfpunkt *Ansichten*,
+`agent/ablaeufe/pruefen.md` § 1); dasselbe zeigt `ansicht/uebersicht.html`
+in der Kachel *Eigene Ansichten*. Ohne beides durchsuchst du sie selbst:
+
+- Sicherheitszeile wie in `ansicht/uebersicht.html` und vor jedem `<script>`
+- keine Adresse mit `http` oder `//` (`src`, `srcset`, `href` von `<link>`,
+  `url(`, `@import`), kein `refresh`, kein `prefetch`
+- kein Netzaufruf (`fetch`, `XMLHttpRequest`, `WebSocket`, `sendBeacon`,
+  `EventSource`, `RTCPeerConnection`, `serviceWorker`), kein Schreiben
+  (`createWritable`, `removeEntry`, `showSaveFilePicker`,
+  `mode: 'readwrite'`), kein Öffnen einer Adresse (`window.open`,
+  `location`)
+
+Einen Fund behebst du vorher.
 
 ## 5 · Abschließen
 
