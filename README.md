@@ -4,7 +4,7 @@ Fundus ist ein Ordner, in dem ein KI-Programm ein Wiki für dich führt: Du
 legst Quellen hinein, es schreibt daraus verlinkte Seiten.
 
 KI-Hinweis: Ich schreibe Fundus und die Anleitungen mit KI-Unterstützung.
-Version 0.6 ist ein Entwurf und hat außer mir noch niemand durchgesehen, es
+Version 0.7 ist ein Entwurf und hat außer mir noch niemand durchgesehen, es
 wird also etwas haken. Fehler und Fragen bitte in die
 [Issues](https://github.com/4e696b6f/fundus/issues).
 
@@ -27,10 +27,24 @@ haben, daraus selbst Notizen zu pflegen.
 
 ## Was du brauchst
 
-Einen Mac oder Windows-Rechner, [Obsidian](https://obsidian.md) und die
-Claude-App mit Claude Code. Das ist das KI-Programm, das hier den Agenten
-macht. Es braucht ein bezahltes Claude-Konto, ein Terminal brauchst du nicht. Was der Agent liest, geht an Anthropic, den Anbieter
-von Claude. Leg nur ab, was dort hin darf.
+Einen Mac oder Windows-Rechner, [Obsidian](https://obsidian.md) und ein
+Agenten-Programm: ein KI-Programm, das in deinem Ordner Dateien liest und
+schreibt. Fundus ist an keins gebunden. Diese fünf sind vorbereitet:
+
+| Programm | Für wen | Konto und Kosten (Art) | Wohin deine Texte gehen |
+|---|---|---|---|
+| **Claude-App** mit Claude Code | Einstieg ohne Terminal, empfohlen | bezahltes Claude-Konto ([Pläne](https://claude.com/pricing)) | an Anthropic |
+| **Codex** | wer ein ChatGPT-Konto hat | bezahltes ChatGPT-Konto oder API-Schlüssel ([Preise](https://learn.chatgpt.com/docs/pricing)) | an OpenAI |
+| **Gemini CLI** | Terminal | API-Schlüssel oder Lizenz über eine Organisation; mit privatem Google-Konto seit Juni 2026 nicht mehr ([Hinweis von Google](https://developers.google.com/gemini-code-assist/docs/deprecations/code-assist-individuals)) | an Google |
+| **pi** | Terminal; eigenes oder lokales Modell | Abo, API-Schlüssel oder lokales Modell ([Anleitung](https://docs.pi.dev/latest/quickstart)) | an den Anbieter, den du wählst; lokales Modell: bleibt auf deinem Rechner |
+| **opencode** | Terminal oder Desktop-App; eigenes oder lokales Modell | Konto, API-Schlüssel oder lokales Modell ([Anbieter](https://opencode.ai/docs/providers)) | an den Anbieter, den du wählst; lokales Modell: bleibt auf deinem Rechner |
+
+Was der Agent liest, geht an den Anbieter deines Programms. Leg nur ab, was
+dort hin darf. Die ganze Tabelle mit den Seiten der Hersteller zum
+Datenschutz steht im
+[Handbuch](handbuch/EINRICHTEN.md#programm-wählen). Erprobt ist Fundus
+bisher mit Claude-Modellen, zuletzt mit pi; Codex, Gemini CLI und opencode
+sind vorbereitet, aber noch nicht im Test gelaufen.
 
 ## So fängst du an
 
@@ -45,10 +59,12 @@ Rechne mit einer halben Stunde. Jeder Klick steht in
 3. Wenn du magst: `EINRICHTUNG.md` öffnen und die Fragen beantworten, wofür
    das Wiki ist und womit du anfängst. Beispiele liegen in
    `handbuch/steckbriefe/`.
-4. Die Claude-App installieren, links **Code** wählen und unter dem
-   Eingabefeld deinen Wiki-Ordner öffnen. Welche Schalter du stellst, steht
-   im Handbuch unter Schritt 4. Wer lieber im Terminal arbeitet, startet dort
-   `claude` im Ordner.
+4. Dein Agenten-Programm installieren und im Wiki-Ordner starten. In der
+   Claude-App: links **Code** wählen und unter dem Eingabefeld den Ordner
+   öffnen. Im Terminal: in den Ordner wechseln und `claude`, `codex`,
+   `gemini`, `pi` oder `opencode` starten. Was du je Programm einstellst,
+   steht im Handbuch unter
+   [Schritt 4](handbuch/EINRICHTEN.md#schritt-4--dein-programm-einrichten).
 5. Dem Agenten schreiben: „Richte mein Wiki ein.“ Er fragt nach, was im
    Steckbrief fehlt, zeigt dir einen Entwurf und legt nach deinem Ja los.
    Danach legst du die erste Datei in `quellen/eingang/`.
@@ -64,7 +80,7 @@ Rechne mit einer halben Stunde. Jeder Klick steht in
 Mehr brauchst du am Anfang nicht. Wenn es passt, schlägt der Agent dir den
 nächsten Schritt vor, etwa eine Prüfung. Alles, was er kann:
 
-| Du sagst | Kurzbefehl | Was passiert |
+| Du sagst | Befehl | Was passiert |
 |---|---|---|
 | „Richte mein Wiki ein.“ | `/einrichten` | Themen, Fragen und Ton festlegen, auch später zum Ändern. |
 | „Wo stehen wir?“ | `/stand` | Was anliegt und was als Nächstes dran ist. |
@@ -78,8 +94,10 @@ nächsten Schritt vor, etwa eine Prüfung. Alles, was er kann:
 | „Aktualisiere Fundus mit der ZIP im Ordner.“ | `/aktualisieren` | Eine neue Fundus-Version übernehmen; deine Dateien bleiben, wie sie sind ([Anleitung](handbuch/EINRICHTEN.md#neue-fundus-version)). |
 | „Feierabend.“ | `/feierabend` | Der Agent schreibt auf, wo ihr steht. |
 
-Die Kurzbefehle zeigt Claude Code, wenn du `/` tippst. Andere Programme
-verstehen die Sätze.
+Die Sätze wirken in jedem Programm. Die Befehle sind dasselbe in kurz und
+heißen überall gleich; nur das Zeichen davor hängt vom Programm ab: `/name`
+in Claude Code, Gemini CLI und opencode, `$name` in Codex (die Liste zeigt
+`/skills`), `/skill:name` in pi.
 
 ## Welche Dateien gehen
 
@@ -100,7 +118,7 @@ verstehen die Sätze.
   über andere kommen nur auf deinen ausdrücklichen Wunsch hinein.
 - **Kein Löschwerkzeug.** Quellen bleiben, wie sie sind; Seiten löscht der
   Agent nur auf deinen Auftrag.
-- **Nichts zum Installieren außer Obsidian und dem Agenten.** Keine
+- **Nichts zum Installieren außer Obsidian und deinem Agenten-Programm.** Keine
   Datenbank, kein Programmierwissen. Das mitgelieferte Prüfwerkzeug nutzt
   der Agent, wenn auf deinem Rechner `node` vorhanden ist; nötig ist das
   nicht, denselben Bericht zeigt die Ansicht im Browser.
@@ -119,12 +137,14 @@ verstehen die Sätze.
 | `handbuch/` | Anleitungen für dich, dazu ein [Glossar](handbuch/GLOSSAR.md) und [Beispiele](handbuch/beispiele/README.md) fertiger Seiten. |
 | `module/` | Fertige Wissenspakete, siehe unten. |
 
-Alles andere (`AGENTS.md`, `agent/` und `.claude/`) sind die Regeln und
-Kurzbefehle des Agenten, lesbar, aber bei jedem Update ersetzt, außer
-Dateien, deren Name mit `eigen-` beginnt; welche Dateien das sind, steht in
-`agent/KERN.txt`. Obsidian blendet `agent/` in
-Suche und Graph aus. `CLAUDE.md` enthält nur den Verweis auf `AGENTS.md`,
-damit Claude Code die Regeln findet. `.obsidian/` hält die Einstellungen
+Alles andere sind die Regeln und Befehle des Agenten: `AGENTS.md` und
+`agent/` die Regeln, für alle Programme dieselben; `.claude/`, `.agents/`,
+`.gemini/` und `.opencode/` dieselben Befehle in der Form, die das jeweilige
+Programm liest. Alles lesbar, aber bei jedem Update ersetzt, außer Dateien,
+deren Name mit `eigen-` beginnt; welche Dateien das sind, steht in
+`agent/KERN.txt`. Obsidian blendet `agent/` in Suche und Graph aus.
+`CLAUDE.md` und `GEMINI.md` enthalten nur den Verweis auf `AGENTS.md`, damit
+Claude Code und Gemini CLI die Regeln finden. `.obsidian/` hält die Einstellungen
 dieses Ordners, etwa die Farbe deiner Gedanken-Blöcke. `CHANGELOG.md` listet,
 was sich je Version ändert. Anfassen musst du nichts davon, löschen solltest
 du es nicht.
@@ -139,8 +159,7 @@ Modulen, fertigen Wissenspaketen, die du zum Anfangen nicht brauchst:
 
 Die Idee stammt von Andrej Karpathy, der sie als
 [llm-wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
-beschrieben hat. Andere KI-Programme, die `AGENTS.md` lesen, etwa Codex, gehen
-auch, sind aber weniger erprobt.
+beschrieben hat.
 
 Fehler und Fragen gehören in die
 [Issues](https://github.com/4e696b6f/fundus/issues), die Fehlerliste dieses
