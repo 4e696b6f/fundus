@@ -6,8 +6,8 @@ Sitzung neu und hält nach jedem Auftrag den Zwischenstand fest
 
 ## Nächster Schritt
 
-Das Wiki einrichten: „einrichten“ sagen (oder `/einrichten`), wenn du magst
-vorher `EINRICHTUNG.md` ausfüllen.
+Das Wiki einrichten: „einrichten“ sagen, wenn du magst vorher
+`EINRICHTUNG.md` ausfüllen.
 
 ## Offen
 

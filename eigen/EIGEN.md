@@ -29,9 +29,10 @@ Kürzel `E-L01`, `E-L02` …
 
 ## Eigene Abläufe
 
-Dateien in `eigen/ablaeufe/`, je mit Auslöser. Einen Kurzbefehl dazu legst
-du als `.claude/commands/eigen-<name>.md` an; Dateien mit `eigen-` vorn
-ersetzt kein Update.
+Dateien in `eigen/ablaeufe/<name>.md`, je mit Auslöser-Satz in der Tabelle.
+Einen Befehl dazu legt der Agent auf Wunsch als `eigen-<name>` an, nur im
+Befehlsordner des Programms, mit dem du arbeitest
+(`agent/regeln/PROGRAMME.md`); was `eigen-` vorn trägt, ersetzt kein Update.
 
 | Die Person sagt oder tut … | Der Agent liest und folgt |
 |---|---|
