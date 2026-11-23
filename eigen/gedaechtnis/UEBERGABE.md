@@ -1,4 +1,4 @@
-# Übergabe
+# Übergabe · 2026-11-23
 
 Startzustand, noch keine Sitzung. Der Agent schreibt diese Datei am Ende jeder
 Sitzung neu und hält nach jedem Auftrag den Zwischenstand fest
@@ -18,3 +18,4 @@ vorher `EINRICHTUNG.md` ausfüllen.
 - Quellen seit letzter Prüfung: 0
 - Fällig: nichts fällig
 - Bald fällig: nichts bald fällig
+- Nächstes Prüfdatum: 2027-11-23 · L01 bis L05

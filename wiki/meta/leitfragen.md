@@ -2,8 +2,8 @@
 title: 'Leitfragen'
 type: meta
 tags: [meta]
-created: 2026-11-18
-updated: 2026-11-18
+created: 2026-11-23
+updated: 2026-11-23
 sicherheit: hoch
 status: aktiv
 stimme: agent
@@ -12,8 +12,9 @@ stimme: agent
 # Leitfragen
 
 Was dein Wiki einmal beantworten soll, in deinen Worten. Der Agent trägt sie
-beim Einrichten ein und markiert sie als beantwortet, sobald eine belegte
-Seite sie trägt. Format: `agent/regeln/SCHEMA.md` → *Leitfragen*.
+beim Einrichten ein. Trägt eine belegte Seite eine Frage, schlägt er
+„beantwortet“ vor (` · dazu: [[seite]]`); verschoben wird sie erst nach
+deinem Ja. Format: `agent/regeln/SCHEMA.md` → *Leitfragen*.
 
 ```
 - Frage? · Bereich: <bereich> · aus dem Steckbrief / im Gespräch am [Datum] · seit [Datum]

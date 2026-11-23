@@ -2,8 +2,8 @@
 title: 'Lücken'
 type: meta
 tags: [meta]
-created: 2026-09-23
-updated: 2026-09-23
+created: 2026-11-23
+updated: 2026-11-23
 sicherheit: hoch
 status: aktiv
 stimme: agent

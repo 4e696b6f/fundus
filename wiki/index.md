@@ -2,8 +2,8 @@
 title: 'Index'
 type: meta
 tags: [meta]
-created: 2026-09-23
-updated: 2026-11-18
+created: 2026-11-23
+updated: 2026-11-23
 sicherheit: hoch
 status: aktiv
 stimme: agent
@@ -11,8 +11,8 @@ stimme: agent
 
 # Index
 
-Die Themenbereiche dieses Wikis, je mit einem Satz und dem Einstieg. Aufbau:
-`agent/regeln/SCHEMA.md` → *Index*.
+Die Themenbereiche dieses Wikis, je mit einem Satz, dem Einstieg und den
+Zeilen `Tempo:` und `Auch:`. Aufbau: `agent/regeln/SCHEMA.md` → *Index*.
 
 ## Bereiche
 
