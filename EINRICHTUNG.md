@@ -6,8 +6,12 @@ es dir einfällt, Stichworte genügen. Die Zeilen mit *Beispiel:* darfst du
 stehen lassen. Ausgefüllte Steckbriefe zum Abgucken liegen in
 `handbuch/steckbriefe/`.
 
+Bei den Themen hilft dem Agenten: welche anderen Wörter du dafür benutzt
+und ob sich das Thema langsam, mittel oder schnell ändert.
+
 Schreib Rollen statt Namen („meine Teamleitung“, „ein Kind aus der 2b“):
-Was der Agent liest, geht an den Anbieter des KI-Werkzeugs.
+Was der Agent liest, geht an den Anbieter des KI-Werkzeugs. Ins Wiki schreibt
+er keinen Namen von hier; in dieser Datei bleibt stehen, was du schreibst.
 
 ## Wer bist du, und wofür soll das Wiki da sein?
 
@@ -15,7 +19,7 @@ Was der Agent liest, geht an den Anbieter des KI-Werkzeugs.
 
 ## Mit welchen Themen fängst du an?
 
-*Beispiel: Leseförderung. Ich kenne Lesetandems und habe mit Lautlesen gute Erfahrungen gemacht, sage oft „Leseflüssigkeit“ dazu. Ändert sich eher langsam.*
+*Beispiel: Leseförderung. Auch: Leseflüssigkeit, Lautlesen. Ändert sich langsam. Ich kenne Lesetandems und habe mit Lautlesen gute Erfahrungen gemacht.*
 
 ## Welche Fragen soll dein Wiki einmal beantworten?
 
@@ -23,7 +27,7 @@ Was der Agent liest, geht an den Anbieter des KI-Werkzeugs.
 
 ## Woran arbeitest du gerade?
 
-*Beispiel: Elternabend im März vorbereiten.*
+*Beispiel: Elternabend vorbereiten, er ist am 12.03.2027.*
 
 ## Welchen Quellen traust du, welchen nicht?
 
